@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAIWAN JOURNEY 2026 - Cupid Private Charter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        .lang-en, .lang-ko, .lang-zh { display: none !important; }
+        .show-zh .lang-zh { display: inline-block !important; }
+        .show-en .lang-en { display: inline-block !important; }
+        .show-ko .lang-ko { display: inline-block !important; }
+
+        :root {
+            --bg-color: #F1F5F9;
+            --card-bg: #FFFFFF;
+            --primary-color: #002B5B; 
+            --secondary-color: #0891B2; 
+            --accent-color: #F97316; 
+            --shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Arial', sans-serif;
+            background: #D1D5DB;
+            margin: 0; padding: 0;
+        }
+
+        .lang-switcher {
+            background-color: #EBF5FF; text-align: center; padding: 10px 0;
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #D0E7FF;
+        }
+        .lang-btn { 
+            padding: 5px 12px; cursor: pointer; border: 1px solid #002B5B; 
+            background: white; color: #002B5B; border-radius: 4px; 
+            font-size: 13px; margin: 0 3px; font-weight: bold; 
+        }
+        .active-btn { background: #002B5B !important; color: white !important; }
+
+        .header-section, .footer-section { 
+            width: 100%; background-color: #EBF5FF; 
+            padding: 25px 10px; text-align: center; box-sizing: border-box; 
+        }
+        .footer-section { border-top: 1px solid #D0E7FF; padding: 25px 10px; }
+        
+        .serif-font { font-family: 'Georgia', serif; }
+        
+        .main-title { 
+            color: #002B5B; font-size: 80px; font-weight: 900; margin: 0; 
+            text-transform: uppercase; white-space: nowrap; overflow: hidden;
+            line-height: 1.1; font-family: 'Georgia', serif;
+        }
+        
+        .sub-title { 
+            color: #4A90E2; font-size: 36px; font-weight: bold; 
+            margin-top: 10px; white-space: nowrap; overflow: hidden;
+            font-family: 'Georgia', serif;
+        }
+
+        .cta-button { 
+            background-color: #ffffff; color: #FF8C00; border: 2.5px solid #FF8C00; 
+            padding: 10px 35px; border-radius: 50px; font-weight: bold; cursor: pointer;
+            margin-top: 20px; display: inline-block; white-space: nowrap;
+            font-family: 'Georgia', serif;
+        }
+
+        .itinerary-section { max-width: 500px; margin: 0 auto; padding: 20px 15px; box-sizing: border-box; }
+        .driver-info { padding: 10px; text-align: center; background: #FFFBEB; margin-bottom: 20px; border-radius: 12px; border: 1px solid #FEF3C7; font-weight: 700; color: #92400E; font-size: 0.9rem; }
+        .card { background: var(--card-bg); border-radius: 20px; padding: 18px; margin-bottom: 20px; border: 1px solid #F1F5F9; box-shadow: var(--shadow); }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .spot-title { font-size: 1.15rem; font-weight: 900; color: var(--primary-color); text-decoration: none; }
+        .time-tag { background: var(--secondary-color); color: #FFF; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-family: 'Georgia', serif; }
+        .info-badge { background: #F8FAFC; border-radius: 15px; padding: 15px; margin: 15px 0; border: 1px solid #E2E8F0; }
+        .info-row { display: flex; justify-content: space-around; align-items: center; }
+        .info-value { font-weight: 900; font-size: 1.4rem; color: var(--secondary-color); font-family: 'Georgia', serif; }
+        .important { color: #E11D48 !important; }
+        .details { font-size: 0.95rem; color: #334155; background: #F1F5F9; padding: 12px; border-radius: 12px; margin-bottom: 12px; }
+        .transit { text-align: center; color: #64748B; font-weight: 600; margin: 15px 0; font-size: 0.85rem; }
+        .ai-btn { background: white; color: var(--accent-color); border: 1.5px solid var(--accent-color); padding: 10px; border-radius: 12px; width: 100%; cursor: pointer; font-weight: 800; font-size: 0.9rem; }
+        .ai-response { background: #FFF7ED; color: #9A3412; border-radius: 12px; padding: 12px; margin-top: 10px; display: none; border: 1px solid #FFEDD5; }
+        .ai-response.show { display: block; }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 8.5vw !important; }
+            .sub-title { font-size: 3.8vw !important; }
+            .btn-text-small { font-size: 20px !important; }
+            .btn-text-en { font-size: 16px !important; }
+            .lang-zh { font-family: 'Noto Sans TC', sans-serif !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="page-wrapper" class="show-zh">
+    
+    <div class="lang-switcher">
+        <button id="btn-zh" onclick="switchLang('zh')" class="lang-btn active-btn">繁體中文</button>
+        <button id="btn-en" onclick="switchLang('en')" class="lang-btn">English</button>
+        <button id="btn-ko" onclick="switchLang('ko')" class="lang-btn">한국어</button>
+    </div>
+
+    <header class="header-section">
+        <h1 class="main-title">TAIWAN JOURNEY</h1>
+        <p class="sub-title">
+            <span class="lang-zh">PREMIUM PRM PRIVATE CHARTER by Cupid</span>
+            <span class="lang-en">PREMIUM PRM PRIVATE CHARTER by Cupid</span>
+            <span class="lang-ko">큐피트 프리미엄 프라이빗 차터</span>
+        </p>
+        <div class="cta-button">
+            <span class="lang-zh btn-text-small" style="font-size: 24px; font-family: 'Noto Sans TC';">開始你的邱比特之旅</span>
+            <span class="lang-en btn-text-en" style="font-size: 20px;">START YOUR CUPID JOURNEY</span>
+            <span class="lang-ko" style="font-size: 20px;">큐피트 여행 시작하기</span>
+        </div>
+    </header>
+
+    <main class="itinerary-section">
+        <div class="driver-info" id="driver-tag">📍 專屬司機：邱比特</div>
+        <div id="itinerary-content"></div>
+    </main>
+
+    <footer class="footer-section">
+        <h2 class="main-title">
+            <span class="lang-zh" style="font-family: 'Noto Sans TC'; font-size: 52px;">祝您旅途愉快</span>
+            <span class="lang-en">ENJOY YOUR TRIP</span>
+            <span class="lang-ko">즐거운 여행 되세요</span>
+        </h2>
+        <p class="sub-title">
+            <span class="lang-zh">PREMIUM PRM PRIVATE CHARTER by Cupid</span>
+            <span class="lang-en">PREMIUM PRM PRIVATE CHARTER by Cupid</span>
+            <span class="lang-ko">큐피트 프리미엄 프라이빗 차터</span>
+        </p>
+        <div class="cta-button">
+            <span class="lang-zh btn-text-small" style="font-size: 22px; font-family: 'Noto Sans TC';">期待下次相見</span>
+            <span class="lang-en btn-text-en" style="font-size: 18px;">HOPE TO SEE YOU AGAIN</span>
+            <span class="lang-ko" style="font-size: 20px;">다음에 또 만나요</span>
+        </div>
+        <p style="margin-top: 20px; color: #888; font-size: 11px; opacity: 0.6;">
+            © 2026 TAIWAN JOURNEY. All Rights Reserved.
+        </p>
+    </footer>
+</div>
+
+<script>
+    const fixedAddress = "南投縣魚池鄉名勝街11號";
+    const googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(fixedAddress);
+    
+    const data = {
+        zh: {
+            driver: "📍 專屬司機：邱比特", stayLabel: "預計停留", gatherLabel: "集合時間", gatherLocLabel: "地點", min: "分鐘", hour: "小時", driveTime: "🚗 交通約", aiBtn: "✨ AI 景點小助手",
+            routePath: "水社 - 玄奘寺 - 伊達邵 - 回到水社",
+            items: [
+                { time: "08:30", title: "行程出發", query: "日月潭", desc: "司機已在指定地點等候。", driveNext: "1小時10分", ai: "建議準備輕便外套。" },
+                { time: "09:40", title: "文武廟", query: "日月潭文武廟", duration: "50", gatherTime: "10:30", desc: "可俯瞰日月潭優美湖景。", driveNext: "10分", ai: "這座廟有獨特的「年梯步道」。" },
+                { time: "10:40", title: "向山遊客中心", query: "向山遊客中心", duration: "40", gatherTime: "11:20", desc: "欣賞清水模建築。", driveNext: "10分", ai: "建築像擁抱湖水的手。" },
+                { time: "11:30", title: "日月潭遊湖", query: fixedAddress, duration: "4", isHour: true, gatherTime: "15:30", gatherLoc: fixedAddress, showRoute: true, desc: "推薦：必吃阿婆茶葉蛋。", driveNext: "1小時40分", ai: "一定要試試邵族小米麻糬。" },
+                { time: "17:10", title: "高美濕地", query: "高美濕地", duration: "90", gatherTime: "18:40", desc: "欣賞絕美夕陽。", driveNext: "50分", ai: "夕陽時分逆光拍剪影最美。" },
+                { time: "19:30", title: "行程結束", query: "台中火車站", desc: "載您返回溫馨住所。", driveNext: "", ai: "希望您玩得愉快！" }
+            ]
+        },
+        en: {
+            driver: "📍 Driver: Cupid", stayLabel: "STAY", gatherLabel: "MEET", gatherLocLabel: "At", min: "mins", hour: "hrs", driveTime: "🚗 Travel Time", aiBtn: "✨ AI Assistant",
+            routePath: "Shuishe - Xuanzang Temple - Ita Thao - Shuishe",
+            items: [
+                { time: "08:30", title: "Departure", query: "Sun Moon Lake", desc: "Driver is waiting.", driveNext: "1hr 10min", ai: "A jacket is recommended." },
+                { time: "09:40", title: "Wenwu Temple", query: "Wenwu Temple", duration: "50", gatherTime: "10:30", desc: "Panoramic views.", driveNext: "10min", ai: "Check out the Year of Steps." },
+                { time: "10:40", title: "Xiangshan Center", query: "Xiangshan Center", duration: "40", gatherTime: "11:20", desc: "Modern masterpiece.", driveNext: "10min", ai: "Modern architectural design." },
+                { time: "11:30", title: "Sun Moon Lake Cruise", query: fixedAddress, duration: "4", isHour: true, gatherTime: "15:30", gatherLoc: fixedAddress, showRoute: true, desc: "Famous tea eggs are a must.", driveNext: "1hr 40min", ai: "Try the local snacks!" },
+                { time: "17:10", title: "Gaomei Wetlands", query: "Gaomei Wetlands", duration: "90", gatherTime: "18:40", desc: "Breathtaking sunset.", driveNext: "50min", ai: "30 mins before sunset is best." },
+                { time: "19:30", title: "End of Tour", query: "Taichung Station", desc: "Returning to hotel.", driveNext: "", ai: "Hope you had a great day!" }
+            ]
+        },
+        ko: {
+            driver: "📍 기사: 큐피트", stayLabel: "체류", gatherLabel: "집합", gatherLocLabel: "장소", min: "분", hour: "시간", driveTime: "🚗 이동 시간 약", aiBtn: "✨ AI 가이드",
+            routePath: "수이서 - 현장사 - 이다사오 - 수이서 복귀",
+            items: [
+                { time: "08:30", title: "일정 시작", query: "일월담", desc: "기사가 대기 중입니다.", driveNext: "1시간 10분", ai: "외투를 챙기세요." },
+                { time: "09:40", title: "문무묘", query: "문무묘", duration: "50", gatherTime: "10:30", desc: "호수 전경 감상.", driveNext: "10분", ai: "생일 계단을 찾아보세요." },
+                { time: "10:40", title: "향산 행정센터", query: "향산 행정센터", duration: "40", gatherTime: "11:20", desc: "예술적인 건축물.", driveNext: "10분", ai: "현대적인 건축물입니다." },
+                { time: "11:30", title: "일월담 유람선", query: fixedAddress, duration: "4", isHour: true, gatherTime: "15:30", gatherLoc: fixedAddress, showRoute: true, desc: "홍차 계란을 추천합니다.", driveNext: "1시간 40분", ai: "현지 간식을 즐기세요." },
+                { time: "17:10", title: "가오메이 습지", query: "가오메이 습지", duration: "90", gatherTime: "18:40", desc: "환상적인 일몰.", driveNext: "50분", ai: "일몰 30분 전이 가장 아름답습니다." },
+                { time: "19:30", title: "일정 종료", query: "타이중역", desc: "숙소로 복귀합니다.", driveNext: "", ai: "즐거우셨나요?" }
+            ]
+        }
+    };
+
+    function toggleAI(btn) { btn.nextElementSibling.classList.toggle('show'); }
+
+    function renderItinerary(lang) {
+        const content = document.getElementById('itinerary-content');
+        const langData = data[lang]; 
+        let html = '';
+        langData.items.forEach(item => {
+            const durationUnit = item.isHour ? langData.hour : langData.min;
+            const mapLink = item.query === fixedAddress ? googleMapsUrl : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(item.query);
+            
+            // 只有當 duration 存在時才顯示 info-badge，且 gatherLoc 必須存在才渲染地點區塊
+            const locSection = item.gatherLoc ? `
+                <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #E2E8F0;font-size:0.8rem;text-align:center">
+                    ${item.showRoute ? `<div style="color:#0891B2; font-weight:900; margin-bottom:4px;">🚢 ${langData.routePath}</div>` : ''}
+                    📍 ${langData.gatherLocLabel}: ${item.gatherLoc}
+                </div>` : '';
+
+            const infoBadge = item.duration ? `
+                <div class="info-badge">
+                    <div class="info-row">
+                        <div style="text-align:center"><span style="color:#64748B;font-size:0.7rem;display:block;font-weight:700">${langData.stayLabel}</span><span class="info-value serif-font">${item.duration}</span> ${durationUnit}</div>
+                        <div style="color:#E2E8F0; font-size:1.4rem;">|</div>
+                        <div style="text-align:center"><span style="color:#64748B;font-size:0.7rem;display:block;font-weight:700">${langData.gatherLabel}</span><span class="info-value important serif-font">${item.gatherTime}</span></div>
+                    </div>
+                    ${locSection}
+                </div>` : '';
+
+            html += `
+                <div class="card">
+                    <div class="card-header">
+                        <a href="${mapLink}" class="spot-title" target="_blank">${item.title} 📍</a>
+                        <div class="time-tag serif-font">${item.time}</div>
+                    </div>
+                    ${infoBadge}
+                    <div class="details">${item.desc}</div>
+                    <button class="ai-btn" onclick="toggleAI(this)">${langData.aiBtn}</button>
+                    <div class="ai-response">${item.ai}</div>
+                </div>
+                ${item.driveNext ? `<div class="transit">${langData.driveTime} ${item.driveNext}</div>` : ''}
+            `;
+        });
+        content.innerHTML = html;
+        document.getElementById('driver-tag').innerText = langData.driver;
+    }
+
+    function switchLang(lang) {
+        document.getElementById('page-wrapper').className = 'show-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active-btn'));
+        const activeBtn = document.getElementById('btn-' + lang);
+        if(activeBtn) activeBtn.classList.add('active-btn');
+        renderItinerary(lang);
+    }
+
+    window.onload = () => renderItinerary('zh');
+</script>
+</body>
+</html>
