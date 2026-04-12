@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TAIWAN JOURNEY 2026 - Cupid Private Charter</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -24,6 +24,10 @@
             font-family: 'Noto Sans TC', 'Arial', sans-serif;
             background: #D1D5DB;
             margin: 0; padding: 0;
+            /* 修正：確保寬度固定且不產生左右滾動 */
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         .lang-switcher {
@@ -193,7 +197,6 @@
             const durationUnit = item.isHour ? langData.hour : langData.min;
             const mapLink = item.query === fixedAddress ? googleMapsUrl : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(item.query);
             
-            // 只有當 duration 存在時才顯示 info-badge，且 gatherLoc 必須存在才渲染地點區塊
             const locSection = item.gatherLoc ? `
                 <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #E2E8F0;font-size:0.8rem;text-align:center">
                     ${item.showRoute ? `<div style="color:#0891B2; font-weight:900; margin-bottom:4px;">🚢 ${langData.routePath}</div>` : ''}
