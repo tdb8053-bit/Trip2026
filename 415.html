@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taiwan Journey | PREMIUM PRM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Georgia&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gray: #F3F4F6;
+            --header-footer-blue: #EBF5FF;
+            --text-dark-blue: #002B5B;
+            --card-white: #FFFFFF;
+            --end-card-bg: #E2E8F0;
+            --accent-gold: #FFFBEB;
+            --text-gold: #92400E;
+            --alert-red: #ef4444;
+            --nav-orange: #d97706;
+            --food-bg: #FFFBEB;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-gray);
+            color: var(--text-dark-blue);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--header-footer-blue);
+            width: 100%;
+            padding: 25px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .header-container {
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .header-title { 
+            font-family: 'Georgia', serif; font-weight: bold; margin: 0;
+            line-height: 1.1; text-align: justify; text-align-last: justify;
+            display: block; white-space: nowrap; font-size: clamp(28px, 9vw, 70px); 
+        }
+        .header-subtitle { 
+            font-family: 'Georgia', serif; margin-top: 5px;
+            text-align: justify; text-align-last: justify; display: block;
+            font-size: clamp(12px, 3.5vw, 22px);
+        }
+
+        .content-area { padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+        
+        .info-card {
+            background: var(--card-white); border-radius: 12px; padding: 18px 24px;
+            margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); font-size: 14px;
+        }
+        .label { font-weight: 700; opacity: 0.8; }
+        .red-text { color: var(--alert-red); font-weight: 700; }
+
+        .tab-nav { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn {
+            flex: 1; padding: 12px; border: none; border-radius: 10px;
+            background: var(--card-white); color: var(--text-dark-blue); 
+            font-family: 'Georgia', serif; font-weight: 700; cursor: pointer;
+        }
+        .tab-btn.active { background: var(--text-dark-blue); color: white; }
+
+        .day-panel { display: none; }
+        .day-panel.active { display: block; }
+
+        .attr-card {
+            background: var(--card-white); border-radius: 16px; padding: 24px;
+            margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .attr-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .attr-title { font-size: 19px; font-weight: 700; }
+        .time-tag { 
+            background: var(--header-footer-blue); color: var(--text-dark-blue); 
+            padding: 4px 12px; border-radius: 6px; 
+            font-family: 'Georgia', serif; font-size: 14px; font-weight: 700; white-space: nowrap;
+        }
+        .attr-en { font-family: 'Georgia', serif; font-size: 15px; color: #64748b; margin-top: -8px; margin-bottom: 12px; }
+        
+        .attr-desc-block { margin-top: 15px; font-size: 14px; color: #475569; border-top: 1px solid #f1f5f9; padding-top: 15px; }
+        .desc-en { font-family: 'Georgia', serif; font-style: italic; opacity: 0.8; margin-top: 5px; }
+
+        .food-recommend {
+            margin-top: 20px; background-color: var(--food-bg); border-radius: 10px;
+            padding: 15px; border-left: 4px solid #FDE68A;
+        }
+        .food-title { font-weight: 700; color: var(--text-gold); font-size: 15px; margin-bottom: 8px; display: block; }
+        .food-list { font-size: 13px; color: #92400E; }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        .nav-btn {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 50px;
+            border: 1px solid #fbbf24; color: var(--nav-orange); text-decoration: none; font-size: 13px; font-weight: 700; background: white;
+        }
+
+        .drive-time { 
+            text-align: center; font-family: 'Georgia', serif; font-size: 13px; color: #94a3b8; 
+            margin: 15px 0 25px; display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
+
+        .main-content {
+            padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 20px;
+        }
+        .end-card {
+            background: var(--end-card-bg); border-radius: 12px; padding: 20px;
+            text-align: center; border: 1px dashed #cbd5e1; width: 100%; max-width: 500px; box-sizing: border-box;
+        }
+        .end-status {
+            color: var(--alert-red); font-weight: 700; font-size: 16px;
+            display: block; margin: 0 auto 4px; width: 135px; text-align: justify; text-align-last: justify;
+        }
+        .fare-info { font-weight: 700; color: var(--text-dark-blue); font-size: 16px; }
+
+        .total-fare-section { width: 100%; max-width: 500px; }
+        .total-fare-card {
+            background: var(--accent-gold); border: 1px solid #FDE68A;
+            border-radius: 16px; padding: 24px; text-align: center;
+        }
+        .total-label { font-size: 14px; color: var(--text-gold); font-weight: 700; }
+        .total-amount { font-family: 'Georgia', serif; font-size: 32px; font-weight: bold; color: var(--text-gold); }
+
+        footer {
+            background-color: var(--header-footer-blue); width: 100%;
+            padding: 30px 0 50px; display: flex; justify-content: center; margin-top: 20px; 
+        }
+        .footer-container { width: 80%; max-width: 400px; text-align: center; }
+        .footer-wish { 
+            font-size: clamp(24px, 7vw, 38px); font-weight: 900; margin: 0;
+            line-height: 1.2; display: block; text-align: center; letter-spacing: 0.5em; padding-left: 0.5em;   
+        }
+        .footer-sub { 
+            font-family: 'Georgia', serif; font-size: clamp(12px, 3.5vw, 18px);
+            margin-top: 8px; line-height: 1.2; display: block; text-align: justify; text-align-last: justify;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <span class="header-title">TAIWAN JOURNEY</span>
+        <span class="header-subtitle">PREMIUM PRM PRIVATE CHARTER by 原鄉谷</span>
+    </div>
+</header>
+
+<div class="content-area">
+    <div class="info-card">
+        <div class="info-line"><span class="label">預約人：</span>胡長龍   <span class="label">電話：</span>+65 9679 5651</div>
+        <div class="info-line"><span class="label">人數：</span>3人   <span class="label">日期：</span>4月16日 - 4月17日</div>
+    </div>
+    <div class="info-card">
+        <div class="info-line"><span class="label">司機：</span>張其芳   <span class="label">電話：</span>0935-089253</div>
+        <div class="info-line"><span class="label">車號：</span><span class="red-text">TEB-6933</span>   <span class="label">車型：</span>五人座車(計程車)</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="showDay('d1', this)">APRIL 16</button>
+        <button class="tab-btn" onclick="showDay('d2', this)">APRIL 17</button>
+    </div>
+
+    <div id="d1" class="day-panel active">
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">嘉義高鐵站 🚄</div>
+                <div class="time-tag">10:00 AM</div>
+            </div>
+            <div class="attr-en">Chiayi HSR Station</div>
+            <div class="attr-desc-block">
+                <div>嘉義行程起點。司機將在預定出口等候。</div>
+                <div class="desc-en">The starting point in Chiayi. The driver will be waiting at the designated exit.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/uX3f5" target="_blank" class="nav-btn">🧭 站點導航</a></div>
+        </div>
+
+        <div class="drive-time">🚗 Driving time: ~70 mins</div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">奮起湖老街 🌲</div>
+                <div class="time-tag">11:30 AM</div>
+            </div>
+            <div class="attr-en">Fenqihu Old Street</div>
+            <div class="attr-desc-block">
+                <div>阿里山鐵路的中繼站，以木造建築與鐵道便當聞名。</div>
+                <div class="desc-en">The relay station of the railway, famous for wooden structures and bento.</div>
+            </div>
+            <div class="food-recommend">
+                <span class="food-title">午餐安排 (12:30)</span>
+                <div class="food-list">達官現炒 (在地熱炒料理)</div>
+            </div>
+            <div class="btn-group">
+                <a href="https://maps.app.goo.gl/vY4g6" target="_blank" class="nav-btn">🧭 景點導航</a>
+                <a href="https://maps.app.goo.gl/wZ5h7" target="_blank" class="nav-btn">🧭 餐廳導航</a>
+            </div>
+        </div>
+
+        <div class="drive-time">🚗 Driving time: ~50 mins</div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">阿里山園區 ⛰️</div>
+                <div class="time-tag">14:30 PM</div>
+            </div>
+            <div class="attr-en">Alishan National Forest</div>
+            <div class="attr-desc-block">
+                <div>漫步千年巨木群，沉浸在高山森林的芬多精中。</div>
+                <div class="desc-en">Stroll through ancient trees and immerse in forest phytoncide.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/aB1c2" target="_blank" class="nav-btn">🧭 園區導航</a></div>
+        </div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">高山青大飯店 🏨</div>
+                <div class="time-tag">17:30 PM</div>
+            </div>
+            <div class="attr-en">Gaoshanqing Hotel (Stay Over)</div>
+            <div class="attr-desc-block">
+                <div>抵達下榻飯店，準備迎接明日的著名的日出。</div>
+                <div class="desc-en">Arrive at the hotel to prepare for tomorrow's famous sunrise.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/dE3f4" target="_blank" class="nav-btn">🧭 飯店導航</a></div>
+        </div>
+
+        <div class="end-card">
+            <span class="end-status">今日行程結束</span>
+            <div class="fare-info">今日車資：TWD 4,500</div>
+        </div>
+    </div>
+
+    <div id="d2" class="day-panel">
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">祝山日出 ☀️</div>
+                <div class="time-tag">05:00 AM</div>
+            </div>
+            <div class="attr-en">Zhushan Sunrise View</div>
+            <div class="attr-desc-block">
+                <div>搭乘小火車前往祝山，見證如畫般的雲海與日出。</div>
+                <div class="desc-en">Take the train to Zhushan to witness the sunrise and sea of clouds.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/gH5i6" target="_blank" class="nav-btn">🧭 平台導航</a></div>
+        </div>
+
+        <div class="drive-time">🚗 Driving time: ~45 mins</div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">優遊吧斯 🍃</div>
+                <div class="time-tag">10:30 AM</div>
+            </div>
+            <div class="attr-en">Yuyupas Cultural Park</div>
+            <div class="attr-desc-block">
+                <div>體驗鄒族傳統文化並欣賞高山茶園景致。</div>
+                <div class="desc-en">Experience Tsou culture and enjoy high-mountain tea plantations.</div>
+            </div>
+            <div class="food-recommend">
+                <span class="food-title">午餐預約 (12:30)</span>
+                <div class="food-list">遊芭絲 (原民風味創意料理)</div>
+            </div>
+            <div class="btn-group">
+                <a href="https://maps.app.goo.gl/jK7l8" target="_blank" class="nav-btn">🧭 部落導航</a>
+                <a href="https://maps.app.goo.gl/mN9o0" target="_blank" class="nav-btn">🧭 餐廳導航</a>
+            </div>
+        </div>
+
+        <div class="drive-time">🚗 Driving time: ~20 mins</div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">二延平步道 ☁️</div>
+                <div class="time-tag">14:30 PM</div>
+            </div>
+            <div class="attr-en">Eryanping Trail</div>
+            <div class="attr-desc-block">
+                <div>著名的雲海與茶田觀景點，是拍照攝影的首選。</div>
+                <div class="desc-en">A premier spot for clouds and tea fields photography.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/pQ1r2" target="_blank" class="nav-btn">🧭 步道導航</a></div>
+        </div>
+
+        <div class="drive-time">🚗 Driving time: ~55 mins</div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">檜意森活村 🏮</div>
+                <div class="time-tag">16:30 PM</div>
+            </div>
+            <div class="attr-en">Hinoki Village</div>
+            <div class="attr-desc-block">
+                <div>全台最大日式宿舍群，漫步於檜木香氣的和風美學。</div>
+                <div class="desc-en">The largest Japanese dormitory complex with rich hinoki aroma.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/sT3u4" target="_blank" class="nav-btn">🧭 園區導航</a></div>
+        </div>
+
+        <div class="drive-time">🚗 Driving time: ~20 mins</div>
+
+        <div class="attr-card">
+            <div class="attr-header">
+                <div class="attr-title">嘉義高鐵站 🚄</div>
+                <div class="time-tag">17:30 PM</div>
+            </div>
+            <div class="attr-en">Chiayi HSR Station (End)</div>
+            <div class="attr-desc-block">
+                <div>抵達終點站，結束美好的兩日阿里山之旅。</div>
+                <div class="desc-en">Arrival at the final station, concluding the 2-day Alishan journey.</div>
+            </div>
+            <div class="btn-group"><a href="https://maps.app.goo.gl/uX3f5" target="_blank" class="nav-btn">🧭 站點導航</a></div>
+        </div>
+
+        <div class="end-card">
+            <span class="end-status">今日行程結束</span>
+            <div class="fare-info">今日車資：TWD 4,500</div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="total-fare-section">
+        <div class="total-fare-card">
+            <div class="total-label">TOTAL FARE</div>
+            <div class="total-amount">TWD 9,000</div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <span class="footer-wish">祝您旅途愉快</span>
+        <span class="footer-sub">PREMIUM PRM PRIVATE CHARTER by 原鄉谷</span>
+    </div>
+</footer>
+
+<script>
+    function showDay(id, btn) {
+        document.querySelectorAll('.day-panel').forEach(d => d.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
