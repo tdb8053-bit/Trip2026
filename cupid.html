@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cupid Premium | Taiwan Tour Guide</title>
+    <title>Cupid Premium | Taiwan Private Charter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -23,45 +23,21 @@
             -webkit-font-smoothing: antialiased;
         }
         .font-georgia { font-family: 'Georgia', serif; }
-        
         .premium-card {
             background: white;
             border-radius: 2rem;
             border: 1px solid rgba(226, 232, 240, 0.8);
             box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .capsule-btn-primary {
-            @apply rounded-full font-bold transition-all flex items-center justify-center gap-2 border-2;
-            border-color: var(--color-gold);
-            color: var(--color-gold);
-            background: rgba(201, 160, 99, 0.03);
-        }
-        .capsule-btn-secondary {
-            @apply rounded-full font-bold transition-all flex items-center justify-center gap-2 border-2;
-            border-color: var(--color-cloud);
-            color: #64748B;
-            background: white;
-        }
-        .capsule-btn-utility {
-            @apply rounded-full font-bold transition-all flex items-center justify-center gap-2 border-2;
-            border-color: #E2E8F0;
-            color: #94A3B8;
-            background: white;
-        }
-
         .profile-frame { height: 150px; width: 150px; }
         .car-frame { height: 160px; width: 100%; overflow: hidden; border-radius: 1.2rem; border: 1.5px solid var(--color-gold); }
         .car-frame img { width: 100%; height: 100%; object-fit: contain; }
-
-        @keyframes subtle-pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.02); }
-        }
-        .animate-subtle { animation: subtle-pulse 4s ease-in-out infinite; }
+        .capsule-btn-primary { @apply rounded-full font-bold flex items-center justify-center gap-2 border-2; border-color: var(--color-gold); color: var(--color-gold); background: rgba(201, 160, 99, 0.03); }
+        .capsule-btn-secondary { @apply rounded-full font-bold flex items-center justify-center gap-2 border-2; border-color: var(--color-cloud); color: #64748B; background: white; }
+        .capsule-btn-utility { @apply rounded-full font-bold flex items-center justify-center gap-2 border-2; border-color: #E2E8F0; color: #94A3B8; background: white; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .force-single-line { white-space: nowrap; overflow: hidden; text-overflow: clip; }
+        .lang-active { background: #3B82F6; color: white; border-color: #3B82F6; }
     </style>
 </head>
 <body>
@@ -75,39 +51,118 @@
             Search: ({ className }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>),
             Camera: ({ className }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>),
             History: ({ className }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>),
-            Car: ({ className }) => (<svg className={className} viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="10" width="22" height="8" rx="2"/><path d="M7 10l3-6h4l3 6M5 18v2m14-2v2M9 14h6"/></svg>),
             X: ({ className, onClick }) => (<svg onClick={onClick} className={`${className} cursor-pointer`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>)
         };
 
-        const App = () => {
-            const [modal, setModal] = useState({ open: false, title: '', content: '' });
+        const translations = {
+            zh: {
+                title: "TAIWAN JOURNEY",
+                sub: "PREMIUM PRM PRIVATE CHARTER by Cupid",
+                driverHeader: "📍 專屬司機：邱比特",
+                driverName: "司機：戴丞鈞",
+                driverPhone: "電話：0911-082120",
+                plate: "車牌：RFF-1206",
+                footerWish: "WISH YOU A PLEASANT JOURNEY",
+                stayLabel: "停留時間",
+                gatherLabel: "集合時間",
+                navBtn: "即刻導覽",
+                foodBtn: "美食搜尋",
+                histBtn: "人文歷史",
+                camBtn: "美拍建議",
+                itinerary: [
+                    { time: "08:30", name: "行程出發", desc: "司機戴先生已在指定地點等候，準備開啟今日精采旅程。" },
+                    { 
+                        time: "09:40", name: "文武廟", desc: "背山面湖，地勢雄偉，是俯瞰日月潭全景的絕佳地點。",
+                        stay: "50 分鐘", gather: "10:30",
+                        history: "文武廟建立於1938年，主祀開基元祖與文昌帝君。建築採用北京皇宮式風格，黃色琉璃瓦頂與精美石雕盡顯大氣。後方的「年梯步道」刻有366位中外名人生日，非常有意思。",
+                        tips: "推薦下午拍攝，陽光灑在黃色屋頂上會有金碧輝煌的效果。登上觀景台可以拍到廟宇建築與潭景疊加的高級感。",
+                        search: "日月潭 文武廟 美食",
+                        address: "文武廟"
+                    },
+                    { 
+                        time: "10:40", name: "向山遊客中心", desc: "CNN評選全球最美單車道起點，欣賞極簡建築美學。",
+                        stay: "40 分鐘", gather: "11:20",
+                        history: "由日本建築師團紀彥設計，以「木紋清水模」打造。建築與自然環境融為一體，兩棟彎曲的造型像雙手環抱日月潭。",
+                        tips: "利用無邊際水池的倒影拍攝，建議低角度。穿著素色衣服在灰色清水模背景下會非常有質感。",
+                        search: "向山遊客中心 必吃",
+                        address: "向山行政暨遊客中心"
+                    },
+                    { 
+                        time: "11:30", name: "日月潭遊湖 + 午餐", desc: "集合點：名勝街11號。路線：水社碼頭出發 → 玄奘寺 → 伊達邵午餐 → 水社碼頭集合。",
+                        stay: "4 小時", gather: "15:30",
+                        history: "日月潭是全台最大的天然淡水湖。遊湖能讓你從湖心視角欣賞水社大山。伊達邵碼頭是邵族文化的中心，有豐富的特色美食如紅茶、山豬肉小吃等。",
+                        tips: "在船頭甲板拍攝湖面倒影。在伊達邵街道拍攝具有原住民色彩的招牌與街景，動態錄影更有風味。",
+                        search: "伊達邵碼頭 推薦美食",
+                        address: "南投縣魚池鄉名勝街11號"
+                    },
+                    { 
+                        time: "17:10", name: "高美濕地", desc: "一生必遊一次的絕美夕陽地，夢幻天空之鏡。",
+                        stay: "90 分鐘", gather: "18:40",
+                        history: "擁有豐富生態的濕地，是候鳥重要的棲息地。長長的木棧道延伸入海，是台灣最知名的日落拍攝聖地。",
+                        tips: "一定要在日落前40分鐘到達。利用退潮時地面的積水拍出反射效果。逆光拍攝剪影效果極佳。",
+                        search: "高美濕地 附近 餐廳",
+                        address: "高美濕地"
+                    },
+                    { time: "19:30", name: "行程結束", desc: "感謝您的選擇，邱比特司機載您返回溫馨住所，祝您有美好的回憶。" }
+                ]
+            },
+            en: {
+                title: "TAIWAN JOURNEY",
+                sub: "PREMIUM PRM PRIVATE CHARTER by Cupid",
+                driverHeader: "📍 Dedicated Driver: Cupid",
+                driverName: "Driver: Tai Cheng-Chun",
+                driverPhone: "Tel: 0911-082120",
+                plate: "Plate: RFF-1206",
+                footerWish: "WISH YOU A PLEASANT JOURNEY",
+                stayLabel: "Stay",
+                gatherLabel: "Gather",
+                navBtn: "Navigate",
+                foodBtn: "Food Search",
+                histBtn: "History",
+                camBtn: "Photo Tips",
+                itinerary: [
+                    { time: "08:30", name: "Departure", desc: "Driver Mr. Tai is ready to start today's wonderful journey." },
+                    { 
+                        time: "09:40", name: "Wenwu Temple", desc: "Magnificent temple overlooking the Sun Moon Lake.",
+                        stay: "50 mins", gather: "10:30",
+                        history: "Built in 1938, it features Northern Chinese palace style architecture. The 'Stairway to the Sky' with 366 steps is a famous highlight.",
+                        tips: "Best shot in the afternoon. The golden roof glows under sunlight. High-angle shots from the terrace capture both temple and lake.",
+                        search: "Sun Moon Lake Wenwu Temple food",
+                        address: "Wenwu Temple"
+                    },
+                    { 
+                        time: "10:40", name: "Xiangshan Center", desc: "Award-winning minimalist architecture by Dan Norihiko.",
+                        stay: "40 mins", gather: "11:20",
+                        history: "Designed by Japanese architect Dan Norihiko, its organic shape symbolizes arms embracing the lake, blending with nature.",
+                        tips: "Use the infinity pool for reflections. Wear solid colors to stand out against the grey concrete texture.",
+                        search: "Xiangshan Visitor Center food",
+                        address: "Xiangshan Visitor Center"
+                    },
+                    { 
+                        time: "11:30", name: "Lake Tour & Lunch", desc: "Meeting Point: No. 11, Mingsheng St. Route: Shuishe → Xuanzang → Ita Thao (Lunch) → Return.",
+                        stay: "4 hours", gather: "15:30",
+                        history: "The tour offers a unique lake-center perspective. Ita Thao is the heart of Thao indigenous culture, offering authentic local cuisine.",
+                        tips: "Capture lake reflections from the boat deck. Street photography at Ita Thao Market is great for dynamic shots.",
+                        search: "Ita Thao Pier best food",
+                        address: "No. 11, Mingsheng St., Yuchi Township, Nantou County"
+                    },
+                    { 
+                        time: "17:10", name: "Gaomei Wetlands", desc: "The ultimate sunset spot, Taiwan's Sky Mirror.",
+                        stay: "90 mins", gather: "18:40",
+                        history: "A world-class wetland with rich biodiversity. The boardwalk extending into the sea offers an unobstructed view of the setting sun.",
+                        tips: "Arrive 40 mins before sunset. Capture the 'Sky Mirror' effect on shallow water. Silhouettes look cinematic.",
+                        search: "Gaomei Wetlands restaurant",
+                        address: "Gaomei Wetlands"
+                    },
+                    { time: "19:30", name: "End of Journey", desc: "Thank you for choosing us. Driver Mr. Tai is taking you home. Have a sweet memory." }
+                ]
+            }
+        };
 
-            const itinerary = [
-                { 
-                    time: "09:40", name: "文武廟", desc: "背山面湖，地勢雄偉，是俯瞰日月潭全景的絕佳地點。", 
-                    history: "文武廟建立於1938年，主祀開基元祖與文昌帝君。建築採用北京皇宮式風格，黃色琉璃瓦頂與精美石雕盡顯大氣。後方的「年梯步道」刻有366位中外名人生日，非常有趣。",
-                    tips: "推薦在下午3點左右拍攝，陽光灑在黃色屋頂上會有金碧輝煌的效果。登上後殿觀景台可以拍到廟宇建築與潭景疊加的高級感。",
-                    search: "日月潭 文武廟 必吃美食"
-                },
-                { 
-                    time: "10:40", name: "向山遊客中心", desc: "CNN評選全球最美單車道起點，極簡建築美學。",
-                    history: "由日本建築師團紀彥設計，以「木紋清水模」打造。建築與自然環境融為一體，兩棟彎曲的造型像雙手環抱日月潭。這裡不僅是服務中心，更是世界級的攝影熱點。",
-                    tips: "利用無邊際水池的倒影拍攝，建議低角度讓建築延伸進湖面。穿著素色衣服，在灰色清水模背景下會非常有質感。",
-                    search: "向山遊客中心 附近餐廳"
-                },
-                { 
-                    time: "11:30", name: "日月潭遊湖", desc: "水社、玄焋、伊達邵三大碼頭巡航之旅。",
-                    history: "日月潭是全台最大的天然淡水湖。遊湖能讓你從湖心視角欣賞水社大山。在伊達邵碼頭可以體驗豐富的原住民邵族文化與傳統小米滋味。",
-                    tips: "在船頭或甲板拍攝湖面倒影，建議動態攝影捕捉浪花。抵達碼頭後，以攤販小吃作為前景，背景帶入湖面夕照，非常有張力。",
-                    search: "伊達邵碼頭 推薦美食"
-                },
-                { 
-                    time: "17:10", name: "高美濕地", desc: "一生必遊一次的絕美夕陽地，夢幻天空之鏡。",
-                    history: "原為海水浴場，後因泥沙淤積演變為生態豐富的濕地。擁有的雲林莞草區是珍貴的自然資產，也是候鳥重要的棲息地。木棧道延綿入海，視野極度遼闊。",
-                    tips: "一定要在日落前40分鐘到達。利用退潮時地面的薄薄積水拍出「天空之鏡」反射效果。逆光拍攝剪影，非常有電影質感。",
-                    search: "高美濕地 晚餐推薦"
-                }
-            ];
+        const App = () => {
+            const [lang, setLang] = useState('zh');
+            const [modal, setModal] = useState({ open: false, title: '', content: '' });
+            const t = translations[lang];
 
             const openInfo = (title, content) => setModal({ open: true, title, content });
             const openSearch = (query) => window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`);
@@ -116,24 +171,29 @@
                 <div className="max-w-md mx-auto min-h-screen bg-[#F9FAFB] no-scrollbar pb-10 overflow-x-hidden">
                     {/* Header */}
                     <header className="bg-[#0F172A] pt-10 pb-12 px-6 text-center shadow-xl w-full">
-                        <h1 className="text-white text-3xl font-bold font-georgia italic uppercase force-single-line">TAIWAN JOURNEY</h1>
-                        <p className="text-[#C9A063] text-[9px] font-bold tracking-[0.2em] uppercase opacity-90 mt-2">PREMIUM PRM PRIVATE CHARTER by Cupid</p>
+                        <h1 className="text-white text-3xl font-bold font-georgia italic uppercase force-single-line">{t.title}</h1>
+                        <p className="text-[#C9A063] text-[9px] font-bold tracking-[0.2em] uppercase opacity-90 mt-2">{t.sub}</p>
+                        <div className="flex justify-center gap-3 mt-6">
+                            {['zh', 'en'].map(l => (
+                                <button key={l} onClick={() => setLang(l)} className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border transition-all ${lang === l ? 'lang-active shadow-inner' : 'text-slate-500 border-slate-700 hover:text-slate-300'}`}>{l === 'zh' ? '繁體中文' : 'ENGLISH'}</button>
+                            ))}
+                        </div>
                     </header>
 
-                    {/* 司機卡片：規格鎖定 */}
+                    {/* Driver Card */}
                     <div className="px-6 mb-12 -mt-6">
                         <div className="premium-card p-6 flex flex-col items-center">
                             <div className="flex flex-col items-center w-full relative z-20">
                                 <div className="profile-frame relative mb-4 overflow-hidden rounded-full shadow-lg bg-white">
                                     <div className="absolute inset-0 border-[2.5px] border-[#C9A063] rounded-full z-20 pointer-events-none"></div>
-                                    <img src="https://tdb8053-bit.github.io/Trip2026/di00.png" className="w-full h-full object-cover" alt="戴丞鈞" />
+                                    <img src="https://tdb8053-bit.github.io/Trip2026/di00.png" className="w-full h-full object-cover" alt="Driver" />
                                 </div>
                                 <div className="text-center space-y-2 mb-4">
-                                    <p className="text-[#C9A063] text-[9px] font-bold tracking-[0.3em] uppercase flex items-center justify-center gap-2">📍 專屬司機：邱比特</p>
-                                    <h3 className="text-base font-bold text-slate-800 tracking-tight">司機：戴丞鈞</h3>
-                                    <p className="text-slate-400 font-georgia italic text-xs">電話：0911-082120</p>
-                                    <div className="px-6 py-1.5 bg-slate-50 rounded-full border border-slate-100 shadow-inner">
-                                        <p className="text-slate-800 font-bold tracking-widest text-sm font-georgia">車牌：RFF-1206</p>
+                                    <p className="text-[#C9A063] text-[9px] font-bold tracking-[0.3em] uppercase flex items-center justify-center gap-2">{t.driverHeader}</p>
+                                    <h3 className="text-base font-bold text-slate-800 tracking-tight">{t.driverName}</h3>
+                                    <p className="text-slate-400 font-georgia italic text-xs">{t.driverPhone}</p>
+                                    <div className="px-6 py-1.5 bg-slate-50 rounded-full border border-slate-100 shadow-inner inline-flex items-center justify-center">
+                                        <p className="text-slate-800 font-bold tracking-widest text-sm font-georgia whitespace-nowrap">{t.plate}</p>
                                     </div>
                                 </div>
                             </div>
@@ -146,35 +206,51 @@
                         </div>
                     </div>
 
-                    {/* 旅程導覽內容 */}
+                    {/* Itinerary */}
                     <div className="px-6 space-y-6">
-                        {itinerary.map((stop, i) => (
-                            <div key={i} className="premium-card p-6 shadow-lg border-l-4 border-[#C9A063]">
+                        {t.itinerary.map((stop, i) => (
+                            <div key={i} className={`premium-card p-6 shadow-lg border-l-4 ${i === t.itinerary.length - 1 ? 'border-green-400' : 'border-[#C9A063]'}`}>
                                 <div className="flex justify-between items-center mb-3">
                                     <h4 className="text-xl font-bold text-slate-800 leading-tight">{stop.name}</h4>
                                     <span className="bg-[#94A3B8] text-white font-georgia italic text-xs font-bold px-4 py-1 rounded-xl shadow-sm">{stop.time}</span>
                                 </div>
                                 <p className="text-xs text-slate-500 mb-6 leading-relaxed bg-slate-50 p-3 rounded-xl">{stop.desc}</p>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.name)}`)} className="capsule-btn-secondary py-2.5 text-[10px]"><Icons.Navigation className="w-3.5 h-3.5" />即刻導航</button>
-                                    <button onClick={() => openSearch(stop.search)} className="capsule-btn-primary py-2.5 text-[10px]"><Icons.Search className="w-3.5 h-3.5" />美食搜尋</button>
-                                    <button onClick={() => openInfo(`${stop.name} 人文歷史`, stop.history)} className="capsule-btn-utility py-2.5 text-[10px]"><Icons.History className="w-3.5 h-3.5 text-slate-300" />人文介紹</button>
-                                    <button onClick={() => openInfo(`${stop.name} 美拍建議`, stop.tips)} className="capsule-btn-utility py-2.5 text-[10px]"><Icons.Camera className="w-3.5 h-3.5 text-slate-300" />攝影技巧</button>
-                                </div>
+                                
+                                {stop.stay && (
+                                    <div className="flex items-center gap-3 mb-6 text-center">
+                                        <div className="flex-1 bg-blue-50/80 rounded-2xl p-3 border border-blue-100">
+                                            <p className="text-[8px] text-blue-400 font-bold uppercase tracking-widest mb-0.5">{t.stayLabel}</p>
+                                            <p className="text-sm font-bold text-[#0891B2] font-georgia italic">{stop.stay}</p>
+                                        </div>
+                                        <div className="flex-1 bg-red-50/80 rounded-2xl p-3 border border-red-100">
+                                            <p className="text-[8px] text-red-400 font-bold uppercase tracking-widest mb-0.5">{t.gatherLabel}</p>
+                                            <p className="text-base font-bold text-red-600 font-georgia">{stop.gather}</p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {stop.history && (
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.address)}`)} className="capsule-btn-secondary py-2.5 text-[10px]"><Icons.Navigation className="w-3.5 h-3.5" />{t.navBtn}</button>
+                                        <button onClick={() => openSearch(stop.search)} className="capsule-btn-primary py-2.5 text-[10px]"><Icons.Search className="w-3.5 h-3.5" />{t.foodBtn}</button>
+                                        <button onClick={() => openInfo(stop.name, stop.history)} className="capsule-btn-utility py-2.5 text-[10px]"><Icons.History className="w-3.5 h-3.5 text-slate-300" />{t.histBtn}</button>
+                                        <button onClick={() => openInfo(stop.name, stop.tips)} className="capsule-btn-utility py-2.5 text-[10px]"><Icons.Camera className="w-3.5 h-3.5 text-slate-300" />{t.camBtn}</button>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
 
                     {/* Footer */}
                     <footer className="bg-[#0F172A] py-14 px-8 text-center mt-10">
-                        <h2 className="text-white font-bold tracking-[0.1em] text-lg uppercase italic font-georgia">Wish You A Pleasant Journey</h2>
-                        <p className="text-[#C9A063] text-[9px] font-bold tracking-[0.2em] uppercase opacity-80 mt-3">PREMIUM PRM PRIVATE CHARTER by Cupid</p>
+                        <h2 className="text-white font-bold tracking-[0.1em] text-lg uppercase italic font-georgia">{t.footerWish}</h2>
+                        <p className="text-[#C9A063] text-[9px] font-bold tracking-[0.2em] uppercase opacity-80 mt-3">{t.sub}</p>
                     </footer>
 
-                    {/* 介紹視窗 (Modal) */}
+                    {/* Modal */}
                     {modal.open && (
                         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-md">
-                            <div className="bg-white w-full max-w-sm rounded-[2.5rem] shadow-2xl overflow-hidden">
+                            <div className="bg-white w-full max-w-sm rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
                                 <div className="bg-[#0F172A] p-5 flex justify-between items-center text-white">
                                     <h3 className="font-bold tracking-[0.1em] text-[10px] uppercase italic font-georgia">{modal.title}</h3>
                                     <button onClick={() => setModal({ ...modal, open: false })}><Icons.X className="w-5 h-5 text-white/70" /></button>
@@ -183,7 +259,7 @@
                                     {modal.content}
                                 </div>
                                 <div className="p-4 bg-slate-50 text-center border-t border-slate-100">
-                                    <button onClick={() => setModal({ ...modal, open: false })} className="text-[10px] font-bold text-[#C9A063] uppercase tracking-[0.2em]">完成閱讀</button>
+                                    <button onClick={() => setModal({ ...modal, open: false })} className="text-[10px] font-bold text-[#C9A063] uppercase tracking-[0.2em]">{lang === 'zh' ? '完成閱讀' : 'Dismiss'}</button>
                                 </div>
                             </div>
                         </div>
