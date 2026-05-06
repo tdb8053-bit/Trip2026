@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原鄉谷私人包車 - ✨ Gemini 智慧行程</title>
+    <!-- 載入 React 核心 -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- 載入 Babel 用於解析 JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 載入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 載入 Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #F9FAFB; margin: 0; }
+        
+        /* 嚴格單行化原則 */
+        .truncate-line { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        
+        /* 行程連接線 */
+        .bg-dotted {
+            background-image: radial-gradient(#CBD5E1 1.5px, transparent 1.5px);
+            background-size: 100% 10px;
+        }
+
+        /* 滾動條美化 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+
+        // --- 色彩與配置 ---
+        const apiKey = ""; 
+        const appId = 'yuan-xiang-gu-v32-precision';
+        const COLORS = {
+            headerFooter: '#722F37', 
+            gold: '#C9A063',         
+            goldLight: '#D4AF37',    
+            bg: '#F9FAFB',           
+            red: '#E11D48',          
+            blueGrey: '#94A3B8',     
+        };
+
+        // --- 行程資料 ---
+        const TRIP_DATA = {
+            customer: "123",
+            driver: {
+                name: "張其芳",
+                phone: "0935-089253",
+                plate: "TEB-6933",
+                avatar: "https://tdb8053-bit.github.io/Trip2026/mr01.png",
+                carImg: "https://tdb8053-bit.github.io/Trip2026/car01.png",
+                carModel: "Mercedes-Benz Vito Tourer"
+            },
+            days: [
+                { date: "2026/05/26 (Tue)", startTime: "08:30", startHotel: "台北德立莊酒店", fare: 7000, 
+                  spots: [
+                    { name: "台北德立莊酒店", type: "start", driveTime: 110, address: "台北市中正區秀山街4號" },
+                    { name: "勝興車站腳踏火車", type: "spot", driveTime: 10, note: "已預約 11:20" },
+                    { name: "三義金榜麵店午餐", type: "food", driveTime: 15, address: "苗栗縣三義鄉中正路170-7號" },
+                    { name: "中社花市", type: "spot", driveTime: 40 },
+                    { name: "高美濕地", type: "spot", driveTime: 45, note: "準備拖鞋下去海邊玩" },
+                    { name: "台中住宿：金瑞文旅", type: "hotel", address: "台中市西屯區福星路247號" }
+                  ]
+                },
+                { date: "2026/05/27 (Wed)", startTime: "09:00", startHotel: "台中金瑞文旅", fare: 6000, 
+                  spots: [
+                    { name: "台中金瑞文旅", type: "start", driveTime: 120, address: "台中市西屯區福星路247號" },
+                    { name: "合歡山", type: "spot", driveTime: 30 },
+                    { name: "18怪餐廳午餐", type: "food", driveTime: 15 },
+                    { name: "清境農場", type: "spot", driveTime: 90 },
+                    { name: "台中住宿：金瑞文旅", type: "hotel", address: "台中市西屯區福星路247號" }
+                  ]
+                },
+                { date: "2026/05/28 (Thu)", startTime: "09:00", startHotel: "台中金瑞文旅", fare: 7000, 
+                  spots: [
+                    { name: "台中金瑞文旅", type: "start", driveTime: 60, address: "台中市西屯區福星路247號" },
+                    { name: "文武廟", type: "spot", driveTime: 10 },
+                    { name: "伊達邵老街", type: "spot", driveTime: 5 },
+                    { name: "日月餐坊午餐", type: "food", driveTime: 10 },
+                    { name: "向山遊客中心", type: "spot", driveTime: 10 },
+                    { name: "太平雲梯", type: "spot", driveTime: 90 },
+                    { name: "台南住宿：一贰一宿", type: "hotel", address: "台南市中西區海安路三段131號" }
+                  ]
+                },
+                { date: "2026/05/29 (Fri)", startTime: "09:00", startHotel: "台南一贰一宿", fare: 6000, 
+                  spots: [
+                    { name: "台南一贰一宿", type: "start", driveTime: 20, address: "台南市中西區海安路三段131號" },
+                    { name: "安平(豆花+古堡+老街)", type: "spot", driveTime: 10 },
+                    { name: "永樂市場午餐", type: "food", driveTime: 10 },
+                    { name: "林百貨", type: "spot", driveTime: 5 },
+                    { name: "高雄住宿：明倫路", type: "hotel", address: "高雄市鼓山區明倫路115號" }
+                  ]
+                },
+                { date: "2026/05/30 (Sat)", startTime: "09:00", startHotel: "高雄明倫路", fare: 5000, 
+                  spots: [{ name: "高雄全日包車", type: "spot" }, { name: "行程照客人需求 (9小時)", type: "info" }]
+                },
+                { date: "2026/05/31 (Sun)", startTime: "01:30", startHotel: "高雄明倫路", fare: 8000, 
+                  spots: [
+                    { name: "高雄起點", type: "start", driveTime: 120, address: "高雄市鼓山區明倫路115號" },
+                    { name: "清水休息區", type: "spot", driveTime: 60 },
+                    { name: "桃園機場 CI721", type: "flight" }
+                  ]
+                }
+            ]
+        };
+
+        const TOTAL_FARE = TRIP_DATA.days.reduce((sum, d) => sum + d.fare, 0);
+
+        function AIModal({ isOpen, title, content, loading, onClose }) {
+            if (!isOpen) return null;
+            return (
+                <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+                    <div className="bg-white rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl animate-fade-in border border-slate-200">
+                        <div className="p-6 flex justify-between items-center text-white" style={{ backgroundColor: COLORS.blueGrey }}>
+                            <div className="flex items-center gap-3">
+                                <i className="fas fa-sparkles text-yellow-300"></i>
+                                <span className="font-bold text-xs uppercase tracking-[0.2em] truncate-line">{title}</span>
+                            </div>
+                            <button onClick={onClose} className="p-1 hover:opacity-50"><i className="fas fa-times text-lg"></i></button>
+                        </div>
+                        <div className="p-8 max-h-[60vh] overflow-y-auto bg-slate-50 text-sm leading-relaxed text-slate-700 whitespace-pre-wrap font-medium">
+                            {loading ? (
+                                <div className="flex flex-col items-center justify-center py-12 gap-4">
+                                    <div className="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin" style={{ borderColor: `${COLORS.blueGrey} transparent` }}></div>
+                                    <p className="text-slate-400 font-bold animate-pulse truncate-line">✨ AI 正在確認精確資訊...</p>
+                                </div>
+                            ) : content}
+                        </div>
+                        <div className="p-6 border-t bg-white flex justify-center">
+                            <button onClick={onClose} className="px-12 py-3.5 rounded-full text-white font-black text-xs tracking-widest shadow-xl active:scale-95 transition-transform" style={{ backgroundColor: COLORS.gold }}>了解</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function App() {
+            const [lang, setLang] = useState('tw');
+            const [activeDay, setActiveDay] = useState(0);
+            const [modal, setModal] = useState({ open: false, title: '', content: '', loading: false });
+
+            const t = lang === 'tw' ? {
+                customer: "預約人", phoneLabel: "電話", driverLabel: "司機", plateLabel: "車牌",
+                startLoc: "今日起點", fare: "本日車資", totalFare: "六日總車資", startLabel: "出發", wish: "祝 您 旅 途 愉 快",
+                btnNav: "導航", btnIntro: "介紹", btnFood: "美食", aiOutfit: "✨ AI 穿搭"
+            } : {
+                customer: "Client", phoneLabel: "Phone", driverLabel: "Driver", plateLabel: "Plate",
+                startLoc: "Start", fare: "Daily Fare", totalFare: "Total Trip Fare", startLabel: "Start", wish: "WISH YOU A PLEASANT JOURNEY",
+                btnNav: "NAV", btnIntro: "INFO", btnFood: "FOOD", aiOutfit: "✨ AI STYLE"
+            };
+
+            // AI API logic
+            const callGemini = async (prompt, system) => {
+                setModal({ open: true, title: "AI 尊榮建議", content: "", loading: true });
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            systemInstruction: { parts: [{ text: system }] },
+                            tools: [{ "google_search": {} }]
+                        })
+                    });
+                    const data = await response.json();
+                    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "AI 暫時忙碌中，請稍後。";
+                    setModal(prev => ({ ...prev, content: text, loading: false }));
+                } catch (e) {
+                    setModal(prev => ({ ...prev, content: "Service error.", loading: false }));
+                }
+            };
+
+            const handleAIInfo = (name) => {
+                let prompt = `介紹景點「${name}」的文化背景與旅遊亮點。`;
+                if (name.includes("金榜麵店")) {
+                    prompt = `詳細介紹「三義金榜麵店」。注意：該店招牌是豬頭肉麵、餛飩麵，份量極大。請強調其客家在地特色，並排除「豬腳」這項錯誤資訊。`;
+                } else if (name.includes("金瑞文旅")) {
+                    prompt = `詳細介紹「台中金瑞文旅 (Gold Hotel)」。位置：西屯區福星路247號，位於逢甲夜市。請介紹環境與優勢。`;
+                }
+                callGemini(prompt, `你是一位極具質感的奢華旅遊導覽員。請使用${lang === 'tw' ? '繁體中文' : 'English'}回答。`);
+            };
+
+            const handleAIFood = (name) => {
+                const prompt = `搜尋「${name}」周邊適合高品質包車客人的 3 間精選隱藏美食或高評價餐廳。如果是金榜麵店，請推薦三義當地的特色餐飲。如果是金瑞文旅，請鎖定逢甲商圈的高級餐飲。`;
+                callGemini(prompt, `你是一位專業美食評論家。請使用${lang === 'tw' ? '繁體中文' : 'English'}回答。`);
+            };
+
+            const handleAIOutfit = () => {
+                const spots = TRIP_DATA.days[activeDay].spots.map(s => s.name).join(',');
+                const prompt = `行程：${spots}。分析地點海拔、地形與氣候，給予今日的體面穿搭建議。`;
+                callGemini(prompt, `高端旅行穿搭顧問。請使用${lang === 'tw' ? '繁體中文' : 'English'}回答。`);
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col no-scrollbar">
+                    {/* Header - Full Width */}
+                    <header className="w-full py-10 text-center text-white shadow-xl flex-shrink-0" style={{ backgroundColor: COLORS.headerFooter }}>
+                        <h1 className="text-3xl font-serif italic tracking-[0.3em] mb-1">TAIWAN JOURNEY</h1>
+                        <p className="text-[9px] tracking-[0.2em] font-bold uppercase truncate-line" style={{ color: COLORS.gold }}>
+                            PREMIUM PRM PRIVATE CHARTER by 原鄉谷
+                        </p>
+                    </header>
+
+                    <main className="max-w-md mx-auto px-4 -mt-6 flex-grow w-full flex flex-col gap-[10px]">
+                        
+                        {/* Reservation Card */}
+                        <div className="bg-white rounded-3xl shadow-lg border border-slate-100 flex-shrink-0 overflow-hidden">
+                            <div className="p-5 flex justify-between items-start font-bold leading-tight">
+                                <div className="space-y-1 text-xs text-slate-500 min-w-0">
+                                    <p className="truncate-line">{t.customer}：{TRIP_DATA.customer}</p>
+                                    <p className="truncate-line font-mono">{t.phoneLabel}：{TRIP_DATA.driver.phone}</p>
+                                    <p className="truncate-line opacity-50 text-[10px]">人數：5位</p>
+                                </div>
+                                <div className="text-right flex-shrink-0">
+                                    <p className="text-[10px] text-amber-600 truncate-line font-black">尊榮包車六日</p>
+                                    <button onClick={handleAIOutfit} className="mt-2 text-[9px] font-black bg-amber-50 px-3 py-1.5 rounded-lg border border-amber-100 active:scale-95 transition-all" style={{ color: COLORS.gold }}>
+                                        {t.aiOutfit}
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="bg-slate-50 px-5 py-2.5 border-t flex justify-between items-center text-[10px] font-bold">
+                                <span className="truncate-line text-slate-400 uppercase tracking-widest">{t.startLoc}: {TRIP_DATA.days[activeDay].startHotel}</span>
+                            </div>
+                        </div>
+
+                        {/* Driver Card - v30 Locked (Fixed 500px) */}
+                        <section className="bg-white rounded-[2.5rem] shadow-xl p-8 h-[500px] flex flex-col items-center relative overflow-hidden border border-slate-100 flex-shrink-0">
+                            
+                            {/* Avatar Section - UP 10px */}
+                            <div className="flex-shrink-0 z-10 pt-[10px] translate-y-[-10px]">
+                                <div className="w-[110px] h-[110px] rounded-full border-4 p-1 bg-white shadow-lg" style={{ borderColor: COLORS.gold }}>
+                                    <img src={TRIP_DATA.driver.avatar} className="w-full h-full object-cover rounded-full" alt="Driver" />
+                                </div>
+                            </div>
+
+                            {/* Info Block - Centered, UP 12px, Symmetrical Labels */}
+                            <div className="z-10 flex-grow w-full flex flex-col justify-center items-center translate-y-[-12px]">
+                                <div className="flex flex-col gap-2.5 w-fit mb-5">
+                                    <div className="grid grid-cols-[auto_1fr] gap-3 items-center">
+                                        <span className="opacity-50 font-bold text-[13px] text-right w-12">{t.driverLabel}：</span>
+                                        <span className="text-xl font-black text-slate-800 truncate-line leading-none">{TRIP_DATA.driver.name}</span>
+                                    </div>
+                                    <div className="grid grid-cols-[auto_1fr] gap-3 items-center">
+                                        <span className="opacity-50 font-bold text-[13px] text-right w-12">{t.phoneLabel}：</span>
+                                        <span className="text-base text-slate-500 font-mono font-bold truncate-line leading-none">{TRIP_DATA.driver.phone}</span>
+                                    </div>
+                                    <div className="grid grid-cols-[auto_1fr] gap-3 items-center">
+                                        <span className="opacity-50 font-bold text-[13px] text-right w-12">{t.plateLabel}：</span>
+                                        <span className="text-base font-black tracking-widest leading-none truncate-line" style={{ color: COLORS.red }}>{TRIP_DATA.driver.plate}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Car - Fixed Bottom position */}
+                            <div className="relative w-full h-[140px] flex-shrink-0 mt-auto mb-14">
+                                <div className="absolute inset-x-0 -bottom-8 -top-10 z-20 transform scale-125 pointer-events-none flex items-center justify-center">
+                                    <img src={TRIP_DATA.driver.carImg} className="w-full h-full object-contain drop-shadow-2xl" alt="Car" />
+                                </div>
+                            </div>
+                            
+                            {/* Brand Text - Bottom 6, guaranteed visible */}
+                            <div className="absolute bottom-6 w-full text-center z-10 px-4">
+                                <p className="text-[9px] font-serif italic tracking-[0.3em] text-slate-300 uppercase leading-none truncate-line">
+                                    {TRIP_DATA.driver.carModel}
+                                </p>
+                            </div>
+                        </section>
+
+                        {/* Day Nav - 10px Gap */}
+                        <div className="flex flex-wrap gap-[10px] flex-shrink-0">
+                            {TRIP_DATA.days.map((_, idx) => (
+                                <button key={idx} onClick={() => setActiveDay(idx)}
+                                    className={`flex-1 min-w-[30%] py-4 rounded-2xl text-[11px] font-black transition-all shadow-md ${activeDay === idx ? 'bg-slate-500 text-white translate-y-[-1px]' : 'bg-white text-slate-400'}`}>
+                                    DAY {idx + 1}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Itinerary List */}
+                        <div className="flex flex-col gap-[10px] pb-5">
+                            <h3 className="text-2xl font-black text-slate-800 tracking-tighter px-2 mb-1 truncate-line">{TRIP_DATA.days[activeDay].date}</h3>
+                            {TRIP_DATA.days[activeDay].spots.map((spot, sIdx) => (
+                                <React.Fragment key={sIdx}>
+                                    <div className="bg-white rounded-[2.5rem] p-6 shadow-lg border-l-[10px] relative overflow-hidden flex-shrink-0" 
+                                         style={{ borderColor: spot.type === 'food' ? COLORS.gold : (spot.type === 'hotel' ? '#0D9488' : COLORS.blueGrey) }}>
+                                        
+                                        <div className="flex justify-between items-center mb-5 gap-3 leading-none">
+                                            <div className="flex items-center gap-4 min-w-0">
+                                                <div className="p-3 rounded-2xl bg-slate-50 shadow-sm flex-shrink-0">
+                                                    <i className={`fas ${spot.type === 'food' ? 'fa-utensils' : (spot.type === 'hotel' ? 'fa-home' : 'fa-map-pin')}`} style={{ color: COLORS.blueGrey }}></i>
+                                                </div>
+                                                <p className="font-black text-slate-800 truncate-line leading-none text-base">{spot.name}</p>
+                                            </div>
+                                            {spot.type === 'start' && (
+                                                <div className="bg-[#E11D48] text-white px-3 py-1.5 rounded-full shadow-lg text-[10px] font-black whitespace-nowrap uppercase">
+                                                    {t.startLabel} {TRIP_DATA.days[activeDay].startTime}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="pl-16 mb-6 flex flex-col gap-1">
+                                            {spot.address && <p className="text-[9px] text-slate-400 font-bold truncate-line leading-none">{spot.address}</p>}
+                                            {spot.note && <p className="text-[10px] text-rose-500 font-black truncate-line leading-none">{spot.note}</p>}
+                                        </div>
+                                        
+                                        {/* 功能按鈕區：導航、介紹、美食 */}
+                                        <div className="grid grid-cols-3 gap-2 border-t pt-4">
+                                            <button onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.address || spot.name)}`)}
+                                                className="flex flex-col items-center gap-1.5 active:scale-90 transition-transform">
+                                                <div className="p-2.5 rounded-full bg-amber-50 shadow-sm">
+                                                    <i className="fas fa-location-arrow text-amber-600 text-[16px]"></i>
+                                                </div>
+                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest truncate-line">{t.btnNav}</span>
+                                            </button>
+                                            <button onClick={() => handleAIInfo(spot.name)}
+                                                className="flex flex-col items-center gap-1.5 active:scale-90 transition-transform">
+                                                <div className="p-2.5 rounded-full bg-slate-50 shadow-sm">
+                                                    <i className="fas fa-info-circle text-slate-400 text-[16px]"></i>
+                                                </div>
+                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest truncate-line">{t.btnIntro}</span>
+                                            </button>
+                                            <button onClick={() => handleAIFood(spot.address || spot.name)}
+                                                className="flex flex-col items-center gap-1.5 active:scale-90 transition-transform">
+                                                <div className="p-2.5 rounded-full bg-amber-50 shadow-sm">
+                                                    <i className="fas fa-utensils text-amber-500 text-[16px]"></i>
+                                                </div>
+                                                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest truncate-line">{t.btnFood}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {spot.driveTime && (
+                                        <div className="flex items-center gap-6 px-10 leading-none">
+                                            <div className="h-8 w-0.5 bg-dotted"></div>
+                                            <div className="text-[10px] font-black text-slate-400 italic truncate-line">行車約 {spot.driveTime} 分鐘</div>
+                                        </div>
+                                    )}
+                                </React.Fragment>
+                            ))}
+                        </div>
+
+                        {/* 車資結算 */}
+                        <div className="bg-white rounded-[1.5rem] shadow-2xl border-2 border-double border-amber-200 overflow-hidden mb-24 text-center flex-shrink-0">
+                            <div className="p-3 bg-amber-50/50 border-b flex justify-center gap-2 items-center">
+                                <i className="fas fa-credit-card text-[10px]" style={{ color: COLORS.gold }}></i>
+                                <span className="text-[9px] font-black tracking-widest text-slate-800 uppercase">Pricing Settlement</span>
+                            </div>
+                            <div className="p-6 space-y-4 text-center">
+                                <div className="flex justify-between items-center border-b border-slate-50 pb-3">
+                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest truncate-line">{t.fare}</span>
+                                    <span className="text-xl font-serif font-black italic truncate-line" style={{ color: COLORS.gold }}>NT$ {TRIP_DATA.days[activeDay].fare.toLocaleString()}</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest truncate-line">{t.totalFare}</span>
+                                    <span className="text-2xl font-serif font-black italic truncate-line" style={{ color: COLORS.gold }}>NT$ {TOTAL_FARE.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+
+                    {/* 語言切換 */}
+                    <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] pointer-events-none">
+                        <button onClick={() => setLang(lang === 'tw' ? 'en' : 'tw')}
+                            className="pointer-events-auto bg-white/90 backdrop-blur-md border border-slate-200 shadow-2xl rounded-full px-10 py-3.5 text-[10px] font-black tracking-widest text-slate-700 active:scale-95 transition-all">
+                            {lang === 'tw' ? '繁體中文 / ENGLISH' : 'ENGLISH / 繁體中文'}
+                        </button>
+                    </div>
+
+                    {/* 頁尾 - 滿版 */}
+                    <footer className="w-full py-8 px-8 text-center text-white mt-auto flex-shrink-0" style={{ backgroundColor: COLORS.headerFooter }}>
+                        <h4 className="text-2xl font-black tracking-[0.2em] mb-4 leading-none truncate-line">祝 您 旅 途 愉 快</h4>
+                        <div className="w-16 h-px bg-white/20 mx-auto mb-4"></div>
+                        <p className="text-[10px] tracking-[0.15em] font-serif font-bold whitespace-nowrap truncate-line" style={{ color: COLORS.gold }}>
+                            PREMIUM PRM PRIVATE CHARTER by 原鄉谷
+                        </p>
+                    </footer>
+
+                    <AIModal 
+                        isOpen={modal.open} 
+                        title={modal.title} 
+                        content={modal.content} 
+                        loading={modal.loading} 
+                        onClose={() => setModal(prev => ({ ...prev, open: false }))} 
+                    />
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
