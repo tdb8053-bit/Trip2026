@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>謝彩芬專屬：5天4夜 台灣山海包車互動行程表 (森林活潑版)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ========================================= */
+/* 🎨 雙主題 CSS 變數控制中心 */
+/* ========================================= */
+
+:root {
+    /* 🌿 預設主題：森林活潑版 (Forest Theme) */
+    --primary-color: #2E4F33; 
+    --secondary-color: #6B8E23; 
+    --accent-color: #D4A373; 
+    --budget-color: #E9C46A; 
+    --text-main: #333333;
+    --text-muted: #667b68; 
+    --bg-main: linear-gradient(120deg, #F0F4F1 0%, #E6EFE7 50%, #FAFCFA 100%);
+    --header-bg: linear-gradient(135deg, #2E4F33 0%, #6B8E23 100%);
+    --header-shadow: rgba(46, 79, 51, 0.2);
+    --card-bg: linear-gradient(to bottom right, #ffffff 0%, #F5F9F5 100%);
+    --card-shadow: rgba(46, 79, 51, 0.1);
+    --card-hover-shadow: rgba(46, 79, 51, 0.25);
+    --card-border: #EBF2EC;
+    --budget-bg: linear-gradient(to right, #FDFAFA, #ffffff);
+    --weather-bg: linear-gradient(to right, #F4F9F4, #ffffff);
+    --day1: #C2D194; --day2: #A3B86C; --day3: #82A33A; --day4: #6B8E23; --day5: #2E4F33;
+    --h2-text: linear-gradient(45deg, #2E4F33, #6B8E23);
+    --dashed-line: #DCE5DE;
+    --total-cost: #D4A373;
+    --spot-bg: #FAFCFA;
+    --arrive-bg: linear-gradient(90deg, #6B8E23, #82A33A);
+    --arrive-shadow: rgba(107, 142, 35, 0.3);
+    --tag-bg: #F0F4F1; --tag-color: #436F4A;
+    --food-bg: #FDF6F0; --food-color: #C28E5C; --food-border: #F5E8D9;
+    --nav-bg: linear-gradient(45deg, #6B8E23, #82A33A);
+    --nav-hover: linear-gradient(45deg, #4F6B19, #6B8E23);
+    --nav-shadow: rgba(107, 142, 35, 0.4);
+    --search-bg: linear-gradient(45deg, #A3B86C, #C2D194);
+    --search-hover: linear-gradient(45deg, #82A33A, #A3B86C);
+    --search-shadow: rgba(107, 142, 35, 0.3);
+    --search-text: #2E4F33;
+    --photo-bg: linear-gradient(45deg, #2E4F33, #436F4A);
+    --photo-hover: linear-gradient(45deg, #1C301F, #2E4F33);
+    --photo-shadow: rgba(46, 79, 51, 0.3);
+    --food-btn-bg: linear-gradient(45deg, #D4A373, #E3BA91);
+    --food-btn-hover: linear-gradient(45deg, #B38252, #D4A373);
+    --food-btn-shadow: rgba(212, 163, 115, 0.4);
+    --web-bg: linear-gradient(45deg, #E9C46A, #F4D381);
+    --web-hover: linear-gradient(45deg, #C7A248, #E9C46A);
+    --web-shadow: rgba(233, 196, 106, 0.4);
+    --web-text: #2E4F33;
+    --cost-span-bg: #FCF9F9;
+    --cost-span-color: #82A33A;
+    --cost-span-border: #EBF2EC;
+}
+
+[data-theme="pink"] {
+    /* 🌸 切換主題：莫蘭迪粉紅版 (Morandi Pink Theme) */
+    --primary-color: #7A5C61; 
+    --secondary-color: #D6B4B8; 
+    --accent-color: #BBA5A6; 
+    --budget-color: #D3C4C1; 
+    --text-main: #4a4a4a;
+    --text-muted: #8A7B7C; 
+    --bg-main: linear-gradient(120deg, #FDF8F8 0%, #F5EBEC 50%, #FCFAFA 100%);
+    --header-bg: linear-gradient(135deg, #7A5C61 0%, #D6B4B8 100%);
+    --header-shadow: rgba(122, 92, 97, 0.2);
+    --card-bg: linear-gradient(to bottom right, #ffffff 0%, #FDF7F8 100%);
+    --card-shadow: rgba(122, 92, 97, 0.1);
+    --card-hover-shadow: rgba(122, 92, 97, 0.25);
+    --card-border: #F5EAEB;
+    --budget-bg: linear-gradient(to right, #FCF9F9, #ffffff);
+    --weather-bg: linear-gradient(to right, #FAF4F5, #ffffff);
+    --day1: #EBD3D5; --day2: #D6B4B8; --day3: #BF999E; --day4: #A37B80; --day5: #7A5C61;
+    --h2-text: linear-gradient(45deg, #7A5C61, #BF999E);
+    --dashed-line: #EADADD;
+    --total-cost: #B36F76;
+    --spot-bg: #FDF9FA;
+    --arrive-bg: linear-gradient(90deg, #D6B4B8, #E2C2C6);
+    --arrive-shadow: rgba(214, 180, 184, 0.3);
+    --tag-bg: #F8F1F2; --tag-color: #A37B80;
+    --food-bg: #FCF4F3; --food-color: #B36F76; --food-border: #F5E2E0;
+    --nav-bg: linear-gradient(45deg, #BF999E, #D6B4B8);
+    --nav-hover: linear-gradient(45deg, #A37B80, #BF999E);
+    --nav-shadow: rgba(214, 180, 184, 0.4);
+    --search-bg: linear-gradient(45deg, #EBD3D5, #F2DFE1);
+    --search-hover: linear-gradient(45deg, #D6B4B8, #EBD3D5);
+    --search-shadow: rgba(214, 180, 184, 0.3);
+    --search-text: #7A5C61;
+    --photo-bg: linear-gradient(45deg, #7A5C61, #A37B80);
+    --photo-hover: linear-gradient(45deg, #5C4347, #7A5C61);
+    --photo-shadow: rgba(122, 92, 97, 0.3);
+    --food-btn-bg: linear-gradient(45deg, #C2898F, #D39FA4);
+    --food-btn-hover: linear-gradient(45deg, #A86D73, #C2898F);
+    --food-btn-shadow: rgba(194, 137, 143, 0.4);
+    --web-bg: linear-gradient(45deg, #BBA5A6, #CDB8B9);
+    --web-hover: linear-gradient(45deg, #9C8687, #BBA5A6);
+    --web-shadow: rgba(187, 165, 166, 0.4);
+    --web-text: white;
+    --cost-span-bg: #FCF9F9;
+    --cost-span-color: #B3868B;
+    --cost-span-border: #F5EAEB;
+}
+
+/* ========================================= */
+/* 網頁主體樣式自動套用變數 */
+/* ========================================= */
+body {
+    font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', "Microsoft JhengHei", "Nunito", sans-serif;
+    line-height: 1.7;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    background: var(--bg-main); 
+    margin: 0;
+    padding: 20px;
+    transition: background 0.5s ease;
+}
+.container { max-width: 900px; margin: 0 auto; position: relative; }
+
+/* 頂部標題漸層 */
+header { background: var(--header-bg); color: white; padding: 30px 20px; border-radius: 16px; text-align: center; box-shadow: 0 10px 20px var(--header-shadow); margin-bottom: 30px; transition: all 0.5s ease;}
+header h1 { margin: 0 0 10px 0; font-size: 1.8em; text-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+header p { margin: 0; font-size: 1.1em; opacity: 0.9; }
+
+/* 內容卡片浮動動畫 */
+.card { 
+    background: var(--card-bg); 
+    padding: 20px; 
+    border-radius: 16px; 
+    box-shadow: 0 6px 15px var(--card-shadow); 
+    margin-bottom: 25px; 
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, background 0.5s ease; 
+    border: 1px solid var(--card-border); 
+}
+.card:hover { 
+    transform: translateY(-8px) scale(1.01); 
+    box-shadow: 0 15px 30px var(--card-hover-shadow); 
+}
+
+/* 區塊專屬左側邊框顏色 */
+.info-card { border-left: 6px solid var(--accent-color); }
+.driver-card { border-left: 6px solid var(--budget-color); }
+.budget-card { border-left: 6px solid var(--budget-color); background: var(--budget-bg); }
+.weather-card { border-left: 6px solid var(--secondary-color); background: var(--weather-bg); }
+
+/* 每日邊框顏色 */
+.day-1 { border-left: 6px solid var(--day1); }
+.day-2 { border-left: 6px solid var(--day2); }
+.day-3 { border-left: 6px solid var(--day3); }
+.day-4 { border-left: 6px solid var(--day4); }
+.day-5 { border-left: 6px solid var(--day5); }
+
+/* 漸層標題文字 */
+h2 { 
+    background: var(--h2-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px dashed var(--dashed-line); 
+    padding-bottom: 10px; margin-top: 10px; line-height: 1.4; font-weight: 700; 
+}
+
+.day-header { margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 12px; }
+h3 { color: var(--secondary-color); margin: 0; font-size: 1.3em; display: block; font-weight: 700; }
+.day-title { font-size: 1.1em; color: var(--primary-color); font-weight: bold; margin-top: 5px; padding-left: 32px; letter-spacing: 1px; display: block; }
+.total-cost { font-size: 1.2em; color: var(--total-cost); font-weight: bold; text-align: right; }
+.drive-time { color: var(--text-muted); font-size: 0.85em; font-weight: bold; padding-left: 20px; margin-bottom: 15px; border-left: 3px dashed var(--dashed-line); white-space: nowrap; }
+
+.spot { border-left: 3px solid var(--secondary-color); padding-left: 15px; margin-bottom: 15px; background: var(--spot-bg); padding-top: 12px; padding-bottom: 12px; border-radius: 0 12px 12px 0; }
+.spot h4 { color: var(--primary-color); margin: 0 0 8px 0; font-size: 1.1em; line-height: 1.5; font-weight: 700; white-space: normal; text-wrap: balance; word-break: normal;}
+
+/* ⭐ 互換後的時間標籤 (出發赤茶紅保持不變 vs 抵達變數切換) */
+.badge-depart { background: linear-gradient(90deg, #c0392b, #e0564b); color: white; padding: 4px 10px; border-radius: 8px; font-size: 0.85em; margin-right: 8px; vertical-align: baseline; letter-spacing: 0.5px; font-weight: bold; box-shadow: 0 3px 8px rgba(192, 57, 43, 0.4);}
+.badge-arrive { background: var(--arrive-bg); color: white; padding: 4px 10px; border-radius: 8px; font-size: 0.85em; margin-right: 8px; vertical-align: baseline; letter-spacing: 0.5px; font-weight: bold; box-shadow: 0 2px 5px var(--arrive-shadow);}
+
+/* 停留時間與美食標籤 */
+.tag, .food-tag { padding: 4px 10px; border-radius: 8px; font-size: 0.85em; margin-right: 6px; display: inline-block; margin-bottom: 5px; font-weight: bold;}
+.tag { background: var(--tag-bg); color: var(--tag-color); border: 1px solid var(--dashed-line); }
+.food-tag { background: var(--food-bg); color: var(--food-color); border: 1px solid var(--food-border); }
+
+/* ======== 電腦版互動式按鈕 ======== */
+.btn-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.btn-group a { display: inline-block; text-decoration: none; padding: 8px 16px; border-radius: 8px; font-size: 0.85em; font-weight: bold; transition: all 0.3s; box-sizing: border-box; }
+
+.btn-nav { background: var(--nav-bg); color: white; }
+.btn-nav:hover { background: var(--nav-hover); box-shadow: 0 4px 12px var(--nav-shadow); transform: translateY(-2px); }
+
+.btn-search { background: var(--search-bg); color: var(--search-text); }
+.btn-search:hover { background: var(--search-hover); box-shadow: 0 4px 12px var(--search-shadow); transform: translateY(-2px); color: white;}
+
+.btn-photo { background: var(--photo-bg); color: white; }
+.btn-photo:hover { background: var(--photo-hover); box-shadow: 0 4px 12px var(--photo-shadow); transform: translateY(-2px); }
+
+.btn-food { background: var(--food-btn-bg); color: white; }
+.btn-food:hover { background: var(--food-btn-hover); box-shadow: 0 4px 12px var(--food-btn-shadow); transform: translateY(-2px); }
+
+.btn-web { background: var(--web-bg); color: var(--web-text); }
+.btn-web:hover { background: var(--web-hover); box-shadow: 0 4px 12px var(--web-shadow); transform: translateY(-2px); color: white;}
+
+/* 圖片與地圖容器 */
+.map-container { width: 100%; height: 200px; border-radius: 12px; overflow: hidden; margin-top: 15px; border: 1px solid #eee; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.map-container iframe { width: 100%; height: 100%; border: 0; }
+.daily-cost-bottom { text-align: right; margin-top: 15px; padding-top: 15px; border-top: 1px dashed #eee; }
+.daily-cost-bottom span { background: var(--cost-span-bg); color: var(--cost-span-color); padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 0.95em; border: 1px solid var(--cost-span-border); display: inline-block; }
+.img-container { width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin: 20px auto 10px auto; overflow: hidden; background: #fff;}
+footer { text-align: center; font-size: 0.9em; color: var(--text-muted); margin-top: 30px; border-top: 1px solid var(--dashed-line); padding-top: 25px; padding-bottom: 20px; line-height: 1.8;}
+
+/* ======== 🚀 懸浮按鈕區 (返回頂部 & 切換主題) ======== */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--header-bg);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.8);
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 6px 15px var(--header-shadow);
+    cursor: pointer;
+    display: none; 
+    z-index: 1000;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+#backToTop:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--card-hover-shadow);
+}
+
+#themeSwitcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--header-bg);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.8);
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 0.9em;
+    font-weight: bold;
+    box-shadow: 0 6px 15px var(--header-shadow);
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+#themeSwitcher:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--card-hover-shadow);
+}
+
+/* ========================================= */
+/* 📱 手機版專屬排版優化 (響應式設計) */
+/* ========================================= */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    .card { padding: 15px; margin-bottom: 15px; }
+    header { padding: 45px 15px 20px 15px; margin-bottom: 20px; } /* 增加上方留白給按鈕 */
+    header h1 { font-size: 1.4em; }
+    header p { font-size: 0.9em; }
+    h2 { font-size: 1.25em; }
+    .driver-card table { font-size: 0.9em; }
+
+    /* ⭐ 按鈕高對比顯眼優化 */
+    .btn-group { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .btn-group a { 
+        text-align: center; 
+        margin-right: 0; 
+        margin-top: 0; 
+        width: 100%; 
+        border: 2px solid rgba(255,255,255,0.9); 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        padding: 12px 16px; 
+        font-size: 1em;
+    }
+
+    .spot { padding-left: 10px; margin-bottom: 12px; }
+    .spot h4 { font-size: 1.05em; }
+    .drive-time { padding-left: 10px; font-size: 0.8em; }
+    .total-cost { font-size: 1.1em; text-align: center; }
+    
+    #backToTop { bottom: 20px; right: 15px; padding: 10px 16px; font-size: 0.9em; border-width: 1.5px; }
+    #themeSwitcher { top: 10px; right: 10px; padding: 8px 12px; font-size: 0.8em; border-width: 1.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 一鍵切換主題按鈕 -->
+<button id="themeSwitcher" onclick="toggleTheme()">🌸 切換粉紅版</button>
+
+<div class="container">
+<header>
+<h1><span id="mainEmoji">🌿</span> 台灣 5 天 4 夜 山海秘境包車遊</h1>
+<p>旅遊日期：2026年5月26日 至 5月30日</p>
+</header>
+
+<!-- 預約代表資訊 -->
+<section class="card info-card">
+<h2>👤 預約乘車資訊</h2>
+<p style="margin-bottom: 0;"><strong>預約代表：</strong> 謝彩芬 等共 6 人 <br><small>電話：+60 12-707 7463</small></p>
+</section>
+
+<!-- 專屬司機資訊與車輛設施 -->
+<section class="card driver-card" style="text-align: center;">
+<h2>🚕 專屬司機資訊</h2>
+<img src="https://tdb8053-bit.github.io/Trip2026/mr01.png" alt="司機大頭貼" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 4px solid var(--budget-color); margin-bottom: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+<table style="border-collapse: collapse; margin: 0 auto; text-align: left; font-size: 1em; white-space: nowrap;">
+<tr><td><strong>專屬司機</strong></td><td style="padding: 0 5px;"><strong>：</strong></td><td>張其芳</td></tr>
+<tr><td><strong>電　　話</strong></td><td style="padding: 0 5px;"><strong>：</strong></td><td>0935089253</td></tr>
+<tr style="color: var(--secondary-color); font-weight: bold;"><td>車　　牌</td><td style="padding: 0 5px;">：</td><td>TEB-6933</td></tr>
+</table>
+<div class="img-container" style="margin-top: 8px;">
+<img src="https://tdb8053-bit.github.io/Trip2026/car01.png" alt="車輛外觀" style="width: 100%; height: auto; display: block;">
+</div>
+<div style="margin-top: 10px; font-size: 1.1em; font-weight: bold; color: var(--primary-color);">
+🚙 車型：Mercedes-Benz Vito Tourer
+</div>
+<div style="margin-top: 25px; text-align: left; background: var(--weather-bg); padding: 15px; border-radius: 12px; border: 1px dashed var(--dashed-line);">
+<h4 style="color: var(--secondary-color); margin-top: 0; margin-bottom: 12px; font-size: 1.1em; border-bottom: 1px solid #eee; padding-bottom: 8px;">✨ 車輛貼心服務與設施</h4>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; font-size: 0.95em; color: var(--text-main); font-weight: bold;">
+<div>💧 免費包裝飲用水</div><div>🔋 USB 獨立充電座</div><div>📶 車載免費 Wi-Fi</div><div>☔ 貼心備用愛心傘</div><div>🧴 濕紙巾與面紙</div>
+</div>
+</div>
+</section>
+
+<!-- 預算總覽 -->
+<section class="card budget-card">
+<h2 style="margin-bottom: 20px;">💰 總車資與預算總覽</h2>
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+<div style="display: inline-block; text-align: left;">
+<p style="margin: 5px 0;"><strong>五天包車總計：</strong> 31,000 元</p>
+<p style="margin: 5px 0;"><strong>代訂車票費用：</strong> 1,710 元</p>
+</div>
+<div style="font-size: 0.85em; color: var(--text-muted); margin-top: 8px;">
+(285元 × 6張，訂單編號: AS260423011)
+</div>
+</div>
+<div style="text-align: right; margin-top: 15px; font-size: 1.3em; color: #c0392b; font-weight: bold;">總金額：32,710 元</div>
+</section>
+
+<section>
+<h2>📅 每日詳細行程與時間軸</h2>
+
+<!-- Day 1 -->
+<div class="card day-card day-1">
+<div class="day-header">
+<h3>📍 5/26 (二)</h3>
+<div class="day-title">台北出發南下</div>
+</div>
+<p><strong><span class="badge-depart">08:30 出發</span> 集合地點</strong>：德立莊酒店 (台北市秀山街4號)</p>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=德立莊酒店&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+<div class="drive-time">🚗 行車時間約 2 小時 10 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 10:40</span> 🚂 勝興車站腳踏火車 (預約 11:20)</h4>
+<p><span class="tag">預計停留 1.5 小時</span> 體驗舊山線鐵道風情。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=苗栗勝興車站" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=勝興車站腳踏火車" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://www.google.com/search?q=勝興車站+旅遊介紹" class="btn-web" target="_blank">🌐 景點介紹</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=苗栗勝興車站&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 12:15</span> 🍜 金榜麵店午餐</h4>
+<p><span class="food-tag">預計停留 1 小時</span> 苗栗超人氣客家美食！必點Q彈客家粄條、濃郁豬頭肉與份量十足的特色滷味小菜。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=三義金榜麵店" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/三義金榜麵店+附近美食" class="btn-food" target="_blank">🍽️ 附近美食地圖</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=三義金榜麵店&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 20 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 13:35</span> 🌷 中社花市</h4>
+<p><span class="tag">預計停留 1.5 小時</span> 欣賞壯觀花海與拍照打卡。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=中社觀光花市" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=中社花市" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://www.google.com/search?tbm=isch&q=中社觀光花市+打卡" class="btn-photo" target="_blank">📷 景點圖庫</a>
+<a href="http://www.flowerjs.com.tw/" class="btn-web" target="_blank">🌐 官網</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=中社觀光花市&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 40 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 15:40</span> 🌊 高美濕地</h4>
+<p><span class="tag">預計停留 2 小時</span> 欣賞壯麗夕陽絕景。(💡 AI 提醒：請準備拖鞋)</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=高美濕地" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=高美濕地" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://www.google.com/search?tbm=isch&q=高美濕地+夕陽" class="btn-photo" target="_blank">📷 夕陽美照</a>
+<a href="https://www.google.com/search?q=高美濕地+旅遊介紹" class="btn-web" target="_blank">🌐 景點介紹</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=高美濕地&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 45 分鐘</div>
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 18:15</span> 🏨 抵達台中住宿</h4>
+<p><strong>入住</strong>：金瑞文旅 (台中市福星路247號)</p>
+<div class="btn-group"><a href="https://www.google.com/maps/search/?api=1&query=台中金瑞文旅" class="btn-nav" target="_blank">🗺️ 導航</a></div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台中金瑞文旅&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+<div class="daily-cost-bottom"><span>💰 本日車資：7,000 元</span></div>
+</div>
+
+<!-- Day 2 -->
+<div class="card day-card day-2">
+<div class="day-header">
+<h3>📍 5/27 (三)</h3>
+<div class="day-title">南投高山深呼吸</div>
+</div>
+<p><strong><span class="badge-depart">08:30 出發</span> 從住宿點出發</strong>：金瑞文旅</p>
+<div class="drive-time">🚗 行車時間約 2 小時 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 10:45</span> ⛰️ 合歡山</h4>
+<p><span class="tag">預計停留 1 小時 15 分</span> 享受高山新鮮空氣與壯闊風景。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=合歡山" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=合歡山風景區" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://www.google.com/search?tbm=isch&q=合歡山風景" class="btn-photo" target="_blank">📷 壯闊風景</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=合歡山武嶺&t=&z=12&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 50 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 12:50</span> 🍽️ 18怪餐廳午餐</h4>
+<p><span class="food-tag">預計停留 1 小時 10 分</span> 清境高山特色餐廳！品嚐道地雲南擺夷料理、鮮甜高山高麗菜與在地野味。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=清境18怪餐廳" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/清境農場+附近美食" class="btn-food" target="_blank">🍽️ 附近美食</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=清境18怪餐廳&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 14:15</span> 🐑 清境農場</h4>
+<p><span class="tag">預計停留 2.5 小時</span> 漫步青青草原、餵食綿羊。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=清境農場" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=清境農場" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://www.cingjing.gov.tw/" class="btn-web" target="_blank">🌐 官網</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=清境農場&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 1 小時 40 分鐘</div>
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 18:25</span> 🏨 抵達台中住宿</h4>
+<p><strong>入住</strong>：金瑞文旅</p>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台中金瑞文旅&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+<div class="daily-cost-bottom"><span>💰 本日車資：6,000 元</span></div>
+</div>
+
+<!-- Day 3 -->
+<div class="card day-card day-3">
+<div class="day-header">
+<h3>📍 5/28 (四)</h3>
+<div class="day-title">日月潭與嘉義雲梯</div>
+</div>
+<p><strong><span class="badge-depart">08:30 出發</span> 從住宿點出發</strong>：金瑞文旅</p>
+<div class="drive-time">🚗 行車時間約 1 小時 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 09:45</span> ⛩️ 文武廟</h4>
+<p><span class="tag">預計停留 30 分鐘</span> 俯瞰日月潭全景。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=日月潭文武廟" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=日月潭文武廟" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://www.wenwu.org.tw/" class="btn-web" target="_blank">🌐 官網</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=日月潭文武廟&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 10:30</span> 🛍️ 伊達邵老街</h4>
+<p><span class="tag">預計停留 1 小時 15 分</span> 逛原住民特色商圈。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=伊達邵老街" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/伊達邵老街+必吃美食" class="btn-food" target="_blank">🍽️ 必吃推薦</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=日月潭伊達邵老街&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 10 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 11:55</span> 🥢 日月餐坊午餐</h4>
+<p><span class="food-tag">預計停留 1 小時</span> 日月潭在地口碑名店！推薦必吃總統魚(曲腰魚)、刺蔥煎蛋與邵族特色竹筒飯，享受精緻合菜。</p>
+<div class="btn-group"><a href="https://www.google.com/maps/search/?api=1&query=日月餐坊" class="btn-nav" target="_blank">🗺️ 導航</a></div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=日月餐坊&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 10 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 13:05</span> 🏞️ 向山遊客中心</h4>
+<p><span class="tag">預計停留 30 分鐘</span> 欣賞清水模建築與絕美湖畔。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=向山遊客中心" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?tbm=isch&q=向山遊客中心+清水模" class="btn-photo" target="_blank">📷 清水模美圖</a>
+<a href="https://www.google.com/search?q=向山遊客中心+旅遊介紹" class="btn-web" target="_blank">🌐 景點介紹</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=日月潭向山遊客中心&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 2 小時</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 15:35</span> 🌉 太平雲梯 & 太平老街</h4>
+<p><span class="tag">預計停留 1.5 小時</span> 俯瞰嘉南平原與感受老街懷舊風情。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=嘉義太平雲梯" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=太平雲梯" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="https://alishan.welcometw.com/taipingbridge" class="btn-web" target="_blank">🌐 官網預約</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=嘉義太平雲梯&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 1 小時 30 分鐘</div>
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 18:35</span> 🏨 抵達台南住宿</h4>
+<p><strong>入住</strong>：一貳一宿 (台南市海安路三段131號)</p>
+<div class="btn-group"><a href="https://www.google.com/maps/search/?api=1&query=台南一貳一宿" class="btn-nav" target="_blank">🗺️ 導航</a></div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台南一貳一宿&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+<div class="daily-cost-bottom"><span>💰 本日車資：7,000 元</span></div>
+</div>
+
+<!-- Day 4 -->
+<div class="card day-card day-4">
+<div class="day-header">
+<h3>📍 5/29 (五)</h3>
+<div class="day-title">台南文化深度遊</div>
+</div>
+<p><strong><span class="badge-depart">09:00 出發</span> 從住宿點出發</strong>：一貳一宿</p>
+<div class="drive-time">🚗 行車時間約 20 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 09:20</span> 🌿 四草綠色隧道</h4>
+<p><span class="tag">預計停留 1.5 小時</span> 搭乘竹筏穿梭台版亞馬遜。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?tbm=isch&q=四草綠色隧道+秘境" class="btn-photo" target="_blank">📷 秘境圖庫</a>
+<a href="https://www.google.com/search?q=四草綠色隧道+旅遊介紹" class="btn-web" target="_blank">🌐 景點介紹</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台南四草綠色隧道&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 11:15</span> 🏰 安平 (古堡+老街+豆花)</h4>
+<p><span class="tag">預計停留 2 小時</span> 逛古蹟並品嚐綿密滑順的傳統古早味黑豆花，搭配珍珠或檸檬汁消暑解渴。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=安平古堡" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/安平古堡+附近美食" class="btn-food" target="_blank">🍽️ 安平美食</a>
+<a href="https://historic.tainan.gov.tw/index.php?option=module&lang=cht&task=pageinfo&id=46&index=2" class="btn-web" target="_blank">🌐 官方介紹</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台南安平古堡&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 15 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 13:30</span> 🍜 永樂市場午餐</h4>
+<p><span class="food-tag">預計停留 1 小時</span> 台南經典小吃匯聚地！推薦品嚐以下必吃美食：<br>
+<small style="color: var(--text-muted); display: block; margin-top: 8px; line-height: 1.6;">
+🕒 <b>富盛號碗粿：</b>07:00 - 17:00 (週四公休)<br>
+🕒 <b>金得春捲：</b>07:00 - 17:00 (週二公休)<br>
+🕒 <b>阿松割包：</b>08:00 - 18:00 (週四公休)
+</small></p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=台南永樂市場" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/台南永樂市場+必吃美食" class="btn-food" target="_blank">🍽️ 美食地圖</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台南永樂市場&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 10 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 14:40</span> 🏛️ 林百貨</h4>
+<p><span class="tag">預計停留 1 小時</span> 復古風情南台灣第一間百貨。</p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=林百貨" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=林百貨" class="btn-search" target="_blank">🔍 搜尋</a>
+<a href="http://www.hayashi.com.tw/" class="btn-web" target="_blank">🌐 官網</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台南林百貨&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 10 分鐘</div>
+
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 15:50</span> 🍢 國華街美食</h4>
+<p><span class="food-tag">預計停留 1.5 小時</span> 美食一級戰區！邊走邊吃享受溫體牛肉湯、鮮甜鱔魚意麵等誘人古都風味。<br>
+<small style="color: var(--accent-color); font-weight: bold; display: block; margin-top: 5px;">💡 AI 提醒：抵達時間接近傍晚，多數傳統小吃於 17:00~18:00 打烊或售完為止，建議抵達後優先尋找想吃的店家！</small></p>
+<div class="btn-group">
+<a href="https://www.google.com/maps/search/?api=1&query=國華街" class="btn-nav" target="_blank">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/台南國華街+人氣美食" class="btn-food" target="_blank">🍽️ 國華街吃透透</a>
+</div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=台南國華街&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+
+<div class="drive-time">🚗 行車時間約 1 小時 15 分鐘</div>
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 18:45</span> 🏨 抵達高雄住宿</h4>
+<p><strong>入住</strong>：高雄市鼓山區明倫路115號</p>
+<div class="btn-group"><a href="https://www.google.com/maps/search/?api=1&query=高雄市鼓山區明倫路115號" class="btn-nav" target="_blank">🗺️ 導航</a></div>
+<div class="map-container"><iframe src="https://maps.google.com/maps?q=高雄市鼓山區明倫路115號&t=&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe></div>
+</div>
+<div class="daily-cost-bottom"><span>💰 本日車資：6,000 元</span></div>
+</div>
+
+<!-- Day 5 -->
+<div class="card day-card day-5">
+<div class="day-header">
+<h3>📍 5/30 (六)</h3>
+<div class="day-title">高雄客製化漫遊</div>
+</div>
+<p><strong><span class="badge-depart">09:00 出發</span> 從住宿點出發</strong>：高雄市鼓山區明倫路115號</p>
+<div class="spot">
+<h4>🚙 9 小時專屬包車行</h4>
+<p><span class="tag">時間彈性</span> 全日行程依照旅客需求彈性規劃。</p>
+</div>
+<div class="spot">
+<h4><span class="badge-arrive">預計抵達 18:00</span> ✅ 結束五天四夜美好旅程</h4>
+</div>
+<div class="daily-cost-bottom"><span>💰 本日車資：5,000 元</span></div>
+</div>
+</section>
+
+<!-- 頁尾：天氣與穿搭建議專屬區塊 -->
+<section class="card weather-card">
+<h2 style="color: var(--primary-color); border-bottom: 2px dashed var(--dashed-line); border-top: none;">⛅ 台灣 5 月下旬天氣與穿搭建議 (AI 智慧指南)</h2>
+<div style="font-size: 0.95em; color: var(--text-main); margin-top: 15px;">
+<p style="margin-bottom: 12px;"><strong>🌡️ 天氣概況：</strong> 5月底的台灣已進入初夏，氣候逐漸悶熱，且可能遇上梅雨季或午後雷陣雨，平均氣溫約在 25°C ~ 30°C 之間。合歡山區即使在夏季，清晨體感溫度仍可能下探至 10 度以下。</p>
+<ul style="padding-left: 20px; line-height: 1.8;">
+<li><strong>👕 洋蔥式穿搭：</strong> 平地氣候炎熱，建議穿著透氣的「吸濕排汗短袖T恤」保持身體乾爽；前往合歡山與清境農場等高山地區，海拔較高且早晚溫差大，請務必攜帶「輕量防風防水外套」以備禦寒防風之需。</li>
+<li><strong>🌞 防護裝備：</strong> 戶外陽光與紫外線強烈，請準備好「防曬帽、墨鏡與 SPF50+ 防曬乳」。此外，前往四草綠色隧道與山區時，務必隨身攜帶「防蚊液或防蚊貼片」，以免遭到蚊蟲叮咬影響遊興。</li>
+<li><strong>👟 推薦鞋款：</strong> 行程中包含許多老街散步與景區步道，建議穿著舒適好走的運動鞋；高美濕地行程強烈建議多準備一雙「好清理的拖鞋或防水涼鞋」，方便您脫鞋走入濕地欣賞夕陽。</li>
+</ul>
+</div>
+<!-- 動態天氣與降雨機率預測圖表 -->
+<div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--dashed-line);">
+<h4 style="color: var(--secondary-color); margin-top: 0; margin-bottom: 10px; font-size: 1.1em;">🌧️ 即時天氣與降雨機率預測</h4>
+<iframe width="100%" height="350" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=km/h&zoom=7&overlay=rain&product=ecmwf&level=surface&lat=23.7&lon=120.9&detailLat=23.7&detailLon=120.9&marker=true" frameborder="0" style="border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></iframe>
+<p style="font-size: 0.85em; color: var(--text-muted); margin-top: 8px; margin-bottom: 0;">(💡 互動式雲圖：您可以在地圖上拖曳、縮放，並點選左下角的播放鍵，查看全台灣未來幾天的即時氣溫與降雨機率走向！)</p>
+</div>
+</section>
+<footer>
+<p>系統整合：原鄉谷派車中心 | 劉先生：＋886 927888032</p>
+<p>🤖 由 AI 旅遊助手自動化彙整｜專屬手機優化、極致漸層與互動體驗 (<span class="theme-name-text">森林活潑版</span>)</p>
+</footer>
+</div>
+
+<!-- 返回頂部按鈕觸發腳本 -->
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><span id="topEmoji">🌿</span> 返回頂部</button>
+
+<script>
+    // 🎨 一鍵切換主題的 JavaScript 功能
+    function toggleTheme() {
+        const html = document.documentElement;
+        const btn = document.getElementById("themeSwitcher");
+        const mainEmoji = document.getElementById("mainEmoji");
+        const topEmoji = document.getElementById("topEmoji");
+        const themeNameElements = document.querySelectorAll(".theme-name-text");
+
+        // 若目前是粉紅版，則切換回森林活潑版
+        if (html.getAttribute("data-theme") === "pink") {
+            html.removeAttribute("data-theme");
+            btn.innerHTML = "🌸 切換粉紅版";
+            mainEmoji.innerText = "🌿";
+            topEmoji.innerText = "🌿";
+            themeNameElements.forEach(el => el.innerText = "森林活潑版");
+            document.title = "謝彩芬專屬：5天4夜 台灣山海包車互動行程表 (森林活潑版)";
+        } 
+        // 若目前是預設(森林版)，則切換成莫蘭迪粉紅版
+        else {
+            html.setAttribute("data-theme", "pink");
+            btn.innerHTML = "🌿 切換森林版";
+            mainEmoji.innerText = "🌸";
+            topEmoji.innerText = "🌸";
+            themeNameElements.forEach(el => el.innerText = "莫蘭迪粉紅版");
+            document.title = "謝彩芬專屬：5天4夜 台灣山海包車互動行程表 (莫蘭迪粉紅版)";
+        }
+    }
+
+    // 偵測滾動，當網頁向下滑動超過 300px 時顯示返回頂部按鈕
+    window.onscroll = function() {
+        var btn = document.getElementById("backToTop");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+</script>
+</body>
+</html>
