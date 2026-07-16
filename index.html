@@ -111,7 +111,7 @@ transform: scale(0.92);
 <!-- ==================== 2. 行程標題（套用紅底框樣式）+ 右側切換按鈕 ==================== -->
 <div class="flex items-center justify-between py-1 px-1 border-b border-zinc-200 pb-2">
 <div id="trip-title" class="bg-red-500/10 text-red-600 px-4 py-2 rounded-full font-black text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex-1 transition-all">
-謝彩芬專屬：5天4夜 尊榮包車行程表
+<span data-template-key="tripTitleZh">謝彩芬專屬：5天4夜 尊榮包車行程表</span>
 </div>
 <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-white/80 ios-blur shadow-sm hover:bg-white text-zinc-800 text-[11px] font-extrabold px-4 py-2 rounded-full transition active:scale-95 border border-zinc-200/60 shrink-0 ml-2">
 🌐 EN
@@ -126,11 +126,11 @@ transform: scale(0.92);
 <div class="premium-info-panel bg-white/50 font-medium text-purple-950">
 <div class="flex justify-between items-center p-3 border-b border-purple-950/10">
 <span class="text-purple-900/60">預約代表：</span>
-<span class="text-sm"><strong>謝彩芬 等共 6 人</strong></span>
+<span class="text-sm"><strong data-template-key="customerParty">謝彩芬 等共 6 人</strong></span>
 </div>
 <div class="flex justify-between items-center p-3">
 <span class="text-purple-900/60">聯絡電話：</span>
-<span class="text-sm"><strong>+60 12-707 7463</strong></span>
+<span class="text-sm"><strong data-template-key="contactPhone">+60 12-707 7463</strong></span>
 </div>
 </div>
 </div>
@@ -533,12 +533,32 @@ function rotateBanner() {
 setInterval(rotateBanner, 3000);
 
 // ==========================================
-// 2. 多國語系與系統控制 (完全保留您原本的行程)
+// 2. 行程資料設定區（未來製作新行程時，優先修改這裡）
+// ==========================================
+const templateData = {
+    customerName: '謝彩芬',
+    customerParty: '謝彩芬 等共 6 人',
+    contactPhone: '+60 12-707 7463',
+    tripDuration: '5天4夜',
+    tripTitleZh: '謝彩芬專屬：5天4夜 尊榮包車行程表',
+    tripTitleEn: "Ms. Chia's 5D4N Chartered Luxury Itinerary"
+};
+
+function applyTemplateData() {
+    document.querySelectorAll('[data-template-key]').forEach((element) => {
+        const key = element.dataset.templateKey;
+        if (templateData[key] !== undefined) element.textContent = templateData[key];
+    });
+}
+
+applyTemplateData();
+
+// 3. 多國語系與系統控制 (完全保留您原本的行程)
 // ==========================================
 let currentLang = 'zh-TW';
 const langDict = {
 'zh-TW': {
-tripTitle: '謝彩芬專屬：5天4夜 尊榮包車行程表',
+tripTitle: templateData.tripTitleZh,
 lblReserve: '👤 預約乘車資訊',
 lblNav: '📅 行程快速跳轉',
 lblDriver: '🚕 專屬司機資訊',
@@ -549,7 +569,7 @@ d1: '5月26', d2: '5月27', d3: '5月28', d4: '5月29', d5: '5月30',
 toggleBtn: '🌐 EN'
 },
 'en': {
-tripTitle: "Ms. Chia's 5D4N Chartered Luxury Itinerary",
+tripTitle: templateData.tripTitleEn,
 lblReserve: '👤 Reservation Details',
 lblNav: '📅 Quick Navigation',
 lblDriver: '🚕 Private Driver Details',
