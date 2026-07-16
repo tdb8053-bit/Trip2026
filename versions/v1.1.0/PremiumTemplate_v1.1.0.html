@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>謝彩芬專屬：5天4夜 尊榮包車行程表</title>
+<!-- 引入 Tailwind CSS 實作行動端自適應質感 -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* 隱藏捲動條但保留功能 */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* iOS 核心毛玻璃效果 */
+.ios-blur {
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+
+/* iOS 磨砂玻璃返回頂部按鈕特製樣式 */
+#backToTop {
+position: fixed;
+bottom: 24px;
+right: 16px;
+background: rgba(255, 255, 255, 0.85);
+color: #5A4180;
+border: 0.5px solid rgba(90, 65, 128, 0.15);
+padding: 11px 18px;
+border-radius: 100px;
+font-size: 0.92em;
+font-weight: 700;
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+cursor: pointer;
+display: none;
+z-index: 1000;
+transition: transform 0.1s ease;
+}
+#backToTop:active {
+transform: scale(0.92);
+}
+
+/* =========================================================
+   Yuan Xiang Gu Premium Design System — v1.0.3
+   Tokens and components are additive: the existing Tailwind
+   layout remains intact while future versions reuse these names.
+   ========================================================= */
+:root {
+  --premium-radius-card: 1.5rem;
+  --premium-radius-control: 0.75rem;
+  --premium-shadow-card: 0 1px 2px rgba(24, 24, 27, 0.04);
+  --premium-space-section: 1rem;
+  --premium-space-card: 1.25rem;
+  --premium-space-content: 0.5rem;
+  --premium-text-body: 0.75rem;
+  --premium-text-title: 0.875rem;
+  --premium-text-card-title: 1rem;
+  --premium-weight-strong: 700;
+  --premium-weight-display: 900;
+}
+
+/* Typography */
+.card-title { font-size: var(--premium-text-card-title); font-weight: var(--premium-weight-display); line-height: 1.5; }
+.place-title { font-size: var(--premium-text-title); font-weight: var(--premium-weight-strong); line-height: 1.5; color: #18181b; }
+.body-text { font-size: var(--premium-text-body); line-height: 1.5; color: #52525b; }
+.drive-time { font-size: var(--premium-text-body); font-weight: var(--premium-weight-strong); line-height: 1.5; color: #71717a; }
+.warning-text { color: red; font-weight: var(--premium-weight-strong); font-size: 0.85em; white-space: nowrap; }
+
+/* Components */
+.premium-card { border-radius: var(--premium-radius-card); box-shadow: var(--premium-shadow-card); padding: var(--premium-space-card); }
+.premium-button { min-height: 2.25rem; padding: 0.5rem; border-radius: var(--premium-radius-control); text-align: center; font-size: var(--premium-text-body); font-weight: var(--premium-weight-strong); transition: transform 0.15s ease, background-color 0.15s ease; }
+.premium-button:active { transform: scale(0.95); }
+.premium-card--plain { background: #fff; border: 1px solid rgb(228 228 231 / 0.6); }
+.premium-info-panel { border-radius: var(--premium-radius-control); padding: 0.25rem; font-size: var(--premium-text-body); }
+.premium-action-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; padding-top: 0.25rem; font-size: var(--premium-text-body); font-weight: var(--premium-weight-strong); }
+.premium-place-card { background: rgb(255 255 255 / 0.6); padding: var(--premium-space-card); border-radius: var(--premium-radius-card); }
+.quick-jump-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.375rem; font-size: 10px; font-weight: var(--premium-weight-strong); }
+.quick-jump-button { display: flex; flex-direction: column; align-items: center; border-radius: var(--premium-radius-control); padding-block: 0.625rem; transition: transform 0.15s ease, background-color 0.15s ease; }
+.quick-jump-button:active { transform: scale(0.95); }
+.restaurant-info { border-radius: var(--premium-radius-control); padding: 0.75rem; background: rgb(255 255 255 / 0.68); border: 1px solid rgb(24 24 27 / 0.06); }
+.restaurant-info__meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.55rem; font-size: 11px; font-weight: var(--premium-weight-strong); }
+.restaurant-info__tag { display: inline-flex; align-items: center; border-radius: 9999px; padding: 0.25rem 0.55rem; }
+.restaurant-info__recommendations { font-size: var(--premium-text-body); line-height: var(--premium-leading-body); }
+.restaurant-info__links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin-top: 0.65rem; font-size: 11px; font-weight: var(--premium-weight-strong); }
+.driver-avatar { width: 90px; height: 90px; border-radius: 9999px; object-fit: cover; border: 1px solid rgb(255 255 255 / 0.95); box-shadow: 0 0 0 2px rgb(125 164 198 / 0.72), 0 3px 8px rgb(0 0 0 / 0.12); }
+
+/* Spacing utilities */
+.section-stack { display: flex; flex-direction: column; gap: var(--premium-space-section); }
+.content-stack { display: flex; flex-direction: column; gap: var(--premium-space-content); }
+.timeline-stack { display: flex; flex-direction: column; gap: 0.75rem; }
+
+</style>
+</head>
+
+<body class="bg-[#F6F2FA] min-h-screen py-6 px-4 antialiased text-zinc-900 font-sans flex justify-center items-start">
+
+<!-- 響應式網頁內容主容器 (完全無外框，Max-width 620px) -->
+<div class="w-full max-w-[620px] section-stack no-scrollbar">
+
+<!-- ==================== 1. 極簡頁首動態輪播圖卡片 ==================== -->
+<div class="relative h-64 bg-zinc-800 rounded-3xl overflow-hidden shadow-sm">
+<!-- 輪播圖片，加上過渡淡入淡出效果 -->
+<img id="banner-img" class="w-full h-full object-cover transition-opacity duration-500 opacity-100" src="https://tdb8053-bit.github.io/Trip2026/taipei101.jpg" alt="風景圖">
+
+<!-- 頁首文字：保留原始亮度，左下英、右下中一左一右對照，大小固定為 text-[14px] -->
+<div class="absolute inset-0 flex items-end justify-between p-6 text-white pointer-events-none">
+<h1 id="text-en" class="translate-y-[13px] text-[14px] font-bold tracking-wider uppercase font-serif drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">Taipei 101</h1>
+<p id="text-zh" class="translate-y-[13px] text-[14px] font-bold tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">臺北101</p>
+</div>
+</div>
+
+<!-- ==================== 2. 行程標題（套用紅底框樣式）+ 右側切換按鈕 ==================== -->
+<div class="flex items-center justify-between py-1 px-1 border-b border-zinc-200 pb-2">
+<div id="trip-title" class="bg-red-500/10 text-red-600 px-4 py-2 rounded-full font-black text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex-1 transition-all">
+<span data-template-key="tripTitleZh">謝彩芬專屬：5天4夜 尊榮包車行程表</span>
+</div>
+<button id="langToggleBtn" onclick="toggleLanguage()" class="bg-white/80 ios-blur shadow-sm hover:bg-white text-zinc-800 text-[11px] font-extrabold px-4 py-2 rounded-full transition active:scale-95 border border-zinc-200/60 shrink-0 ml-2">
+🌐 EN
+</button>
+</div>
+
+<!-- ==================== 3. 預約人資訊卡片 (淺紫底色) ==================== -->
+<div class="bg-[#e2d9f3] premium-card space-y-3 border border-purple-200/40">
+<h2 id="lbl-reserve" class="card-title text-purple-950 flex items-center gap-1.5 border-b border-purple-950/10 pb-2">
+👤 預約乘車資訊
+</h2>
+<div class="premium-info-panel bg-white/50 font-medium text-purple-950">
+<div class="flex justify-between items-center p-3 border-b border-purple-950/10">
+<span class="text-purple-900/60">預約代表：</span>
+<span class="text-sm"><strong data-template-key="customerParty">謝彩芬 等共 6 人</strong></span>
+</div>
+<div class="flex justify-between items-center p-3">
+<span class="text-purple-900/60">聯絡電話：</span>
+<span class="text-sm"><strong data-template-key="contactPhone">+60 12-707 7463</strong></span>
+</div>
+</div>
+</div>
+
+<!-- ==================== 4. 行程快速跳轉按鈕網格 ==================== -->
+<div class="premium-card premium-card--plain">
+<h2 id="lbl-nav" class="card-title text-zinc-400 uppercase tracking-wider mb-2.5 px-0.5">📅 行程快速跳轉</h2>
+<div class="quick-jump-grid">
+<button onclick="document.getElementById('day26').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d1" class="mt-0.5">5月26</span></button>
+<button onclick="document.getElementById('day27').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d2" class="mt-0.5">5月27</span></button>
+<button onclick="document.getElementById('day28').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d3" class="mt-0.5">5月28</span></button>
+<button onclick="document.getElementById('day29').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d4" class="mt-0.5">5月29</span></button>
+<button onclick="document.getElementById('day30').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d5" class="mt-0.5">5月30</span></button>
+</div>
+</div>
+
+<!-- ==================== 5. 專屬司機資訊卡片 (淺藍底色) ==================== -->
+<div class="bg-[#d0e8f5] premium-card space-y-3 border border-blue-200/40 text-center">
+<h2 id="lbl-driver" class="card-title text-blue-950 flex items-center justify-center gap-1.5 border-b border-blue-950/10 pb-2 text-left">
+🚕 專屬司機資訊
+</h2>
+<img src="https://tdb8053-bit.github.io/Trip2026/mr01.png" alt="司機大頭貼" class="driver-avatar mx-auto my-2">
+<div class="premium-info-panel bg-white/50 font-bold text-blue-950 text-left">
+<div class="flex justify-between items-center p-3 border-b border-blue-950/10">
+<span class="text-blue-900/60">專屬司機：</span>
+<span>張其芳</span>
+</div>
+<div class="flex justify-between items-center p-3 border-b border-blue-950/10">
+<span class="text-blue-900/60">連絡電話：</span>
+<span>0935-089253</span>
+</div>
+<div class="flex justify-between items-center p-3">
+<span class="text-blue-900/60">車牌號碼：</span>
+<span class="bg-red-500/10 text-red-600 px-3 py-0.5 rounded-full font-black text-[11px]">TEB-6933</span>
+</div>
+</div>
+<div class="w-full rounded-xl overflow-hidden shadow-sm my-3 border border-white/50 bg-white">
+<img src="https://tdb8053-bit.github.io/Trip2026/car01.png" alt="車輛外觀" class="w-full h-auto block">
+</div>
+<div class="text-xs font-black text-blue-950 mb-3">🚙 車型：Mercedes-Benz Vito Tourer</div>
+<div class="bg-white/60 p-4 rounded-xl border border-blue-950/5 text-left space-y-2">
+<h4 id="lbl-amenity" class="text-blue-950 font-black text-[12px] border-b border-blue-950/10 pb-1">✨ 車輛貼心服務與設施</h4>
+<div class="grid grid-cols-2 gap-2 text-[12px] font-bold text-blue-900">
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">💧 免費包裝飲用水</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">🔋 USB 充電座</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">📶 車載免費 Wi-Fi</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">☔ 貼心備用愛心傘</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1 col-span-2 justify-center">🧴 濕紙巾與面紙</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 6. 💰 總車資與預算總覽 (粉蜜桃底色) ==================== -->
+<div class="bg-[#FFF3E0] premium-card border border-orange-200/40 space-y-3">
+<h2 id="lbl-budget" class="card-title text-orange-950 flex items-center gap-1.5 border-b border-orange-950/10 pb-2">
+💰 總車資與預算總覽
+</h2>
+<div class="premium-info-panel bg-white/50 font-bold text-orange-950">
+<div class="flex justify-between items-center p-3 border-b border-orange-950/5">
+<span class="text-orange-900/60">五天包車總計：</span>
+<span class="text-sm">NT$ 31,000</span>
+</div>
+<div class="flex justify-between items-center p-3">
+<span class="text-orange-900/60">代訂車票費用：</span>
+<span class="text-sm">NT$ 1,710</span>
+</div>
+</div>
+<div class="text-center text-[11px] text-orange-900/60 font-bold">(285元 × 6張，訂單編號: AS260423011)</div>
+<div id="lbl-total-price" class="text-right text-lg text-red-600 font-black pt-2 border-t border-dashed border-orange-950/10">
+總金額：32,710 元
+</div>
+</div>
+
+<!-- ==================== 7. 每日詳細行程與時間軸 ==================== -->
+<!-- DAY 1: 薄荷綠馬卡龍 -->
+<div id="day26" class="bg-[#E8F5E9] premium-card border border-emerald-200/40 space-y-4">
+<div class="flex justify-between items-center border-b border-emerald-900/10 pb-2">
+<h3 class="bg-[#2D5A27] text-white text-xs px-3 py-1 rounded-full font-bold">📍 5/26 (二)</h3>
+<span class="text-emerald-950 font-black text-sm">台北出發南下</span>
+</div>
+<p class="text-xs text-zinc-700"><b>集合地點：</b><strong>德立莊酒店 (台北市秀山街4號)</strong></p>
+<p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">08:30 出發</span></p>
+<div class="drive-time pl-4 border-l-2 border-dashed border-emerald-600/40 py-1">🚗 行車時間約 2 小時 10 分鐘</div>
+<div class="timeline-stack pl-2 border-l-2 border-dashed border-emerald-600/30">
+<div class="premium-place-card border border-emerald-900/5 content-stack">
+<h4 class="place-title">🚂 勝興車站腳踏火車 (預約 11:20)</h4>
+<div class="text-[10px] space-y-1">
+<span class="bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full inline-block font-bold">預計抵達：10:40</span>
+<span class="bg-red-500 text-white px-2 py-0.5 rounded-full inline-block font-bold ml-1">停留：1.5 小時</span>
+</div>
+<p class="warning-text">⚠️ 應提前30分鐘前抵達，參加安全講習</p>
+<p class="body-text">體驗舊山線鐵道風情。</p>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=苗栗勝興車站" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=勝興車站腳踏火車" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🔍 搜尋</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 15 分鐘</div>
+<div class="premium-place-card border border-emerald-900/5 content-stack">
+<h4 class="place-title">🍜 三義金榜麵店午餐</h4>
+<p class="body-text">苗栗超人氣客家美食！必點Q彈客家粄條、濃郁豬頭肉與特色滷味小菜。</p>
+<section class="restaurant-info" aria-label="三義金榜麵店餐廳資訊">
+  <div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 預估 NT$100～250／人</span><span class="restaurant-info__tag bg-emerald-50 text-emerald-800">🥢 客家麵食</span></div>
+  <p class="restaurant-info__recommendations"><b>推薦料理：</b>客家粄條、豬頭肉、手工餛飩、滷味小菜</p>
+  <div class="restaurant-info__links">
+    <a href="https://www.google.com/search?q=三義金榜麵店+菜單" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">📖 菜單</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=三義金榜麵店" target="_blank" class="bg-amber-500/10 text-amber-800 premium-button">⭐ 評價</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=三義金榜麵店" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🗺️ 導航</a>
+  </div>
+</section>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=三義金榜麵店" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/三義金榜麵店+附近美食" target="_blank" class="bg-orange-500/10 text-orange-700 premium-button">🍽️ 附近美食</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 20 分鐘</div>
+<div class="premium-place-card border border-emerald-900/5 content-stack">
+<h4 class="place-title">🌷 中社花市</h4>
+<p class="body-text">欣賞壯觀花海與拍照打卡。</p>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=中社觀光花市" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🗺️ 導航</a>
+<a href="http://www.flowerjs.com.tw/" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">🌐 官網</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 40 分鐘</div>
+<div class="premium-place-card border border-emerald-900/5 content-stack">
+<h4 class="place-title">🌊 高美濕地</h4>
+<p class="warning-text">💡 貼心提醒：請準備拖鞋</p>
+<p class="body-text">欣賞壯麗夕陽絕景。</p>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=高美濕地" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=高美濕地" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button">🔍 搜尋</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 45 分鐘</div>
+<div class="premium-place-card border border-emerald-900/5 content-stack">
+<h4 class="place-title">🏨 抵達台中住宿</h4>
+<p class="body-text"><b>入住旅店：</b><strong>金瑞文旅 (台中市福星路247號)</strong></p>
+<a href="https://www.google.com/maps/search/?api=1&query=台中金瑞文旅" target="_blank" class="bg-emerald-800/10 text-emerald-900 premium-button block font-bold text-xs">🗺️ 導航</a>
+</div>
+</div>
+<div class="text-right border-t border-emerald-900/10 pt-2 text-xs font-bold text-emerald-900">💰 本日車資：7,000 元</div>
+</div>
+
+<!-- DAY 2: 蜜桃粉馬卡龍 -->
+<div id="day27" class="bg-[#FFF3E0] premium-card border border-orange-200/40 space-y-4">
+<div class="flex justify-between items-center border-b border-orange-900/10 pb-2">
+<h3 class="bg-[#E65100] text-white text-xs px-3 py-1 rounded-full font-bold">📍 5/27 (三)</h3>
+<span class="text-orange-950 font-black text-sm">南投高山深呼吸</span>
+</div>
+<p class="text-xs text-zinc-700"><b>出發起點：</b><strong>金瑞文旅</strong></p>
+<p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">08:30 出發</span></p>
+<div class="drive-time pl-4 border-l-2 border-dashed border-orange-600/40 py-1">🚗 行車時間約 2 小時 15 分鐘</div>
+<div class="timeline-stack pl-2 border-l-2 border-dashed border-orange-600/30">
+<div class="premium-place-card border border-orange-900/5 content-stack">
+<h4 class="place-title">⛰️ 合歡山</h4>
+<p class="warning-text">⚠️ 日夜溫差大，請注意保暖</p>
+<p class="body-text">享受高山新鮮空氣與壯闊風景。</p>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=合歡山" target="_blank" class="bg-orange-800/10 text-orange-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=合歡山風景區" target="_blank" class="bg-orange-800/10 text-orange-900 premium-button">🔍 搜尋</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 50 分鐘</div>
+<div class="premium-place-card border border-orange-900/5 content-stack">
+<h4 class="place-title">🍜 18怪餐廳午餐</h4>
+<p class="body-text">品嚐道地雲南擺夷料理、鮮甜高山高麗菜與在地野味。</p>
+<section class="restaurant-info" aria-label="清境十八怪餐廳資訊">
+  <div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 預估 NT$250～500／人</span><span class="restaurant-info__tag bg-orange-50 text-orange-800">🥢 雲南擺夷料理</span></div>
+  <p class="restaurant-info__recommendations"><b>推薦料理：</b>雲南大薄片、錦灑、椒麻雞、高山高麗菜</p>
+  <div class="restaurant-info__links">
+    <a href="https://www.yunnan.com.tw/yunnan-restaurant.html" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">📖 菜單</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=清境18怪餐廳" target="_blank" class="bg-amber-500/10 text-amber-800 premium-button">⭐ 評價</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=清境18怪餐廳" target="_blank" class="bg-orange-800/10 text-orange-900 premium-button">🗺️ 導航</a>
+  </div>
+</section>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=清境18怪餐廳" target="_blank" class="bg-orange-800/10 text-orange-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/清境農場+附近美食" target="_blank" class="bg-orange-500/10 text-orange-700 premium-button">🍽️ 附近美食</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 15 分鐘</div>
+<div class="premium-place-card border border-orange-900/5 content-stack">
+<h4 class="place-title">🐑 清境農場</h4>
+<p class="warning-text">⚠️ 日夜溫差大，請注意保暖</p>
+<p class="body-text">漫步青青草原、餵食綿羊。</p>
+<div class="premium-action-grid">
+<a href="https://www.google.com/maps/search/?api=1&query=清境農場" target="_blank" class="bg-orange-800/10 text-orange-900 premium-button">🗺️ 導航</a>
+<a href="https://www.cingjing.gov.tw/" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">🌐 官網</a>
+</div>
+</div>
+</div>
+<div class="text-right border-t border-orange-900/10 pt-2 text-xs font-bold text-orange-900">💰 本日車資：6,000 元</div>
+</div>
+
+<!-- DAY 3: 鵝黃馬卡龍 -->
+<div id="day28" class="bg-[#FFFDE7] premium-card border border-yellow-200/40 space-y-4">
+<div class="flex justify-between items-center border-b border-yellow-900/10 pb-2">
+<h3 class="bg-[#F57F17] text-white text-xs px-3 py-1 rounded-full font-bold">📍 5/28 (四)</h3>
+<span class="text-yellow-950 font-black text-sm">日月潭與嘉義雲梯</span>
+</div>
+<div class="drive-time pl-4 border-l-2 border-dashed border-yellow-600/40 py-1">🚗 行車時間約 1 小時 15 分鐘</div>
+<div class="timeline-stack pl-2 border-l-2 border-dashed border-yellow-600/30">
+<div class="premium-place-card border border-yellow-900/5 content-stack">
+<h4 class="place-title">⛩️ 文武廟</h4>
+<p class="body-text">俯瞰日月潭全景。</p>
+<div class="grid grid-cols-2 gap-2 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=日月潭文武廟" target="_blank" class="bg-yellow-800/10 text-yellow-900 premium-button">🗺️ 導航</a>
+<a href="https://www.wenwu.org.tw/" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">🌐 官網</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 15 分鐘</div>
+<div class="premium-place-card border border-yellow-900/5 content-stack">
+<h4 class="place-title">🛍️ 伊達邵老街</h4>
+<p class="body-text">逛原住民特色商圈。</p>
+<div class="grid grid-cols-2 gap-2 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=伊達邵老街" target="_blank" class="bg-yellow-800/10 text-yellow-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/伊達邵老街+必吃美食" target="_blank" class="bg-orange-500/10 text-orange-700 premium-button">🍽️ 附近美食</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 10 分鐘</div>
+<div class="premium-place-card border border-yellow-900/5 content-stack">
+<h4 class="place-title">🥢 日月餐坊午餐</h4>
+<p class="body-text">推薦必吃總統魚(曲腰魚)、刺蔥煎蛋與邵族特色竹筒飯。</p>
+<section class="restaurant-info" aria-label="日月餐坊餐廳資訊">
+  <div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 預估 NT$400 起／人</span><span class="restaurant-info__tag bg-yellow-50 text-yellow-800">🥢 台式在地合菜</span></div>
+  <p class="restaurant-info__recommendations"><b>推薦料理：</b>陶板醃豬肉、小米竹筒飯、刺蔥捲蛋、酸筍空心菜</p>
+  <div class="restaurant-info__links">
+    <a href="https://www.google.com/search?q=日月餐坊+菜單" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">📖 菜單</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=日月餐坊+日月潭" target="_blank" class="bg-amber-500/10 text-amber-800 premium-button">⭐ 評價</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=日月餐坊+日月潭" target="_blank" class="bg-yellow-800/10 text-yellow-900 premium-button">🗺️ 導航</a>
+  </div>
+</section>
+<div class="grid grid-cols-2 gap-2 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=日月餐坊" target="_blank" class="bg-yellow-800/10 text-yellow-900 premium-button block">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/日月餐坊+附近美食" target="_blank" class="bg-orange-500/10 text-orange-700 premium-button block">🍽️ 附近美食</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 10 分鐘</div>
+<div class="premium-place-card border border-yellow-900/5 content-stack">
+<h4 class="place-title">🏞️ 向山遊客中心</h4>
+<p class="body-text">欣賞清水模建築與絕美湖畔。</p>
+<div class="grid grid-cols-2 gap-2 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=向山遊客中心" target="_blank" class="bg-yellow-800/10 text-yellow-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=向山遊客中心+旅遊介紹" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">🌐 景點介紹</a>
+</div>
+</div>
+<div class="drive-time py-1">🚗 行車時間約 2 小時</div>
+<div class="premium-place-card border border-yellow-900/5 content-stack">
+<h4 class="place-title">🌉 太平雲梯 & 太平老街</h4>
+<p class="body-text">俯瞰嘉南平原與感受老街懷舊風情。</p>
+<div class="grid grid-cols-2 gap-2 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=嘉義太平雲梯" target="_blank" class="bg-yellow-800/10 text-yellow-900 premium-button">🗺️ 導航</a>
+<a href="https://alishan.welcometw.com/taipingbridge" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">🌐 官網預約</a>
+</div>
+</div>
+</div>
+<div class="text-right border-t border-yellow-900/10 pt-2 text-xs font-bold text-yellow-900">💰 本日車資：7,000 元</div>
+</div>
+
+<!-- DAY 4: 水藍馬卡龍 -->
+<div id="day29" class="bg-[#E0F7FA] premium-card border border-cyan-200/40 space-y-4">
+<div class="flex justify-between items-center border-b border-cyan-900/10 pb-2">
+<h3 class="bg-[#006064] text-white text-xs px-3 py-1 rounded-full font-bold">📍 5/29 (五)</h3>
+<span class="text-cyan-950 font-black text-sm">台南文化深度遊</span>
+</div>
+<div class="drive-time pl-4 border-l-2 border-dashed border-cyan-600/40 py-1">🚗 行車時間約 20 分鐘</div>
+<div class="timeline-stack pl-2 border-l-2 border-dashed border-cyan-600/30">
+<div class="premium-place-card border border-cyan-900/5 content-stack">
+<h4 class="place-title">🌿 四草綠色隧道</h4>
+<p class="body-text">搭乘竹筏穿梭台版亞馬遜。</p>
+<div class="grid grid-cols-2 gap-2 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=四草綠色隧道" target="_blank" class="bg-cyan-800/10 text-cyan-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/search?q=四草綠色隧道" target="_blank" class="bg-blue-500/10 text-blue-700 premium-button">🌐 景點介紹</a>
+</div>
+</div>
+<div class="drive-time pl-4 py-1">🚗 行車時間約 15 分鐘</div>
+<div class="premium-place-card border border-emerald-900/5 content-stack">
+<h4 class="place-title">🍜 永樂市場午餐</h4>
+<p class="body-text">台南經典小吃匯聚地！推薦富盛號碗粿、金得春捲、阿松割包。</p>
+<div class="grid grid-cols-2 gap-2 pt-1 font-bold text-xs">
+<a href="https://www.google.com/maps/search/?api=1&query=台南永樂市場" target="_blank" class="bg-cyan-800/10 text-cyan-900 premium-button">🗺️ 導航</a>
+<a href="https://www.google.com/maps/search/台南永樂市場+必吃美食" target="_blank" class="bg-orange-500/10 text-orange-700 premium-button">🍽️ 美食地圖</a>
+</div>
+</div>
+</div>
+<div class="text-right border-t border-cyan-900/10 pt-2 text-xs font-bold text-cyan-900">💰 本日車資：6,000 元</div>
+</div>
+
+<!-- DAY 5: 薰衣草淡紫馬卡龍 -->
+<div id="day30" class="bg-[#F3E5F5] premium-card border border-purple-200/40 space-y-4">
+<div class="flex justify-between items-center border-b border-purple-900/10 pb-2">
+<h3 class="bg-[#4A148C] text-white text-xs px-3 py-1 rounded-full font-bold">📍 5/30 (六)</h3>
+<span class="text-purple-950 font-black text-sm">高雄客製化漫遊</span>
+</div>
+<div class="bg-white/60 p-4 rounded-xl border border-purple-950/5 space-y-1 text-xs text-zinc-700">
+<h4 class="font-bold text-zinc-900 text-sm">🚙 9 小時專屬包車行</h4>
+<p>全日行程依照旅客需求彈性規劃，結束五天四夜美好旅程。</p>
+</div>
+<div class="text-right border-t border-purple-900/10 pt-2 text-xs font-bold text-purple-900">💰 本日車資：5,000 元</div>
+</div>
+
+<!-- ==================== 8. ⛅ 天氣與 Windy 即時降雨預測 ==================== -->
+<div class="bg-white premium-card border border-zinc-200/60 space-y-4">
+<h2 id="lbl-weather" class="card-title text-zinc-800 flex items-center gap-1.5 border-b border-zinc-200 pb-2">
+⛅ 台灣 5 月下旬天氣與穿搭建議
+</h2>
+<div class="text-xs text-zinc-600 space-y-2 leading-relaxed">
+<p><strong>🌡️ 天氣概況：</strong> 5月底的台灣已進入初夏，氣候逐漸悶熱，平均氣溫約在 25°C ~ 30°C 之間。合歡山區即使在夏季，清晨體感溫度仍可能下探至 10 度以下。</p>
+<p><strong>👕 穿搭防護：</strong> 平地穿著透氣的短袖，高山溫差大請攜帶防風防水外套。戶外陽光強烈請準備防曬帽、墨鏡與防曬乳，並隨身攜帶防蚊液。</p>
+</div>
+<!-- Windy 互動式即時雲圖 -->
+<div class="pt-2 border-t border-zinc-100">
+<h4 class="text-zinc-700 font-bold text-xs text-center mb-2">🌧️ 即時天氣與降雨機率預測 (Windy 即時雲圖)</h4>
+<div class="w-full h-80 rounded-2xl overflow-hidden border border-zinc-200">
+<iframe width="100%" height="100%" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=km/h&zoom=7&overlay=rain&product=ecmwf&level=surface&lat=23.7&lon=120.9&detailLat=23.7&detailLon=120.9&marker=true" frameborder="0"></iframe>
+</div>
+</div>
+</div>
+
+<!-- PremiumTemplate_v1.0.3: Design System refactor; visual layout preserved. -->
+<!-- ==================== 9. 頁尾與版權宣告 ==================== -->
+<footer class="text-center text-[11px] text-zinc-400 space-y-1 py-4 border-t border-zinc-200/60 mt-2">
+<p>系統整合：原鄉谷派車中心 | 劉先生：＋886 927888032</p>
+<p>🤖 由 AI 旅遊助手自動化彙整｜專屬手機優化、蘋果級微反饋與極致美學</p>
+</footer>
+</div>
+
+<!-- 🌸 iOS 磨砂玻璃返回頂部按鈕 -->
+<button id="backToTop" class="ios-blur" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">🌸 返回頂部</button>
+
+<!-- 語系切換與返回頂部同步 JavaScript -->
+<script>
+// ==========================================
+// 1. 頁首輪播資料與動態控制 (每 3 秒自動輪播)
+// ==========================================
+const bannerData = [
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/taipei101.jpg",
+        nameEn: "Taipei 101",
+        nameZh: "臺北101"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/jiufen.jpg",
+        nameEn: "Jiufen Night View",
+        nameZh: "九份夜景"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/shifen.jpg",
+        nameEn: "Shifen Sky Lanterns",
+        nameZh: "十分放天燈"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/sunmoonlake.jpg",
+        nameEn: "Sun Moon Lake",
+        nameZh: "日月潭水社碼頭"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/cingjing.jpg",
+        nameEn: "Cingjing Farm",
+        nameZh: "清境農場"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/gaomei.jpg",
+        nameEn: "Gaomei Wetlands",
+        nameZh: "高美濕地夕陽"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/alishan.jpg",
+        nameEn: "Alishan",
+        nameZh: "阿里山小火車"
+    }
+];
+
+let currentBannerIndex = 0;
+const bannerImg = document.getElementById("banner-img");
+const textEn = document.getElementById("text-en");
+const textZh = document.getElementById("text-zh");
+
+function rotateBanner() {
+    // 優雅地先淡出 (透明度變 0)
+    bannerImg.classList.add("opacity-0");
+    bannerImg.classList.remove("opacity-100");
+    
+    // 等 500ms 淡出動畫即將完成時更換內容，再淡入
+    setTimeout(() => {
+        currentBannerIndex = (currentBannerIndex + 1) % bannerData.length;
+        const nextData = bannerData[currentBannerIndex];
+        
+        bannerImg.src = nextData.imgSrc;
+        textEn.innerText = nextData.nameEn;
+        textZh.innerText = nextData.nameZh;
+        
+        bannerImg.classList.remove("opacity-0");
+        bannerImg.classList.add("opacity-100");
+    }, 500);
+}
+
+// 啟動 3 秒輪播 (3000 毫秒)
+setInterval(rotateBanner, 3000);
+
+// ==========================================
+// 2. 行程資料設定區（未來製作新行程時，優先修改這裡）
+// ==========================================
+const templateData = {
+    customerName: '謝彩芬',
+    customerParty: '謝彩芬 等共 6 人',
+    contactPhone: '+60 12-707 7463',
+    tripDuration: '5天4夜',
+    tripTitleZh: '謝彩芬專屬：5天4夜 尊榮包車行程表',
+    tripTitleEn: "Ms. Chia's 5D4N Chartered Luxury Itinerary"
+};
+
+function applyTemplateData() {
+    document.querySelectorAll('[data-template-key]').forEach((element) => {
+        const key = element.dataset.templateKey;
+        if (templateData[key] !== undefined) element.textContent = templateData[key];
+    });
+}
+
+applyTemplateData();
+
+// 3. 多國語系與系統控制 (完全保留您原本的行程)
+// ==========================================
+let currentLang = 'zh-TW';
+const langDict = {
+'zh-TW': {
+tripTitle: templateData.tripTitleZh,
+lblReserve: '👤 預約乘車資訊',
+lblNav: '📅 行程快速跳轉',
+lblDriver: '🚕 專屬司機資訊',
+lblAmenity: '✨ 車輛貼心服務與設施',
+lblBudget: '💰 總車資與預算總覽',
+lblWeather: '⛅ 台灣 5 月下旬天氣與穿搭建議',
+d1: '5月26', d2: '5月27', d3: '5月28', d4: '5月29', d5: '5月30',
+toggleBtn: '🌐 EN'
+},
+'en': {
+tripTitle: templateData.tripTitleEn,
+lblReserve: '👤 Reservation Details',
+lblNav: '📅 Quick Navigation',
+lblDriver: '🚕 Private Driver Details',
+lblAmenity: '✨ Complimentary Amenities',
+lblBudget: '💰 Fleet Fare & Budget Overview',
+lblWeather: '⛅ Weather & Dressing Guidelines',
+d1: 'May 26', d2: 'May 27', d3: 'May 28', d4: 'May 29', d5: 'May 30',
+toggleBtn: '🌐 中文'
+}
+};
+
+// 監聽網頁滾動以動態隱藏/顯示返回頂部按鈕
+window.onscroll = function() {
+var btn = document.getElementById("backToTop");
+if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+btn.style.display = "block";
+} else {
+btn.style.display = "none";
+}
+};
+
+function toggleLanguage() {
+const btn = document.getElementById('langToggleBtn');
+currentLang = (currentLang === 'zh-TW') ? 'en' : 'zh-TW';
+btn.innerText = langDict[currentLang].toggleBtn;
+document.getElementById('trip-title').innerText = langDict[currentLang].tripTitle;
+document.getElementById('lbl-reserve').innerText = langDict[currentLang].lblReserve;
+document.getElementById('lbl-nav').innerText = langDict[currentLang].lblNav;
+document.getElementById('lbl-driver').innerText = langDict[currentLang].lblDriver;
+document.getElementById('lbl-amenity').innerText = langDict[currentLang].lblAmenity;
+document.getElementById('lbl-budget').innerText = langDict[currentLang].lblBudget;
+document.getElementById('lbl-weather').innerText = langDict[currentLang].lblWeather;
+document.getElementById('btn-d1').innerText = langDict[currentLang].d1;
+document.getElementById('btn-d2').innerText = langDict[currentLang].d2;
+document.getElementById('btn-d3').innerText = langDict[currentLang].d3;
+document.getElementById('btn-d4').innerText = langDict[currentLang].d4;
+document.getElementById('btn-d5').innerText = langDict[currentLang].d5;
+}
+</script>
+
+</body>
+<!-- 隱藏專屬網址防呆防漏測試 -->
+<div style="display:none;">https://tdb8053-bit.github.io/Trip2026/F1234謝彩芬.html</div>
+</html>
