@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Alicia Ng專屬：7天6夜 尊榮包車行程表</title>
+<!-- 引入 Tailwind CSS 實作行動端自適應質感 -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* 隱藏捲動條但保留功能 */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* iOS 核心毛玻璃效果 */
+.ios-blur {
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+
+/* iOS 磨砂玻璃返回頂部按鈕特製樣式 */
+#backToTop {
+position: fixed;
+bottom: 24px;
+right: 16px;
+background: rgba(255, 255, 255, 0.85);
+color: #5A4180;
+border: 0.5px solid rgba(90, 65, 128, 0.15);
+padding: 11px 18px;
+border-radius: 100px;
+font-size: 0.92em;
+font-weight: 700;
+box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+cursor: pointer;
+display: none;
+z-index: 1000;
+transition: transform 0.1s ease;
+}
+#backToTop:active {
+transform: scale(0.92);
+}
+
+/* =========================================================
+   Yuan Xiang Gu Premium Design System — v1.0.3
+   Tokens and components are additive: the existing Tailwind
+   layout remains intact while future versions reuse these names.
+   ========================================================= */
+:root {
+  --premium-radius-card: 1.5rem;
+  --premium-radius-control: 0.75rem;
+  --premium-shadow-card: 0 1px 2px rgba(24, 24, 27, 0.04);
+  --premium-space-section: 1rem;
+  --premium-space-card: 1.25rem;
+  --premium-space-content: 0.5rem;
+  --premium-text-body: 0.75rem;
+  --premium-text-title: 0.875rem;
+  --premium-text-card-title: 1rem;
+  --premium-weight-strong: 700;
+  --premium-weight-display: 900;
+}
+
+/* Typography */
+.card-title { font-size: var(--premium-text-card-title); font-weight: var(--premium-weight-display); line-height: 1.5; }
+.place-title { font-size: var(--premium-text-title); font-weight: var(--premium-weight-strong); line-height: 1.5; color: #18181b; }
+.body-text { font-size: var(--premium-text-body); line-height: 1.5; color: #52525b; }
+.drive-time { font-size: var(--premium-text-body); font-weight: var(--premium-weight-strong); line-height: 1.5; color: #71717a; }
+.warning-text { color: red; font-weight: var(--premium-weight-strong); font-size: 0.85em; white-space: nowrap; }
+
+/* Components */
+[hidden] { display: none !important; }
+.premium-card { border-radius: var(--premium-radius-card); box-shadow: var(--premium-shadow-card); padding: var(--premium-space-card); }
+.premium-button { min-height: 2.25rem; padding: 0.5rem; border-radius: var(--premium-radius-control); text-align: center; font-size: var(--premium-text-body); font-weight: var(--premium-weight-strong); transition: transform 0.15s ease, background-color 0.15s ease; }
+.premium-button:active { transform: scale(0.95); }
+.premium-card--plain { background: #fff; border: 1px solid rgb(228 228 231 / 0.6); }
+.premium-info-panel { border-radius: var(--premium-radius-control); padding: 0.25rem; font-size: var(--premium-text-body); }
+.premium-action-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; padding-top: 0.25rem; font-size: var(--premium-text-body); font-weight: var(--premium-weight-strong); }
+.premium-place-card { background: rgb(255 255 255 / 0.6); padding: var(--premium-space-card); border-radius: var(--premium-radius-card); }
+.quick-jump-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.375rem; font-size: 10px; font-weight: var(--premium-weight-strong); }
+.quick-jump-button { display: flex; flex-direction: column; align-items: center; border-radius: var(--premium-radius-control); padding-block: 0.625rem; transition: transform 0.15s ease, background-color 0.15s ease; }
+.quick-jump-button:active { transform: scale(0.95); }
+.restaurant-info { border-radius: var(--premium-radius-control); padding: 0.75rem; background: rgb(255 255 255 / 0.68); border: 1px solid rgb(24 24 27 / 0.06); }
+.restaurant-info__meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.55rem; font-size: 11px; font-weight: var(--premium-weight-strong); }
+.restaurant-info__tag { display: inline-flex; align-items: center; border-radius: 9999px; padding: 0.25rem 0.55rem; }
+.restaurant-info__recommendations { font-size: var(--premium-text-body); line-height: var(--premium-leading-body); }
+.restaurant-info__links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; margin-top: 0.65rem; font-size: 11px; font-weight: var(--premium-weight-strong); }
+.driver-avatar { width: 90px; height: 90px; border-radius: 9999px; object-fit: cover; border: 1px solid rgb(255 255 255 / 0.95); box-shadow: 0 0 0 2px rgb(125 164 198 / 0.72), 0 3px 8px rgb(0 0 0 / 0.12); }
+.airport-transfer-card { background: linear-gradient(135deg, #E3F2FD, #F3E5F5); border: 1px solid rgb(144 202 249 / 0.55); }
+.airport-transfer-grid { display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.45rem 0.75rem; font-size: 13px; line-height: 1.45; }
+.airport-transfer-grid dt { color: rgb(30 64 175 / 0.65); font-weight: 700; }
+.airport-transfer-grid dd { margin: 0; font-weight: 800; color: rgb(24 24 27); }
+.generator-panel { background: linear-gradient(135deg, #F3E5F5, #E3F2FD); border: 1px solid rgb(147 51 234 / 0.2); }
+.generator-panel textarea { width: 100%; min-height: 12rem; resize: vertical; border: 1px solid rgb(168 85 247 / 0.25); border-radius: 0.9rem; padding: 0.8rem; background: rgb(255 255 255 / 0.85); color: #27272A; font-size: 0.8rem; line-height: 1.55; }
+.generator-panel__status { min-height: 1.25rem; font-size: 0.75rem; font-weight: 700; color: #6B21A8; }
+
+/* Spacing utilities */
+.section-stack { display: flex; flex-direction: column; gap: var(--premium-space-section); }
+.content-stack { display: flex; flex-direction: column; gap: var(--premium-space-content); }
+.timeline-stack { display: flex; flex-direction: column; gap: 0.75rem; }
+
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.col-span-2{grid-column:span 2 / span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.my-3{margin-top:0.75rem;margin-bottom:0.75rem}.mb-2{margin-bottom:0.5rem}.mb-2\.5{margin-bottom:0.625rem}.mb-3{margin-bottom:0.75rem}.ml-1{margin-left:0.25rem}.ml-2{margin-left:0.5rem}.mt-0\.5{margin-top:0.125rem}.mt-2{margin-top:0.5rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.grid{display:grid}.h-64{height:16rem}.h-80{height:20rem}.h-auto{height:auto}.h-full{height:100%}.min-h-\[76px\]{min-height:76px}.min-h-screen{min-height:100vh}.w-full{width:100%}.w-fit{width:-moz-fit-content;width:fit-content}.max-w-\[620px\]{max-width:620px}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.translate-y-\[13px\]{--tw-translate-y:13px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.text-ellipsis{text-overflow:ellipsis}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-l-2{border-left-width:2px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-amber-200\/40{border-color:rgb(253 230 138 / 0.4)}.border-amber-900\/10{border-color:rgb(120 53 15 / 0.1)}.border-amber-900\/5{border-color:rgb(120 53 15 / 0.05)}.border-blue-200\/40{border-color:rgb(191 219 254 / 0.4)}.border-blue-950\/10{border-color:rgb(23 37 84 / 0.1)}.border-blue-950\/5{border-color:rgb(23 37 84 / 0.05)}.border-cyan-200\/40{border-color:rgb(165 243 252 / 0.4)}.border-cyan-600\/30{border-color:rgb(8 145 178 / 0.3)}.border-cyan-600\/40{border-color:rgb(8 145 178 / 0.4)}.border-cyan-900\/10{border-color:rgb(22 78 99 / 0.1)}.border-cyan-900\/5{border-color:rgb(22 78 99 / 0.05)}.border-emerald-200\/40{border-color:rgb(167 243 208 / 0.4)}.border-emerald-600\/30{border-color:rgb(5 150 105 / 0.3)}.border-emerald-600\/40{border-color:rgb(5 150 105 / 0.4)}.border-emerald-900\/10{border-color:rgb(6 78 59 / 0.1)}.border-emerald-900\/5{border-color:rgb(6 78 59 / 0.05)}.border-indigo-200\/40{border-color:rgb(199 210 254 / 0.4)}.border-indigo-900\/10{border-color:rgb(49 46 129 / 0.1)}.border-indigo-900\/5{border-color:rgb(49 46 129 / 0.05)}.border-orange-200\/40{border-color:rgb(254 215 170 / 0.4)}.border-orange-600\/30{border-color:rgb(234 88 12 / 0.3)}.border-orange-600\/40{border-color:rgb(234 88 12 / 0.4)}.border-orange-900\/10{border-color:rgb(124 45 18 / 0.1)}.border-orange-900\/5{border-color:rgb(124 45 18 / 0.05)}.border-orange-950\/10{border-color:rgb(67 20 7 / 0.1)}.border-orange-950\/5{border-color:rgb(67 20 7 / 0.05)}.border-pink-200\/40{border-color:rgb(251 207 232 / 0.4)}.border-pink-900\/10{border-color:rgb(131 24 67 / 0.1)}.border-pink-900\/5{border-color:rgb(131 24 67 / 0.05)}.border-purple-200{--tw-border-opacity:1;border-color:rgb(233 213 255 / var(--tw-border-opacity, 1))}.border-purple-200\/40{border-color:rgb(233 213 255 / 0.4)}.border-purple-900\/10{border-color:rgb(88 28 135 / 0.1)}.border-purple-900\/15{border-color:rgb(88 28 135 / 0.15)}.border-purple-950\/10{border-color:rgb(59 7 100 / 0.1)}.border-purple-950\/5{border-color:rgb(59 7 100 / 0.05)}.border-sky-900\/10{border-color:rgb(12 74 110 / 0.1)}.border-sky-900\/15{border-color:rgb(12 74 110 / 0.15)}.border-stone-200\/40{border-color:rgb(231 229 228 / 0.4)}.border-stone-900\/10{border-color:rgb(28 25 23 / 0.1)}.border-stone-900\/5{border-color:rgb(28 25 23 / 0.05)}.border-teal-200\/40{border-color:rgb(153 246 228 / 0.4)}.border-teal-900\/10{border-color:rgb(19 78 74 / 0.1)}.border-teal-900\/5{border-color:rgb(19 78 74 / 0.05)}.border-violet-900\/10{border-color:rgb(76 29 149 / 0.1)}.border-white\/50{border-color:rgb(255 255 255 / 0.5)}.border-yellow-200\/40{border-color:rgb(254 240 138 / 0.4)}.border-yellow-600\/30{border-color:rgb(202 138 4 / 0.3)}.border-yellow-600\/40{border-color:rgb(202 138 4 / 0.4)}.border-yellow-900\/10{border-color:rgb(113 63 18 / 0.1)}.border-yellow-900\/5{border-color:rgb(113 63 18 / 0.05)}.border-zinc-100{--tw-border-opacity:1;border-color:rgb(244 244 245 / var(--tw-border-opacity, 1))}.border-zinc-200{--tw-border-opacity:1;border-color:rgb(228 228 231 / var(--tw-border-opacity, 1))}.border-zinc-200\/60{border-color:rgb(228 228 231 / 0.6)}.border-zinc-400\/30{border-color:rgb(161 161 170 / 0.3)}.border-zinc-400\/40{border-color:rgb(161 161 170 / 0.4)}.border-zinc-900\/10{border-color:rgb(24 24 27 / 0.1)}.border-zinc-900\/5{border-color:rgb(24 24 27 / 0.05)}.bg-\[\#006064\]{--tw-bg-opacity:1;background-color:rgb(0 96 100 / var(--tw-bg-opacity, 1))}.bg-\[\#00695C\]{--tw-bg-opacity:1;background-color:rgb(0 105 92 / var(--tw-bg-opacity, 1))}.bg-\[\#283593\]{--tw-bg-opacity:1;background-color:rgb(40 53 147 / var(--tw-bg-opacity, 1))}.bg-\[\#2D5A27\]{--tw-bg-opacity:1;background-color:rgb(45 90 39 / var(--tw-bg-opacity, 1))}.bg-\[\#4A148C\]{--tw-bg-opacity:1;background-color:rgb(74 20 140 / var(--tw-bg-opacity, 1))}.bg-\[\#5D4037\]{--tw-bg-opacity:1;background-color:rgb(93 64 55 / var(--tw-bg-opacity, 1))}.bg-\[\#AD1457\]{--tw-bg-opacity:1;background-color:rgb(173 20 87 / var(--tw-bg-opacity, 1))}.bg-\[\#E0F2F1\]{--tw-bg-opacity:1;background-color:rgb(224 242 241 / var(--tw-bg-opacity, 1))}.bg-\[\#E0F7FA\]{--tw-bg-opacity:1;background-color:rgb(224 247 250 / var(--tw-bg-opacity, 1))}.bg-\[\#E65100\]{--tw-bg-opacity:1;background-color:rgb(230 81 0 / var(--tw-bg-opacity, 1))}.bg-\[\#E8EAF6\]{--tw-bg-opacity:1;background-color:rgb(232 234 246 / var(--tw-bg-opacity, 1))}.bg-\[\#E8F5E9\]{--tw-bg-opacity:1;background-color:rgb(232 245 233 / var(--tw-bg-opacity, 1))}.bg-\[\#EFEBE9\]{--tw-bg-opacity:1;background-color:rgb(239 235 233 / var(--tw-bg-opacity, 1))}.bg-\[\#F3E5F5\]{--tw-bg-opacity:1;background-color:rgb(243 229 245 / var(--tw-bg-opacity, 1))}.bg-\[\#F57F17\]{--tw-bg-opacity:1;background-color:rgb(245 127 23 / var(--tw-bg-opacity, 1))}.bg-\[\#F6F2FA\]{--tw-bg-opacity:1;background-color:rgb(246 242 250 / var(--tw-bg-opacity, 1))}.bg-\[\#FCE4EC\]{--tw-bg-opacity:1;background-color:rgb(252 228 236 / var(--tw-bg-opacity, 1))}.bg-\[\#FF8F00\]{--tw-bg-opacity:1;background-color:rgb(255 143 0 / var(--tw-bg-opacity, 1))}.bg-\[\#FFF3E0\]{--tw-bg-opacity:1;background-color:rgb(255 243 224 / var(--tw-bg-opacity, 1))}.bg-\[\#FFF8E1\]{--tw-bg-opacity:1;background-color:rgb(255 248 225 / var(--tw-bg-opacity, 1))}.bg-\[\#FFFDE7\]{--tw-bg-opacity:1;background-color:rgb(255 253 231 / var(--tw-bg-opacity, 1))}.bg-\[\#d0e8f5\]{--tw-bg-opacity:1;background-color:rgb(208 232 245 / var(--tw-bg-opacity, 1))}.bg-\[\#e2d9f3\]{--tw-bg-opacity:1;background-color:rgb(226 217 243 / var(--tw-bg-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-amber-500\/10{background-color:rgb(245 158 11 / 0.1)}.bg-blue-500\/10{background-color:rgb(59 130 246 / 0.1)}.bg-cyan-800\/10{background-color:rgb(21 94 117 / 0.1)}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-700{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.bg-emerald-800\/10{background-color:rgb(6 95 70 / 0.1)}.bg-indigo-700{--tw-bg-opacity:1;background-color:rgb(67 56 202 / var(--tw-bg-opacity, 1))}.bg-orange-50{--tw-bg-opacity:1;background-color:rgb(255 247 237 / var(--tw-bg-opacity, 1))}.bg-orange-500\/10{background-color:rgb(249 115 22 / 0.1)}.bg-orange-800\/10{background-color:rgb(154 52 18 / 0.1)}.bg-purple-700{--tw-bg-opacity:1;background-color:rgb(126 34 206 / var(--tw-bg-opacity, 1))}.bg-purple-900\/5{background-color:rgb(88 28 135 / 0.05)}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-red-500\/10{background-color:rgb(239 68 68 / 0.1)}.bg-sky-800{--tw-bg-opacity:1;background-color:rgb(7 89 133 / var(--tw-bg-opacity, 1))}.bg-sky-900\/10{background-color:rgb(12 74 110 / 0.1)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/50{background-color:rgb(255 255 255 / 0.5)}.bg-white\/60{background-color:rgb(255 255 255 / 0.6)}.bg-white\/70{background-color:rgb(255 255 255 / 0.7)}.bg-white\/80{background-color:rgb(255 255 255 / 0.8)}.bg-white\/90{background-color:rgb(255 255 255 / 0.9)}.bg-yellow-50{--tw-bg-opacity:1;background-color:rgb(254 252 232 / var(--tw-bg-opacity, 1))}.bg-yellow-800\/10{background-color:rgb(133 77 14 / 0.1)}.bg-zinc-800{--tw-bg-opacity:1;background-color:rgb(39 39 42 / var(--tw-bg-opacity, 1))}.bg-rose-500{--tw-bg-opacity:1;background-color:rgb(244 63 94 / var(--tw-bg-opacity, 1))}.bg-sky-700\/10{background-color:rgb(3 105 161 / 0.1)}.object-cover{object-fit:cover}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-0\.5{padding-left:0.125rem;padding-right:0.125rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-1{padding-bottom:0.25rem}.pb-2{padding-bottom:0.5rem}.pl-2{padding-left:0.5rem}.pl-4{padding-left:1rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.font-serif{font-family:ui-serif, Georgia, Cambria, "Times New Roman", Times, serif}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[14px\]{font-size:14px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-wider{letter-spacing:0.05em}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-amber-950{--tw-text-opacity:1;color:rgb(69 26 3 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-blue-900{--tw-text-opacity:1;color:rgb(30 58 138 / var(--tw-text-opacity, 1))}.text-blue-900\/60{color:rgb(30 58 138 / 0.6)}.text-blue-950{--tw-text-opacity:1;color:rgb(23 37 84 / var(--tw-text-opacity, 1))}.text-cyan-900{--tw-text-opacity:1;color:rgb(22 78 99 / var(--tw-text-opacity, 1))}.text-cyan-950{--tw-text-opacity:1;color:rgb(8 51 68 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-emerald-900{--tw-text-opacity:1;color:rgb(6 78 59 / var(--tw-text-opacity, 1))}.text-emerald-950{--tw-text-opacity:1;color:rgb(2 44 34 / var(--tw-text-opacity, 1))}.text-indigo-950{--tw-text-opacity:1;color:rgb(30 27 75 / var(--tw-text-opacity, 1))}.text-orange-700{--tw-text-opacity:1;color:rgb(194 65 12 / var(--tw-text-opacity, 1))}.text-orange-800{--tw-text-opacity:1;color:rgb(154 52 18 / var(--tw-text-opacity, 1))}.text-orange-900{--tw-text-opacity:1;color:rgb(124 45 18 / var(--tw-text-opacity, 1))}.text-orange-900\/60{color:rgb(124 45 18 / 0.6)}.text-orange-950{--tw-text-opacity:1;color:rgb(67 20 7 / var(--tw-text-opacity, 1))}.text-pink-950{--tw-text-opacity:1;color:rgb(80 7 36 / var(--tw-text-opacity, 1))}.text-purple-900{--tw-text-opacity:1;color:rgb(88 28 135 / var(--tw-text-opacity, 1))}.text-purple-900\/60{color:rgb(88 28 135 / 0.6)}.text-purple-900\/70{color:rgb(88 28 135 / 0.7)}.text-purple-950{--tw-text-opacity:1;color:rgb(59 7 100 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-sky-900{--tw-text-opacity:1;color:rgb(12 74 110 / var(--tw-text-opacity, 1))}.text-sky-950{--tw-text-opacity:1;color:rgb(8 47 73 / var(--tw-text-opacity, 1))}.text-sky-950\/65{color:rgb(8 47 73 / 0.65)}.text-sky-950\/70{color:rgb(8 47 73 / 0.7)}.text-stone-950{--tw-text-opacity:1;color:rgb(12 10 9 / var(--tw-text-opacity, 1))}.text-teal-950{--tw-text-opacity:1;color:rgb(4 47 46 / var(--tw-text-opacity, 1))}.text-violet-900\/70{color:rgb(76 29 149 / 0.7)}.text-violet-950{--tw-text-opacity:1;color:rgb(46 16 101 / var(--tw-text-opacity, 1))}.text-violet-950\/65{color:rgb(46 16 101 / 0.65)}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-800{--tw-text-opacity:1;color:rgb(133 77 14 / var(--tw-text-opacity, 1))}.text-yellow-900{--tw-text-opacity:1;color:rgb(113 63 18 / var(--tw-text-opacity, 1))}.text-yellow-950{--tw-text-opacity:1;color:rgb(66 32 6 / var(--tw-text-opacity, 1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity, 1))}.text-zinc-600{--tw-text-opacity:1;color:rgb(82 82 91 / var(--tw-text-opacity, 1))}.text-zinc-700{--tw-text-opacity:1;color:rgb(63 63 70 / var(--tw-text-opacity, 1))}.text-zinc-800{--tw-text-opacity:1;color:rgb(39 39 42 / var(--tw-text-opacity, 1))}.text-zinc-900{--tw-text-opacity:1;color:rgb(24 24 27 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-100{opacity:1}.opacity-0{opacity:0}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.drop-shadow-\[0_2px_4px_rgba\(0\2c 0\2c 0\2c 0\.6\)\]{--tw-drop-shadow:drop-shadow(0 2px 4px rgba(0,0,0,0.6));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.hover\:bg-purple-900\/10:hover{background-color:rgb(88 28 135 / 0.1)}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}</style><script>window.__initialTripData = {"customerName":"Alicia Ng","customerParty":"Alicia Ng 等共 4 人","contactPhone":"+65 9660 5497","tripDays":7,"startDate":"2018-12-12","airportTransfer":{"pickup":{"enabled":false,"flight":"","time":"","terminal":"","meetingPoint":"","note":""},"dropoff":{"enabled":false,"flight":"","time":"","terminal":"","meetingPoint":"","note":""}},"dailyTimelines":{"1":{"startTime":"08:30","stops":[{"driveMinutes":0,"stayMinutes":60},{"driveMinutes":null,"stayMinutes":45},{"driveMinutes":45,"stayMinutes":60},{"driveMinutes":90,"stayMinutes":20}]},"2":{"startTime":"09:00","stops":[{"driveMinutes":45,"stayMinutes":60},{"driveMinutes":35,"stayMinutes":35},{"driveMinutes":10,"stayMinutes":35},{"driveMinutes":10,"stayMinutes":35},{"driveMinutes":30,"stayMinutes":60},{"driveMinutes":70,"stayMinutes":45},{"driveMinutes":25,"stayMinutes":60}]},"3":{"startTime":"09:00","stops":[{"driveMinutes":30,"stayMinutes":45},{"driveMinutes":15,"stayMinutes":30},{"driveMinutes":20,"stayMinutes":60},{"driveMinutes":35,"stayMinutes":60},{"driveMinutes":25,"stayMinutes":60},{"driveMinutes":25,"stayMinutes":45},{"driveMinutes":40,"stayMinutes":20}]},"4":{"startTime":"09:00","stops":[{"driveMinutes":35,"stayMinutes":300},{"driveMinutes":35,"stayMinutes":20}]},"5":{"startTime":"09:00","stops":[{"driveMinutes":80,"stayMinutes":150},{"driveMinutes":15,"stayMinutes":45},{"driveMinutes":10,"stayMinutes":240},{"driveMinutes":90,"stayMinutes":20}]},"6":{"startTime":"09:00","stops":[{"driveMinutes":30,"stayMinutes":60},{"driveMinutes":25,"stayMinutes":60},{"driveMinutes":80,"stayMinutes":75},{"driveMinutes":15,"stayMinutes":60},{"driveMinutes":15,"stayMinutes":45},{"driveMinutes":10,"stayMinutes":20},{"driveMinutes":110,"stayMinutes":20}]},"7":{"startTime":"09:00","stops":[{"driveMinutes":45,"stayMinutes":60},{"driveMinutes":35,"stayMinutes":60},{"driveMinutes":10,"stayMinutes":45},{"driveMinutes":60,"stayMinutes":20},{"driveMinutes":10,"stayMinutes":35},{"driveMinutes":15,"stayMinutes":60},{"driveMinutes":140,"stayMinutes":20}]},"8":{"startTime":"08:30","stops":[]},"9":{"startTime":"08:30","stops":[]},"10":{"startTime":"08:30","stops":[]}},"dailyItinerary":{"1":{"entries":["13:05 抵達","桃園機場接機（SQ876，13:05 抵達）","新竹大拇指小館","逢甲住宿"],"items":[{"type":"place","name":"13:05 抵達"},{"type":"place","name":"桃園機場接機（SQ876，13:05 抵達）","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 45 分鐘","minutes":45},{"type":"place","name":"新竹大拇指小館","stayMinutes":60,"stayText":"1 小時"},{"type":"drive","text":"🚗 行車時間約 1 小時 30 分鐘","minutes":90},{"type":"place","name":"逢甲住宿"}],"meta":{}},"2":{"entries":["紙箱王","荔園農場","新峰農場","百菇莊","薰衣草森林","高美濕地","逢甲夜市"],"items":[{"type":"drive","text":"🚗 行車時間約 45 分鐘","minutes":45},{"type":"place","name":"紙箱王","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 35 分鐘","minutes":35},{"type":"place","name":"荔園農場","stayMinutes":35,"stayText":"35 分鐘"},{"type":"drive","text":"🚗 行車時間約 10 分鐘","minutes":10},{"type":"place","name":"新峰農場","stayMinutes":35,"stayText":"35 分鐘"},{"type":"drive","text":"🚗 行車時間約 10 分鐘","minutes":10},{"type":"place","name":"百菇莊","stayMinutes":35,"stayText":"35 分鐘"},{"type":"drive","text":"🚗 行車時間約 30 分鐘","minutes":30},{"type":"place","name":"薰衣草森林","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 1 小時 10 分鐘","minutes":70},{"type":"place","name":"高美濕地","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 25 分鐘","minutes":25},{"type":"place","name":"逢甲夜市"}],"meta":{"locationLabel":"出發起點","location":"逢甲住宿"}},"3":{"entries":["太陽餅 DIY","宮原眼科","春水堂 DIY","紙寮 DIY","散散木工房 DIY","18度 C 巧克力","台中住宿"],"items":[{"type":"drive","text":"🚗 行車時間約 30 分鐘","minutes":30},{"type":"place","name":"太陽餅 DIY","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 15 分鐘","minutes":15},{"type":"place","name":"宮原眼科","stayMinutes":30,"stayText":"30 分鐘"},{"type":"drive","text":"🚗 行車時間約 20 分鐘","minutes":20},{"type":"place","name":"春水堂 DIY","stayMinutes":60,"stayText":"1 小時"},{"type":"drive","text":"🚗 行車時間約 35 分鐘","minutes":35},{"type":"place","name":"紙寮 DIY","stayMinutes":60,"stayText":"1 小時"},{"type":"drive","text":"🚗 行車時間約 25 分鐘","minutes":25},{"type":"place","name":"散散木工房 DIY","stayMinutes":60,"stayText":"1 小時"},{"type":"drive","text":"🚗 行車時間約 25 分鐘","minutes":25},{"type":"place","name":"18度 C 巧克力","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 40 分鐘","minutes":40},{"type":"place","name":"台中住宿"}],"meta":{"locationLabel":"出發起點","location":"台中住宿"}},"4":{"entries":["麗寶樂園","台中住宿"],"items":[{"type":"drive","text":"🚗 行車時間約 35 分鐘","minutes":35},{"type":"place","name":"麗寶樂園","stayMinutes":300,"stayText":"5 小時"},{"type":"drive","text":"🚗 行車時間約 35 分鐘","minutes":35},{"type":"place","name":"台中住宿"}],"meta":{"locationLabel":"出發起點","location":"台中住宿"}},"5":{"entries":["日月潭遊湖","日月潭纜車","九族文化村","台中住宿"],"items":[{"type":"drive","text":"🚗 行車時間約 1 小時 20 分鐘","minutes":80},{"type":"place","name":"日月潭遊湖","stayMinutes":150,"stayText":"120～150 分鐘"},{"type":"drive","text":"🚗 行車時間約 15 分鐘","minutes":15},{"type":"place","name":"日月潭纜車","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 10 分鐘","minutes":10},{"type":"place","name":"九族文化村","stayMinutes":240,"stayText":"4 小時"},{"type":"drive","text":"🚗 行車時間約 1 小時 30 分鐘","minutes":90},{"type":"place","name":"台中住宿"}],"meta":{"locationLabel":"出發起點","location":"台中住宿"}},"6":{"entries":["今夜星辰農場","塔洛灣雞仔午餐","青青草原","觀山牧場","小瑞士花園","老英格蘭拍照","台中住宿"],"items":[{"type":"drive","text":"🚗 行車時間約 30 分鐘","minutes":30},{"type":"place","name":"今夜星辰農場","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 25 分鐘","minutes":25},{"type":"place","name":"塔洛灣雞仔午餐","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 1 小時 20 分鐘","minutes":80},{"type":"place","name":"青青草原","stayMinutes":75,"stayText":"1 小時 15 分鐘"},{"type":"drive","text":"🚗 行車時間約 15 分鐘","minutes":15},{"type":"place","name":"觀山牧場","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 15 分鐘","minutes":15},{"type":"place","name":"小瑞士花園","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 10 分鐘","minutes":10},{"type":"place","name":"老英格蘭拍照","stayMinutes":20,"stayText":"20 分鐘"},{"type":"drive","text":"🚗 行車時間約 1 小時 50 分鐘","minutes":110},{"type":"place","name":"台中住宿"}],"meta":{"locationLabel":"出發起點","location":"台中住宿"}},"7":{"entries":["中社花市","春田窯甕仔雞午餐","陶窯 DIY","大湖草莓文化館","採草莓","巧克力雲莊 DIY","台北飯店"],"items":[{"type":"drive","text":"🚗 行車時間約 45 分鐘","minutes":45},{"type":"place","name":"中社花市","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 35 分鐘","minutes":35},{"type":"place","name":"春田窯甕仔雞午餐","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 10 分鐘","minutes":10},{"type":"place","name":"陶窯 DIY","stayMinutes":45,"stayText":"45 分鐘"},{"type":"drive","text":"🚗 行車時間約 1 小時","minutes":60},{"type":"place","name":"大湖草莓文化館","stayMinutes":20,"stayText":"20 分鐘"},{"type":"drive","text":"🚗 行車時間約 10 分鐘","minutes":10},{"type":"place","name":"採草莓","stayMinutes":35,"stayText":"35 分鐘"},{"type":"drive","text":"🚗 行車時間約 15 分鐘","minutes":15},{"type":"place","name":"巧克力雲莊 DIY","stayMinutes":60,"stayText":"60 分鐘"},{"type":"drive","text":"🚗 行車時間約 2 小時 20 分鐘","minutes":140},{"type":"place","name":"台北飯店"}],"meta":{"locationLabel":"出發起點","location":"台中住宿"}}},"dailyBudgets":{"1":3000,"2":3500,"3":3500,"4":1600,"5":3500,"6":4000,"7":5000},"travelProfiles":[]};</script></head>
+
+<body class="bg-[#F6F2FA] min-h-screen py-6 px-4 antialiased text-zinc-900 font-sans flex justify-center items-start">
+
+<!-- 響應式網頁內容主容器 (完全無外框，Max-width 620px) -->
+<div class="w-full max-w-[620px] section-stack no-scrollbar">
+
+<!-- ==================== 1. 極簡頁首動態輪播圖卡片 ==================== -->
+<div class="relative h-64 bg-zinc-800 rounded-3xl overflow-hidden shadow-sm">
+<!-- 輪播圖片，加上過渡淡入淡出效果 -->
+<img id="banner-img" class="w-full h-full object-cover transition-opacity duration-500 opacity-100" src="https://tdb8053-bit.github.io/Trip2026/jiufen.jpg" alt="風景圖">
+
+<!-- 頁首文字：保留原始亮度，左下英、右下中一左一右對照，大小固定為 text-[14px] -->
+<div class="absolute inset-0 flex items-end justify-between p-6 text-white pointer-events-none">
+<h1 id="text-en" class="translate-y-[13px] text-[14px] font-bold tracking-wider uppercase font-serif drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">Jiufen Night View</h1>
+<p id="text-zh" class="translate-y-[13px] text-[14px] font-bold tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">九份夜景</p>
+</div>
+</div>
+
+<!-- 僅供內部製作使用的獨立生成器檔案。 -->
+
+
+<!-- ==================== 2. 行程標題（套用紅底框樣式）+ 右側切換按鈕 ==================== -->
+<div class="flex items-center justify-between py-1 px-1 border-b border-zinc-200 pb-2">
+<div id="trip-title" class="bg-red-500/10 text-red-600 px-4 py-2 rounded-full font-black text-[14px] whitespace-nowrap overflow-hidden text-ellipsis flex-1 transition-all">
+<span data-template-key="tripTitleZh">Alicia Ng專屬：7天6夜 尊榮包車行程表</span>
+</div>
+<button id="langToggleBtn" onclick="toggleLanguage()" class="bg-white/80 ios-blur shadow-sm hover:bg-white text-zinc-800 text-[11px] font-extrabold px-4 py-2 rounded-full transition active:scale-95 border border-zinc-200/60 shrink-0 ml-2">
+🌐 EN
+</button>
+</div>
+
+<!-- ==================== 3. 預約人資訊卡片 (淺紫底色) ==================== -->
+<div class="bg-[#e2d9f3] premium-card space-y-3 border border-purple-200/40">
+<h2 id="lbl-reserve" class="card-title text-purple-950 flex items-center gap-1.5 border-b border-purple-950/10 pb-2">
+👤 預約乘車資訊
+</h2>
+<div class="premium-info-panel bg-white/50 font-medium text-purple-950">
+<div class="flex justify-between items-center p-3 border-b border-purple-950/10">
+<span class="text-purple-900/60">預約代表：</span>
+<span class="text-sm"><strong data-template-key="customerParty">Alicia Ng 等共 4 人</strong></span>
+</div>
+<div class="flex justify-between items-center p-3">
+<span class="text-purple-900/60">聯絡電話：</span>
+<span class="text-sm"><strong data-template-key="contactPhone">+65 9660 5497</strong></span>
+</div>
+</div>
+</div>
+
+<!-- ==================== 4. 行程快速跳轉按鈕網格 ==================== -->
+<div class="premium-card premium-card--plain">
+<h2 id="lbl-nav" class="card-title text-zinc-400 uppercase tracking-wider mb-2.5 px-0.5">📅 行程快速跳轉</h2>
+<div id="quick-nav-grid" class="quick-jump-grid" style="grid-template-columns: repeat(5, minmax(0px, 1fr));">
+<button data-itinerary-nav="1" onclick="document.getElementById('day26').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d1" data-day-nav-label="1" class="mt-0.5">12月12</span></button>
+<button data-itinerary-nav="2" onclick="document.getElementById('day27').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d2" data-day-nav-label="2" class="mt-0.5">12月13</span></button>
+<button data-itinerary-nav="3" onclick="document.getElementById('day28').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d3" data-day-nav-label="3" class="mt-0.5">12月14</span></button>
+<button data-itinerary-nav="4" onclick="document.getElementById('day29').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d4" data-day-nav-label="4" class="mt-0.5">12月15</span></button>
+<button data-itinerary-nav="5" onclick="document.getElementById('day30').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span id="btn-d5" data-day-nav-label="5" class="mt-0.5">12月16</span></button>
+<button data-itinerary-nav="6" onclick="document.getElementById('day6').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span data-day-nav-label="6" class="mt-0.5">12月17</span></button>
+<button data-itinerary-nav="7" onclick="document.getElementById('day7').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950"><span>📆</span><span data-day-nav-label="7" class="mt-0.5">12月18</span></button>
+<button data-itinerary-nav="8" onclick="document.getElementById('day8').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950" hidden=""><span>📆</span><span data-day-nav-label="8" class="mt-0.5">12月19</span></button>
+<button data-itinerary-nav="9" onclick="document.getElementById('day9').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950" hidden=""><span>📆</span><span data-day-nav-label="9" class="mt-0.5">12月20</span></button>
+<button data-itinerary-nav="10" onclick="document.getElementById('day10').scrollIntoView({behavior: 'smooth'})" class="quick-jump-button bg-purple-900/5 hover:bg-purple-900/10 text-purple-950" hidden=""><span>📆</span><span data-day-nav-label="10" class="mt-0.5">12月21</span></button>
+</div>
+</div>
+
+<!-- ==================== 5. 專屬司機資訊卡片 (淺藍底色) ==================== -->
+<div class="bg-[#d0e8f5] premium-card space-y-3 border border-blue-200/40 text-center">
+<h2 id="lbl-driver" class="card-title text-blue-950 flex items-center justify-center gap-1.5 border-b border-blue-950/10 pb-2 text-left">
+🚕 專屬司機資訊
+</h2>
+<img src="https://tdb8053-bit.github.io/Trip2026/mr01.png" alt="司機大頭貼" class="driver-avatar mx-auto my-2">
+<div class="premium-info-panel bg-white/50 font-bold text-blue-950 text-left">
+<div class="flex justify-between items-center p-3 border-b border-blue-950/10">
+<span class="text-blue-900/60">專屬司機：</span>
+<span>張其芳</span>
+</div>
+<div class="flex justify-between items-center p-3 border-b border-blue-950/10">
+<span class="text-blue-900/60">連絡電話：</span>
+<span>0935-089253</span>
+</div>
+<div class="flex justify-between items-center p-3">
+<span class="text-blue-900/60">車牌號碼：</span>
+<span class="bg-red-500/10 text-red-600 px-3 py-0.5 rounded-full font-black text-[11px]">TEB-6933</span>
+</div>
+</div>
+<div class="w-full rounded-xl overflow-hidden shadow-sm my-3 border border-white/50 bg-white">
+<img src="https://tdb8053-bit.github.io/Trip2026/car01.png" alt="車輛外觀" class="w-full h-auto block">
+</div>
+<div class="text-xs font-black text-blue-950 mb-3">🚙 車型：Mercedes-Benz Vito Tourer</div>
+<div class="bg-white/60 p-4 rounded-xl border border-blue-950/5 text-left space-y-2">
+<h4 id="lbl-amenity" class="text-blue-950 font-black text-[12px] border-b border-blue-950/10 pb-1">✨ 車輛貼心服務與設施</h4>
+<div class="grid grid-cols-2 gap-2 text-[12px] font-bold text-blue-900">
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">💧 免費包裝飲用水</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">🔋 USB 充電座</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">📶 車載免費 Wi-Fi</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1">☔ 貼心備用愛心傘</div>
+<div class="bg-white/80 p-2 rounded-lg flex items-center gap-1 col-span-2 justify-center">🧴 濕紙巾與面紙</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 6. 💰 總車資與預算總覽 (粉蜜桃底色) ==================== -->
+<div id="budget-card" class="bg-[#FFF3E0] premium-card border border-orange-200/40 space-y-3">
+<h2 id="lbl-budget" class="card-title text-orange-950 flex items-center gap-1.5 border-b border-orange-950/10 pb-2">
+💰 總車資與預算總覽
+</h2>
+<div class="premium-info-panel bg-white/50 font-bold text-orange-950">
+<div id="budget-trip-row" class="flex justify-between items-center p-3 border-b border-orange-950/5">
+<span id="budget-trip-label" class="text-orange-900/60">7天包車總計：</span>
+<span id="budget-trip-value" class="text-sm">NT$ 24,100</span>
+</div>
+<div id="budget-booking-row" hidden="" class="flex justify-between items-center p-3">
+<span class="text-orange-900/60">代訂車票費用：</span>
+<span class="text-sm">NT$ 1,710</span>
+</div>
+</div>
+<div id="budget-booking-note" hidden="" class="text-center text-[11px] text-orange-900/60 font-bold">(285元 × 6張，訂單編號: AS260423011)</div>
+<div id="lbl-total-price" class="text-right text-lg text-red-600 font-black pt-2 border-t border-dashed border-orange-950/10">總金額：24,100 元</div>
+</div>
+
+<!-- ==================== 7. 每日詳細行程與時間軸 ==================== -->
+<!-- 可選接機資訊：預設隱藏，設定 pickup.enabled 為 true 即顯示 -->
+<section data-airport-transfer="pickup" hidden="" class="airport-transfer-card premium-card space-y-3">
+  <h2 class="card-title text-blue-950 flex items-center gap-1.5 border-b border-blue-950/10 pb-2">✈️ 專屬接機資訊</h2>
+  <dl class="airport-transfer-grid">
+    <dt>抵達航班：</dt><dd data-airport-field="pickup.flight">待填入</dd>
+    <dt>抵達時間：</dt><dd data-airport-field="pickup.time">待填入</dd>
+    <dt>抵達航廈：</dt><dd data-airport-field="pickup.terminal">待填入</dd>
+    <dt>集合地點：</dt><dd data-airport-field="pickup.meetingPoint">待填入</dd>
+    <dt>貼心提醒：</dt><dd data-airport-field="pickup.note">待填入</dd>
+  </dl>
+</section>
+
+<!-- DAY 1: 薄荷綠馬卡龍 -->
+<div id="day26" data-itinerary-day="1" class="bg-[#E8F5E9] premium-card border border-emerald-200/40 space-y-4"><div class="flex justify-between items-center border-b border-emerald-900/10 pb-2">
+<h3 data-day-header="1" class="bg-[#2D5A27] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/12 (三)</h3>
+<span class="text-emerald-950 font-black text-sm">第 1 天行程</span>
+</div><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">08:30 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=13%3A05%20%E6%8A%B5%E9%81%94&amp;destination=%E9%80%A2%E7%94%B2%E4%BD%8F%E5%AE%BF&amp;waypoints=%E6%A1%83%E5%9C%92%E6%A9%9F%E5%A0%B4%E6%8E%A5%E6%A9%9F%EF%BC%88SQ876%EF%BC%8C13%3A05%20%E6%8A%B5%E9%81%94%EF%BC%89%7C%E6%96%B0%E7%AB%B9%E5%A4%A7%E6%8B%87%E6%8C%87%E5%B0%8F%E9%A4%A8&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 13:05 抵達</h4><p class="body-text">建議依現場狀況與旅客步調彈性安排，保留舒適的拍照與休息時間。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=13%3A05%20%E6%8A%B5%E9%81%94" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=13%3A05%20%E6%8A%B5%E9%81%94" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">✈️ 桃園機場接機（SQ876，13:05 抵達）</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">辦理接送與行李確認，實際時間將依航班與現場狀況調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%A1%83%E5%9C%92%E6%A9%9F%E5%A0%B4%E6%8E%A5%E6%A9%9F%EF%BC%88SQ876%EF%BC%8C13%3A05%20%E6%8A%B5%E9%81%94%EF%BC%89" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%A1%83%E5%9C%92%E6%A9%9F%E5%A0%B4%E6%8E%A5%E6%A9%9F%EF%BC%88SQ876%EF%BC%8C13%3A05%20%E6%8A%B5%E9%81%94%EF%BC%89" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 45 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 新竹大拇指小館</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 1 小時</span><p class="body-text">安排接機後用餐與休息，餐點可依旅客口味選擇。</p><p class="warning-text">💡 貼心提醒：用餐尖峰建議先確認座位。</p><section class="restaurant-info"><div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 現場菜單</span></div><p class="restaurant-info__recommendations"><b>🔥 推薦：</b>炒米粉、貢丸湯</p></section><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E7%AB%B9%E5%A4%A7%E6%8B%87%E6%8C%87%E5%B0%8F%E9%A4%A8" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%96%B0%E7%AB%B9%E5%A4%A7%E6%8B%87%E6%8C%87%E5%B0%8F%E9%A4%A8%20菜單" target="_blank" rel="noopener noreferrer">📖 菜單</a><a class="bg-amber-500/10 text-amber-800 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E7%AB%B9%E5%A4%A7%E6%8B%87%E6%8C%87%E5%B0%8F%E9%A4%A8" target="_blank" rel="noopener noreferrer">⭐ 評價</a><a class="bg-orange-500/10 text-orange-700 premium-button" href="https://www.google.com/search?q=%E6%96%B0%E7%AB%B9%E5%A4%A7%E6%8B%87%E6%8C%87%E5%B0%8F%E9%A4%A8%20附近美食" target="_blank" rel="noopener noreferrer">🍽️ 附近美食</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時 30 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🏨 逢甲住宿</h4><p class="body-text">安排入住或休息，實際時間依飯店作業與當日行程調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%80%A2%E7%94%B2%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E9%80%A2%E7%94%B2%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：3,000 元</div></div>
+
+<!-- DAY 2: 蜜桃粉馬卡龍 -->
+<div id="day27" data-itinerary-day="2" class="bg-[#FFF3E0] premium-card border border-orange-200/40 space-y-4"><div class="flex justify-between items-center border-b border-orange-900/10 pb-2">
+<h3 data-day-header="2" class="bg-[#E65100] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/13 (四)</h3>
+<span class="text-orange-950 font-black text-sm">第 2 天行程</span>
+</div><p class="text-xs text-zinc-700"><b>出發起點：</b><strong>逢甲住宿</strong></p><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">09:00 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E7%B4%99%E7%AE%B1%E7%8E%8B&amp;destination=%E9%80%A2%E7%94%B2%E5%A4%9C%E5%B8%82&amp;waypoints=%E8%8D%94%E5%9C%92%E8%BE%B2%E5%A0%B4%7C%E6%96%B0%E5%B3%B0%E8%BE%B2%E5%A0%B4%7C%E7%99%BE%E8%8F%87%E8%8E%8A%7C%E8%96%B0%E8%A1%A3%E8%8D%89%E6%A3%AE%E6%9E%97%7C%E9%AB%98%E7%BE%8E%E6%BF%95%E5%9C%B0&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 45 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 紙箱王創意園區</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">以紙藝創作為主題的創意園區，可欣賞紙雕作品、搭乘紙箱小火車並體驗紙的各種創意應用。</p><p class="warning-text">💡 貼心提醒：DIY 請另留時間。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=紙箱王創意園區" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E7%B4%99%E7%AE%B1%E7%8E%8B%E5%89%B5%E6%84%8F%E5%9C%92%E5%8D%80" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 35 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 荔園農場</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 35 分鐘</span><p class="body-text">農場休閒行程，可安排短暫參觀與拍照。</p><p class="warning-text">💡 貼心提醒：戶外行程，請依天候準備。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%8D%94%E5%9C%92%E8%BE%B2%E5%A0%B4" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E8%8D%94%E5%9C%92%E8%BE%B2%E5%A0%B4" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 新峰農場</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 35 分鐘</span><p class="body-text">可安排農場參觀，感受新社山城的休閒氛圍。</p><p class="warning-text">💡 貼心提醒：請依園區當日開放與活動安排。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E5%B3%B0%E8%BE%B2%E5%A0%B4" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%96%B0%E5%B3%B0%E8%BE%B2%E5%A0%B4" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 百菇莊</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 35 分鐘</span><p class="body-text">以菇類生態與農產品為主題，適合短暫參觀與選購伴手禮。</p><p class="warning-text">💡 貼心提醒：商品與體驗項目依現場為準。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%99%BE%E8%8F%87%E8%8E%8A" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E7%99%BE%E8%8F%87%E8%8E%8A" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 30 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 薰衣草森林・台中新社園區</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">結合花田、林間步道與森林氛圍的休閒園區，適合散步、拍照與享受悠閒的山林時光。</p><p class="warning-text">💡 貼心提醒：步道多，請穿好走的鞋。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=薰衣草森林+台中新社園區" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E8%96%B0%E8%A1%A3%E8%8D%89%E6%A3%AE%E6%9E%97%E3%83%BB%E5%8F%B0%E4%B8%AD%E6%96%B0%E7%A4%BE%E5%9C%92%E5%8D%80" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 高美濕地</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">欣賞遼闊濕地與夕陽景色。</p><p class="warning-text">💡 貼心提醒：備拖鞋，留意潮汐與日落。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=高美濕地" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E9%AB%98%E7%BE%8E%E6%BF%95%E5%9C%B0" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 25 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 逢甲夜市</h4><p class="body-text">台中具代表性的夜市商圈，適合品嘗小吃、逛街與自由活動。</p><p class="warning-text">💡 貼心提醒：人潮較多，請留意錢包與貴重物品。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%80%A2%E7%94%B2%E5%A4%9C%E5%B8%82" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E9%80%A2%E7%94%B2%E5%A4%9C%E5%B8%82" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：3,500 元</div></div>
+
+<!-- DAY 3: 鵝黃馬卡龍 -->
+<div id="day28" data-itinerary-day="3" class="bg-[#FFFDE7] premium-card border border-yellow-200/40 space-y-4"><div class="flex justify-between items-center border-b border-yellow-900/10 pb-2">
+<h3 data-day-header="3" class="bg-[#F57F17] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/14 (五)</h3>
+<span class="text-yellow-950 font-black text-sm">第 3 天行程</span>
+</div><p class="text-xs text-zinc-700"><b>出發起點：</b><strong>台中住宿</strong></p><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">09:00 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E5%A4%AA%E9%99%BD%E9%A4%85%20DIY&amp;destination=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF&amp;waypoints=%E5%AE%AE%E5%8E%9F%E7%9C%BC%E7%A7%91%7C%E6%98%A5%E6%B0%B4%E5%A0%82%20DIY%7C%E7%B4%99%E5%AF%AE%20DIY%7C%E6%95%A3%E6%95%A3%E6%9C%A8%E5%B7%A5%E6%88%BF%20DIY%7C18%E5%BA%A6%20C%20%E5%B7%A7%E5%85%8B%E5%8A%9B&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 30 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 太陽餅 DIY</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">體驗台中糕餅文化與手作樂趣，並可選購在地伴手禮。</p><p class="warning-text">💡 貼心提醒：DIY 須依預約時段安排。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%AA%E9%99%BD%E9%A4%85%20DIY" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%A4%AA%E9%99%BD%E9%A4%85%20DIY" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 15 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 宮原眼科</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 30 分鐘</span><p class="body-text">由歷史建築改造的台中熱門景點，結合甜點、伴手禮與復古空間。</p><p class="warning-text">💡 貼心提醒：熱門時段人潮多，請預留排隊時間。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%AE%AE%E5%8E%9F%E7%9C%BC%E7%A7%91" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%AE%AE%E5%8E%9F%E7%9C%BC%E7%A7%91" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 20 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 春水堂 DIY</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 1 小時</span><p class="body-text">可安排茶飲與手作體驗，感受台中茶文化。</p><p class="warning-text">💡 貼心提醒：體驗內容須依門市或預約安排。</p><section class="restaurant-info"><div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 依現場菜單</span></div><p class="restaurant-info__recommendations"><b>🔥 推薦：</b>珍珠奶茶與當日手作體驗</p></section><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%A5%E6%B0%B4%E5%A0%82%20DIY" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%98%A5%E6%B0%B4%E5%A0%82%20DIY%20菜單" target="_blank" rel="noopener noreferrer">📖 菜單</a><a class="bg-amber-500/10 text-amber-800 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%A5%E6%B0%B4%E5%A0%82%20DIY" target="_blank" rel="noopener noreferrer">⭐ 評價</a><a class="bg-orange-500/10 text-orange-700 premium-button" href="https://www.google.com/search?q=%E6%98%A5%E6%B0%B4%E5%A0%82%20DIY%20附近美食" target="_blank" rel="noopener noreferrer">🍽️ 附近美食</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 35 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 紙寮 DIY</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 1 小時</span><p class="body-text">認識紙張製作與紙藝手作，適合親子或團體體驗。</p><p class="warning-text">💡 貼心提醒：手作時間請依現場流程安排。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%B4%99%E5%AF%AE%20DIY" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E7%B4%99%E5%AF%AE%20DIY" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 25 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 散散木工房 DIY</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 1 小時</span><p class="body-text">以木作手作為主的體驗行程，可留下專屬旅行紀念。</p><p class="warning-text">💡 貼心提醒：作品完成時間依體驗內容而定。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%95%A3%E6%95%A3%E6%9C%A8%E5%B7%A5%E6%88%BF%20DIY" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%95%A3%E6%95%A3%E6%9C%A8%E5%B7%A5%E6%88%BF%20DIY" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 25 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 18度 C 巧克力工房</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">埔里知名巧克力與甜點景點，適合品嘗甜點及選購伴手禮。</p><p class="warning-text">💡 貼心提醒：假日人潮較多，請注意集合時間。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=18%E5%BA%A6%20C%20%E5%B7%A7%E5%85%8B%E5%8A%9B%E5%B7%A5%E6%88%BF" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=18%E5%BA%A6%20C%20%E5%B7%A7%E5%85%8B%E5%8A%9B%E5%B7%A5%E6%88%BF" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 40 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🏨 台中住宿</h4><p class="body-text">安排入住或休息，實際時間依飯店作業與當日行程調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：3,500 元</div></div>
+
+<!-- DAY 4: 水藍馬卡龍 -->
+<div id="day29" data-itinerary-day="4" class="bg-[#E0F7FA] premium-card border border-cyan-200/40 space-y-4"><div class="flex justify-between items-center border-b border-cyan-900/10 pb-2">
+<h3 data-day-header="4" class="bg-[#006064] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/15 (六)</h3>
+<span class="text-cyan-950 font-black text-sm">第 4 天行程</span>
+</div><p class="text-xs text-zinc-700"><b>出發起點：</b><strong>台中住宿</strong></p><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">09:00 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E9%BA%97%E5%AF%B6%E6%A8%82%E5%9C%92&amp;destination=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 35 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 麗寶樂園</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 5 小時</span><p class="body-text">結合主題樂園與休閒設施的大型園區，適合安排半日以上遊玩。</p><p class="warning-text">💡 貼心提醒：設施開放與排隊時間依當日公告。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BA%97%E5%AF%B6%E6%A8%82%E5%9C%92" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E9%BA%97%E5%AF%B6%E6%A8%82%E5%9C%92" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 35 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🏨 台中住宿</h4><p class="body-text">安排入住或休息，實際時間依飯店作業與當日行程調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：1,600 元</div></div>
+
+<!-- DAY 5: 薰衣草淡紫馬卡龍 -->
+<div id="day30" data-itinerary-day="5" class="bg-[#F3E5F5] premium-card border border-purple-200/40 space-y-4"><div class="flex justify-between items-center border-b border-purple-900/10 pb-2">
+<h3 data-day-header="5" class="bg-[#4A148C] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/16 (日)</h3>
+<span class="text-purple-950 font-black text-sm">第 5 天行程</span>
+</div><p class="text-xs text-zinc-700"><b>出發起點：</b><strong>台中住宿</strong></p><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">09:00 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E6%97%A5%E6%9C%88%E6%BD%AD%E9%81%8A%E6%B9%96&amp;destination=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF&amp;waypoints=%E6%97%A5%E6%9C%88%E6%BD%AD%E7%BA%9C%E8%BB%8A%7C%E4%B9%9D%E6%97%8F%E6%96%87%E5%8C%96%E6%9D%91&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時 20 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 日月潭遊湖</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 120～150 分鐘</span><p class="body-text">從湖面欣賞日月潭的湖光山色；抵達伊達邵可品嘗山豬肉香腸、竹筒飯、小米麻糬與日月潭紅茶。</p><p class="warning-text">💡 貼心提醒：預留候船時間，留意船班與天候。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=日月潭遊湖" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%97%A5%E6%9C%88%E6%BD%AD%E9%81%8A%E6%B9%96" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 15 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 日月潭纜車</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">從空中欣賞日月潭湖光山色，串聯日月潭與九族文化村。</p><p class="warning-text">💡 貼心提醒：請留意纜車營運時間與天候。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%97%A5%E6%9C%88%E6%BD%AD%E7%BA%9C%E8%BB%8A" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%97%A5%E6%9C%88%E6%BD%AD%E7%BA%9C%E8%BB%8A" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 九族文化村</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 4 小時</span><p class="body-text">結合原住民族文化、主題遊樂設施與山林景觀的園區，並可透過纜車欣賞日月潭周邊景色。</p><p class="warning-text">💡 貼心提醒：園區大，請穿舒適鞋；設施依當日公告。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=九族文化村" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E4%B9%9D%E6%97%8F%E6%96%87%E5%8C%96%E6%9D%91" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時 30 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🏨 台中住宿</h4><p class="body-text">安排入住或休息，實際時間依飯店作業與當日行程調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：3,500 元</div></div>
+
+<!-- DAY 6～10：預留行程卡，依 templateData.tripDays 自動顯示 -->
+<div id="day6" data-itinerary-day="6" class="bg-[#FCE4EC] premium-card border border-pink-200/40 space-y-4"><div class="flex justify-between items-center border-b border-pink-900/10 pb-2"><h3 data-day-header="6" class="bg-[#AD1457] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/17 (一)</h3><span class="text-pink-950 font-black text-sm">第 6 天行程</span></div><p class="text-xs text-zinc-700"><b>出發起點：</b><strong>台中住宿</strong></p><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">09:00 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E4%BB%8A%E5%A4%9C%E6%98%9F%E8%BE%B0%E8%BE%B2%E5%A0%B4&amp;destination=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF&amp;waypoints=%E5%A1%94%E6%B4%9B%E7%81%A3%E9%9B%9E%E4%BB%94%E5%8D%88%E9%A4%90%7C%E9%9D%92%E9%9D%92%E8%8D%89%E5%8E%9F%7C%E8%A7%80%E5%B1%B1%E7%89%A7%E5%A0%B4%7C%E5%B0%8F%E7%91%9E%E5%A3%AB%E8%8A%B1%E5%9C%92%7C%E8%80%81%E8%8B%B1%E6%A0%BC%E8%98%AD%E6%8B%8D%E7%85%A7&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 30 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 今夜星辰農場</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">可安排農場散步、拍照與親近自然的輕鬆行程。</p><p class="warning-text">💡 貼心提醒：戶外區域請依天候調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BB%8A%E5%A4%9C%E6%98%9F%E8%BE%B0%E8%BE%B2%E5%A0%B4" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E4%BB%8A%E5%A4%9C%E6%98%9F%E8%BE%B0%E8%BE%B2%E5%A0%B4" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 25 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🍽️ 塔洛灣雞仔午餐</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">安排山區行程中的午餐與休息，餐點依現場菜單供應。</p><p class="warning-text">💡 貼心提醒：用餐時間請依當日行程彈性調整。</p><section class="restaurant-info"><div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 依現場菜單</span></div><p class="restaurant-info__recommendations"><b>🔥 推薦：</b>依旅客口味與當日菜單安排</p></section><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A1%94%E6%B4%9B%E7%81%A3%E9%9B%9E%E4%BB%94%E5%8D%88%E9%A4%90" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%A1%94%E6%B4%9B%E7%81%A3%E9%9B%9E%E4%BB%94%E5%8D%88%E9%A4%90%20菜單" target="_blank" rel="noopener noreferrer">📖 菜單</a><a class="bg-amber-500/10 text-amber-800 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A1%94%E6%B4%9B%E7%81%A3%E9%9B%9E%E4%BB%94%E5%8D%88%E9%A4%90" target="_blank" rel="noopener noreferrer">⭐ 評價</a><a class="bg-orange-500/10 text-orange-700 premium-button" href="https://www.google.com/search?q=%E5%A1%94%E6%B4%9B%E7%81%A3%E9%9B%9E%E4%BB%94%E5%8D%88%E9%A4%90%20附近美食" target="_blank" rel="noopener noreferrer">🍽️ 附近美食</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時 20 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 清境青青草原</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 1 小時 15 分鐘</span><p class="body-text">清境代表性高山草原景點，可欣賞山景並觀賞綿羊活動。</p><p class="warning-text">💡 貼心提醒：海拔較高，請備保暖衣物並注意防寒。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%85%E5%A2%83%E9%9D%92%E9%9D%92%E8%8D%89%E5%8E%9F" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%B8%85%E5%A2%83%E9%9D%92%E9%9D%92%E8%8D%89%E5%8E%9F" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 15 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 觀山牧場</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">安排山景、牧場風光與短暫休息的行程節點。</p><p class="warning-text">💡 貼心提醒：海拔較高，請備保暖衣物並注意防寒。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%A7%80%E5%B1%B1%E7%89%A7%E5%A0%B4" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E8%A7%80%E5%B1%B1%E7%89%A7%E5%A0%B4" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 15 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 清境小瑞士花園</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">以歐式花園與山景為特色，適合散步與拍照。</p><p class="warning-text">💡 貼心提醒：戶外步行較多，請穿好走的鞋。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%85%E5%A2%83%E5%B0%8F%E7%91%9E%E5%A3%AB%E8%8A%B1%E5%9C%92" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%B8%85%E5%A2%83%E5%B0%8F%E7%91%9E%E5%A3%AB%E8%8A%B1%E5%9C%92" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 老英格蘭莊園</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 20 分鐘</span><p class="body-text">歐式建築外觀與高山景色是清境熱門拍照地點。</p><p class="warning-text">💡 貼心提醒：以外觀拍照為主，請尊重住宿旅客。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%80%81%E8%8B%B1%E6%A0%BC%E8%98%AD%E8%8E%8A%E5%9C%92" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E8%80%81%E8%8B%B1%E6%A0%BC%E8%98%AD%E8%8E%8A%E5%9C%92" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時 50 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🏨 台中住宿</h4><p class="body-text">安排入住或休息，實際時間依飯店作業與當日行程調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%8F%B0%E4%B8%AD%E4%BD%8F%E5%AE%BF" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：4,000 元</div></div>
+<div id="day7" data-itinerary-day="7" class="bg-[#E8EAF6] premium-card border border-indigo-200/40 space-y-4"><div class="flex justify-between items-center border-b border-indigo-900/10 pb-2"><h3 data-day-header="7" class="bg-[#283593] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/18 (二)</h3><span class="text-indigo-950 font-black text-sm">第 7 天行程</span></div><p class="text-xs text-zinc-700"><b>出發起點：</b><strong>台中住宿</strong></p><p class="text-xs"><span class="bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]">09:00 出發</span></p><div data-generated-route="true"><a class="bg-sky-700/10 text-sky-900 premium-button block w-full" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E4%B8%AD%E7%A4%BE%E8%8A%B1%E5%B8%82&amp;destination=%E5%8F%B0%E5%8C%97%E9%A3%AF%E5%BA%97&amp;waypoints=%E6%98%A5%E7%94%B0%E7%AA%AF%E7%94%95%E4%BB%94%E9%9B%9E%E5%8D%88%E9%A4%90%7C%E9%99%B6%E7%AA%AF%20DIY%7C%E5%A4%A7%E6%B9%96%E8%8D%89%E8%8E%93%E6%96%87%E5%8C%96%E9%A4%A8%7C%E6%8E%A1%E8%8D%89%E8%8E%93%7C%E5%B7%A7%E5%85%8B%E5%8A%9B%E9%9B%B2%E8%8E%8A%20DIY&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">🧭 查看當日完整路線</a></div><div class="timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30"><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 45 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 中社花市</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">以季節花海與庭園造景聞名，適合拍照與輕鬆散步。</p><p class="warning-text">💡 貼心提醒：花況依季節變動，請以現場公告為準。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%AD%E7%A4%BE%E8%8A%B1%E5%B8%82" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E4%B8%AD%E7%A4%BE%E8%8A%B1%E5%B8%82" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 35 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 春田窯甕仔雞</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">安排客家風味午餐與休息，適合團體共享料理。</p><p class="warning-text">💡 貼心提醒：建議事先確認訂位與出餐時間。</p><section class="restaurant-info"><div class="restaurant-info__meta"><span class="restaurant-info__tag bg-amber-50 text-amber-800">💰 依現場菜單</span></div><p class="restaurant-info__recommendations"><b>🔥 推薦：</b>甕仔雞與客家風味料理</p></section><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%A5%E7%94%B0%E7%AA%AF%E7%94%95%E4%BB%94%E9%9B%9E" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E6%98%A5%E7%94%B0%E7%AA%AF%E7%94%95%E4%BB%94%E9%9B%9E%20菜單" target="_blank" rel="noopener noreferrer">📖 菜單</a><a class="bg-amber-500/10 text-amber-800 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%A5%E7%94%B0%E7%AA%AF%E7%94%95%E4%BB%94%E9%9B%9E" target="_blank" rel="noopener noreferrer">⭐ 評價</a><a class="bg-orange-500/10 text-orange-700 premium-button" href="https://www.google.com/search?q=%E6%98%A5%E7%94%B0%E7%AA%AF%E7%94%95%E4%BB%94%E9%9B%9E%20附近美食" target="_blank" rel="noopener noreferrer">🍽️ 附近美食</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 陶窯 DIY</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 45 分鐘</span><p class="body-text">體驗陶藝手作與在地工藝，為旅程留下紀念。</p><p class="warning-text">💡 貼心提醒：作品燒製與取件方式依現場規定。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%99%B6%E7%AA%AF%20DIY" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E9%99%B6%E7%AA%AF%20DIY" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 1 小時</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 大湖草莓文化館</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 20 分鐘</span><p class="body-text">認識大湖草莓產業與相關特色商品，適合短暫參觀。</p><p class="warning-text">💡 貼心提醒：草莓相關商品與活動依季節供應。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E6%B9%96%E8%8D%89%E8%8E%93%E6%96%87%E5%8C%96%E9%A4%A8" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%A4%A7%E6%B9%96%E8%8D%89%E8%8E%93%E6%96%87%E5%8C%96%E9%A4%A8" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 10 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 大湖採草莓</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 35 分鐘</span><p class="body-text">親自體驗採果樂趣，感受大湖草莓產地風情。</p><p class="warning-text">💡 貼心提醒：採果季與價格依農園及當日產量為準。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E6%B9%96%E6%8E%A1%E8%8D%89%E8%8E%93" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%A4%A7%E6%B9%96%E6%8E%A1%E8%8D%89%E8%8E%93" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 15 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">📍 巧克力雲莊</h4><span class="bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit">⏳ 預計停留：約 60 分鐘</span><p class="body-text">以巧克力主題結合山林環境，可安排甜點、拍照與手作體驗。</p><p class="warning-text">💡 貼心提醒：DIY 項目與時間請依現場安排。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%B7%A7%E5%85%8B%E5%8A%9B%E9%9B%B2%E8%8E%8A" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%B7%A7%E5%85%8B%E5%8A%9B%E9%9B%B2%E8%8E%8A" target="_blank" rel="noopener noreferrer">🔍 搜尋</a></div></div><div class="drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1">🚗 行車時間約 2 小時 20 分鐘</div><div class="premium-place-card border border-zinc-900/5 content-stack"><h4 class="place-title">🍽️ 台北飯店</h4><p class="body-text">安排入住或休息，實際時間依飯店作業與當日行程調整。</p><div class="premium-action-grid"><a class="bg-emerald-800/10 text-emerald-900 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E5%8C%97%E9%A3%AF%E5%BA%97" target="_blank" rel="noopener noreferrer">🗺️ 導航</a><a class="bg-blue-500/10 text-blue-700 premium-button" href="https://www.google.com/search?q=%E5%8F%B0%E5%8C%97%E9%A3%AF%E5%BA%97%20菜單" target="_blank" rel="noopener noreferrer">📖 菜單</a><a class="bg-amber-500/10 text-amber-800 premium-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%B0%E5%8C%97%E9%A3%AF%E5%BA%97" target="_blank" rel="noopener noreferrer">⭐ 評價</a><a class="bg-orange-500/10 text-orange-700 premium-button" href="https://www.google.com/search?q=%E5%8F%B0%E5%8C%97%E9%A3%AF%E5%BA%97%20附近美食" target="_blank" rel="noopener noreferrer">🍽️ 附近美食</a></div></div></div><div class="text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700">💰 本日車資：5,000 元</div></div>
+<div id="day8" data-itinerary-day="8" class="bg-[#E0F2F1] premium-card border border-teal-200/40 space-y-4" hidden="">
+  <div class="flex justify-between items-center border-b border-teal-900/10 pb-2"><h3 data-day-header="8" class="bg-[#00695C] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/19 (三)</h3><span class="text-teal-950 font-black text-sm">待安排行程</span></div>
+  <div class="premium-place-card border border-teal-900/5 content-stack"><h4 class="place-title">📝 Day 8 行程規劃</h4><p class="body-text">待填入景點、餐廳、住宿與行車時間。</p></div>
+</div>
+<div id="day9" data-itinerary-day="9" class="bg-[#FFF8E1] premium-card border border-amber-200/40 space-y-4" hidden="">
+  <div class="flex justify-between items-center border-b border-amber-900/10 pb-2"><h3 data-day-header="9" class="bg-[#FF8F00] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/20 (四)</h3><span class="text-amber-950 font-black text-sm">待安排行程</span></div>
+  <div class="premium-place-card border border-amber-900/5 content-stack"><h4 class="place-title">📝 Day 9 行程規劃</h4><p class="body-text">待填入景點、餐廳、住宿與行車時間。</p></div>
+</div>
+<div id="day10" data-itinerary-day="10" class="bg-[#EFEBE9] premium-card border border-stone-200/40 space-y-4" hidden="">
+  <div class="flex justify-between items-center border-b border-stone-900/10 pb-2"><h3 data-day-header="10" class="bg-[#5D4037] text-white text-xs px-3 py-1 rounded-full font-bold">📍 12/21 (五)</h3><span class="text-stone-950 font-black text-sm">待安排行程</span></div>
+  <div class="premium-place-card border border-stone-900/5 content-stack"><h4 class="place-title">📝 Day 10 行程規劃</h4><p class="body-text">待填入景點、餐廳、住宿與行車時間。</p></div>
+</div>
+
+<!-- 可選送機資訊：預設隱藏，設定 dropoff.enabled 為 true 即顯示 -->
+<section data-airport-transfer="dropoff" hidden="" class="airport-transfer-card premium-card space-y-3">
+  <h2 class="card-title text-purple-950 flex items-center gap-1.5 border-b border-purple-950/10 pb-2">🛫 專屬送機資訊</h2>
+  <dl class="airport-transfer-grid">
+    <dt>出發航班：</dt><dd data-airport-field="dropoff.flight">待填入</dd>
+    <dt>起飛時間：</dt><dd data-airport-field="dropoff.time">待填入</dd>
+    <dt>出發航廈：</dt><dd data-airport-field="dropoff.terminal">待填入</dd>
+    <dt>送機地點：</dt><dd data-airport-field="dropoff.meetingPoint">待填入</dd>
+    <dt>貼心提醒：</dt><dd data-airport-field="dropoff.note">待填入</dd>
+  </dl>
+</section>
+
+<!-- ==================== 8. ⛅ 天氣與 Windy 即時降雨預測 ==================== -->
+<div class="bg-white premium-card border border-zinc-200/60 space-y-4">
+<h2 id="lbl-weather" class="card-title text-zinc-800 flex items-center gap-1.5 border-b border-zinc-200 pb-2">
+⛅ 台灣 5 月下旬天氣與穿搭建議
+</h2>
+<div class="text-xs text-zinc-600 space-y-2 leading-relaxed">
+<p><strong>🌡️ 天氣概況：</strong> 5月底的台灣已進入初夏，氣候逐漸悶熱，平均氣溫約在 25°C ~ 30°C 之間。合歡山區即使在夏季，清晨體感溫度仍可能下探至 10 度以下。</p>
+<p><strong>👕 穿搭防護：</strong> 平地穿著透氣的短袖，高山溫差大請攜帶防風防水外套。戶外陽光強烈請準備防曬帽、墨鏡與防曬乳，並隨身攜帶防蚊液。</p>
+</div>
+<!-- Windy 互動式即時雲圖 -->
+<div class="pt-2 border-t border-zinc-100">
+<h4 class="text-zinc-700 font-bold text-xs text-center mb-2">🌧️ 即時天氣與降雨機率預測 (Windy 即時雲圖)</h4>
+<div class="w-full h-80 rounded-2xl overflow-hidden border border-zinc-200">
+<iframe width="100%" height="100%" src="https://embed.windy.com/embed.html?type=map&amp;location=coordinates&amp;metricRain=mm&amp;metricTemp=%C2%B0C&amp;metricWind=km/h&amp;zoom=7&amp;overlay=rain&amp;product=ecmwf&amp;level=surface&amp;lat=23.7&amp;lon=120.9&amp;detailLat=23.7&amp;detailLon=120.9&amp;marker=true" frameborder="0"></iframe>
+</div>
+</div>
+</div>
+
+<!-- PremiumTemplate_v1.0.3: Design System refactor; visual layout preserved. -->
+<!-- ==================== 9. 頁尾與版權宣告 ==================== -->
+<footer class="text-center text-[11px] text-zinc-400 space-y-1 py-4 border-t border-zinc-200/60 mt-2">
+<p>系統整合：原鄉谷派車中心 | 劉先生：＋886 927888032</p>
+<p>🤖 由 AI 旅遊助手自動化彙整｜專屬手機優化、蘋果級微反饋與極致美學</p>
+</footer>
+</div>
+
+<!-- 🌸 iOS 磨砂玻璃返回頂部按鈕 -->
+<button id="backToTop" class="ios-blur" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="display: block;">🌸 返回頂部</button>
+
+<!-- 語系切換與返回頂部同步 JavaScript -->
+<script>
+// ==========================================
+// 1. 頁首輪播資料與動態控制 (每 3 秒自動輪播)
+// ==========================================
+const bannerData = [
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/taipei101.jpg",
+        nameEn: "Taipei 101",
+        nameZh: "臺北101"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/jiufen.jpg",
+        nameEn: "Jiufen Night View",
+        nameZh: "九份夜景"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/shifen.jpg",
+        nameEn: "Shifen Sky Lanterns",
+        nameZh: "十分放天燈"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/sunmoonlake.jpg",
+        nameEn: "Sun Moon Lake",
+        nameZh: "日月潭水社碼頭"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/cingjing.jpg",
+        nameEn: "Cingjing Farm",
+        nameZh: "清境農場"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/gaomei.jpg",
+        nameEn: "Gaomei Wetlands",
+        nameZh: "高美濕地夕陽"
+    },
+    {
+        imgSrc: "https://tdb8053-bit.github.io/Trip2026/alishan.jpg",
+        nameEn: "Alishan",
+        nameZh: "阿里山小火車"
+    }
+];
+
+let currentBannerIndex = 0;
+const bannerImg = document.getElementById("banner-img");
+const textEn = document.getElementById("text-en");
+const textZh = document.getElementById("text-zh");
+
+function rotateBanner() {
+    // 優雅地先淡出 (透明度變 0)
+    bannerImg.classList.add("opacity-0");
+    bannerImg.classList.remove("opacity-100");
+    
+    // 等 500ms 淡出動畫即將完成時更換內容，再淡入
+    setTimeout(() => {
+        currentBannerIndex = (currentBannerIndex + 1) % bannerData.length;
+        const nextData = bannerData[currentBannerIndex];
+        
+        bannerImg.src = nextData.imgSrc;
+        textEn.innerText = nextData.nameEn;
+        textZh.innerText = nextData.nameZh;
+        
+        bannerImg.classList.remove("opacity-0");
+        bannerImg.classList.add("opacity-100");
+    }, 500);
+}
+
+// 啟動 3 秒輪播 (3000 毫秒)
+setInterval(rotateBanner, 3000);
+
+// ==========================================
+// 2. 行程資料設定區（未來製作新行程時，優先修改這裡）
+// ==========================================
+const templateData = {
+    customerName: '謝彩芬',
+    customerParty: '謝彩芬 等共 6 人',
+    contactPhone: '+60 12-707 7463',
+    tripDays: 5,
+    startDate: '2026-05-26',
+    timelinePolicy: {
+        dailyStartTime: '08:30',
+        dailyEndTime: '18:30',
+        bufferMinutes: 30
+    },
+    // 內部時間軸資料：不顯示在客戶頁面。
+    // 未來只要填入每站的行車與停留分鐘數，即可自動計算每日完成時間。
+    dailyTimelines: {
+        1: { startTime: '08:30', stops: [] },
+        2: { startTime: '08:30', stops: [] },
+        3: { startTime: '08:30', stops: [] },
+        4: { startTime: '08:30', stops: [] },
+        5: { startTime: '08:30', stops: [] },
+        6: { startTime: '08:30', stops: [] },
+        7: { startTime: '08:30', stops: [] },
+        8: { startTime: '08:30', stops: [] },
+        9: { startTime: '08:30', stops: [] },
+        10: { startTime: '08:30', stops: [] }
+    },
+    // 每日原始行程資料，保留景點、餐廳、住宿等文字供下一步自動產生卡片。
+    dailyItinerary: {},
+    // 每日車資：由純文字中的「車資 3,500 元」自動擷取。
+    dailyBudgets: {},
+    // 此次行程專用的新景點／餐廳資料；確認後可再納入正式資料庫。
+    customTravelProfiles: [],
+    airportTransfer: {
+        pickup: {
+            enabled: false,
+            flight: '', time: '', terminal: '', meetingPoint: '', note: ''
+        },
+        dropoff: {
+            enabled: false,
+            flight: '', time: '', terminal: '', meetingPoint: '', note: ''
+        }
+    },
+    get normalizedDays() { return Math.min(Math.max(Number(this.tripDays) || 1, 1), 10); },
+    get tripDuration() { return `${this.normalizedDays}天${this.normalizedDays - 1}夜`; },
+    get tripTitleZh() { return `${this.customerName}專屬：${this.tripDuration} 尊榮包車行程表`; },
+    get tripTitleEn() { return `${this.customerName}'s ${this.normalizedDays}D${this.normalizedDays - 1}N Chartered Luxury Itinerary`; }
+};
+
+// 可重複使用的旅遊資料庫：後續只要繼續新增店家或景點，不需要改動卡片版型。
+const travelLibrary = [
+    {
+        keywords: ['金榜', '金榜麵店'], type: 'restaurant', displayName: '三義金榜麵店',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=三義金榜麵店',
+        menuUrl: 'https://www.google.com/search?q=三義金榜麵店+菜單',
+        budget: 'NT$100～250／人', recommendations: '客家粄條、豬頭肉、滷味拼盤'
+    },
+    {
+        keywords: ['18怪', '十八怪'], type: 'restaurant', displayName: '清境 18 怪餐廳',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=清境18怪餐廳',
+        menuUrl: 'https://www.yunnan.com.tw/yunnan-restaurant.html',
+        budget: 'NT$250～400／人', recommendations: '雲南擺夷料理、錦灑、豌豆粉'
+    },
+    {
+        keywords: ['日月餐坊'], type: 'restaurant', displayName: '日月餐坊',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=日月餐坊+日月潭',
+        menuUrl: 'https://www.google.com/search?q=日月餐坊+菜單',
+        budget: '約 NT$400／人', recommendations: '依當日菜單與旅客口味安排'
+    },
+    {
+        keywords: ['高美濕地', '高美'], type: 'place', displayName: '高美濕地',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=高美濕地',
+        description: '欣賞遼闊濕地與夕陽景色。',
+        reminder: '備拖鞋，留意潮汐與日落。',
+        stayMinutes: 60, stayText: '約 60 分鐘'
+    },
+    {
+        keywords: ['紙箱王', '紙箱王創意園區'], type: 'place', displayName: '紙箱王創意園區',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=紙箱王創意園區',
+        description: '以紙藝創作為主題的創意園區，可欣賞紙雕作品、搭乘紙箱小火車並體驗紙的各種創意應用。',
+        reminder: 'DIY 請另留時間。',
+        stayMinutes: 60, stayText: '45～60 分鐘'
+    },
+    {
+        keywords: ['薰衣草森林'], type: 'place', displayName: '薰衣草森林・台中新社園區',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=薰衣草森林+台中新社園區',
+        description: '結合花田、林間步道與森林氛圍的休閒園區，適合散步、拍照與享受悠閒的山林時光。',
+        reminder: '步道多，請穿好走的鞋。',
+        stayMinutes: 60, stayText: '約 60 分鐘'
+    },
+    {
+        keywords: ['日月潭遊湖'], type: 'place', displayName: '日月潭遊湖',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=日月潭遊湖',
+        description: '從湖面欣賞日月潭的湖光山色；抵達伊達邵可品嘗山豬肉香腸、竹筒飯、小米麻糬與日月潭紅茶。',
+        reminder: '預留候船時間，留意船班與天候。',
+        stayMinutes: 150, stayText: '120～150 分鐘'
+    },
+    {
+        keywords: ['九族文化村', '九族'], type: 'place', displayName: '九族文化村',
+        mapsUrl: 'https://www.google.com/maps/search/?api=1&query=九族文化村',
+        description: '結合原住民族文化、主題遊樂設施與山林景觀的園區，並可透過纜車欣賞日月潭周邊景色。',
+        reminder: '園區大，請穿舒適鞋；設施依當日公告。',
+        stayMinutes: 300, stayText: '4～5 小時'
+    },
+    {
+        keywords: ['新竹大拇指小館'], type: 'restaurant', displayName: '新竹大拇指小館',
+        description: '安排接機後用餐與休息，餐點可依旅客口味選擇。',
+        reminder: '用餐尖峰建議先確認座位。', budget: '現場菜單', recommendations: '炒米粉、貢丸湯'
+    },
+    {
+        keywords: ['荔園農場'], type: 'place', displayName: '荔園農場',
+        description: '農場休閒行程，可安排短暫參觀與拍照。',
+        reminder: '戶外行程，請依天候準備。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['新峰農場'], type: 'place', displayName: '新峰農場',
+        description: '可安排農場參觀，感受新社山城的休閒氛圍。',
+        reminder: '請依園區當日開放與活動安排。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['百菇莊'], type: 'place', displayName: '百菇莊',
+        description: '以菇類生態與農產品為主題，適合短暫參觀與選購伴手禮。',
+        reminder: '商品與體驗項目依現場為準。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['逢甲夜市'], type: 'place', displayName: '逢甲夜市',
+        description: '台中具代表性的夜市商圈，適合品嘗小吃、逛街與自由活動。',
+        reminder: '人潮較多，請留意錢包與貴重物品。'
+    },
+    {
+        keywords: ['太陽餅 DIY', '太陽餅DIY'], type: 'place', displayName: '太陽餅 DIY',
+        description: '體驗台中糕餅文化與手作樂趣，並可選購在地伴手禮。',
+        reminder: 'DIY 須依預約時段安排。', stayMinutes: 60, stayText: '45～60 分鐘'
+    },
+    {
+        keywords: ['宮原眼科'], type: 'place', displayName: '宮原眼科',
+        description: '由歷史建築改造的台中熱門景點，結合甜點、伴手禮與復古空間。',
+        reminder: '熱門時段人潮多，請預留排隊時間。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['春水堂 DIY', '春水堂DIY'], type: 'restaurant', displayName: '春水堂 DIY',
+        description: '可安排茶飲與手作體驗，感受台中茶文化。',
+        reminder: '體驗內容須依門市或預約安排。', budget: '依現場菜單', recommendations: '珍珠奶茶與當日手作體驗'
+    },
+    {
+        keywords: ['紙寮 DIY', '紙寮DIY'], type: 'place', displayName: '紙寮 DIY',
+        description: '認識紙張製作與紙藝手作，適合親子或團體體驗。',
+        reminder: '手作時間請依現場流程安排。', stayMinutes: 60, stayText: '45～60 分鐘'
+    },
+    {
+        keywords: ['散散木工房 DIY', '散散木工房DIY'], type: 'place', displayName: '散散木工房 DIY',
+        description: '以木作手作為主的體驗行程，可留下專屬旅行紀念。',
+        reminder: '作品完成時間依體驗內容而定。', stayMinutes: 60, stayText: '45～60 分鐘'
+    },
+    {
+        keywords: ['18度 C 巧克力', '18度C巧克力', '18度 C'], type: 'place', displayName: '18度 C 巧克力工房',
+        description: '埔里知名巧克力與甜點景點，適合品嘗甜點及選購伴手禮。',
+        reminder: '假日人潮較多，請注意集合時間。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['麗寶樂園', '麗寶'], type: 'place', displayName: '麗寶樂園',
+        description: '結合主題樂園與休閒設施的大型園區，適合安排半日以上遊玩。',
+        reminder: '設施開放與排隊時間依當日公告。', stayMinutes: 300, stayText: '4～5 小時'
+    },
+    {
+        keywords: ['日月潭纜車'], type: 'place', displayName: '日月潭纜車',
+        description: '從空中欣賞日月潭湖光山色，串聯日月潭與九族文化村。',
+        reminder: '請留意纜車營運時間與天候。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['今夜星辰農場'], type: 'place', displayName: '今夜星辰農場',
+        description: '可安排農場散步、拍照與親近自然的輕鬆行程。',
+        reminder: '戶外區域請依天候調整。', stayMinutes: 60, stayText: '約 60 分鐘'
+    },
+    {
+        keywords: ['塔洛灣雞仔午餐'], type: 'restaurant', displayName: '塔洛灣雞仔午餐',
+        description: '安排山區行程中的午餐與休息，餐點依現場菜單供應。',
+        reminder: '用餐時間請依當日行程彈性調整。', stayMinutes: 60, stayText: '約 60 分鐘', budget: '依現場菜單', recommendations: '依旅客口味與當日菜單安排'
+    },
+    {
+        keywords: ['青青草原'], type: 'place', displayName: '清境青青草原',
+        description: '清境代表性高山草原景點，可欣賞山景並觀賞綿羊活動。',
+        reminder: '海拔較高，請備保暖衣物並注意防寒。', stayMinutes: 90, stayText: '60～90 分鐘'
+    },
+    {
+        keywords: ['觀山牧場'], type: 'place', displayName: '觀山牧場',
+        description: '安排山景、牧場風光與短暫休息的行程節點。',
+        reminder: '海拔較高，請備保暖衣物並注意防寒。', stayMinutes: 60, stayText: '約 60 分鐘'
+    },
+    {
+        keywords: ['小瑞士花園'], type: 'place', displayName: '清境小瑞士花園',
+        description: '以歐式花園與山景為特色，適合散步與拍照。',
+        reminder: '戶外步行較多，請穿好走的鞋。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['老英格蘭拍照', '老英格蘭'], type: 'place', displayName: '老英格蘭莊園',
+        description: '歐式建築外觀與高山景色是清境熱門拍照地點。',
+        reminder: '以外觀拍照為主，請尊重住宿旅客。', stayMinutes: 30, stayText: '20～30 分鐘'
+    },
+    {
+        keywords: ['中社花市'], type: 'place', displayName: '中社花市',
+        description: '以季節花海與庭園造景聞名，適合拍照與輕鬆散步。',
+        reminder: '花況依季節變動，請以現場公告為準。', stayMinutes: 60, stayText: '約 60 分鐘'
+    },
+    {
+        keywords: ['春田窯甕仔雞午餐', '春田窯'], type: 'restaurant', displayName: '春田窯甕仔雞',
+        description: '安排客家風味午餐與休息，適合團體共享料理。',
+        reminder: '建議事先確認訂位與出餐時間。', stayMinutes: 60, stayText: '約 60 分鐘', budget: '依現場菜單', recommendations: '甕仔雞與客家風味料理'
+    },
+    {
+        keywords: ['陶窯 DIY', '陶窯DIY'], type: 'place', displayName: '陶窯 DIY',
+        description: '體驗陶藝手作與在地工藝，為旅程留下紀念。',
+        reminder: '作品燒製與取件方式依現場規定。', stayMinutes: 60, stayText: '45～60 分鐘'
+    },
+    {
+        keywords: ['大湖草莓文化館', '大湖草莓博物館'], type: 'place', displayName: '大湖草莓文化館',
+        description: '認識大湖草莓產業與相關特色商品，適合短暫參觀。',
+        reminder: '草莓相關商品與活動依季節供應。', stayMinutes: 30, stayText: '20～30 分鐘'
+    },
+    {
+        keywords: ['採草莓'], type: 'place', displayName: '大湖採草莓',
+        description: '親自體驗採果樂趣，感受大湖草莓產地風情。',
+        reminder: '採果季與價格依農園及當日產量為準。', stayMinutes: 45, stayText: '30～45 分鐘'
+    },
+    {
+        keywords: ['巧克力雲莊 DIY', '巧克力雲莊DIY', '巧克力雲莊'], type: 'place', displayName: '巧克力雲莊',
+        description: '以巧克力主題結合山林環境，可安排甜點、拍照與手作體驗。',
+        reminder: 'DIY 項目與時間請依現場安排。', stayMinutes: 60, stayText: '約 60 分鐘'
+    }
+];
+
+function getTravelProfile(entry) {
+    const profiles = [...travelLibrary, ...templateData.customTravelProfiles];
+    return profiles.find((profile) => profile.keywords.some((keyword) => entry.includes(keyword))) || null;
+}
+
+// 時間軸計算工具：僅供未來生成器使用，不改變客戶頁面的外觀。
+function timeToMinutes(time) {
+    const [hours, minutes] = String(time).split(':').map(Number);
+    return (hours * 60) + minutes;
+}
+
+function minutesToTime(totalMinutes) {
+    const normalized = ((totalMinutes % 1440) + 1440) % 1440;
+    return `${String(Math.floor(normalized / 60)).padStart(2, '0')}:${String(normalized % 60).padStart(2, '0')}`;
+}
+
+function calculateDailyTimeline(dayNumber) {
+    const timeline = templateData.dailyTimelines[dayNumber];
+    if (!timeline || !Array.isArray(timeline.stops) || timeline.stops.length === 0) {
+        return { complete: false, finishTime: null, withinLimit: null, missing: ['stops'] };
+    }
+
+    let currentMinutes = timeToMinutes(timeline.startTime || templateData.timelinePolicy.dailyStartTime);
+    const missing = [];
+    for (const [index, stop] of timeline.stops.entries()) {
+        if (!Number.isFinite(stop.driveMinutes) || !Number.isFinite(stop.stayMinutes)) {
+            missing.push(`day${dayNumber}.stops[${index}]`);
+            continue;
+        }
+        currentMinutes += stop.driveMinutes + stop.stayMinutes;
+    }
+
+    if (missing.length > 0) {
+        return { complete: false, finishTime: null, withinLimit: null, missing };
+    }
+
+    const finishTime = minutesToTime(currentMinutes);
+    const latestRecommendedMinutes = timeToMinutes(templateData.timelinePolicy.dailyEndTime) - templateData.timelinePolicy.bufferMinutes;
+    return {
+        complete: true,
+        finishTime,
+        withinLimit: currentMinutes <= timeToMinutes(templateData.timelinePolicy.dailyEndTime),
+        withinRecommendedBuffer: currentMinutes <= latestRecommendedMinutes,
+        missing: []
+    };
+}
+
+function validateTripTimeline() {
+    const validation = {};
+    for (let dayNumber = 1; dayNumber <= templateData.normalizedDays; dayNumber += 1) {
+        validation[dayNumber] = calculateDailyTimeline(dayNumber);
+    }
+    return validation;
+}
+
+// 行程資料匯入入口：供未來「貼上行程表 → 自動生成」流程使用。
+// 客戶頁面不會顯示此設定；只需提供有內容的欄位即可。
+function importTripData(input) {
+    if (!input || typeof input !== 'object') return { applied: false, reason: 'invalid-input' };
+
+    const editableFields = ['customerName', 'customerParty', 'contactPhone', 'tripDays', 'startDate'];
+    editableFields.forEach((field) => {
+        if (input[field] !== undefined) templateData[field] = input[field];
+    });
+
+    if (input.airportTransfer && typeof input.airportTransfer === 'object') {
+        ['pickup', 'dropoff'].forEach((type) => {
+            if (input.airportTransfer[type]) {
+                templateData.airportTransfer[type] = { ...templateData.airportTransfer[type], ...input.airportTransfer[type] };
+            }
+        });
+    }
+
+    if (input.dailyTimelines && typeof input.dailyTimelines === 'object') {
+        const cleanTimelines = {};
+        for (let day = 1; day <= 10; day += 1) {
+            cleanTimelines[day] = { startTime: templateData.timelinePolicy.dailyStartTime, stops: [] };
+        }
+        Object.entries(input.dailyTimelines).forEach(([dayNumber, timeline]) => {
+            const day = Number(dayNumber);
+            if (day >= 1 && day <= 10 && timeline && typeof timeline === 'object') {
+                cleanTimelines[day] = { ...cleanTimelines[day], ...timeline };
+            }
+        });
+        templateData.dailyTimelines = cleanTimelines;
+    }
+
+    if (input.dailyItinerary && typeof input.dailyItinerary === 'object') {
+        templateData.dailyItinerary = { ...input.dailyItinerary };
+    }
+
+    if (input.dailyBudgets && typeof input.dailyBudgets === 'object') {
+        templateData.dailyBudgets = { ...input.dailyBudgets };
+    }
+
+    templateData.customTravelProfiles = [];
+    if (Array.isArray(input.travelProfiles)) {
+        input.travelProfiles.forEach((profile) => {
+            if (!profile || !profile.displayName || !Array.isArray(profile.keywords)) return;
+            const exists = templateData.customTravelProfiles.some((item) => item.displayName === profile.displayName);
+            if (!exists) templateData.customTravelProfiles.push(profile);
+        });
+    }
+
+    applyTemplateData();
+    renderImportedItinerary();
+    updateBudgetSummary();
+    return { applied: true, timeline: validateTripTimeline(), libraryDraft: buildTravelLibraryDraft() };
+}
+
+// 純文字行程解析器：可讀取旅行社常見的「欄位：內容」格式。
+// 解析後再交給 importTripData() 套用；不會在客戶頁面顯示任何操作介面。
+function stripListMarker(value) {
+    return String(value || '').trim().replace(/^(?:[•・-]\s*|\d+[.)、]\s*)/, '');
+}
+
+function parseTripText(rawText) {
+    const text = String(rawText || '').replace(/\r/g, '');
+    const readField = (labels) => {
+        const labelPattern = labels.map((label) => label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+        const match = text.match(new RegExp(`(?:${labelPattern})\\s*[：:]\\s*([^\\n]+)`, 'i'));
+        return match ? match[1].trim() : '';
+    };
+
+    const customerParty = readField(['預約代表', '代表', '旅客姓名']);
+    const contactPhone = readField(['聯絡電話', '電話', '手機']);
+    const durationMatch = text.match(/(\d+)\s*天\s*(\d+)\s*夜/);
+    const dateMatch = text.match(/(20\d{2})[\/.\-](\d{1,2})[\/.\-](\d{1,2})/);
+    const result = {};
+
+    if (customerParty) {
+        result.customerParty = customerParty;
+        result.customerName = customerParty.replace(/\s*(等共|共)\s*\d+\s*人.*$/, '').trim();
+    }
+    if (contactPhone) result.contactPhone = contactPhone;
+    if (durationMatch) result.tripDays = Number(durationMatch[1]);
+    if (dateMatch) {
+        const [, year, month, day] = dateMatch;
+        result.startDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+
+    const dayStartTimes = {};
+    const dailyItinerary = {};
+    const dailyBudgets = {};
+    const parseDriveMinutes = (line) => {
+        const hours = Number((line.match(/(\d+)\s*小時/) || [])[1] || 0);
+        const minutes = Number((line.match(/(\d+)\s*分鐘/) || [])[1] || 0);
+        return (hours * 60) + minutes;
+    };
+    const normalizeItineraryEntry = (line) => {
+        const value = stripListMarker(line);
+        if (!value || /^(?:💡\s*)?(?:貼心\s*)?提醒|^(備註|注意事項|(?:🚗\s*)?行車時間)/.test(value) || /^(?:[｜|]\s*)?\d{1,4}[\/-]\d{1,2}(?:[\/-]\d{1,2})?(?:\s*[（(].*[）)])?$/.test(value)) return '';
+        const labeled = value.match(/^(?:集合地點|出發起點|入住旅店|住宿|景點|早餐|午餐|晚餐)\s*[：:]\s*(.+)$/);
+        return labeled ? labeled[1].trim() : value;
+    };
+    const dayPattern = /(?:Day\s*|第\s*)(\d+)(?:\s*天)?([\s\S]*?)(?=(?:Day\s*|第\s*)\d+(?:\s*天)?|$)/gi;
+    let dayMatch;
+    while ((dayMatch = dayPattern.exec(text)) !== null) {
+        const dayNumber = Number(dayMatch[1]);
+        const startMatch = dayMatch[2].match(/(\d{1,2}:\d{2})\s*(?:出發|集合)/);
+        if (dayNumber >= 1 && dayNumber <= 10) {
+            if (startMatch) dayStartTimes[dayNumber] = { startTime: startMatch[1], stops: [] };
+
+            const entries = [];
+            const items = [];
+            const meta = {};
+            dayMatch[2].split('\n').forEach((rawLine) => {
+                const line = rawLine.trim();
+                if (!line || /^(\d{1,2}:\d{2})\s*(出發|集合)/.test(line)) return;
+                const locationMatch = line.match(/^(集合地點|出發起點)\s*[：:]\s*(.+)$/);
+                if (locationMatch) {
+                    meta.locationLabel = locationMatch[1];
+                    meta.location = locationMatch[2].trim();
+                    return;
+                }
+                const budgetMatch = line.match(/^車資\s*[：:]?\s*([\d,]+)\s*元?/);
+                if (budgetMatch) {
+                    dailyBudgets[dayNumber] = Number(budgetMatch[1].replace(/,/g, ''));
+                    return;
+                }
+                if (/^(?:🚗\s*)?行車時間/.test(line)) {
+                    items.push({ type: 'drive', text: line, minutes: parseDriveMinutes(line) });
+                    return;
+                }
+                const stayMatch = line.match(/^(?:⏳\s*)?停留(?:時間)?\s*(?:[：:]\s*)?(?:約\s*)?(.+)$/);
+                if (stayMatch) {
+                    const lastPlace = [...items].reverse().find((item) => item.type === 'place');
+                    if (lastPlace) {
+                        if (/(飯店|旅店|住宿|民宿|酒店)/.test(lastPlace.name)) return;
+                        lastPlace.stayMinutes = parseDriveMinutes(stayMatch[1]);
+                        lastPlace.stayText = stayMatch[1].trim();
+                    }
+                    return;
+                }
+                const reminderMatch = line.match(/^(?:💡\s*)?(?:貼心\s*)?提醒\s*[：:]?\s*(.+)$/);
+                if (reminderMatch) {
+                    const lastPlace = [...items].reverse().find((item) => item.type === 'place');
+                    if (lastPlace) lastPlace.reminder = reminderMatch[1].trim();
+                    else items.push({ type: 'note', text: reminderMatch[1].trim() });
+                    return;
+                }
+                if (/^(備註|注意事項)/.test(line)) {
+                    items.push({ type: 'note', text: line.replace(/^(備註|提醒|注意事項)\s*[：:]?\s*/, '') });
+                    return;
+                }
+                const entry = normalizeItineraryEntry(line);
+                if (!entry) return;
+                entries.push(entry);
+                items.push({ type: 'place', name: entry });
+            });
+            dailyItinerary[dayNumber] = { entries, items, meta };
+        }
+    }
+    // 未填「出發起點」時，預設承接前一天最後一個住宿點。
+    Object.keys(dailyItinerary).map(Number).sort((a, b) => a - b).forEach((dayNumber) => {
+        if (dayNumber <= 1 || dailyItinerary[dayNumber].meta?.location) return;
+        const previousItems = dailyItinerary[dayNumber - 1]?.items || [];
+        const previousHotel = [...previousItems].reverse().find((item) => item.type === 'place' && /(飯店|旅店|住宿|民宿|酒店)/.test(item.name));
+        if (previousHotel) {
+            dailyItinerary[dayNumber].meta.locationLabel = '出發起點';
+            dailyItinerary[dayNumber].meta.location = previousHotel.name;
+        }
+    });
+    if (Object.keys(dayStartTimes).length > 0) result.dailyTimelines = dayStartTimes;
+    if (Object.keys(dailyItinerary).length > 0) result.dailyItinerary = dailyItinerary;
+    result.dailyBudgets = dailyBudgets;
+    return result;
+}
+
+function importTripText(rawText) {
+    return importTripData(parseTripText(rawText));
+}
+
+function setGeneratorMode() {
+    const panel = document.getElementById('generator-panel');
+    if (!panel) return;
+    panel.hidden = false;
+}
+
+function applyGeneratorInput() {
+    const input = document.getElementById('generator-input');
+    const status = document.getElementById('generator-status');
+    const rawText = input.value.trim();
+    if (!rawText) {
+        status.textContent = '請先貼上行程內容。';
+        return;
+    }
+
+    const result = importTripText(rawText);
+    const summary = getGeneratorSummary();
+    const pending = result.libraryDraft ? result.libraryDraft.length : 0;
+    const routeCount = renderRouteQueue();
+    renderDailyFinishEstimate();
+    status.textContent = `已讀取 ${summary.days} 天、${summary.entries} 個行程項目、${routeCount} 段路線。${pending > 0 ? `另有 ${pending} 個新景點／餐廳待補資料。` : '所有已辨識景點／餐廳均有資料。'}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buildRouteSegments() {
+    const segments = [];
+    Object.entries(templateData.dailyItinerary).forEach(([dayNumber, itinerary]) => {
+        const items = Array.isArray(itinerary.items)
+            ? itinerary.items
+            : (itinerary.entries || []).filter(Boolean).map((name) => ({ type: 'place', name }));
+        let previousPlace = null;
+        let driveAfterPrevious = null;
+        items.forEach((item) => {
+            if (item.type === 'drive' && previousPlace) {
+                driveAfterPrevious = item;
+                return;
+            }
+            if (item.type !== 'place') return;
+            if (previousPlace) {
+                segments.push({
+                    day: Number(dayNumber),
+                    from: previousPlace.name,
+                    to: item.name,
+                    drive: driveAfterPrevious,
+                    complete: Boolean(driveAfterPrevious && driveAfterPrevious.minutes > 0)
+                });
+            }
+            previousPlace = item;
+            driveAfterPrevious = null;
+        });
+    });
+    return segments;
+}
+
+function renderRouteQueue() {
+    const queue = document.getElementById('route-queue');
+    const list = document.getElementById('route-queue-list');
+    const summary = document.getElementById('route-queue-summary');
+    const segments = buildRouteSegments();
+    list.replaceChildren();
+    segments.forEach((segment) => {
+        const item = document.createElement('li');
+        item.textContent = `Day ${segment.day}：${segment.from} → ${segment.to}${segment.complete ? ` ・✓ ${segment.drive.text}` : ' ・待查車程'}`;
+        list.appendChild(item);
+    });
+    const completed = segments.filter((segment) => segment.complete).length;
+    summary.textContent = segments.length > 0
+        ? `車程完成度：${completed}／${segments.length} 段${completed === segments.length ? '，可下載客戶版。' : '；請查詢並套用其餘路段。'}`
+        : '';
+    queue.hidden = segments.length === 0;
+    return segments.length;
+}
+
+function getEstimatedStayMinutes(entry, explicitMinutes) {
+    if (Number.isFinite(explicitMinutes) && explicitMinutes > 0) return explicitMinutes;
+    if (/(飯店|旅店|住宿|民宿|酒店)/.test(entry)) return 20;
+    if (/(機場|接機|送機|航班)/.test(entry)) return 30;
+    if (isRestaurantEntry(entry)) return 75;
+    return 60;
+}
+
+function buildEstimatedTimelines() {
+    const timelines = {};
+    Object.entries(templateData.dailyItinerary).forEach(([dayNumber, itinerary]) => {
+        const items = Array.isArray(itinerary.items)
+            ? itinerary.items
+            : (itinerary.entries || []).filter(Boolean).map((name) => ({ type: 'place', name }));
+        let nextDrive = 0;
+        const stops = [];
+        items.forEach((item) => {
+            if (item.type === 'drive') {
+                nextDrive = Number.isFinite(item.minutes) && item.minutes > 0 ? item.minutes : NaN;
+                return;
+            }
+            if (item.type !== 'place') return;
+            stops.push({ driveMinutes: nextDrive, stayMinutes: getEstimatedStayMinutes(item.name, item.stayMinutes) });
+            nextDrive = NaN;
+        });
+        timelines[dayNumber] = {
+            startTime: (templateData.dailyTimelines[dayNumber] || {}).startTime || templateData.timelinePolicy.dailyStartTime,
+            stops
+        };
+    });
+    templateData.dailyTimelines = { ...templateData.dailyTimelines, ...timelines };
+}
+
+function renderDailyFinishEstimate() {
+    const panel = document.getElementById('daily-finish-estimate');
+    const list = document.getElementById('daily-finish-estimate-list');
+    buildEstimatedTimelines();
+    const days = Object.keys(templateData.dailyItinerary).filter((day) => (templateData.dailyItinerary[day].entries || []).length > 0);
+    list.replaceChildren();
+    days.forEach((day) => {
+        const result = validateDayTimeline(Number(day));
+        const item = document.createElement('li');
+        if (!result.complete) {
+            item.textContent = `Day ${day}：尚缺 ${result.missing.length} 段行車時間，完成後才能試算。`;
+            item.className = 'text-amber-700 font-bold';
+        } else if (result.withinRecommendedBuffer) {
+            item.textContent = `Day ${day}：預估 ${result.finishTime} 結束 ✓`;
+            item.className = 'text-emerald-700 font-bold';
+        } else if (result.withinLimit) {
+            item.textContent = `Day ${day}：預估 ${result.finishTime} 結束，接近 18:30。`;
+            item.className = 'text-amber-700 font-bold';
+        } else {
+            item.textContent = `Day ${day}：預估 ${result.finishTime} 結束，超過 18:30，建議調整。`;
+            item.className = 'text-red-700 font-bold';
+        }
+        list.appendChild(item);
+    });
+    panel.hidden = days.length === 0;
+}
+
+async function copyRouteQueue() {
+    const segments = buildRouteSegments();
+    const routes = segments.map((segment) => `Day ${segment.day}：${segment.from} → ${segment.to}`).join('\n');
+    const text = `請查詢以下台灣包車路段的約略行車時間（不需即時路況）。請只用「Day N：景點 A → 景點 B｜約 X 分鐘」的格式逐行回覆，讓我可以直接貼回內部行程生成器。\n\n${routes}`;
+    const status = document.getElementById('generator-status');
+    if (!text) {
+        status.textContent = '目前沒有可複製的路段。';
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(text);
+    } catch (error) {
+        const helper = document.createElement('textarea');
+        helper.value = text;
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+    }
+    status.textContent = '已複製查詢文字，可直接貼到 ChatGPT；回覆結果可整段貼回下方自動套用。';
+}
+
+function parseDriveDuration(value) {
+    const text = String(value || '');
+    const hours = Number((text.match(/(\d+)\s*小時/) || [])[1] || 0);
+    const minutes = Number((text.match(/(\d+)\s*分鐘/) || [])[1] || 0);
+    return { text: hours > 0 && minutes > 0 ? `${hours} 小時 ${minutes} 分鐘` : hours > 0 ? `${hours} 小時` : minutes > 0 ? `${minutes} 分鐘` : '', minutes: (hours * 60) + minutes };
+}
+
+function applyDriveTimes() {
+    const input = document.getElementById('drive-time-input');
+    const status = document.getElementById('generator-status');
+    const lines = input.value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+    const driveMap = new Map();
+
+    lines.forEach((line) => {
+        const match = line.match(/^\s*(?:Day\s*|第\s*)(\d+)\s*(?:天)?\s*[：:]\s*(.+?)\s*→\s*(.+?)\s*(?:[｜|]\s*)?(?:行車時間)?(?:約)?\s*(\d+\s*小時(?:\s*\d+\s*分鐘)?|\d+\s*分鐘)\s*$/i);
+        if (!match) return;
+        const [, day, from, to, duration] = match;
+        const parsed = parseDriveDuration(duration);
+        if (parsed.minutes > 0) driveMap.set(`${Number(day)}|${from.trim()}|${to.trim()}`, parsed);
+    });
+
+    if (driveMap.size === 0) {
+        status.textContent = '找不到可套用的行車時間。請確認格式為「Day 1：景點 A → 景點 B｜約 45 分鐘」。';
+        return;
+    }
+
+    let applied = 0;
+    Object.entries(templateData.dailyItinerary).forEach(([dayNumber, itinerary]) => {
+        const baseItems = (Array.isArray(itinerary.items) ? itinerary.items : (itinerary.entries || []).map((name) => ({ type: 'place', name })))
+            .filter((item) => item.type !== 'drive');
+        const rebuilt = [];
+        baseItems.forEach((item, index) => {
+            rebuilt.push(item);
+            if (item.type !== 'place') return;
+            const nextPlace = baseItems.slice(index + 1).find((candidate) => candidate.type === 'place');
+            if (!nextPlace) return;
+            const drive = driveMap.get(`${Number(dayNumber)}|${item.name}|${nextPlace.name}`);
+            if (!drive) return;
+            rebuilt.push({ type: 'drive', text: `行車時間約 ${drive.text}`, minutes: drive.minutes });
+            applied += 1;
+        });
+        itinerary.items = rebuilt;
+    });
+
+    renderImportedItinerary();
+    renderRouteQueue();
+    renderDailyFinishEstimate();
+    status.textContent = applied > 0 ? `已自動套用 ${applied} 段行車時間，可確認預覽後下載客戶版。` : '沒有找到相符的景點路段，請確認名稱與「待查詢路段」一致。';
+}
+
+function getGeneratorSummary() {
+    const days = Object.values(templateData.dailyItinerary)
+        .filter((itinerary) => Array.isArray(itinerary.entries) && itinerary.entries.length > 0);
+    return {
+        days: days.length,
+        entries: days.reduce((total, itinerary) => total + itinerary.entries.length, 0)
+    };
+}
+
+function restartGenerator() {
+    window.location.reload();
+}
+
+function getExportTripData() {
+    return {
+        customerName: templateData.customerName,
+        customerParty: templateData.customerParty,
+        contactPhone: templateData.contactPhone,
+        tripDays: templateData.tripDays,
+        startDate: templateData.startDate,
+        airportTransfer: templateData.airportTransfer,
+        dailyTimelines: templateData.dailyTimelines,
+        dailyItinerary: templateData.dailyItinerary,
+        dailyBudgets: templateData.dailyBudgets,
+        travelProfiles: templateData.customTravelProfiles
+    };
+}
+
+function downloadBlob(content, type, filename) {
+    const file = new Blob([content], { type });
+    const url = URL.createObjectURL(file);
+    const download = document.createElement('a');
+    download.href = url;
+    download.download = filename;
+    document.body.appendChild(download);
+    download.click();
+    download.remove();
+    URL.revokeObjectURL(url);
+}
+
+function getCaseFilename() {
+    const caseId = document.getElementById('case-id').value.trim().replace(/[\\/:*?"<>|]/g, '_');
+    const customerName = String(templateData.customerName || '未命名客戶').replace(/[\\/:*?"<>|]/g, '_');
+    return `${caseId ? `${caseId}_` : ''}${customerName}.json`;
+}
+
+function getCustomerPageFilename() {
+    const caseId = document.getElementById('case-id').value.trim().replace(/[\\/:*?"<>|]/g, '_');
+    return caseId ? `${caseId}.html` : 'index.html';
+}
+
+function saveCaseFile() {
+    const status = document.getElementById('generator-status');
+    const summary = getGeneratorSummary();
+    if (summary.days === 0) {
+        status.textContent = '請先貼上行程並按「套用並預覽」，再保存案件。';
+        return;
+    }
+    const payload = {
+        format: 'YuanXiangGuPremiumCase',
+        version: 1,
+        savedAt: new Date().toISOString(),
+        caseId: document.getElementById('case-id').value.trim(),
+        rawItinerary: document.getElementById('generator-input').value,
+        data: getExportTripData()
+    };
+    downloadBlob(JSON.stringify(payload, null, 2), 'application/json;charset=utf-8', getCaseFilename());
+    status.textContent = `案件已保存為 ${getCaseFilename()}。`;
+}
+
+function loadCaseFile(event) {
+    const status = document.getElementById('generator-status');
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+        try {
+            const payload = JSON.parse(reader.result);
+            if (!payload || payload.format !== 'YuanXiangGuPremiumCase' || !payload.data) throw new Error('format');
+            importTripData(payload.data);
+            document.getElementById('case-id').value = payload.caseId || '';
+            document.getElementById('generator-input').value = payload.rawItinerary || '';
+            renderRouteQueue();
+            renderDailyFinishEstimate();
+            status.textContent = `已重新開啟案件：${file.name}`;
+        } catch (error) {
+            status.textContent = '無法讀取此案件檔案，請確認您選的是本生成器保存的 .json 檔。';
+        } finally {
+            event.target.value = '';
+        }
+    };
+    reader.readAsText(file, 'utf-8');
+}
+
+function downloadCustomerPage() {
+    const status = document.getElementById('generator-status');
+    const summary = getGeneratorSummary();
+    if (summary.days === 0) {
+        status.textContent = '請先貼上行程並按「套用並預覽」，確認讀取成功後再下載。';
+        return;
+    }
+    const exportedDocument = document.documentElement.cloneNode(true);
+    const generatorPanel = exportedDocument.querySelector('#generator-panel');
+    if (generatorPanel) generatorPanel.remove();
+
+    const initialData = document.createElement('script');
+    const serializedData = JSON.stringify(getExportTripData()).replace(/</g, '\\u003c');
+    initialData.textContent = `window.__initialTripData = ${serializedData};`;
+    exportedDocument.querySelector('head').appendChild(initialData);
+
+    const outputHtml = `<!DOCTYPE html>\n${exportedDocument.outerHTML}`;
+    const customerFilename = getCustomerPageFilename();
+    downloadBlob(outputHtml, 'text/html;charset=utf-8', customerFilename);
+    status.textContent = `客戶版 ${customerFilename} 已下載，可直接上傳 GitHub。`;
+}
+
+// 找出尚未收錄的新名稱，供建立正式資料庫時補齊資訊。
+function buildTravelLibraryDraft() {
+    const unknown = new Map();
+    Object.values(templateData.dailyItinerary).forEach((itinerary) => {
+        (itinerary.entries || []).forEach((entry) => {
+            const name = stripListMarker(entry);
+            if (!name || getTravelProfile(name) || unknown.has(name)) return;
+            unknown.set(name, {
+                displayName: name,
+                type: isRestaurantEntry(name) ? 'restaurant' : 'place',
+                requiredFields: isRestaurantEntry(name)
+                    ? ['keywords', 'mapsUrl', 'menuUrl', 'budget', 'recommendations']
+                    : ['keywords', 'mapsUrl']
+            });
+        });
+    });
+    return [...unknown.values()];
+}
+
+// 將已解析的行程文字轉成既有的精品卡片。僅在匯入新行程後執行；
+// 目前範例頁面不會因為此功能而改變。
+function itineraryEntryIcon(entry) {
+    if (/(餐|麵|飯|食|咖啡|茶|午餐|晚餐)/.test(entry)) return '🍽️';
+    if (/(飯店|旅店|住宿|民宿|酒店)/.test(entry)) return '🏨';
+    if (/(機場|接機|送機|航班)/.test(entry)) return '✈️';
+    return '📍';
+}
+
+// 資料庫尚未建檔時，也保留簡潔說明，避免客戶版出現空白卡片。
+function getFallbackDescription(entry, isRestaurant) {
+    if (/(機場|接機|送機|航班)/.test(entry)) return '辦理接送與行李確認，實際時間將依航班與現場狀況調整。';
+    if (/(飯店|旅店|住宿|民宿|酒店)/.test(entry)) return '安排入住或休息，實際時間依飯店作業與當日行程調整。';
+    if (isRestaurant) return '安排用餐與短暫休息，可依旅客口味及現場候位狀況彈性調整。';
+    return '建議依現場狀況與旅客步調彈性安排，保留舒適的拍照與休息時間。';
+}
+
+function isRestaurantEntry(entry) {
+    return /(餐|麵|飯|食|咖啡|茶|午餐|晚餐|小吃|火鍋|燒肉)/.test(entry);
+}
+
+function createGeneratedAction(label, href, colorClass) {
+    const action = document.createElement('a');
+    action.className = `${colorClass} premium-button`;
+    action.href = href;
+    action.target = '_blank';
+    action.rel = 'noopener noreferrer';
+    action.textContent = label;
+    return action;
+}
+
+function buildGoogleRouteUrl(entries) {
+    if (!Array.isArray(entries) || entries.length < 2) return '';
+    const origin = encodeURIComponent(entries[0]);
+    const destination = encodeURIComponent(entries[entries.length - 1]);
+    const waypoints = entries.slice(1, -1).map((entry) => encodeURIComponent(entry)).join('%7C');
+    return `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypoints ? `&waypoints=${waypoints}` : ''}&travelmode=driving`;
+}
+
+function updateBudgetSummary() {
+    const card = document.getElementById('budget-card');
+    const hasImportedItinerary = Object.keys(templateData.dailyItinerary || {}).length > 0;
+    if (!hasImportedItinerary) {
+        card.hidden = true;
+        return;
+    }
+
+    const amounts = Object.values(templateData.dailyBudgets || {})
+        .map(Number)
+        .filter((value) => Number.isFinite(value) && value > 0);
+    if (amounts.length === 0) {
+        card.hidden = true;
+        return;
+    }
+
+    const total = amounts.reduce((sum, amount) => sum + amount, 0);
+    card.hidden = false;
+    document.getElementById('budget-trip-label').textContent = `${templateData.normalizedDays}天包車總計：`;
+    document.getElementById('budget-trip-value').textContent = `NT$ ${total.toLocaleString('zh-TW')}`;
+    document.getElementById('budget-booking-row').hidden = true;
+    document.getElementById('budget-booking-note').hidden = true;
+    document.getElementById('lbl-total-price').textContent = `總金額：${total.toLocaleString('zh-TW')} 元`;
+}
+
+function renderImportedItinerary() {
+    Object.entries(templateData.dailyItinerary).forEach(([dayNumber, itinerary]) => {
+        const entries = Array.isArray(itinerary.entries) ? itinerary.entries : [];
+        if (entries.length === 0) return;
+
+        const dayCard = document.querySelector(`[data-itinerary-day="${dayNumber}"]`);
+        if (!dayCard) return;
+
+        // 新案件一律清除範例卡中的舊文字、車資與行程，只保留日期標題的外觀。
+        const header = dayCard.firstElementChild;
+        dayCard.replaceChildren(header);
+        const dayTheme = header.querySelector('span');
+        if (dayTheme) dayTheme.textContent = itinerary.meta?.title || `第 ${dayNumber} 天行程`;
+
+        if (itinerary.meta?.location) {
+            const location = document.createElement('p');
+            location.className = 'text-xs text-zinc-700';
+            location.innerHTML = `<b>${itinerary.meta.locationLabel}：</b>`;
+            const value = document.createElement('strong');
+            value.textContent = itinerary.meta.location;
+            location.appendChild(value);
+            dayCard.appendChild(location);
+        }
+
+        const startTime = (templateData.dailyTimelines[dayNumber] || {}).startTime;
+        if (startTime) {
+            const departure = document.createElement('p');
+            departure.className = 'text-xs';
+            const badge = document.createElement('span');
+            badge.className = 'bg-red-500 text-white font-bold px-3 py-1 rounded-full text-[10px]';
+            badge.textContent = `${startTime} 出發`;
+            departure.appendChild(badge);
+            dayCard.appendChild(departure);
+        }
+
+        const routeUrl = buildGoogleRouteUrl(entries);
+        if (routeUrl) {
+            const routeArea = document.createElement('div');
+            routeArea.dataset.generatedRoute = 'true';
+            const routeButton = createGeneratedAction('🧭 查看當日完整路線', routeUrl, 'bg-sky-700/10 text-sky-900');
+            routeButton.classList.add('block', 'w-full');
+            routeArea.appendChild(routeButton);
+            dayCard.appendChild(routeArea);
+        }
+
+        const timeline = document.createElement('div');
+        timeline.className = 'timeline-stack pl-2 border-l-2 border-dashed border-zinc-400/30';
+        dayCard.appendChild(timeline);
+
+        const timelineItems = Array.isArray(itinerary.items)
+            ? itinerary.items
+            : entries.map((entry) => ({ type: 'place', name: entry }));
+
+        timeline.replaceChildren();
+        timelineItems.forEach((item) => {
+            if (item.type === 'drive') {
+                const driveTime = document.createElement('div');
+                driveTime.className = 'drive-time pl-4 border-l-2 border-dashed border-zinc-400/40 py-1';
+                driveTime.textContent = `🚗 ${item.text.replace(/^🚗\s*/, '')}`;
+                timeline.appendChild(driveTime);
+                return;
+            }
+
+            if (item.type === 'note') {
+                const note = document.createElement('p');
+                note.className = 'body-text font-bold text-rose-700 px-2';
+                note.textContent = `⚠️ ${item.text}`;
+                timeline.appendChild(note);
+                return;
+            }
+
+            const entry = item.name;
+            const placeName = stripListMarker(entry);
+            const profile = getTravelProfile(placeName);
+            const displayName = profile ? profile.displayName : placeName;
+            const restaurant = profile ? profile.type === 'restaurant' : isRestaurantEntry(placeName);
+            const card = document.createElement('div');
+            card.className = 'premium-place-card border border-zinc-900/5 content-stack';
+            const title = document.createElement('h4');
+            title.className = 'place-title';
+            title.textContent = `${itineraryEntryIcon(displayName)} ${displayName}`;
+            card.appendChild(title);
+
+            const stayMinutes = Number.isFinite(item.stayMinutes) && item.stayMinutes > 0 ? item.stayMinutes : profile?.stayMinutes;
+            const stayText = item.stayText || profile?.stayText;
+            if (Number.isFinite(stayMinutes) && stayMinutes > 0) {
+                const stay = document.createElement('span');
+                stay.className = 'bg-rose-500 text-white px-2 py-0.5 rounded-full inline-block text-[10px] font-bold w-fit';
+                stay.textContent = `⏳ 預計停留：約 ${stayText || `${stayMinutes} 分鐘`}`;
+                card.appendChild(stay);
+            }
+
+            const descriptionText = profile?.description || getFallbackDescription(displayName, restaurant);
+            if (descriptionText) {
+                const description = document.createElement('p');
+                description.className = 'body-text';
+                description.textContent = descriptionText;
+                card.appendChild(description);
+            }
+
+            const reminderText = profile?.reminder || item.reminder;
+            if (reminderText) {
+                const reminder = document.createElement('p');
+                reminder.className = 'warning-text';
+                reminder.textContent = `💡 貼心提醒：${reminderText}`;
+                card.appendChild(reminder);
+            }
+
+            if (profile?.type === 'restaurant') {
+                const info = document.createElement('section');
+                info.className = 'restaurant-info';
+                const meta = document.createElement('div');
+                meta.className = 'restaurant-info__meta';
+                const budget = document.createElement('span');
+                budget.className = 'restaurant-info__tag bg-amber-50 text-amber-800';
+                budget.textContent = `💰 ${profile.budget}`;
+                meta.appendChild(budget);
+                const recommendation = document.createElement('p');
+                recommendation.className = 'restaurant-info__recommendations';
+                recommendation.innerHTML = '<b>🔥 推薦：</b>';
+                recommendation.append(document.createTextNode(profile.recommendations));
+                info.append(meta, recommendation);
+                card.appendChild(info);
+            }
+
+            const actions = document.createElement('div');
+            actions.className = 'premium-action-grid';
+            const query = encodeURIComponent(displayName);
+            actions.appendChild(createGeneratedAction('🗺️ 導航', profile?.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${query}`, 'bg-emerald-800/10 text-emerald-900'));
+
+            if (restaurant) {
+                actions.appendChild(createGeneratedAction('📖 菜單', profile?.menuUrl || `https://www.google.com/search?q=${query}%20菜單`, 'bg-blue-500/10 text-blue-700'));
+                actions.appendChild(createGeneratedAction('⭐ 評價', profile?.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${query}`, 'bg-amber-500/10 text-amber-800'));
+                actions.appendChild(createGeneratedAction('🍽️ 附近美食', `https://www.google.com/search?q=${query}%20附近美食`, 'bg-orange-500/10 text-orange-700'));
+            } else {
+                actions.appendChild(createGeneratedAction('🔍 搜尋', `https://www.google.com/search?q=${query}`, 'bg-blue-500/10 text-blue-700'));
+            }
+
+            card.appendChild(actions);
+            timeline.appendChild(card);
+        });
+
+        const dailyBudget = Number(templateData.dailyBudgets[dayNumber]);
+        if (Number.isFinite(dailyBudget) && dailyBudget > 0) {
+            const footer = document.createElement('div');
+            footer.className = 'text-right border-t border-zinc-900/10 pt-2 text-xs font-bold text-zinc-700';
+            footer.textContent = `💰 本日車資：${dailyBudget.toLocaleString('zh-TW')} 元`;
+            dayCard.appendChild(footer);
+        }
+    });
+}
+
+function applyTemplateData() {
+    document.title = templateData.tripTitleZh;
+    document.querySelectorAll('[data-template-key]').forEach((element) => {
+        const key = element.dataset.templateKey;
+        if (templateData[key] !== undefined) element.textContent = templateData[key];
+    });
+
+    document.querySelectorAll('[data-itinerary-day], [data-itinerary-nav]').forEach((element) => {
+        const dayNumber = Number(element.dataset.itineraryDay || element.dataset.itineraryNav);
+        element.hidden = dayNumber > templateData.normalizedDays;
+    });
+
+    document.querySelectorAll('[data-airport-transfer]').forEach((card) => {
+        const type = card.dataset.airportTransfer;
+        card.hidden = !templateData.airportTransfer[type].enabled;
+    });
+
+    document.querySelectorAll('[data-airport-field]').forEach((element) => {
+        const [type, field] = element.dataset.airportField.split('.');
+        const value = templateData.airportTransfer[type][field];
+        element.textContent = value || '待填入';
+    });
+
+    const visibleDays = templateData.normalizedDays;
+    const navColumns = Math.min(visibleDays, 5);
+    document.getElementById('quick-nav-grid').style.gridTemplateColumns = `repeat(${navColumns}, minmax(0, 1fr))`;
+
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+    const firstDay = new Date(`${templateData.startDate}T00:00:00`);
+    document.querySelectorAll('[data-day-nav-label], [data-day-header]').forEach((element) => {
+        const dayNumber = Number(element.dataset.dayNavLabel || element.dataset.dayHeader);
+        const date = new Date(firstDay);
+        date.setDate(firstDay.getDate() + dayNumber - 1);
+        const monthDay = `${date.getMonth() + 1}/${date.getDate()}`;
+        element.textContent = element.dataset.dayNavLabel ? `${date.getMonth() + 1}月${date.getDate()}` : `📍 ${monthDay} (${weekDays[date.getDay()]})`;
+    });
+}
+
+if (window.__initialTripData) {
+    importTripData(window.__initialTripData);
+} else {
+    applyTemplateData();
+}
+setGeneratorMode();
+window.addEventListener('hashchange', setGeneratorMode);
+
+// 3. 多國語系與系統控制 (完全保留您原本的行程)
+// ==========================================
+let currentLang = 'zh-TW';
+const langDict = {
+'zh-TW': {
+tripTitle: templateData.tripTitleZh,
+lblReserve: '👤 預約乘車資訊',
+lblNav: '📅 行程快速跳轉',
+lblDriver: '🚕 專屬司機資訊',
+lblAmenity: '✨ 車輛貼心服務與設施',
+lblBudget: '💰 總車資與預算總覽',
+lblWeather: '⛅ 台灣 5 月下旬天氣與穿搭建議',
+d1: '5月26', d2: '5月27', d3: '5月28', d4: '5月29', d5: '5月30',
+toggleBtn: '🌐 EN'
+},
+'en': {
+tripTitle: templateData.tripTitleEn,
+lblReserve: '👤 Reservation Details',
+lblNav: '📅 Quick Navigation',
+lblDriver: '🚕 Private Driver Details',
+lblAmenity: '✨ Complimentary Amenities',
+lblBudget: '💰 Fleet Fare & Budget Overview',
+lblWeather: '⛅ Weather & Dressing Guidelines',
+d1: 'May 26', d2: 'May 27', d3: 'May 28', d4: 'May 29', d5: 'May 30',
+toggleBtn: '🌐 中文'
+}
+};
+
+// 監聽網頁滾動以動態隱藏/顯示返回頂部按鈕
+window.onscroll = function() {
+var btn = document.getElementById("backToTop");
+if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+btn.style.display = "block";
+} else {
+btn.style.display = "none";
+}
+};
+
+function toggleLanguage() {
+const btn = document.getElementById('langToggleBtn');
+currentLang = (currentLang === 'zh-TW') ? 'en' : 'zh-TW';
+btn.innerText = langDict[currentLang].toggleBtn;
+document.getElementById('trip-title').innerText = langDict[currentLang].tripTitle;
+document.getElementById('lbl-reserve').innerText = langDict[currentLang].lblReserve;
+document.getElementById('lbl-nav').innerText = langDict[currentLang].lblNav;
+document.getElementById('lbl-driver').innerText = langDict[currentLang].lblDriver;
+document.getElementById('lbl-amenity').innerText = langDict[currentLang].lblAmenity;
+document.getElementById('lbl-budget').innerText = langDict[currentLang].lblBudget;
+document.getElementById('lbl-weather').innerText = langDict[currentLang].lblWeather;
+document.getElementById('btn-d1').innerText = langDict[currentLang].d1;
+document.getElementById('btn-d2').innerText = langDict[currentLang].d2;
+document.getElementById('btn-d3').innerText = langDict[currentLang].d3;
+document.getElementById('btn-d4').innerText = langDict[currentLang].d4;
+document.getElementById('btn-d5').innerText = langDict[currentLang].d5;
+}
+</script>
+
+
+
+<div style="display:none;">https://tdb8053-bit.github.io/Trip2026/F1234謝彩芬.html</div>
+
+</body><!-- 隱藏專屬網址防呆防漏測試 --><div id="codex-browser-sidebar-comments-root" style="position: fixed; inset: 0px; pointer-events: none; z-index: 2147483647;"></div></html>
