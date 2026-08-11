@@ -1,0 +1,587 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="台灣包車精選行程與客製化旅遊參考。">
+  <title>精選包車行程｜台灣客製化旅遊</title>
+  <style>
+    :root{--ink:#17383d;--brand:#0b766d;--brand-deep:#075950;--mint:#e8f7f3;--line:#c9e4dd;--paper:#fffdfa;--sand:#fff6e9;--muted:#60787d;--red:#b43e37}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f8f7;color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}
+.wrap{max-width:1160px;margin:auto;padding:18px 18px 58px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:6px 0 22px}
+.brand{font-weight:900;font-size:1.07rem;letter-spacing:.04em}
+.brand small{display:block;color:var(--muted);font-weight:600;font-size:.75rem;letter-spacing:0}
+.nav{display:flex;flex-wrap:wrap;gap:13px}
+.nav a{color:var(--brand-deep);font-size:.88rem;font-weight:800;text-decoration:none}
+.hero{min-height:360px;border-radius:30px;padding:38px;display:flex;align-items:end;background:linear-gradient(0deg,rgba(2,42,45,.88),rgba(2,42,45,.08)),url("北海岸精選行程測試/images/北海岸主視覺.webp") center/cover;color:#fff;box-shadow:0 18px 40px rgba(15,87,80,.16)}
+.hero-inner{max-width:690px}
+.eyebrow{font-size:.86rem;font-weight:900;letter-spacing:.1em}
+.hero h1{font-size:clamp(2.05rem,5vw,3.45rem);line-height:1.15;margin:9px 0;text-shadow:0 2px 13px rgba(0,0,0,.32)}
+.hero p{margin:0;max-width:620px;font-size:1.04rem;text-shadow:0 1px 8px rgba(0,0,0,.32)}
+.hero .keep-line{white-space:nowrap}
+section{margin-top:52px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:17px}
+.section-head h2{font-size:1.5rem;margin:0}
+.section-head p{margin:0;color:var(--muted);font-size:.92rem;max-width:610px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 18px}
+.filter-button{min-height:36px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--brand-deep);font:inherit;font-size:.86rem;font-weight:900;cursor:pointer}
+.filter-button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.trip[hidden],.region-title[hidden]{display:none}
+.trip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.trip{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 26px rgba(15,118,110,.075)}
+.trip-image{min-height:166px;background:linear-gradient(0deg,rgba(5,53,54,.48),rgba(5,53,54,0)),url("北海岸精選行程測試/images/漁人碼頭示意圖.webp") center/cover;filter:saturate(.88) hue-rotate(6deg) brightness(1.16) contrast(.94)}
+.trip-image.jiufen{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("精選行程網站圖片/九份十分主視覺.webp")}
+.trip-image.yangmingshan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("精選行程網站圖片/陽明山主視覺.webp")}
+.trip-image.yilan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-02.webp")}
+.trip-image.tainan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-03.webp")}
+.trip-image.kaohsiung{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-04.webp")}
+.trip-body{padding:18px}
+.tag{display:inline-block;background:var(--mint);color:var(--brand-deep);padding:3px 9px;border-radius:999px;font-size:.78rem;font-weight:900}
+.trip h3{font-size:1.18rem;margin:10px 0 6px;line-height:1.35}
+.trip p{font-size:.91rem;color:var(--muted);margin:0}
+.trip-actions{display:flex;gap:9px;margin-top:16px}
+.button{display:inline-flex;justify-content:center;align-items:center;gap:6px;min-height:43px;border:1px solid var(--brand);border-radius:12px;padding:8px 13px;text-decoration:none;font:inherit;font-size:.9rem;font-weight:900;cursor:pointer}
+.button.primary{background:var(--brand);color:#fff}
+.button.secondary{background:#fff;color:var(--brand)}
+.custom{background:var(--paper);border:1px solid var(--line);border-radius:26px;padding:25px;box-shadow:0 12px 32px rgba(15,118,110,.07)}
+.custom-top{display:flex;justify-content:space-between;gap:16px;align-items:start}
+.custom h2{margin:0;font-size:1.55rem}
+.custom .lead{color:var(--muted);font-size:.93rem;margin:5px 0 0;max-width:690px}
+.count{white-space:nowrap;background:var(--mint);color:var(--brand-deep);font-size:.82rem;font-weight:900;padding:5px 10px;border-radius:999px}
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:20px 0}
+.choice{display:flex;align-items:center;gap:9px;padding:12px;border:1px solid var(--line);border-radius:13px;background:#fff;cursor:pointer;font-size:.93rem;font-weight:800;transition:.15s}
+.choice:hover{border-color:var(--brand)}
+.choice input{accent-color:var(--brand);width:17px;height:17px;flex:none}
+.choice.disabled{background:#f2f5f4;color:#94a3a5;cursor:not-allowed;text-decoration:line-through}
+.hint{margin:-6px 0 16px;color:var(--muted);font-size:.84rem}
+.request-label{display:block;font-weight:900;margin:15px 0 7px}
+.request{width:100%;min-height:92px;resize:vertical;border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit;font-size:.94rem;color:var(--ink);background:#fff}
+.request:focus{outline:3px solid #c8eee6;border-color:var(--brand)}
+.summary{margin-top:15px;padding:14px 15px;background:var(--mint);border-radius:14px;font-size:.92rem}
+.summary b{color:var(--brand-deep)}
+.custom-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.notice{font-size:.82rem;color:var(--muted);margin:12px 0 0}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.service{background:#fff;border:1px solid var(--line);border-radius:18px;padding:19px}
+.service .icon{font-size:1.55rem}
+.service h3{font-size:1.06rem;margin:6px 0}
+.service p{font-size:.91rem;color:var(--muted);margin:0}
+.vehicle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.vehicle{background:linear-gradient(145deg,#fff,#f3fbf9);border:1px solid var(--line);border-radius:18px;padding:20px}
+.vehicle b{font-size:1.08rem}
+.vehicle p{margin:7px 0 0;color:var(--muted);font-size:.9rem}
+.rules{display:grid;grid-template-columns:1.05fr .95fr;gap:17px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:21px}
+.panel h3{margin:0 0 9px;font-size:1.1rem}
+.panel ul{padding-left:1.25em;margin:0}
+.panel li{margin:7px 0;color:var(--muted);font-size:.91rem}
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.step{background:var(--sand);border:1px solid #f3dfbb;border-radius:18px;padding:20px}
+.step b{color:#966012;font-size:.84rem;letter-spacing:.05em}
+.step h3{font-size:1.07rem;margin:6px 0}
+.step p{margin:0;color:#705f47;font-size:.9rem}
+.faq{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px 15px}
+.faq summary{cursor:pointer;font-weight:900}
+.faq p{color:var(--muted);font-size:.9rem;margin:9px 0 1px}
+.footer{margin-top:52px;border-radius:25px;padding:29px;text-align:center;background:#dff3ee}
+.footer h2{margin:0 0 8px;font-size:1.45rem}
+.footer p{max-width:640px;margin:0 auto 16px;color:var(--muted);font-size:.92rem}
+.status{min-height:1.5em;margin:12px 0 0;color:var(--brand-deep);font-size:.9rem}
+.contact-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin-top:16px}
+@media(max-width:820px){.trip-grid,.service-grid,.vehicle-grid{grid-template-columns:repeat(2,1fr)}
+.choice-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){.wrap{padding:14px 12px 40px}
+.top{display:block;padding-bottom:15px}
+.nav{margin-top:9px;gap:10px}
+.hero{min-height:302px;padding:23px;border-radius:22px}
+.hero h1{font-size:2.05rem}
+.trip-grid,.service-grid,.vehicle-grid,.process,.faq,.rules,.choice-grid{grid-template-columns:1fr}
+.section-head,.custom-top{display:block}
+.section-head p{margin-top:4px}
+.count{display:inline-block;margin-top:11px}
+.custom{padding:19px;border-radius:20px}
+.trip-actions .button{flex:1;padding-inline:8px}
+.custom-actions .button{width:100%}
+section{margin-top:38px}
+}
+
+    .region-title{grid-column:1/-1;margin:12px 0 -3px;padding:8px 0 5px;border-bottom:1px solid var(--line);color:var(--brand-deep);font-size:1.16rem;font-weight:900}
+.region-title small{display:block;color:var(--muted);font-size:.82rem;font-weight:600}
+.region-title.north{order:1}
+.trip.north{order:2}
+.region-title.yilan-region{order:3}
+.trip.yilan-region{order:4}
+.region-title.central{order:5}
+.trip.central{order:6}
+.region-title.south{order:7}
+.trip.south{order:8}
+.trip-image.taichung{background-image:linear-gradient(0deg,rgba(5,53,54,.58),rgba(5,53,54,0)),url("web-assets/trip-image-05.webp")}
+.trip-image.sunmoon{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-06.webp")}
+.trip-image.railbike{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-07.webp")}
+.trip-image.lukang{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-08.webp")}
+.trip-image.alishan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-09.webp")}
+.trip-image.taipingshan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-10.webp")}
+
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">精選包車行程<small>台灣私人包車・客製化旅遊參考</small>
+</div>
+      <nav class="nav">
+<a href="#trips">精選行程</a>
+<a href="#custom">台中客製</a>
+<a href="#service">車輛與服務</a>
+<a href="#booking">預約方式</a>
+</nav>
+    </header>
+
+    <section class="hero" aria-label="台灣包車旅遊">
+      <div class="hero-inner">
+<div class="eyebrow">TAIWAN PRIVATE TOUR</div>
+<h1>挑選喜歡的路線，<br>輕鬆安排一趟台灣旅行。</h1>
+<p>為您準備的精選路線。從一日慢遊到多日包車，先挑選喜歡的方向，<br><span class="keep-line">再一起安排最適合您的旅行節奏。</span></p>
+</div>
+    </section>
+
+    <section id="trips">
+      <div class="section-head">
+<div>
+<h2>精選行程</h2>
+<p>以下是適合包車旅遊的路線靈感。實際停留時間、順序與用餐安排，將依天候、交通、季節與旅客步調彈性調整。</p>
+</div>
+<p>手機可直接分享給親友</p>
+</div>
+      <div class="filters" aria-label="行程篩選">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">全部</button>
+        <button class="filter-button" type="button" data-filter="north" aria-pressed="false">北部</button>
+        <button class="filter-button" type="button" data-filter="yilan" aria-pressed="false">宜蘭</button>
+        <button class="filter-button" type="button" data-filter="central" aria-pressed="false">中部</button>
+        <button class="filter-button" type="button" data-filter="south" aria-pressed="false">南部</button>
+      </div>
+      <div class="trip-grid">
+        <div class="region-title north">北部精選<small>山城、海岸與火山地景</small>
+</div>
+        <div class="region-title yilan-region">宜蘭精選<small>農趣、溫泉與高山森林</small>
+</div>
+        <div class="region-title central">中部精選<small>湖泊、高山、鐵道、古鎮與客製行程</small>
+</div>
+        <div class="region-title south">南部精選<small>府城文化、港灣與客庄風景</small>
+</div>
+        <article class="trip north">
+<div class="trip-image">
+</div>
+<div class="trip-body">
+<span class="tag">北部・一日遊</span>
+<h3>經典北海岸｜野柳・金山・淡水</h3>
+<p>野柳奇岩、龜吼漁港或金山美食、富貴角燈塔、淡水老街與漁人碼頭。</p>
+<div class="trip-actions">
+<a class="button primary" href="北海岸精選行程測試/北海岸精選行程公開介紹卡_LINE_WhatsApp測試.html">查看行程</a>
+<button class="button secondary" type="button" data-share="經典北海岸｜野柳・金山・淡水" data-share-url="北海岸精選行程測試/北海岸精選行程公開介紹卡_LINE_WhatsApp測試.html">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip north">
+<div class="trip-image jiufen">
+</div>
+<div class="trip-body">
+<span class="tag">北部・一日遊</span>
+<h3>台北山城｜九份・十分</h3>
+<p>老街巷弄、山城景色、天燈體驗與瀑布自然風景，適合想感受東北角人文氛圍的旅客。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=jiufen">查看行程</a>
+<button class="button secondary" type="button" data-share="台北山城｜九份・十分" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=jiufen">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip north">
+<div class="trip-image yangmingshan">
+</div>
+<div class="trip-body">
+<span class="tag">北部・一日遊</span>
+<h3>陽明山・淡水一日遊</h3>
+<p>從臺北市各大酒店出發，經擎天崗、小油坑、竹子湖午餐、北投地熱谷，再到淡水老街與漁人碼頭。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/陽明山淡水一日遊_LINE_WhatsApp測試.html">查看行程</a>
+<button class="button secondary" type="button" data-share="陽明山・淡水一日遊" data-share-url="詳細行程/陽明山淡水一日遊_LINE_WhatsApp測試.html">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip yilan-region">
+<div class="trip-image yilan">
+</div>
+<div class="trip-body">
+<span class="tag">宜蘭・兩日遊</span>
+<h3>宜蘭｜山林農趣・蘭陽慢遊</h3>
+<p>萌寵農場、三星蔥體驗、清水地熱煮食區、傳藝中心與羅東夜市或返回宜蘭縣各大酒店，適合親子與慢旅行。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=yilan">查看行程</a>
+<button class="button secondary" type="button" data-share="宜蘭｜山林農趣・蘭陽慢遊" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=yilan">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip south">
+<div class="trip-image tainan">
+</div>
+<div class="trip-body">
+<span class="tag">台南・一日遊</span>
+<h3>台南｜府城古蹟・安平水道</h3>
+<p>井仔腳鹽田、四草綠色隧道、安平古堡、安平老街與花園夜市，細細感受府城風景與美食。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=tainan">查看行程</a>
+<button class="button secondary" type="button" data-share="台南｜府城古蹟・安平水道" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=tainan">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip south">
+<div class="trip-image kaohsiung">
+</div>
+<div class="trip-body">
+<span class="tag">高雄・一日遊</span>
+<h3>高雄｜港灣旗津</h3>
+<p>蓮池潭、駁二特區、旗津老街與彩虹教堂，走訪高雄港灣的城市與海島風景。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiung">查看行程</a>
+<button class="button secondary" type="button" data-share="高雄｜港灣旗津" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiung">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip south">
+<div class="trip-image kaohsiung">
+</div>
+<div class="trip-body">
+<span class="tag">高雄・一日遊</span>
+<h3>高雄｜佛光山・美濃</h3>
+<p>佛光山、美濃客庄與旗山老街，感受高雄山城、客庄與在地文化。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiungculture">查看行程</a>
+<button class="button secondary" type="button" data-share="高雄｜佛光山・美濃" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiungculture">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip yilan-region">
+<div class="trip-image taipingshan">
+</div>
+<div class="trip-body">
+<span class="tag">宜蘭・一日遊</span>
+<h3>宜蘭太平山森林一日遊</h3>
+<p>太平山森林遊樂區、蹦蹦車、見晴懷古步道與鳩之澤溫泉，最後返回宜蘭各大酒店。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=taipingshan">查看行程</a>
+<button class="button secondary" type="button" data-share="宜蘭太平山森林一日遊" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=taipingshan">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip central">
+<div class="trip-image sunmoon">
+</div>
+<div class="trip-body">
+<span class="tag">中部・一日遊</span>
+<h3>日月潭・清境農場一日遊</h3>
+<p>從臺中市各大酒店出發，安排日月潭湖光山色與清境高山草原，最後返回臺中市各大酒店。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=sunmoon">查看行程</a>
+<button class="button secondary" type="button" data-share="日月潭・清境農場一日遊" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=sunmoon">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip central">
+<div class="trip-image railbike">
+</div>
+<div class="trip-body">
+<span class="tag">中部・一日遊</span>
+<h3>苗栗鐵道・花海・高美濕地</h3>
+<p>勝興鐵道自行車、在地午餐、中社花市、高美濕地與逢甲夜市或返回臺中市各大酒店；鐵道班次需先預約確認。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=railbike">查看行程</a>
+<button class="button secondary" type="button" data-share="苗栗鐵道・花海・高美濕地" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=railbike">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip central">
+<div class="trip-image lukang">
+</div>
+<div class="trip-body">
+<span class="tag">中部・一日遊</span>
+<h3>彰化鹿港老街・高美濕地</h3>
+<p>星月天空、鹿港老街、玻璃博物館與高美濕地，串起中部的人文、藝術與海線風景。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=lukang">查看行程</a>
+<button class="button secondary" type="button" data-share="彰化鹿港老街・高美濕地" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=lukang">分享行程</button>
+</div>
+</div>
+</article>
+        <article class="trip central">
+<div class="trip-image alishan">
+</div>
+<div class="trip-body">
+<span class="tag">中部・一日／兩日遊</span>
+<h3>阿里山森林鐵道・山林慢遊</h3>
+<p>天長地久橋、奮起湖與阿里山園區；可選一日早出發行程，或兩日版留宿山區、安排日出與步道。</p>
+<div class="trip-actions">
+<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=alishan">查看行程</a>
+<button class="button secondary" type="button" data-share="阿里山森林鐵道・山林慢遊" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=alishan">分享行程</button>
+</div>
+</div>
+</article>
+      </div>
+    </section>
+
+    <section id="custom">
+      <div class="custom">
+        <div class="custom-top">
+<div>
+<h2>台中客製化一日遊</h2>
+<p class="lead">請選擇您喜歡的行程。系統會協助整理您的想法；實際順序與停留時間，仍由我們依車程、季節與當日狀況確認後安排。</p>
+</div>
+<span class="count" id="count">已選擇 0／5 項</span>
+</div>
+        <div class="choice-grid" id="choices">
+          <label class="choice">
+<input type="checkbox" value="彩虹眷村">彩虹眷村</label>
+          <label class="choice">
+<input type="checkbox" value="紙箱王">紙箱王</label>
+          <label class="choice">
+<input type="checkbox" value="薰衣草森林">薰衣草森林</label>
+          <label class="choice">
+<input type="checkbox" value="中社花市">中社花市</label>
+          <label class="choice">
+<input type="checkbox" value="仙塘跡農園餐廳">仙塘跡農園餐廳</label>
+          <label class="choice">
+<input type="checkbox" value="高美濕地" data-group="coast">高美濕地</label>
+          <label class="choice">
+<input type="checkbox" value="審計新村" data-group="city">審計新村</label>
+          <label class="choice">
+<input type="checkbox" value="春水堂創始店" data-group="city">春水堂創始店</label>
+          <label class="choice">
+<input type="checkbox" value="逢甲夜市">逢甲夜市</label>
+        </div>
+        <p class="hint">高美濕地與「審計新村・春水堂創始店」不安排於同一天；最多可選 5 個主要停留點。</p>
+        <label class="request-label" for="request">其他想去的景點／用餐／需求</label>
+        <textarea class="request" id="request" placeholder="例如：想安排親子農場、指定餐廳、希望 18:00 前返回飯店……">
+</textarea>
+        <div class="summary" id="summary">
+<b>您已選擇：</b>尚未選擇景點。</div>
+        <div class="custom-actions">
+<button class="button secondary" id="reset-custom" type="button">重新選擇</button>
+<button class="button primary" id="copy-custom" type="button">複製詢問內容</button>
+<button class="button secondary" id="share-custom" type="button">分享此選擇</button>
+</div>
+        <p class="notice">此頁目前不直接送出個資；按下按鈕只會產生或分享您的詢問內容，方便再透過您慣用的通訊軟體聯絡。</p>
+      </div>
+    </section>
+
+    <section id="service">
+<div class="section-head">
+<div>
+<h2>車輛與服務說明</h2>
+<p>依人數、行李、兒童座椅與路線需求，協助確認適合的車型與服務方式。</p>
+</div>
+</div>
+<div class="vehicle-grid">
+<article class="vehicle">
+<b>舒適五人座</b>
+<p>適合小型同行旅客與輕量行李。實際乘坐與行李空間將依車款確認。</p>
+</article>
+<article class="vehicle">
+<b>寬敞七人座</b>
+<p>適合家庭或多人同行；如有大型行李、推車或安全座椅，請在詢價時一併說明。</p>
+</article>
+<article class="vehicle">
+<b>多人九人座</b>
+<p>適合較多人數、團體與多件行李的旅程，可依行程需求確認安排。</p>
+</article>
+</div>
+<div class="service-grid" style="margin-top:15px">
+<article class="service">
+<div class="icon">🚘</div>
+<h3>一日・多日包車</h3>
+<p>從城市一日慢遊到跨縣市多日旅行，保留彈性，依旅客步調安排。</p>
+</article>
+<article class="service">
+<div class="icon">✈️</div>
+<h3>機場與定點接送</h3>
+<p>可協助規劃接機、送機、飯店往返與多點接送等交通需求。</p>
+</article>
+<article class="service">
+<div class="icon">👨‍👩‍👧</div>
+<h3>親子與特殊需求</h3>
+<p>兒童座椅、輪椅、寵物或大型行李等需求，請於預約時主動告知。</p>
+</article>
+<article class="service">
+<div class="icon">🧭</div>
+<h3>在地行程建議</h3>
+<p>依季節、天候、交通與景點特性，協助調整停留順序與旅遊節奏。</p>
+</article>
+<article class="service">
+<div class="icon">🧼</div>
+<h3>安心乘車</h3>
+<p>出發前確認集合、行李與特殊需求；乘車期間也請共同維護車內整潔。</p>
+</article>
+<article class="service">
+<div class="icon">💬</div>
+<h3>出發前確認</h3>
+<p>行程、車型、費用範圍與服務內容，均以正式確認內容為準。</p>
+</article>
+</div>
+</section>
+
+    <section>
+<div class="rules">
+<article class="panel">
+<h3>費用與行程提醒</h3>
+<ul>
+<li>正式報價會依日期、車型、用車時數、路線與特殊需求確認。</li>
+<li>餐食、景點門票、體驗活動、住宿或代訂項目，除非報價明確列入，通常另行計算。</li>
+<li>多日行程如涉及司機住宿、餐費或跨區安排，會於確認前一併說明。</li>
+<li>若遇天候、交通管制或不可預期狀況，將以安全與行程順暢為優先調整。</li>
+</ul>
+</article>
+<article class="panel">
+<h3>行李與乘車條件</h3>
+<ul>
+<li>請於詢價時告知人數、行李件數與最大尺寸，才能正確安排車型。</li>
+<li>嬰幼兒安全座椅、輪椅、寵物或特殊設備，請提前備註確認。</li>
+<li>小型車的司機以駕駛與車上簡介為主；若需全程隨行導覽，可於預訂時提出需求。</li>
+<li>為兼顧下一組旅客權益，若有車內污損或特殊清潔需求，可能酌收必要費用。</li>
+</ul>
+</article>
+</div>
+</section>
+
+    <section id="booking">
+<div class="section-head">
+<div>
+<h2>預約方式</h2>
+<p>先說明您的日期與需求，再一起把路線安排得剛剛好。</p>
+</div>
+</div>
+<div class="process">
+<article class="step">
+<b>STEP 1</b>
+<h3>告訴我們旅行需求</h3>
+<p>提供日期、人數、出發地、想去的景點，以及是否有行李、兒童座椅或接送需求。</p>
+</article>
+<article class="step">
+<b>STEP 2</b>
+<h3>確認適合方案</h3>
+<p>依路線與人數確認可安排的車型、行程方向與費用內容。</p>
+</article>
+<article class="step">
+<b>STEP 3</b>
+<h3>完成出發前確認</h3>
+<p>出發前再次確認集合資訊與行程重點，當日可依現場狀況保有合理彈性。</p>
+</article>
+</div>
+</section>
+
+    <section>
+<div class="section-head">
+<div>
+<h2>常見問題</h2>
+</div>
+</div>
+<div class="faq">
+<details>
+<summary>可以完全照客人指定的景點安排嗎？</summary>
+<p>可以提出想去的景點；我們會依地理位置、交通與停留時間提出可行順序，避免整天都在車上。</p>
+</details>
+<details>
+<summary>高美濕地與市區景點為什麼不能同一天？</summary>
+<p>高美濕地適合安排傍晚海線時段；審計新村與春水堂位於市區，兩組同日會拉長車程並壓縮停留時間。</p>
+</details>
+<details>
+<summary>可以安排接機或送機嗎？</summary>
+<p>可以。請先提供航班日期、時間、航廈、飯店或目的地，以及行李與人數資訊。</p>
+</details>
+<details>
+<summary>行程會因天氣改變嗎？</summary>
+<p>會以旅客安全與行程品質優先。遇雨勢、道路狀況或交通管制時，將協助調整順序或替代景點。</p>
+</details>
+</div>
+</section>
+
+    <section class="footer">
+<h2>想把下一趟台灣旅行排得更剛好？</h2>
+<p>先選擇您喜歡的行程方向，再把詢問內容傳給我們。這份網站目前為行程展示與需求整理用途，正式安排仍以確認回覆為準。</p>
+<div class="contact-actions"><a class="button primary" href="https://line.me/ti/p/-Cu2YtZ3SP" target="_blank" rel="noopener">使用 LINE 詢問</a><a class="button secondary" href="https://wa.me/886935089253" target="_blank" rel="noopener">使用 WhatsApp 詢問</a></div>
+<button class="button primary" id="general-inquiry" type="button">複製一般詢問內容</button>
+<p class="status" id="status" aria-live="polite">
+</p>
+</section>
+  </main>
+  <script>
+    const status=document.getElementById('status');
+
+    const checks=[...document.querySelectorAll('#choices input')];
+
+    const request=document.getElementById('request');
+
+    const summary=document.getElementById('summary');
+
+    const count=document.getElementById('count');
+
+    const coast=checks.find(c=>c.dataset.group==='coast');
+
+    const city=checks.filter(c=>c.dataset.group==='city');
+
+    function selected(){return checks.filter(c=>c.checked).map(c=>c.value)}
+    function updateChoices(){const picked=selected();
+const coastOn=coast.checked;
+const cityOn=city.some(c=>c.checked);
+checks.forEach(c=>{let disabled=false;
+if(!c.checked){
+  if(c.dataset.group==='city'&&coastOn)disabled=true;
+  else if(c===coast&&cityOn)disabled=true;
+  else if(picked.length>=5)disabled=true;
+}
+c.disabled=disabled;
+c.closest('.choice').classList.toggle('disabled',disabled)});
+const latest=selected();
+count.textContent=`已選擇 ${latest.length}／5 項`;
+summary.innerHTML=`<b>您已選擇：</b>${latest.length?latest.join('、'):'尚未選擇景點。'}`}
+    checks.forEach(c=>c.addEventListener('change',updateChoices));
+
+    function customText(){const places=selected();
+const note=request.value.trim();
+return `想詢問：台中客製化一日遊\n已選擇景點：${places.length?places.join('、'):'尚未選擇'}\n補充需求：${note||'無'}`}
+    async function copyText(text,done){try{await navigator.clipboard.writeText(text);
+status.textContent=done}catch{status.textContent='無法自動複製，請手動選取內容後複製。'}}
+    document.getElementById('reset-custom').addEventListener('click',()=>{checks.forEach(c=>c.checked=false);request.value='';updateChoices();status.textContent='已清空選擇，您可以重新挑選景點。';});
+    document.getElementById('copy-custom').addEventListener('click',()=>copyText(customText(),'已複製詢問內容，可貼到 LINE、WhatsApp 或其他通訊軟體。'));
+
+    document.getElementById('share-custom').addEventListener('click',async()=>{const text=customText();
+try{if(navigator.share){await navigator.share({title:'台中客製化一日遊',text,url:location.href});
+status.textContent='已開啟分享。'}else{await copyText(text+'\n'+location.href,'已複製行程選擇與網址。')}}catch(e){if(e.name!=='AbortError')status.textContent='分享未完成，請再試一次。'}});
+
+    document.querySelectorAll('[data-share]').forEach(btn=>btn.addEventListener('click',async()=>{const title=btn.dataset.share;
+const description=btn.closest('.trip').querySelector('p').textContent.trim();
+const url=new URL(btn.dataset.shareUrl||location.href,location.href).href;
+const text=`推薦行程：${title}\n${description}`;
+try{if(navigator.share){await navigator.share({title,text,url});
+status.textContent='已開啟分享。'}else{await copyText(`${text}\n${url}`,`已複製「${title}」的行程資訊與網址。`)}}catch(e){if(e.name!=='AbortError')status.textContent='分享未完成，請再試一次。'}}));
+
+    document.querySelectorAll('[data-inquiry]').forEach(btn=>btn.addEventListener('click',()=>copyText(`想詢問：${btn.dataset.inquiry}\n旅行日期：\n人數：\n出發地：\n其他需求：`,'已複製詢問範本，可貼到您慣用的通訊軟體。')));
+
+    document.getElementById('general-inquiry').addEventListener('click',()=>copyText('想詢問台灣包車行程\n旅行日期：\n人數：\n出發地：\n希望前往的地點：\n行李／兒童座椅／其他需求：','已複製一般詢問範本。'));
+
+    const filters=[...document.querySelectorAll('[data-filter]')];
+    function categoryFor(card){const tag=card.querySelector('.tag').textContent;return tag.startsWith('北部')?'north':tag.startsWith('宜蘭')?'yilan':tag.startsWith('中部')||tag.startsWith('台中')?'central':tag.startsWith('台南')||tag.startsWith('高雄')?'south':''}
+    function setFilter(filter){document.querySelectorAll('.trip').forEach(card=>card.hidden=filter!=='all'&&categoryFor(card)!==filter);document.querySelectorAll('.region-title').forEach(title=>title.hidden=filter!=='all'&&!title.classList.contains(filter==='yilan'?'yilan-region':filter));filters.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===filter)))}
+    filters.forEach(button=>button.addEventListener('click',()=>setFilter(button.dataset.filter)));
+
+    updateChoices();
+
+  </script>
+</body>
+</html>
+
+
+
+
