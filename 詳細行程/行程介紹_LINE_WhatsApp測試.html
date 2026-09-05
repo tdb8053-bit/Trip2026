@@ -6,41 +6,59 @@
   <meta name="description" content="精選包車行程介紹。">
   <title>精選包車行程｜行程介紹</title>
   <style>
-    :root{--ink:#17383d;--brand:#0b766d;--deep:#075950;--mint:#e8f7f3;--line:#c9e4dd;--muted:#60787d}*{box-sizing:border-box}body{margin:0;background:#f4f8f7;color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}.wrap{width:min(100% - 28px,920px);margin:auto;padding:18px 0 52px}.wrap *{font-weight:400!important}.back{display:inline-flex;align-items:center;margin:3px 0 18px;color:var(--deep);text-decoration:none}.hero{min-height:330px;display:flex;align-items:end;padding:30px;border-radius:28px;background:linear-gradient(0deg,rgba(2,42,45,.87),rgba(2,42,45,.12)),var(--hero) center/cover;color:#fff;box-shadow:0 18px 40px rgba(15,87,80,.16)}.hero h1{margin:8px 0 0;font-size:clamp(2rem,5vw,3.2rem);line-height:1.2}.tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#e8f7f3;color:var(--deep);font-size:.8rem}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.chip{padding:6px 10px;border-radius:999px;background:var(--mint);color:var(--deep);font-size:.88rem}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 10px 26px rgba(15,118,110,.07)}.card h2{margin:0 0 9px;font-size:1.2rem}.card p{margin:0;color:var(--muted)}.route-card{margin-top:20px}.stops{border-left:3px solid var(--brand);padding-left:15px}.stops p{padding:6px 0!important}.stops p:first-child,.stops p:last-child{color:var(--deep)}.notice{margin-top:16px;background:var(--mint);border-radius:18px;padding:18px;color:var(--deep);font-size:.92rem}.contact-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.button{display:inline-flex;justify-content:center;align-items:center;min-height:45px;margin-top:20px;padding:9px 16px;border-radius:12px;background:var(--brand);color:#fff;text-decoration:none}.contact-actions .button{margin-top:0}.button.secondary{background:#fff;color:var(--brand);border:1px solid var(--brand)}@media(max-width:620px){.wrap{width:min(100% - 24px,920px);padding-top:12px}.hero{min-height:286px;padding:22px;border-radius:22px}.grid{grid-template-columns:1fr}.card{padding:18px}}
+    :root{--ink:#17383d;--brand:#0b766d;--deep:#075950;--mint:#e8f7f3;--line:#c9e4dd;--muted:#60787d}*{box-sizing:border-box}body{margin:0;background:#f4f8f7;color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}.wrap{width:min(100% - 28px,920px);margin:auto;padding:18px 0 52px}.wrap *{font-weight:400!important;font-synthesis:none}.back{display:inline-flex;align-items:center;margin:3px 0 18px;color:var(--deep);text-decoration:none}.hero{min-height:330px;display:flex;align-items:end;padding:30px;border-radius:28px;background:linear-gradient(0deg,rgba(2,42,45,.87),rgba(2,42,45,.12)),var(--hero) center/cover;color:#fff;box-shadow:0 18px 40px rgba(15,87,80,.16)}.hero h1{margin:8px 0 0;font-size:clamp(2rem,5vw,3.2rem);line-height:1.2}.tag{display:inline-block;padding:4px 10px;border-radius:999px;background:#e8f7f3;color:var(--deep);font-size:.8rem}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.chip{padding:6px 10px;border-radius:999px;background:var(--mint);color:var(--deep);font-size:.88rem}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 10px 26px rgba(15,118,110,.07)}.card h2{margin:0 0 9px;font-size:1.2rem}.card p{margin:0;color:var(--muted)}.route-card{margin-top:20px}.stops{border-left:3px solid var(--brand);padding-left:15px}.stops p{padding:6px 0!important;font-family:inherit!important;font-size:1rem!important;line-height:1.65!important}.stops p:first-child,.stops p:last-child{color:var(--deep)}.notice{margin-top:16px;background:var(--mint);border-radius:18px;padding:18px;color:var(--deep);font-size:.92rem}.contact-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.button{display:inline-flex;justify-content:center;align-items:center;min-height:45px;margin-top:20px;padding:9px 16px;border-radius:12px;background:var(--brand);color:#fff;text-decoration:none}.contact-actions .button{margin-top:0}.button.secondary{background:#fff;color:var(--brand);border:1px solid var(--brand)}@media(max-width:620px){.wrap{width:min(100% - 24px,920px);padding-top:12px}.hero{min-height:286px;padding:22px;border-radius:22px}.grid{grid-template-columns:1fr}.card{padding:18px}}
   </style>
 </head>
 <body>
   <main class="wrap">
     <a class="back" id="back" href="../index.html#trips">← 返回精選行程</a>
     <section class="hero" id="hero"><div><span class="tag" id="tag"></span><h1 id="title"></h1></div></section>
-    <div class="chips" aria-label="行程資訊"><span class="chip">建議 09:00 出發</span><span class="chip">約 18:30 返回酒店</span><span class="chip">適合親子・好友・首次造訪</span></div>
-    <section class="card route-card"><h2>完整路線</h2><div id="stops" class="stops" aria-label="已確認行程路線"></div></section>
-    <section class="grid"><article class="card"><h2>行程亮點</h2><p id="description"></p></article><article class="card"><h2>安排說明</h2><p>實際停留點、順序、時間、車型與費用，會依出發日期、人數、交通、天候與需求確認後安排。</p></article></section>
-    <p class="notice"><b>行前提醒：</b>景點開放、體驗班次、天候與道路狀況可能影響安排；正式服務內容與費用以確認回覆為準。</p>
-    <div class="contact-actions"><a class="button" href="https://line.me/ti/p/-Cu2YtZ3SP" target="_blank" rel="noopener">使用 LINE 詢問</a><a class="button secondary" id="whatsapp-contact" target="_blank" rel="noopener">使用 WhatsApp 詢問</a></div>
+    <div class="chips" aria-label="行程資訊"><span class="chip" id="chip-time">建議 09:00 出發</span><span class="chip" id="chip-return">約 18:30 返回酒店</span><span class="chip" id="chip-suitable">適合親子・好友・首次造訪</span></div>
+    <section class="card route-card"><h2 id="route-heading">完整路線</h2><div id="stops" class="stops" aria-label="已確認行程路線"></div></section>
+    <section class="grid"><article class="card"><h2 id="highlight-heading">行程亮點</h2><p id="description"></p></article><article class="card"><h2 id="arrangement-heading">安排說明</h2><p id="arrangement">實際停留點、順序、時間、車型與費用，會依出發日期、人數、交通、天候與需求確認後安排。</p></article></section>
+    <p class="notice"><b id="notice-label">行前提醒：</b><span id="notice-text">景點開放、體驗班次、天候與道路狀況可能影響安排；正式服務內容與費用以確認回覆為準。</span></p>
+    <div class="contact-actions"><a class="button" id="line-contact" href="https://line.me/ti/p/-Cu2YtZ3SP" target="_blank" rel="noopener">使用 LINE 詢問</a><a class="button secondary" id="whatsapp-contact" target="_blank" rel="noopener">使用 WhatsApp 詢問</a></div>
     <a class="button" id="return-link" href="../index.html#trips">返回查看其他行程</a>
   </main>
   <script>
     const routes={
-      jiufen:{tag:'北部・一日遊',title:'台北山城｜九份・十分',description:'把瀑布、礦業遺址與山城街景排在同一天，適合想一次收集自然風景、老街散步與東北角特色的旅客。',image:'../精選行程網站圖片/九份十分主視覺.webp',stops:['臺北市各大酒店出發','十分瀑布','十分老街','十三層遺址','黃金瀑布','九份','返回酒店']},
+      jiufen:{tag:'北部・一日遊',title:'野柳・九份・十分',description:'串連野柳奇岩、陰陽海、黃金瀑布、九份老街與十分瀑布天燈體驗，適合一次探索北海岸與山城風景。',image:'../精選行程網站圖片/九份十分主視覺.webp',stops:['臺北市各大酒店出發','野柳地質公園','陰陽海','黃金瀑布','九份老街','十分瀑布','十分天燈','返回酒店']},
       yangmingshan:{tag:'北部・一日遊',title:'陽明山・淡水一日遊',description:'上午感受陽明山的草原與地熱地景，午後轉往淡水河岸散步；山景、溫泉地景與海港氛圍一次兼具。',image:'../精選行程網站圖片/陽明山主視覺.webp',stops:['臺北市各大酒店出發','擎天崗','小油坑','竹子湖午餐','北投地熱谷','淡水老街','漁人碼頭','返回酒店']},
       yilan:{tag:'宜蘭・兩日遊',title:'宜蘭｜山林農趣・蘭陽慢遊',description:'結合親子農場、三星蔥體驗與清水地熱煮食，傍晚可逛羅東夜市；步調輕鬆，適合家庭與好友慢遊。',image:'../web-assets/trip-image-02.webp',stops:['宜蘭縣各大酒店出發','萌寵農場','三星蔥體驗','清水地熱煮食區','傳藝中心','羅東夜市或返回酒店']},
       tainan:{tag:'台南・一日遊',title:'台南｜府城古蹟・安平水道',description:'從鹽田與水道風景一路走進安平古城，晚上以夜市收尾；適合喜歡歷史街區、海岸景色與在地小吃的旅客。',image:'../web-assets/trip-image-03.webp',stops:['臺南市各大酒店出發','井仔腳鹽田','四草綠色隧道','安平古堡','安平老街','花園夜市','返回酒店']},
       kaohsiung:{tag:'高雄・一日遊',title:'高雄｜港灣旗津',description:'以港灣城市為主題，白天走訪蓮池潭與駁二藝術空間，再安排旗津的海島街景與拍照地標。',image:'../web-assets/trip-image-04.webp',stops:['高雄市各大酒店出發','蓮池潭','駁二特區','旗津老街','彩虹教堂','返回酒店']},
-      kaohsiungculture:{tag:'高雄・一日遊',title:'高雄｜佛光山・美濃',description:'把宗教建築、客庄風景與老街文化放進同一天，適合偏好人文深度、悠閒散步與地方風味的旅客。',image:'../web-assets/trip-image-04.webp',stops:['高雄市各大酒店出發','佛光山','美濃客庄','旗山老街','返回酒店']},
+      kaohsiungculture:{tag:'高雄・一日遊',title:'高雄｜佛光山・美濃',description:'把宗教建築、客庄風景與老街文化放進同一天，適合偏好人文深度、悠閒散步與地方風味的旅客。',image:'../web-assets/trip-image-11-foguangshan-meinong.png',stops:['高雄市各大酒店出發','佛光山','美濃客庄','旗山老街','返回酒店']},
       taipingshan:{tag:'宜蘭・一日遊',title:'宜蘭太平山森林一日遊',description:'高山森林、蹦蹦車與懷古步道是這條路線的核心，最後以鳩之澤溫泉放鬆；適合喜歡山林與自然步道的旅客。',image:'../web-assets/trip-image-10.webp',stops:['宜蘭縣各大酒店出發','太平山森林遊樂區','蹦蹦車','見晴懷古步道','鳩之澤溫泉','返回酒店']},
       sunmoon:{tag:'中部・一日遊',title:'日月潭・清境農場一日遊',description:'從湖畔景色一路上到高山草原，視野與氣候變化豐富；適合想用一天感受中部代表性山水風景的旅客。',image:'../web-assets/trip-image-06.webp',stops:['臺中市各大酒店出發','日月潭','清境農場','返回酒店']},
       railbike:{tag:'中部・一日遊',title:'苗栗鐵道・花海・高美濕地',description:'鐵道體驗、花海拍照與海線風景一次完成，節奏由山城一路延伸到傍晚濕地；鐵道班次需先確認。',image:'../web-assets/trip-image-07.webp',stops:['臺中市各大酒店出發','勝興鐵道自行車','在地午餐','中社花市','高美濕地','逢甲夜市或返回酒店']},
       lukang:{tag:'中部・一日遊',title:'彰化鹿港老街・高美濕地',description:'由山城景觀、鹿港老街與玻璃藝術一路延伸到海線濕地，適合喜歡文化散步、拍照與夕照氛圍的旅客。',image:'../web-assets/trip-image-08.webp',stops:['臺中市各大酒店出發','星月天空','鹿港老街','玻璃博物館','高美濕地','返回酒店']},
       alishan:{tag:'中部・一日／兩日遊',title:'阿里山森林鐵道・山林慢遊',description:'一日版聚焦山城與森林風景；兩日版從日出小火車、鄒族文化到步道與檜意生活村，適合想深度感受阿里山的人文與山林風景的旅客。',image:'../web-assets/trip-image-09.webp',stops:['一日遊：臺中市各大酒店出發','天長地久橋','奮起湖','阿里山園區','返回酒店','兩日遊：阿里山園區飯店出發','搭小火車看日出','鄒族文化村','二延坪步道','檜意生活村','回台中或嘉義']}
     };
-    const route=routes[new URLSearchParams(location.search).get('route')]||routes.jiufen;
+    const params=new URLSearchParams(location.search);
+    const language=params.get('lang')||localStorage.getItem('homepage-language')||'zh-Hant';
+    const routeKey=params.get('route');
+    const route=routes[routeKey]||routes.jiufen;
+    const simplified={
+      jiufen:['北部・一日游','野柳・九份・十分','串联野柳奇岩、阴阳海、黄金瀑布、九份老街与十分瀑布天灯体验，适合一次探索北海岸与山城风景。',['台北市各大酒店出发','野柳地质公园','阴阳海','黄金瀑布','九份老街','十分瀑布','十分天灯','返回酒店']],
+      yangmingshan:['北部・一日游','阳明山・淡水一日游','上午感受阳明山的草原与地热地景，午后前往淡水河岸散步；山景、温泉地景与海港氛围一次兼具。',['台北市各大酒店出发','擎天岗','小油坑','竹子湖午餐','北投地热谷','淡水老街','渔人码头','返回酒店']],
+      yilan:['宜兰・两日游','宜兰｜山林农趣・兰阳慢游','结合亲子农场、三星葱体验与清水地热煮食，傍晚可逛罗东夜市；步调轻松，适合家庭与好友慢游。',['宜兰县各大酒店出发','萌宠农场','三星葱体验','清水地热煮食区','传艺中心','罗东夜市或返回酒店']],
+      tainan:['台南・一日游','台南｜府城古迹・安平水道','从盐田与水道风景一路走进安平古城，晚上以夜市收尾；适合喜欢历史街区、海岸景色与在地小吃的旅客。',['台南市各大酒店出发','井仔脚盐田','四草绿色隧道','安平古堡','安平老街','花园夜市','返回酒店']],
+      kaohsiung:['高雄・一日游','高雄｜港湾旗津','以港湾城市为主题，白天走访莲池潭与驳二艺术空间，再安排旗津的海岛街景与拍照地标。',['高雄市各大酒店出发','莲池潭','驳二特区','旗津老街','彩虹教堂','返回酒店']],
+      taipingshan:['宜兰・一日游','宜兰太平山森林一日游','高山森林、蹦蹦车与怀古步道是这条路线的核心，最后以鸠之泽温泉放松；适合喜欢山林与自然步道的旅客。',['宜兰县各大酒店出发','太平山森林游乐区','蹦蹦车','见晴怀古步道','鸠之泽温泉','返回酒店']],
+      sunmoon:['中部・一日游','日月潭・清境农场一日游','从湖畔景色一路上到高山草原，视野与气候变化丰富；适合想用一天感受中部代表性山水风景的旅客。',['台中市各大酒店出发','日月潭','清境农场','返回酒店']],
+      railbike:['中部・一日游','苗栗铁道・花海・高美湿地','铁路体验、花海拍照与海线风景一次完成，铁路班次需先确认。',['台中市各大酒店出发','胜兴铁路自行车','在地午餐','中社花市','高美湿地','逢甲夜市或返回酒店']],
+      lukang:['中部・一日游','彰化鹿港老街・高美湿地','由山城景观、鹿港老街与玻璃艺术一路延伸到海线湿地，适合喜欢文化散步、拍照与夕照氛围的旅客。',['台中市各大酒店出发','星月天空','鹿港老街','玻璃博物馆','高美湿地','返回酒店']],
+      alishan:['中部・一日／两日游','阿里山森林铁道・山林慢游','一日版聚焦山城与森林风景；两日版从日出小火车、邹族文化到步道与桧意生活村，适合想深度感受阿里山人文与山林风景的旅客。',['一日游：台中市各大酒店出发','天长地久桥','奋起湖','阿里山园区','返回酒店','两日游：阿里山园区饭店出发','搭小火车看日出','邹族文化村','二延坪步道','桧意生活村','回台中或嘉义']]
+    };
+    if(language==='zh-Hans'&&simplified[routeKey]){const item=simplified[routeKey];route.tag=item[0];route.title=item[1];route.description=item[2];route.stops=item[3];}
     document.title=`${route.title}｜精選包車行程`;
     document.getElementById('tag').textContent=route.tag;
     document.getElementById('title').textContent=route.title;
     document.getElementById('description').textContent=route.description;
     document.getElementById('hero').style.setProperty('--hero',`url("${route.image}")`);
-    document.getElementById('whatsapp-contact').href=`https://wa.me/886935089253?text=${encodeURIComponent(`您好，我想詢問「${route.title}」包車行程。`)}`;
+    document.documentElement.lang=language;
+    if(language==='zh-Hans'){document.title=`${route.title}｜精选包车行程`;document.getElementById('back').textContent='← 返回精选行程';document.getElementById('route-heading').textContent='完整路线';document.getElementById('highlight-heading').textContent='行程亮点';document.getElementById('arrangement-heading').textContent='安排说明';document.getElementById('arrangement').textContent='实际停留点、顺序、时间、车型与费用，会依出发日期、人数、交通、天气与需求确认后安排。';document.getElementById('notice-label').textContent='行前提醒：';document.getElementById('notice-text').textContent='景点开放、体验班次、天气与道路状况可能影响安排；正式服务内容与费用以确认回复为准。';document.getElementById('chip-time').textContent='建议 09:00 出发';document.getElementById('chip-return').textContent='约 18:30 返回饭店';document.getElementById('chip-suitable').textContent='适合亲子・好友・首次造访';document.getElementById('line-contact').textContent='使用 LINE 询问';document.getElementById('whatsapp-contact').textContent='使用 WhatsApp 询问';document.getElementById('return-link').textContent='返回查看其他行程';}
+    document.getElementById('whatsapp-contact').href=`https://wa.me/886935089253?text=${encodeURIComponent(`${language==='zh-Hans'?'您好，我想询问':'您好，我想詢問'}「${route.title}」${language==='zh-Hans'?'包车行程。':'包車行程。'}`)}`;
     const stopList=document.getElementById('stops');
     route.stops.forEach((stop,index)=>{const item=document.createElement('p');item.textContent=`${index+1}. ${stop}`;stopList.append(item)});
     if(route.back){document.getElementById('back').href=route.back;document.getElementById('return-link').href=route.back;document.getElementById('return-link').textContent=route.label;}
