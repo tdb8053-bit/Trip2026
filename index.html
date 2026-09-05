@@ -401,7 +401,7 @@ section#trips{margin-top:68px;padding:0 30px}
       .custom{padding:22px}
       .footer{padding:28px 20px}
     }
-    @media(max-width:620px){.style-picker{margin:13px 0 0;justify-content:space-between}.style-picker select{flex:1}}
+    @media(max-width:620px){.style-picker{margin:13px 0 0;justify-content:space-between}.style-picker select{flex:1}.hero h1{font-size:1.82rem;line-height:1.28}}
     @media(min-width:621px){
       body:not([data-theme="modern"]) .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
       body:not([data-theme="modern"]) .hero-copy{padding-right:0}
@@ -478,18 +478,9 @@ section#trips{margin-top:68px;padding:0 30px}
 <div class="style-picker" aria-label="首頁風格設定">
   <label for="style-select">首頁風格</label>
   <select id="style-select">
-    <option value="modern">現代簡約</option>
-    <option value="business">高級商務</option>
-    <option value="nature">溫馨自然</option>
     <option value="colorful">活潑鮮豔</option>
-    <option value="japanese">日系清爽</option>
     <option value="taiwan">台灣人文風</option>
-    <option value="luxury">奢華精品風</option>
-    <option value="island">海島度假風</option>
     <option value="retro">復古懷舊風</option>
-    <option value="outdoor">大地戶外風</option>
-    <option value="tech">科技現代風</option>
-    <option value="sunset">日落暖色風</option>
   </select>
   <button id="save-style" type="button">儲存</button>
 </div>
@@ -500,7 +491,7 @@ section#trips{margin-top:68px;padding:0 30px}
       <div class="hero-inner">
 <div class="hero-copy">
 <div class="eyebrow">TAIWAN PRIVATE TOUR</div>
-<h1>挑選喜歡的路線，<br>安排一趟台灣旅行。</h1>
+<h1>挑選喜歡的路線，<br>安排一趟台灣旅行</h1>
 <p>挑選喜歡的路線，從一日慢遊到多日包車。<br><span class="keep-line">再一起安排最適合您的旅行節奏。</span></p>
 </div>
 <a class="hero-action" href="#trips">探索精選行程 <span aria-hidden="true">→</span></a>
@@ -541,19 +532,6 @@ section#trips{margin-top:68px;padding:0 30px}
 </div>
         <div class="region-title south">南部精選<small>府城文化、港灣與客庄風景</small>
 </div>
-        <article class="trip north">
-<div class="trip-image"><img src="北海岸精選行程測試/images/漁人碼頭示意圖.webp" loading="lazy" decoding="async" alt="北海岸漁人碼頭風景">
-</div>
-<div class="trip-body">
-<span class="tag">北部・一日遊</span>
-<h3>經典北海岸｜野柳・金山・淡水</h3>
-<p>野柳奇岩、龜吼漁港或金山美食、富貴角燈塔、淡水老街與漁人碼頭。</p>
-<div class="trip-actions">
-<a class="button primary" href="北海岸精選行程測試/北海岸精選行程公開介紹卡_LINE_WhatsApp測試.html">查看行程</a>
-<button class="button secondary" type="button" data-share="經典北海岸｜野柳・金山・淡水" data-share-url="北海岸精選行程測試/北海岸精選行程公開介紹卡_LINE_WhatsApp測試.html">分享行程</button>
-</div>
-</div>
-</article>
         <article class="trip north">
 <div class="trip-image jiufen"><img src="精選行程網站圖片/九份十分主視覺.webp" loading="lazy" decoding="async" alt="九份山城與十分風景">
 </div>
@@ -616,19 +594,6 @@ section#trips{margin-top:68px;padding:0 30px}
 <div class="trip-actions">
 <a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiung">查看行程</a>
 <button class="button secondary" type="button" data-share="高雄｜港灣旗津" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiung">分享行程</button>
-</div>
-</div>
-</article>
-        <article class="trip south">
-<div class="trip-image kaohsiungculture"><img src="web-assets/trip-image-11-foguangshan-meinong.png" loading="lazy" decoding="async" alt="佛光山與美濃客庄風景">
-</div>
-<div class="trip-body">
-<span class="tag">高雄・一日遊</span>
-<h3>高雄｜佛光山・美濃</h3>
-<p>佛光山、美濃客庄與旗山老街，感受高雄山城、客庄與在地文化。</p>
-<div class="trip-actions">
-<a class="button primary" href="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiungculture">查看行程</a>
-<button class="button secondary" type="button" data-share="高雄｜佛光山・美濃" data-share-url="詳細行程/行程介紹_LINE_WhatsApp測試.html?route=kaohsiungculture">分享行程</button>
 </div>
 </div>
 </article>
@@ -905,7 +870,9 @@ section#trips{margin-top:68px;padding:0 30px}
       revealItems.forEach(item=>revealObserver.observe(item));
     }else{revealItems.forEach(item=>item.classList.add('is-visible'))}
     const styleSelect=document.getElementById('style-select');
-    const savedStyle=localStorage.getItem('homepage-style')||'modern';
+    const availableStyles=[...styleSelect.options].map(option=>option.value);
+    const storedStyle=localStorage.getItem('homepage-style');
+    const savedStyle=availableStyles.includes(storedStyle)?storedStyle:'taiwan';
     function applyStyle(style){document.body.dataset.theme=style;styleSelect.value=style}
     applyStyle(savedStyle);
     styleSelect.addEventListener('change',()=>applyStyle(styleSelect.value));
@@ -918,8 +885,8 @@ section#trips{margin-top:68px;padding:0 30px}
     };
     const originalTitles=[...document.querySelectorAll('.trip h3')].map(item=>item.textContent);
     const translatedTitles={
-      en:['Classic North Coast | Yehliu, Jinshan & Tamsui','Yehliu, Jiufen & Shifen','Yangmingshan & Tamsui Day Tour','Yilan | Forest, Farms & Slow Travel','Tainan | Historic Sites & Anping','Kaohsiung | Harbor & Cijin','Kaohsiung | Fo Guang Shan & Meinong','Yilan Taipingshan Forest Day Tour','Sun Moon Lake & Cingjing Farm','Miaoli Railway, Flowers & Gaomei Wetlands','Lukang Old Street & Gaomei Wetlands','Alishan Forest Railway & Mountain Escape'],
-      'zh-Hans':['经典北海岸｜野柳・金山・淡水','野柳・九份・十分','阳明山・淡水一日游','宜兰｜山林农趣・兰阳慢游','台南｜府城古迹・安平水道','高雄｜港湾旗津','高雄｜佛光山・美浓','宜兰太平山森林一日游','日月潭・清境农场一日游','苗栗铁道・花海・高美湿地','彰化鹿港老街・高美湿地','阿里山森林铁道・山林慢游']
+      en:['Yehliu, Jiufen & Shifen','Yangmingshan & Tamsui Day Tour','Yilan | Forest, Farms & Slow Travel','Tainan | Historic Sites & Anping','Kaohsiung | Harbor & Cijin','Yilan Taipingshan Forest Day Tour','Sun Moon Lake & Cingjing Farm','Miaoli Railway, Flowers & Gaomei Wetlands','Lukang Old Street & Gaomei Wetlands','Alishan Forest Railway & Mountain Escape'],
+      'zh-Hans':['野柳・九份・十分','阳明山・淡水一日游','宜兰｜山林农趣・兰阳慢游','台南｜府城古迹・安平水道','高雄｜港湾旗津','宜兰太平山森林一日游','日月潭・清境农场一日游','苗栗铁道・花海・高美湿地','彰化鹿港老街・高美湿地','阿里山森林铁道・山林慢游']
     };
     function applyLanguage(language){
       const text=languageText[language];
