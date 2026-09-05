@@ -334,12 +334,19 @@ section#trips{margin-top:68px;padding:0 30px}
     body[data-theme="sunset"] .trip-grid{grid-template-columns:repeat(2,1fr);gap:26px 18px}
     body[data-theme="sunset"] .trip:nth-of-type(3n){grid-column:span 2}
     body[data-theme="sunset"] .trip-image{min-height:245px}
+    @media(min-width:621px){
+      body:not([data-theme="modern"]) .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
+      body:not([data-theme="modern"]) .hero-copy{padding-right:0}
+      body:not([data-theme="modern"]) .hero-copy p{max-width:640px}
+      body:not([data-theme="modern"]) .hero-action{position:static;min-width:190px;transform:none}
+    }
     @media(max-width:820px){
       body[data-theme="colorful"] .trip-grid,body[data-theme="business"] .trip-grid,body[data-theme="taiwan"] .trip-grid,body[data-theme="retro"] .trip-grid,body[data-theme="sunset"] .trip-grid{grid-template-columns:repeat(2,1fr)}
       body[data-theme="business"] .trip{display:block}
       body[data-theme="business"] .trip-image{min-height:190px}
     }
     @media(max-width:620px){
+      body:not([data-theme="modern"]) .hero-copy{padding-right:0}
       body[data-theme="colorful"] .trip-grid,body[data-theme="business"] .trip-grid,body[data-theme="taiwan"] .trip-grid,body[data-theme="retro"] .trip-grid,body[data-theme="sunset"] .trip-grid{grid-template-columns:1fr}
       body[data-theme="sunset"] .trip:nth-of-type(3n){grid-column:auto}
       body[data-theme="retro"] .trip:nth-of-type(odd),body[data-theme="retro"] .trip:nth-of-type(even){transform:none}
@@ -395,6 +402,15 @@ section#trips{margin-top:68px;padding:0 30px}
       .footer{padding:28px 20px}
     }
     @media(max-width:620px){.style-picker{margin:13px 0 0;justify-content:space-between}.style-picker select{flex:1}}
+    @media(min-width:621px){
+      body:not([data-theme="modern"]) .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
+      body:not([data-theme="modern"]) .hero-copy{padding-right:0}
+      body:not([data-theme="modern"]) .hero-action{position:static;min-width:190px;transform:none}
+    }
+    @media(min-width:981px){
+      .hero h1{white-space:nowrap}
+      .hero h1 br{display:none}
+    }
 
     /* Search, favourites and contact enhancements */
     .trip-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 22px}
