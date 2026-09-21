@@ -1,0 +1,2968 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-lang="zh-TW" class="notranslate" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="google" content="notranslate">
+<title>偉哥 · 尊榮包車行程生成器 v1.6.72 (尊享旗艦版)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-alabaster: #F7F5F0;
+  --card-parchment: #FFFFFF;
+  --ink-black: #1A1A18;
+  --ink-sub: #5A5954;
+  --gold-michelin: #C5A059;
+  --gold-deep: #8C6D37;
+  --gold-light: #F4EEDF;
+  --border-gilded: #E7DFD0;
+  --burgundy-seal: #8C2425;
+  --premium-radius-card: 1.25rem;
+
+  /* 三步驟專屬階梯柔和配色 */
+  --step1-bg: #FAF8F5;
+  --step1-border: #E8E0D2;
+  --step2-bg: #F6EEDB;
+  --step2-border: #DFCFAE;
+  --step3-bg: #EFF6F2;
+  --step3-border: #BDD8C7;
+}
+
+body {
+  background-color: var(--bg-alabaster);
+  color: var(--ink-black);
+  font-family: "Noto Serif TC", "Playfair Display", Georgia, serif;
+}
+
+html[data-lang="zh-TW"] body,
+html[data-lang="zh-TW"] .font-serif-luxury {
+  font-family: "Noto Serif TC", "Playfair Display", serif !important;
+}
+
+html[data-lang="zh-CN"] body,
+html[data-lang="zh-CN"] .font-serif-luxury {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+}
+
+html[data-lang="en"] body,
+html[data-lang="en"] .font-serif-luxury {
+  font-family: "Playfair Display", "Plus Jakarta Sans", serif !important;
+}
+
+.font-cinzel { font-family: "Cinzel", serif; }
+.font-playfair { font-family: "Playfair Display", serif; }
+.font-sans-ui { font-family: "Plus Jakarta Sans", sans-serif; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.parchment-card {
+  background: var(--card-parchment);
+  border: 1px solid var(--border-gilded);
+  border-radius: var(--premium-radius-card);
+  box-shadow: 0 8px 30px -4px rgba(60, 52, 40, 0.05);
+}
+
+.brand-seal-box {
+  width: 42px;
+  height: 42px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding: 0 !important;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.brand-seal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgba(184, 29, 24, 0.3));
+}
+
+.double-rule {
+  border-top: 1px solid var(--border-gilded);
+  border-bottom: 1px solid var(--border-gilded);
+  padding: 2px 0;
+}
+
+.switch-pill {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: 999px;
+  background: var(--gold-light);
+  border: 1px solid var(--border-gilded);
+}
+
+.switch-btn {
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+  color: var(--ink-sub);
+}
+
+.switch-btn.active {
+  background: var(--ink-black);
+  color: #FAF5ED;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.14);
+}
+
+.interactive-btn {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.interactive-btn:active {
+  transform: scale(0.96);
+}
+
+.generator-panel {
+  background: #FFFFFF;
+  border: 2px dashed var(--gold-michelin);
+  border-radius: var(--premium-radius-card);
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(197, 160, 89, 0.12);
+}
+
+.step-block-1 {
+  background: var(--step1-bg);
+  border: 1px solid var(--step1-border);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 14px rgba(60, 52, 40, 0.03);
+}
+
+.step-block-2 {
+  background: var(--step2-bg);
+  border: 1.5px solid var(--step2-border);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(197, 160, 89, 0.1);
+}
+
+.step-block-3 {
+  background: var(--step3-bg);
+  border: 1px solid var(--step3-border);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(47, 111, 78, 0.06);
+}
+
+.generator-panel textarea {
+  width: 100%;
+  min-height: 7.5rem;
+  resize: vertical;
+  border: 1px solid var(--border-gilded);
+  border-radius: 0.85rem;
+  padding: 0.75rem;
+  background: #FFFFFF;
+  color: #1A1A18;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  font-family: "Plus Jakarta Sans", monospace;
+}
+
+.premium-button {
+  min-height: 2.3rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.premium-button:active { transform: scale(0.96); }
+
+.quick-jump-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; font-size: 11px; font-weight: 800; }
+.quick-jump-button {
+  flex: 1;
+  min-width: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  padding: 0.45rem 0.25rem;
+  transition: all 0.2s ease;
+  background: var(--gold-light);
+  color: #5C4314;
+  border: 1px solid var(--border-gilded);
+}
+.quick-jump-button.is-active {
+  background-color: var(--ink-black) !important;
+  color: #FAF5ED !important;
+  box-shadow: 0 4px 12px rgba(26, 26, 24, 0.25);
+  border-color: var(--gold-michelin);
+  transform: translateY(-1px);
+}
+
+.travel-time-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: #F4EEDF;
+  color: #7A5A1C;
+  border: 1px solid #E2D2B0;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-block: 0.35rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.travel-time-badge-pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: #FFF1F2;
+  color: #BE123C;
+  border: 1.5px dashed #FB7185;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-block: 0.35rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.time-schedule-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FAF8F5;
+  border: 1px solid var(--border-gilded);
+  border-radius: 0.75rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #4A463E;
+  margin-block: 0.25rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.departure-exception-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2.5px 9px;
+  border: 1.5px solid var(--gold-michelin);
+  border-radius: 999px;
+  background: #FFF9F2;
+  color: var(--burgundy-seal);
+  font-size: 10.5px;
+  font-weight: 800;
+  box-shadow: 0 1.5px 5px rgba(197, 160, 89, 0.2);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.long-drive-reminder {
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px dashed #F59E0B;
+  border-radius: 0.75rem;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.45;
+  margin-top: 0.35rem;
+}
+
+.free-activity-card {
+  background: #FAF8F5;
+  border: 1px dashed var(--gold-michelin);
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.75rem;
+  color: #5A564E;
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+.hotel-place-card {
+  background: linear-gradient(135deg, #FFFFFF, #FAF7F0);
+  border: 1.5px solid var(--gold-michelin);
+  box-shadow: 0 6px 20px rgba(197, 160, 89, 0.12);
+}
+
+.driver-dispatch-collection-box {
+  background: linear-gradient(135deg, #FAF8F5, #F4EEDF);
+  border: 2px solid var(--gold-michelin);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(140, 109, 55, 0.15);
+  margin-top: 1.25rem;
+}
+
+.audit-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 24, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 6000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.audit-modal-backdrop.is-open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.audit-modal-card {
+  width: min(100%, 32rem);
+  max-height: min(88vh, 40rem);
+  background: #FFFFFF;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border-gilded);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
+}
+.audit-modal-backdrop.is-open .audit-modal-card {
+  transform: scale(1);
+}
+
+#michelinToast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: #1A1A18;
+  border: 1px solid var(--gold-michelin);
+  color: #FAF6EF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  z-index: 7000;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+#michelinToast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+#michelinToast.error {
+  background: #8C2425;
+  border-color: #F87171;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 24px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1A1A18;
+  border: 1px solid var(--gold-michelin);
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  display: none;
+  z-index: 1000;
+  transition: transform 0.15s ease;
+}
+#backToTop:active { transform: scale(0.92); }
+
+@keyframes gold-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 8px 24px -4px rgba(197, 160, 89, 0.22), 0 0 0 1px rgba(197, 160, 89, 0.45);
+  }
+  50% {
+    box-shadow: 0 14px 34px -2px rgba(197, 160, 89, 0.48), 0 0 0 1.5px rgba(230, 192, 120, 0.85);
+  }
+}
+
+.vip-invitation-card {
+  background: linear-gradient(135deg, #1F1F1D 0%, #2B2822 50%, #1A1A18 100%);
+  border: 1.5px solid var(--gold-michelin);
+  border-radius: var(--premium-radius-card);
+  animation: gold-pulse-glow 3.5s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.vip-invitation-card:hover {
+  transform: translateY(-2px);
+}
+.vip-invitation-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -30%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(197, 160, 89, 0.2) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.footer-signature-plate {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAF8F5 60%, #F5EFE6 100%);
+  border: 1px solid var(--border-gilded);
+  border-radius: var(--premium-radius-card);
+  box-shadow: 0 6px 22px rgba(60, 52, 40, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.25s ease;
+}
+.footer-signature-plate:hover {
+  border-color: var(--gold-michelin);
+  box-shadow: 0 8px 26px rgba(197, 160, 89, 0.14);
+}
+
+.footer-seal-box {
+  width: 48px;
+  height: 48px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding: 0 !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  position: relative;
+}
+.footer-signature-plate:hover .footer-seal-box {
+  transform: scale(1.06) rotate(-2deg);
+}
+</style>
+</head>
+
+<body class="min-h-screen py-6 px-3.5 sm:px-4 antialiased flex justify-center items-start selection:bg-amber-100 selection:text-amber-950">
+<div id="page-shell" class="w-full max-w-[560px] space-y-4 no-scrollbar mb-16">
+
+<!-- 1. 內部行程生成器控制面板（三階對比色塊版） -->
+<section id="generator-panel" class="generator-panel space-y-3.5 font-sans-ui">
+  <div class="flex justify-between items-center border-b border-[#E7DFD0] pb-2">
+    <div>
+      <h2 class="text-xs font-bold font-cinzel text-[#8C6D37] uppercase tracking-wider">🛠️ 偉哥行程生成器 v1.6.72 (尊享旗艦版)</h2>
+      <p class="text-[11px] text-[#5A5954] mt-0.5">三階對比色調度工廠 · 步驟清楚獨立，出單直覺又零失誤！</p>
+    </div>
+    <span class="text-[10px] font-bold bg-[#F4EEDF] text-[#7A5A1C] px-2 py-0.5 rounded border border-[#E2D2B0]">內部工作區</span>
+  </div>
+
+  <!-- 【區塊 1｜象牙米白】步驟 1：文字輸入與車程精算 -->
+  <div class="step-block-1 space-y-3">
+    <div class="flex justify-between items-center border-b border-[#EFE9DD] pb-1.5">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-[#8C6D37]"></span>
+        <h3 class="text-xs font-black text-[#1A1A18] tracking-wide">步驟 1｜貼上或選取標準文字行程</h3>
+      </div>
+      <button type="button" onclick="restartGenerator()" class="bg-white hover:bg-[#FAF8F5] text-[#8C6D37] border border-[#E7DFD0] px-2 py-0.5 rounded-lg text-[11px] font-bold shadow-2xs hover:border-[#C5A059] transition">↻ 重新開始下一位客戶</button>
+    </div>
+    
+    <textarea id="smart-source-input" placeholder="請貼上第二次確認摘要或標準行程文字..."></textarea>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+      <button type="button" onclick="triggerTxtFilePicker()" class="bg-[#2C2B27] hover:bg-[#1A1A18] text-[#FAF5ED] premium-button w-full shadow-xs">📄 選擇標準行程 .txt 檔</button>
+      <input type="file" id="txt-file-picker" accept=".txt,.text,text/plain" style="display:none" onchange="handleTxtFileSelect(this.files)">
+      <button type="button" onclick="startDirectSmartProcess()" class="bg-[#8C6D37] hover:bg-[#73582A] text-white premium-button w-full shadow-xs">✨ 整理並渲染米其林星鑰手帖</button>
+    </div>
+
+    <!-- 🧭 車程精算與佇列 -->
+    <div id="route-queue-card" class="bg-white rounded-xl border border-[#E7DFD0] p-3 space-y-2">
+      <div class="flex items-center justify-between gap-2 border-b border-[#EFE9DD] pb-1.5">
+        <div class="flex items-center gap-1.5">
+          <span class="text-sm">🧭</span>
+          <h4 class="text-xs font-bold text-[#1A1A18]">路段車程精算與查詢佇列</h4>
+        </div>
+        <button type="button" onclick="copyRouteQueuePrompt()" class="bg-[#F4EEDF] hover:bg-[#EBE2CF] text-[#6A4F1D] border border-[#DFCFAE] text-[11px] font-bold px-2.5 py-0.5 rounded-lg">📋 複製待查路段清單</button>
+      </div>
+      <p id="route-queue-summary" class="text-[11px] font-bold text-[#2F6F4E]">車程完成度：正在計算中...</p>
+      
+      <div class="max-h-36 overflow-y-auto no-scrollbar bg-[#FAF8F5] rounded-lg p-2 border border-[#E7DFD0]">
+        <ul id="route-queue-list" class="text-xs space-y-1 text-[#4A463E]"></ul>
+      </div>
+
+      <div class="space-y-1 pt-1">
+        <label for="drive-time-input" class="block text-[11px] font-bold text-[#1A1A18]">貼上查詢到的行車時間（批次自動套用）：</label>
+        <textarea id="drive-time-input" style="min-height: 4rem;" class="w-full rounded-lg border border-[#E7DFD0] bg-[#FAF8F5] p-2 text-xs" placeholder="例如：
+Day 1：桃園國際機場 → 台北君悅酒店｜約 50 分鐘
+Day 2：台北君悅酒店 → 日月潭遊湖｜約 210 分鐘"></textarea>
+        <button type="button" onclick="applyDriveTimes()" class="w-full bg-[#1A1A18] hover:bg-[#2C2B27] text-[#FAF5ED] premium-button text-xs shadow-xs">✨ 套用行車時間並寫入本機記憶庫</button>
+      </div>
+    </div>
+
+    <!-- 乘客需求與費用快速設定 -->
+    <details class="rounded-xl border border-[#E7DFD0] bg-white p-2.5 space-y-2">
+      <summary class="cursor-pointer text-xs font-bold text-[#1A1A18]"><span aria-hidden="true">👤</span> 乘客需求與費用快速設定（即時連動鑑賞書札）</summary>
+      <div class="mt-2 space-y-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DD] text-xs">
+        <div class="space-y-1">
+          <label class="block text-[10px] font-bold text-[#6A665E]">乘客需求快速選單（可複選加入）：</label>
+          <div class="grid grid-cols-[1fr_auto] gap-1.5">
+            <select id="quick-request-select" class="rounded border border-[#E7DFD0] px-2 py-1 text-xs font-bold bg-white text-[#1A1A18]">
+              <option value="請準備一個兒童座椅">請準備一個兒童座椅</option>
+              <option value="請準備 2 個兒童安全座椅">請準備 2 個兒童安全座椅</option>
+              <option value="輪椅／無障礙協助服務">輪椅／無障礙協助服務</option>
+              <option value="素食飲食需求">素食飲食需求</option>
+              <option value="有大型行李載運需求">有大型行李載運需求</option>
+              <option value="接機舉牌服務">接機舉牌服務</option>
+            </select>
+            <button type="button" onclick="addQuickRequest()" class="bg-[#8C6D37] hover:bg-[#73582A] text-white rounded px-2.5 py-1 text-[11px] font-bold shrink-0">＋加入需求</button>
+          </div>
+          <div id="quick-requests-tags" class="flex flex-wrap gap-1 pt-1"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 pt-1 border-t border-[#EFE9DD]">
+          <div>
+            <label class="block text-[10px] font-bold text-[#6A665E]">總車資 (NT$)</label>
+            <input id="input-total-fare" type="number" oninput="handleFareOrDepositChange()" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs font-bold bg-white" placeholder="例如：28500">
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-[#6A665E]">已收定金 (NT$)</label>
+            <input id="input-deposit" type="number" oninput="handleFareOrDepositChange()" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs font-bold bg-white" placeholder="例如：5000">
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- 【區塊 2｜香檳淡金】步驟 2：案件檔名與派車調度 -->
+  <div class="step-block-2 space-y-3">
+    <div class="flex items-center gap-1.5 border-b border-[#E5D5B8] pb-1.5">
+      <span class="w-2 h-2 rounded-full bg-[#B48F48]"></span>
+      <h3 class="text-xs font-black text-[#6A4F1D] tracking-wide">步驟 2｜案件檔名與派車調度（<span class="text-rose-600">必填機制</span>）</h3>
+    </div>
+
+    <div class="space-y-1 bg-white/80 p-2.5 rounded-xl border border-[#DFCFAE]">
+      <label for="case-id" class="text-xs font-bold text-[#1A1A18] block">案件編號（必填，例如：1015）</label>
+      <input id="case-id" type="text" value="" oninput="updateOutputPreview()" class="w-full rounded-lg border border-[#DFCFAE] bg-white px-3 py-1.5 text-sm font-bold text-[#1A1A18] focus:border-[#8C6D37] focus:outline-none" placeholder="請輸入案件編號（例如：1015）">
+      <p id="output-preview" class="text-[11px] leading-relaxed font-bold text-rose-600">⚠️ 請填寫案件檔名與編號（必填，例如：1015）</p>
+    </div>
+
+    <!-- 出發時間設定 -->
+    <details class="rounded-xl border border-[#DFCFAE] bg-white/80 p-2.5 space-y-2">
+      <summary class="cursor-pointer text-xs font-bold text-[#1A1A18]"><span aria-hidden="true">🕘</span> 出發時間與指定單日出發時間設定（選填）</summary>
+      <div class="mt-2 space-y-2 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DD] text-xs">
+        <div class="grid grid-cols-2 gap-2 pb-1.5 border-b border-[#EFE9DD]">
+          <div>
+            <label class="block text-[10px] font-bold text-[#6A665E]">一般行程固定出發時間</label>
+            <input id="generator-default-time" type="time" value="09:00" onchange="applyDepartureDefaultTime(this.value)" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs font-bold bg-white">
+          </div>
+          <div class="text-[10px] text-[#8A8478] leading-tight flex items-center">
+            💡 若不是預設的 09:00，手帖右上角會自動亮出「例外出發時間」加框標籤。
+          </div>
+        </div>
+        <div class="pt-1 space-y-1.5">
+          <label class="block text-[10px] font-bold text-[#1A1A18]">指定單一日期出發時間：</label>
+          <div class="grid grid-cols-[1fr_1fr_auto] gap-1.5">
+            <select id="single-departure-day" class="rounded border border-[#E7DFD0] px-2 py-1 text-xs font-bold bg-white text-[#1A1A18]"></select>
+            <input id="single-departure-time" type="time" value="08:30" class="rounded border border-[#E7DFD0] px-2 py-1 text-xs font-bold bg-white">
+            <button type="button" onclick="applySingleDayDepartureTime()" class="bg-[#2C2B27] hover:bg-[#1A1A18] text-[#FAF5ED] rounded px-2.5 py-1 text-[11px] font-bold shrink-0">套用此日</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 司機派遣設定 -->
+    <details class="rounded-xl border border-[#DFCFAE] bg-white/80 p-2.5 space-y-2" open>
+      <summary class="cursor-pointer text-xs font-bold text-[#1A1A18]"><span aria-hidden="true">🚕</span> 司機派遣調度與選擇司機設定（選填）</summary>
+      <div class="mt-2 space-y-2.5 bg-[#FAF8F5] p-2.5 rounded-lg border border-[#EFE9DD] text-xs">
+        <div class="flex items-center justify-between">
+          <label class="font-bold text-[#1A1A18] text-[11px]">指派司機：</label>
+          <select id="dispatch-driver-select" onchange="handleDriverSelectChange(this.value)" class="text-xs rounded border border-[#E7DFD0] p-1 font-bold text-[#1A1A18] bg-white min-w-[140px]">
+            <option value="none">尚未指派（出發前通知）</option>
+            <option value="custom">✏️ 手動輸入／新增司機</option>
+          </select>
+        </div>
+        <div id="dispatch-driver-details" class="grid grid-cols-2 gap-2 pt-1">
+          <div>
+            <label class="block text-[9px] text-[#8A8478] font-bold">司導姓名</label>
+            <input id="dispatch-driver-name" type="text" placeholder="例如：陳小明" oninput="handleDriverInputChange()" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs bg-white font-bold text-[#1A1A18]">
+          </div>
+          <div>
+            <label class="block text-[9px] text-[#8A8478] font-bold">聯絡電話</label>
+            <input id="dispatch-driver-phone" type="text" placeholder="例如：+886912345678" oninput="handleDriverInputChange()" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs bg-white font-bold text-[#1A1A18]">
+          </div>
+          <div>
+            <label class="block text-[9px] text-[#8A8478] font-bold">座駕車牌</label>
+            <input id="dispatch-driver-plate" type="text" placeholder="例如：ABC-8888" oninput="handleDriverInputChange()" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs bg-white font-bold text-[#1A1A18]">
+          </div>
+          <div>
+            <label class="block text-[9px] text-[#8A8478] font-bold">車型規格</label>
+            <input id="dispatch-driver-vehicle" type="text" placeholder="例如：Benz Vito 9人座" oninput="handleDriverInputChange()" class="w-full rounded border border-[#E7DFD0] px-2 py-1 text-xs bg-white font-bold text-[#1A1A18]">
+          </div>
+          <div class="col-span-2 pt-0.5">
+            <button type="button" onclick="saveCurrentDriverToLibrary()" class="w-full bg-[#F4EEDF] hover:bg-[#EBE2CF] text-[#6A4F1D] border border-[#DFCFAE] rounded py-1 text-[11px] font-bold">💾 將此位司導儲存至本機名冊庫</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 工作資料夾設定 -->
+    <details class="rounded-xl border border-[#DFCFAE] bg-white/80 p-2.5 space-y-2">
+      <summary class="cursor-pointer text-xs font-bold text-[#1A1A18]"><span aria-hidden="true">⚙️</span> 首次設定／進階專案資料夾鎖定</summary>
+      <div class="mt-2 space-y-2 text-xs">
+        <p id="workspace-folder-status" class="text-[11px] font-bold text-[#8C6D37]">正在檢查本機專案資料夾設定...</p>
+        <button type="button" onclick="chooseWorkspaceFolder()" class="w-full bg-[#2C2B27] hover:bg-[#1A1A18] text-[#FAF5ED] premium-button">📁 選擇 偉哥派車系統 資料夾</button>
+      </div>
+    </details>
+  </div>
+
+  <!-- 【區塊 3｜翡翠淡綠】步驟 3：預檢發布與雙端交付 -->
+  <div class="step-block-3 space-y-2.5">
+    <div class="flex items-center gap-1.5 border-b border-[#BDD8C7] pb-1.5">
+      <span class="w-2 h-2 rounded-full bg-[#2F6F4E]"></span>
+      <h3 class="text-xs font-black text-[#1B4D35] tracking-wide">步驟 3｜預檢並儲存米其林雙端交付檔案</h3>
+    </div>
+    
+    <button type="button" onclick="generateAndSaveCustomerPackage()" class="w-full bg-[#C5A059] hover:bg-[#B48F48] text-white premium-button shadow-md font-bold text-xs py-2.5">🛡️ 智慧預檢並一鍵儲存米其林雙端交付檔</button>
+    
+    <div class="grid grid-cols-2 gap-2 pt-0.5">
+      <button type="button" onclick="downloadSingleCustomerHtml()" class="bg-[#1A1A18] hover:bg-[#2C2B27] text-[#FAF5ED] premium-button text-xs">📥 下載 客戶端手帖</button>
+      <button type="button" onclick="downloadSingleDriverHtml()" class="bg-[#8C6D37] hover:bg-[#73582A] text-white premium-button text-xs">📥 下載 司導任務單</button>
+    </div>
+
+    <div id="local-delivery-path-container" hidden class="bg-white/90 border border-[#BDD8C7] rounded-xl p-2.5 mt-1">
+      <p id="local-delivery-path-text" class="text-[11px] font-bold text-[#1B4D35] break-all leading-relaxed"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 頂部禮賓銘板 Header -->
+<header class="flex items-center justify-between px-1 py-1">
+  <div class="flex items-center gap-3">
+    <div class="brand-seal-box">
+      <img id="header-seal-img" src="https://raw.githubusercontent.com/tdb8053-bit/Trip2026/main/002.png" alt="偉哥 Logo" class="brand-seal-img" onload="onSealImageLoaded(this, 'header-seal-fallback')" onerror="onSealImageError(this, 'header-seal-fallback')">
+      <div id="header-seal-fallback" class="w-full h-full flex items-center justify-center p-0.5" style="display:none;">
+        <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <rect width="88" height="88" x="6" y="6" rx="12" fill="none" stroke="#B81D18" stroke-width="7" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center gap-1.5">
+        <span id="txt-header-brand" class="text-[9px] font-cinzel font-bold text-[#8C6D37] tracking-[0.2em] uppercase">Wei Travel Concierge</span>
+        <span id="txt-header-order-no" class="text-[9px] text-[#A69B88] font-sans-ui">N° 2026-1015</span>
+      </div>
+      <h2 id="txt-header-title" class="text-xs font-bold text-[#1A1A18] tracking-wide mt-0.5">偉哥 · 尊享私旅鑑賞手冊</h2>
+    </div>
+  </div>
+  
+  <div class="flex items-center gap-1.5 font-sans-ui">
+    <div class="switch-pill" title="切換語言 / Switch Language">
+      <button id="lang-btn-tw" onclick="setLanguage('zh-TW')" class="switch-btn active">繁</button>
+      <button id="lang-btn-cn" onclick="setLanguage('zh-CN')" class="switch-btn">简</button>
+      <button id="lang-btn-en" onclick="setLanguage('en')" class="switch-btn">EN</button>
+    </div>
+  </div>
+</header>
+
+<!-- 2. 典雅封面卷首 -->
+<div class="parchment-card p-6 relative overflow-hidden text-center space-y-4">
+  <div class="flex justify-center items-center gap-2 text-[#8C6D37] text-xs">
+    <span>✦</span>
+    <span id="txt-hero-super" class="font-cinzel tracking-[0.25em] text-[10px] uppercase font-bold">Curated Expedition in Formosa</span>
+    <span>✦</span>
+  </div>
+
+  <div class="space-y-1">
+    <p id="txt-hero-sub" class="text-xs italic text-[#7A7468] font-playfair">Exclusive Private Charter Dossier</p>
+    <h1 id="txt-hero-title" class="text-xl sm:text-2xl font-black text-[#1A1A18] leading-snug tracking-tight">
+      <span class="block">陳先生專屬</span>
+      <span class="block mt-0.5">5天4夜 尊榮包車行程表</span>
+    </h1>
+    <p id="txt-hero-meta" class="text-[11px] text-[#8C7A60] font-sans-ui pt-1">
+      尊榮專屬：陳先生 等共 4 人 ｜ 2026.10.15 ～ 10.19
+    </p>
+  </div>
+
+  <div class="double-rule"></div>
+
+  <div class="relative h-48 sm:h-56 rounded-xl overflow-hidden shadow-xs border border-[#E7DFD0]">
+    <img id="banner-img" class="w-full h-full object-cover" src="https://raw.githubusercontent.com/tdb8053-bit/Trip2026/main/001.webp" alt="精選封面大圖" onerror="this.onerror=null;this.src='001.webp';">
+    <div id="banner-standard-text" class="absolute bottom-2 right-2 bg-black/65 backdrop-blur-md text-white px-3 py-1 rounded-full text-[9px] font-cinzel tracking-wider">
+      <span id="text-en" class="font-bold">SUN MOON LAKE · NATURALLY PURE</span>
+    </div>
+  </div>
+</div>
+
+<!-- 3. 隨行名家司導 -->
+<section id="driver-card" class="parchment-card p-5 space-y-3.5 border-l-4 border-l-[#C5A059]">
+  <div class="flex justify-between items-start border-b border-[#EFE9DD] pb-3">
+    <div>
+      <span id="txt-chauffeur-tag" class="text-[9px] font-cinzel tracking-[0.18em] text-[#8C6D37] uppercase font-bold block">Certified Chauffeur & Carrier</span>
+      <h3 id="txt-chauffeur-title" class="text-sm font-bold text-[#1A1A18] mt-0.5">專屬隨行司導與禮賓座駕</h3>
+    </div>
+    <span id="txt-chauffeur-status" class="px-2.5 py-0.5 rounded-md text-[10px] font-cinzel font-bold bg-[#F4EEDF] text-[#7A5A1C] border border-[#E2D2B0]">
+      KEY GOLD STATUS
+    </span>
+  </div>
+
+  <div id="driver-content-active" class="space-y-3">
+    <div class="grid grid-cols-2 gap-3 text-xs font-sans-ui">
+      <div class="space-y-0.5 bg-[#FAF8F5] p-2.5 rounded-xl border border-[#EFE9DD]">
+        <span id="txt-lbl-driver" class="text-[10px] text-[#8A8478] block">專屬隨行執勤</span>
+        <div class="flex items-center justify-between">
+          <strong id="val-driver-name" class="text-sm font-serif font-bold text-[#1A1A18] block">陳小明 先生</strong>
+          <span class="text-[10px] text-[#A87B28] font-bold">★ 4.98 滿意好評</span>
+        </div>
+        <span class="text-[10px] text-[#8A8478] block pt-1">聯絡電話</span>
+        <strong id="val-driver-phone-display" class="text-xs font-mono font-bold text-[#1A1A18] block tracking-wide">+886912345678</strong>
+      </div>
+
+      <div class="space-y-0.5 bg-[#FAF8F5] p-2.5 rounded-xl border border-[#EFE9DD]">
+        <span id="txt-lbl-car" class="text-[10px] text-[#8A8478] block">禮賓專車 / 車號</span>
+        <strong id="val-driver-plate" class="text-sm font-mono font-bold text-[#1A1A18] block tracking-wider">ABC-8888</strong>
+        <span class="text-[10px] text-[#8A8478] block pt-1">車型 / 座位</span>
+        <span id="val-driver-vehicle" class="text-xs font-serif font-bold text-[#1A1A18] block leading-snug">
+          <span class="block">Mercedes-Benz</span>
+          <span class="block">Vito Tourer/9</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div id="driver-content-pending" class="p-3 bg-[#FAF8F5] rounded-xl text-center text-xs font-bold text-[#7A5A1C] border border-[#EFE9DD]" hidden>
+    <span id="txt-driver-pending">ℹ️ 專屬司導與座駕資訊將於出發前確認後正式呈送，偉哥竭誠為您守護。</span>
+  </div>
+
+  <div class="text-[11px] text-[#7A7468] pt-1 border-t border-dashed border-[#EFE9DD] flex flex-wrap justify-between items-center font-sans-ui gap-1">
+    <span id="txt-child-seat">座駕特別配置：兒童安全座椅 × 1</span>
+  </div>
+</section>
+
+<!-- 4. 預約乘車與乘客專屬需求 -->
+<section class="parchment-card p-5 space-y-3 font-sans-ui">
+  <div class="flex justify-between items-center border-b border-[#EFE9DD] pb-2">
+    <h3 id="lbl-order-info-title" class="text-xs font-bold text-[#1A1A18] font-cinzel uppercase tracking-wider flex items-center gap-1.5">
+      <span>👤 GUEST & JOURNEY LEDGER</span>
+    </h3>
+    <span class="text-[10px] text-[#8C6D37] font-bold font-serif" id="info-order-no">VIP PASS</span>
+  </div>
+
+  <div class="space-y-2 text-xs">
+    <div class="flex justify-between items-center border-b border-[#FAF8F5] pb-1.5">
+      <span id="lbl-customer-party" class="text-[#6A665E]">預約代表：</span>
+      <strong id="val-customer-party" class="font-bold text-[#1A1A18]">陳先生 等共 4 人</strong>
+    </div>
+    <div class="flex justify-between items-center border-b border-[#FAF8F5] pb-1.5">
+      <span id="lbl-contact-phone" class="text-[#6A665E]">聯絡電話：</span>
+      <strong id="val-contact-phone" class="font-bold text-[#1A1A18] font-mono">0912-345678</strong>
+    </div>
+
+    <div id="reservation-requests-row" class="p-2.5 bg-[#FAF8F5] border border-[#EFE9DD] rounded-xl space-y-1">
+      <span id="lbl-reservation-requests" class="block text-[11px] font-bold text-[#8C6D37]">✨ 專屬配置需求：</span>
+      <ul id="val-reservation-requests" class="text-xs list-disc list-inside space-y-0.5 text-rose-600 font-bold">
+        <li>請準備一個兒童座椅</li>
+      </ul>
+    </div>
+
+    <div id="reservation-note-row" class="p-2.5 bg-[#FFFBEB] border border-[#FDE68A] rounded-xl space-y-0.5" hidden>
+      <span id="lbl-reservation-note" class="block text-[11px] font-bold text-[#92400E]">⚠️ 備註與客約條款：</span>
+      <span id="val-reservation-note" class="text-xs text-[#92400E] font-medium"></span>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 行程樂章篇章快速導航 -->
+<div id="quick-nav-card" class="parchment-card p-3.5 space-y-2 sticky top-2 z-30 shadow-md">
+  <div class="flex items-center justify-between">
+    <span id="txt-chapters-tag" class="text-[#7A7468] font-cinzel tracking-wider uppercase font-bold text-[10px]">The Movement Chapters</span>
+    <span id="txt-chapters-sub" class="text-[10px] text-[#8C6D37] font-bold font-sans-ui">慢活巡航節奏</span>
+  </div>
+  <div id="quick-nav-grid" class="quick-jump-grid"></div>
+</div>
+
+<!-- 6. 每日詳細行程樂章容器 -->
+<div id="itinerary-days-container" class="space-y-4"></div>
+
+<!-- 7. 費用明細與鑑賞書札 -->
+<section id="budget-card" class="parchment-card p-5 sm:p-6 space-y-4">
+  <div class="flex justify-between items-start border-b border-[#EFE9DD] pb-3">
+    <div>
+      <span id="txt-statement-tag" class="text-[9px] font-cinzel text-[#8C6D37] tracking-[0.2em] font-bold uppercase block">Official Statement</span>
+      <h3 id="txt-statement-title" class="text-sm font-bold text-[#1A1A18] mt-0.5">貴賓行程費用核對書札</h3>
+    </div>
+    <span class="text-[10px] font-sans-ui font-bold text-[#7A7468] bg-[#FAF8F5] border border-[#EFE9DD] px-2 py-0.5 rounded-md">新台幣 TWD</span>
+  </div>
+
+  <div class="space-y-2 text-xs font-sans-ui text-[#4A463E]">
+    <div class="flex justify-between py-0.5">
+      <span id="lbl-total-fare" class="font-serif text-[#6A665E]">全程包車車資總額：</span>
+      <strong id="val-total-fare" class="font-mono text-[#1A1A18] font-bold">NT$ 28,500</strong>
+    </div>
+
+    <div id="row-collections" class="p-3 rounded-xl bg-[#FAF8F5] border border-[#EFE9DD] space-y-1.5 text-[11px]" hidden>
+      <div class="flex justify-between font-bold text-[#7A5A1C] border-b border-[#EFE9DD] pb-1 font-serif">
+        <span id="lbl-collection-total">代收代付與訂金代墊小計：</span>
+        <span id="val-collection-total" class="font-mono">NT$ 0</span>
+      </div>
+      <div id="collection-breakdown" class="space-y-0.5 text-zinc-600 font-sans-ui"></div>
+    </div>
+
+    <div class="flex justify-between py-0.5 text-[#2F6F4E] font-bold">
+      <span id="lbl-deposit" class="font-serif">公司已收定金：</span>
+      <span id="val-deposit" class="font-mono">- NT$ 0</span>
+    </div>
+  </div>
+
+  <div class="border-t-2 border-dashed border-[#EFE9DD] pt-3 flex justify-between items-baseline font-sans-ui">
+    <div>
+      <span id="lbl-payable-prompt" class="text-xs font-serif font-bold text-[#1A1A18] block">現場結算應付總額</span>
+      <span id="lbl-payable-sub" class="text-[10px] text-[#8A8478]">行程結束前向執勤司導付清即可</span>
+    </div>
+    <div class="text-right font-mono">
+      <strong id="val-final-payable" class="text-2xl font-black text-[#8C6D37]">28,500 元</strong>
+    </div>
+  </div>
+</section>
+
+<!-- 司機端派遣單專屬 -->
+<div id="driver-dispatch-collection-container" hidden></div>
+
+<!-- 8. 氣象即時守護 -->
+<section class="parchment-card p-5 space-y-3">
+  <div class="flex items-center justify-between border-b border-[#EFE9DD] pb-2.5">
+    <div class="flex items-center gap-2">
+      <span class="text-sm">⛅</span>
+      <div>
+        <h4 id="txt-weather-title" class="text-xs font-bold text-[#1A1A18]">即時雲圖與山區氣候守護</h4>
+        <p class="text-[10px] text-[#8A8478] font-sans-ui">Windy ECMWF 聯網雷達</p>
+      </div>
+    </div>
+    <span class="text-[10px] font-bold text-[#2F6F4E] bg-[#E3EDE8] border border-[#B9D0C3] px-2 py-0.5 rounded-full font-sans-ui">即時連線中</span>
+  </div>
+  <div class="w-full h-56 rounded-xl overflow-hidden border border-[#E7DFD0]">
+    <iframe width="100%" height="100%" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=%C2%B0C&metricWind=km/h&zoom=7&overlay=rain&product=ecmwf&level=surface&lat=23.7&lon=120.9&detailLat=23.7&detailLon=120.9&marker=true" frameborder="0"></iframe>
+  </div>
+</section>
+
+<!-- 9. 品牌回訪邀請卡 -->
+<a id="return-visit-card" target="_blank" rel="noopener" href="https://tdb8053-bit.github.io/Website/" class="block vip-invitation-card p-5 group font-sans-ui text-left">
+  <div class="space-y-3 relative z-10">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-1.5 bg-[#C5A059]/20 border border-[#C5A059]/50 px-2.5 py-0.5 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#E5C278]"></span>
+        <span class="text-[9px] tracking-[0.22em] text-[#F3E2BD] uppercase font-cinzel font-bold">VIP Curated Expeditions</span>
+      </div>
+      <span class="text-[10px] text-[#C5A059] font-cinzel tracking-widest uppercase font-bold">Wei Private Tour</span>
+    </div>
+
+    <div>
+      <h4 id="return-visit-title" class="text-sm sm:text-base font-bold text-[#FAF6EF] tracking-wide flex items-center gap-1.5">
+        <span>🌿 探索偉哥旅遊平台更多台灣精選私旅</span>
+      </h4>
+      <p id="return-visit-sub" class="text-[11px] text-[#C8BFB0] mt-1 leading-relaxed">
+        阿里山日出、水沙連湖景、九份山城專屬客製包車
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-1.5 pt-0.5">
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/10 text-[#F5EEDF] border border-white/15">🌅 阿里山日出雲海</span>
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/10 text-[#F5EEDF] border border-white/15">⛵ 水沙連湖景巡航</span>
+      <span class="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white/10 text-[#F5EEDF] border border-white/15">🏮 九份山城秘境</span>
+    </div>
+
+    <div class="pt-1 flex justify-end">
+      <div class="inline-flex items-center gap-2 bg-gradient-to-r from-[#C5A059] to-[#DFBE7A] text-[#1A1A18] px-4 py-2 rounded-xl text-xs font-black shadow-md group-hover:brightness-110 group-hover:translate-x-0.5 transition-all">
+        <span>即刻前往官網鑑賞</span>
+        <span class="text-sm font-bold group-hover:translate-x-1 transition-transform">➔</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- 頁尾 -->
+<footer class="footer-signature-plate p-4 sm:p-4.5 my-6 font-sans-ui flex items-center justify-between gap-3 sm:gap-4 relative overflow-hidden">
+  <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+    <div class="relative shrink-0">
+      <div class="footer-seal-box">
+        <img id="footer-seal-img" src="https://raw.githubusercontent.com/tdb8053-bit/Trip2026/main/002.png" alt="偉哥 Logo" class="brand-seal-img" onload="onSealImageLoaded(this, 'footer-seal-fallback')" onerror="onSealImageError(this, 'footer-seal-fallback')">
+      </div>
+      <span class="absolute -bottom-1 -right-1 text-[8px] bg-[#8C6D37] text-white px-1.5 py-0.2 rounded-full font-cinzel font-bold tracking-tighter shadow-2xs border border-white/60">KEY</span>
+    </div>
+    <div class="min-w-0 space-y-0.5 text-left">
+      <span id="txt-footer-brand" class="font-bold text-xs sm:text-sm text-[#1A1A18] tracking-tight font-serif">偉哥旅遊派遣平台 · The Michelin Key Voyage Edition</span>
+      <p id="txt-footer-contact" class="text-[10.5px] text-[#7A7468] truncate leading-relaxed">官方服務：偉哥旅遊派遣平台</p>
+    </div>
+  </div>
+  <div class="hidden sm:flex flex-col items-end shrink-0 text-right pr-1">
+    <span class="text-[9px] font-cinzel font-bold text-[#8C6D37] tracking-widest uppercase">Concierge Certified</span>
+    <span class="text-[10px] text-[#2F6F4E] font-bold flex items-center gap-1 mt-0.5 bg-[#E3EDE8] px-2 py-0.5 rounded-full border border-[#B9D0C3]">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      安全調度中
+    </span>
+  </div>
+</footer>
+
+</div>
+
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">✦ TOP</button>
+<div id="michelinToast">已複製至剪貼簿！</div>
+
+<!-- 智慧預檢報告對話視窗 -->
+<div id="audit-modal-backdrop" class="audit-modal-backdrop">
+  <div class="audit-modal-card">
+    <div class="bg-[#1A1A18] p-4 text-[#FAF5ED] flex justify-between items-center shrink-0 border-b border-[#C5A059]">
+      <div>
+        <h3 class="text-sm font-bold font-cinzel flex items-center gap-1.5 text-[#C5A059]">
+          <span>🛡️ 行程發布智慧預檢報告</span>
+        </h3>
+        <p class="text-[11px] text-[#A69B88] opacity-90 mt-0.5 font-sans-ui">Pre-flight Audit Engine · Michelin Standard</p>
+      </div>
+      <button type="button" onclick="closeAuditModal()" class="text-white/80 hover:text-white text-lg font-bold px-2 py-0.5 rounded-lg bg-white/10">✕</button>
+    </div>
+
+    <div class="p-4 overflow-y-auto space-y-3 text-xs leading-relaxed no-scrollbar flex-1 font-sans-ui">
+      <div id="audit-status-banner" class="p-3 rounded-xl border bg-amber-50 border-amber-200 text-amber-950 flex items-center gap-3">
+        <span id="audit-status-icon" class="text-2xl shrink-0">⚠️</span>
+        <div>
+          <p id="audit-status-title" class="font-bold text-sm">正在執行預檢...</p>
+          <p id="audit-status-sub" class="text-[11px] opacity-80 mt-0.5">核對行程邏輯與帳務算式中。</p>
+        </div>
+      </div>
+
+      <div id="audit-blocker-section" class="space-y-1.5" hidden>
+        <p class="font-bold text-rose-700 text-xs flex items-center gap-1">
+          <span>🔴 嚴格錯誤（阻擋發布，必須修正）</span>
+        </p>
+        <ul id="audit-blocker-list" class="space-y-1 pl-1"></ul>
+      </div>
+
+      <div id="audit-warning-section" class="space-y-1.5" hidden>
+        <p class="font-bold text-amber-700 text-xs flex items-center gap-1">
+          <span>🟡 邏輯與時間警示（請專員確認）</span>
+        </p>
+        <ul id="audit-warning-list" class="space-y-1 pl-1"></ul>
+      </div>
+    </div>
+
+    <div class="p-3 bg-[#FAF8F5] border-t border-[#E7DFD0] flex gap-2 shrink-0 font-sans-ui">
+      <button type="button" onclick="closeAuditModal()" class="flex-1 bg-white hover:bg-zinc-100 text-[#1A1A18] border border-[#E7DFD0] premium-button">返回修改</button>
+      <button id="audit-proceed-btn" type="button" onclick="proceedPublishAfterAudit()" class="flex-1 bg-[#8C6D37] hover:bg-[#73582A] text-white premium-button shadow-xs">⚠️ 確認無誤，繼續發布雙端交付檔</button>
+    </div>
+  </div>
+</div>
+
+<!-- 雙端交付檔案成功儲存與即時下載中心對話視窗 -->
+<div id="delivery-success-modal" class="audit-modal-backdrop">
+  <div class="audit-modal-card">
+    <div class="bg-[#1A1A18] p-4 text-white flex justify-between items-center shrink-0 border-b border-[#C5A059]">
+      <div>
+        <h3 class="text-sm font-bold font-cinzel flex items-center gap-1.5 text-[#C5A059]">
+          <span>🎉 米其林雙端交付檔已建立完成！</span>
+        </h3>
+        <p class="text-[11px] text-[#A69B88] opacity-90 mt-0.5 font-sans-ui">Michelin Key Voyage Package Ready</p>
+      </div>
+      <button type="button" onclick="closeDeliverySuccessModal()" class="text-white/80 hover:text-white text-lg font-bold px-2 py-0.5 rounded-lg bg-white/10">✕</button>
+    </div>
+
+    <div class="p-4 overflow-y-auto space-y-3 text-xs leading-relaxed no-scrollbar flex-1 font-sans-ui">
+      <div id="delivery-location-box" class="p-3 rounded-xl border bg-[#FAF8F5] border-[#E2D2B0] text-[#1A1A18] space-y-1.5">
+        <p class="font-bold text-sm flex items-center gap-1 text-[#8C6D37]">
+          <span>📁 本機儲存位置：</span>
+        </p>
+        <p id="delivery-modal-path-text" class="font-mono text-xs text-[#5A5954] break-all font-bold bg-white p-2 rounded-lg border border-[#E7DFD0]"></p>
+      </div>
+
+      <div class="space-y-2 pt-1">
+        <p class="font-bold text-[#1A1A18] text-xs">📥 即時下載檔案（點擊立即存至「下載項目」）：</p>
+        <div class="grid grid-cols-1 gap-2">
+          <button id="modal-download-customer-btn" type="button" class="w-full bg-[#1A1A18] hover:bg-[#2C2B27] text-[#FAF5ED] premium-button text-xs shadow-xs font-bold flex items-center justify-between px-3">
+            <span>👤 下載 客戶端米其林星鑰手帖 HTML</span>
+            <span class="text-[10px] opacity-80" id="modal-customer-filename-tag"></span>
+          </button>
+          <button id="modal-download-driver-btn" type="button" class="w-full bg-[#8C6D37] hover:bg-[#73582A] text-white premium-button text-xs shadow-xs font-bold flex items-center justify-between px-3">
+            <span>🚕 下載 司導任務派遣單 HTML</span>
+            <span class="text-[10px] opacity-80" id="modal-driver-filename-tag"></span>
+          </button>
+          <button id="modal-download-raw-btn" type="button" class="w-full bg-zinc-700 hover:bg-zinc-800 text-white premium-button text-xs shadow-xs font-bold flex items-center justify-between px-3">
+            <span>📄 下載 原始文字備份 TXT</span>
+            <span class="text-[10px] opacity-80">.txt</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-3 bg-[#FAF8F5] border-t border-[#E7DFD0] flex justify-end shrink-0 font-sans-ui">
+      <button type="button" onclick="closeDeliverySuccessModal()" class="bg-[#1A1A18] hover:bg-[#2C2B27] text-[#FAF5ED] premium-button px-6 font-bold shadow-xs">完成</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentLang = 'zh-TW';
+
+const i18nDictionary = {
+  'zh-TW': {
+    brandTag: 'Wei Travel Concierge',
+    brandTitle: '偉哥 · 尊享私旅鑑賞手冊',
+    heroSuper: 'Curated Expedition in Formosa',
+    heroSub: 'Exclusive Private Charter Dossier',
+    tripTitle: (name, days) => name ? `${name}專屬：${days}天${days > 1 ? days - 1 : 1}夜 尊榮包車行程表` : '尊榮包車行程表',
+    chauffeurTag: 'Certified Chauffeur & Carrier',
+    chauffeurTitle: '專屬隨行司導與禮賓座駕',
+    chauffeurStatus: 'KEY GOLD STATUS',
+    driverLbl: '專屬隨行執勤',
+    carLbl: '禮賓專車 / 車號',
+    childSeat: '座駕特別配置：兒童安全座椅 × 1',
+    orderInfoTitle: '👤 GUEST & JOURNEY LEDGER',
+    customerPartyLbl: '預約代表：',
+    contactPhoneLbl: '聯絡電話：',
+    reservationRequestsLbl: '✨ 專屬配置需求：',
+    reservationNoteLbl: '⚠️ 備註與客約條款：',
+    chaptersTag: 'The Movement Chapters',
+    chaptersSub: '慢活巡航節奏',
+    departureOriginLbl: '啟程節點：',
+    pickupTitle: '✈️ 桃園機場專屬迎賓接機',
+    dropoffTitle: '🛫 桃園機場專屬禮賓送機',
+    arrivalDateLbl: '抵達日期：',
+    arrivalTimeLbl: '航班抵達：',
+    flightNoLbl: '航班編號：',
+    pickupTerminalLbl: '抵達航廈：',
+    dropoffDateLbl: '送機日期：',
+    departureTimeLbl: '起飛時間：',
+    dropoffFlightNoLbl: '離境航班：',
+    dropoffTerminalLbl: '出發航廈：',
+    meetingPointLbl: '📍 迎候地點：',
+    dropoffLocationLbl: '送機地點：',
+    stayPrefix: '⏳ 預計停留：約 ',
+    stayUnit: '分鐘',
+    meetingTimePrefix: '⏰ 集合時間：',
+    mapBtn: '🗺️ 地圖導覽',
+    searchBtn: '🔍 Google 探索',
+    dailyFarePrefix: '💰 今日車資：NT$ ',
+    dailyFareSuffix: ' 元',
+    statementTag: 'Official Statement',
+    statementTitle: '貴賓行程費用核對書札',
+    totalFareLbl: '全程包車車資總額：',
+    collectionLbl: '代收代付與訂金代墊小計：',
+    depositLbl: '公司已收定金：',
+    payablePrompt: '現場結算應付總額',
+    payableSub: '行程結束前向執勤司導付清即可',
+    currencyUnit: '元',
+    weatherTitle: '即時雲圖與山區氣候守護',
+    returnVisitTitle: '🌿 探索偉哥旅遊平台更多台灣精選私旅',
+    returnVisitSub: '阿里山日出、水沙連湖景、九份山城專屬客製包車',
+    footerBrand: '偉哥包車旅遊服務平台 · The Michelin Key Voyage Edition',
+    driverPendingText: 'ℹ️ 專屬司導與座駕資訊將於出發前確認後正式呈送，偉哥竭誠為您守護。'
+  },
+  'zh-CN': {
+    brandTag: 'Wei Travel Concierge',
+    brandTitle: '伟哥 · 尊享私旅鉴赏手册',
+    heroSuper: 'Curated Expedition in Formosa',
+    heroSub: 'Exclusive Private Charter Dossier',
+    tripTitle: (name, days) => name ? `${name}专属：${days}天${days > 1 ? days - 1 : 1}夜 尊荣包车行程表` : '尊荣包车行程表',
+    chauffeurTag: 'Certified Chauffeur & Carrier',
+    chauffeurTitle: '专属随行司导与礼宾座驾',
+    chauffeurStatus: 'KEY GOLD STATUS',
+    driverLbl: '专属随行执勤',
+    carLbl: '礼宾专车 / 车号',
+    childSeat: '座驾特别配置：儿童安全座椅 × 1',
+    orderInfoTitle: '👤 GUEST & JOURNEY LEDGER',
+    customerPartyLbl: '预约代表：',
+    contactPhoneLbl: '联系电话：',
+    reservationRequestsLbl: '✨ 专属配置需求：',
+    reservationNoteLbl: '⚠️ 备注与客约条款：',
+    chaptersTag: 'The Movement Chapters',
+    chaptersSub: '慢活巡航节奏',
+    departureOriginLbl: '启程节点：',
+    pickupTitle: '✈️ 桃园机场专属迎宾接机',
+    dropoffTitle: '🛫 桃园机场专属礼宾送机',
+    arrivalDateLbl: '抵达日期：',
+    arrivalTimeLbl: '航班抵达：',
+    flightNoLbl: '航班编号：',
+    pickupTerminalLbl: '抵达航厦：',
+    dropoffDateLbl: '送机日期：',
+    departureTimeLbl: '起飞时间：',
+    dropoffFlightNoLbl: '离境航班：',
+    dropoffTerminalLbl: '出发航厦：',
+    meetingPointLbl: '📍 迎候地点：',
+    dropoffLocationLbl: '送机地点：',
+    stayPrefix: '⏳ 预计停留：约 ',
+    stayUnit: '分钟',
+    meetingTimePrefix: '⏰ 集合时间：',
+    mapBtn: '🗺️ 地图导航',
+    searchBtn: '🔍 Google 探索',
+    dailyFarePrefix: '💰 今日车资：NT$ ',
+    dailyFareSuffix: ' 元',
+    statementTag: 'Official Statement',
+    statementTitle: '贵宾行程费用核对书札',
+    totalFareLbl: '全程包车车资总额：',
+    collectionLbl: '代收代付与订金代垫小计：',
+    depositLbl: '公司已收定金：',
+    payablePrompt: '现场结算应付总额',
+    payableSub: '行程结束前向执勤司导付清即可',
+    currencyUnit: '元',
+    weatherTitle: '实时云图与山区气候守护',
+    returnVisitTitle: '🌿 探索伟哥旅游平台更多台湾精选私旅',
+    returnVisitSub: '阿里山日出、水沙连湖景、九份山城专属定制包车',
+    footerBrand: '伟哥包车旅游服务平台 · The Michelin Key Voyage Edition',
+    driverPendingText: 'ℹ️ 专属司导与座驾信息将于出发前确认后正式呈送，伟哥竭诚为您守护。'
+  },
+  'en': {
+    brandTag: 'Wei Travel Concierge',
+    brandTitle: 'Wei Travel · Michelin Key Voyage Dossier',
+    heroSuper: 'Curated Expedition in Formosa',
+    heroSub: 'Exclusive Private Charter Dossier',
+    tripTitle: (name, days) => name ? `Curated Voyage for ${name} · ${days}D${days > 1 ? days - 1 : 1}N` : 'Exclusive Private Charter Itinerary',
+    chauffeurTag: 'Certified Chauffeur & Carrier',
+    chauffeurTitle: 'Designated Chauffeur & Fleet',
+    chauffeurStatus: 'KEY GOLD STATUS',
+    driverLbl: 'Designated Chauffeur',
+    carLbl: 'Vehicle & Plate Number',
+    childSeat: 'Special Equipment: Child Safety Seat × 1',
+    orderInfoTitle: '👤 GUEST & JOURNEY LEDGER',
+    customerPartyLbl: 'Lead Guest:',
+    contactPhoneLbl: 'Contact Tel:',
+    reservationRequestsLbl: '✨ Special Amenities:',
+    reservationNoteLbl: '⚠️ Remarks & Terms:',
+    chaptersTag: 'The Movement Chapters',
+    chaptersSub: 'Curated Voyage Rhythm',
+    departureOriginLbl: 'Departure Origin:',
+    pickupTitle: '✈️ Airport Arrival Concierge',
+    dropoffTitle: '🛫 Airport Departure Transfer',
+    arrivalDateLbl: 'Arrival Date:',
+    arrivalTimeLbl: 'Arrival Time:',
+    flightNoLbl: 'Flight No:',
+    pickupTerminalLbl: 'Terminal:',
+    dropoffDateLbl: 'Departure Date:',
+    departureTimeLbl: 'Flight Time:',
+    dropoffFlightNoLbl: 'Flight No:',
+    dropoffTerminalLbl: 'Terminal:',
+    meetingPointLbl: '📍 Meeting Point:',
+    dropoffLocationLbl: 'Dropoff Airport:',
+    stayPrefix: '⏳ Expected Stay: ~',
+    stayUnit: 'mins',
+    meetingTimePrefix: '⏰ Assemble At: ',
+    mapBtn: '🗺️ Map Navigation',
+    searchBtn: '🔍 Explore Google',
+    dailyFarePrefix: '💰 Day Fare: NT$ ',
+    dailyFareSuffix: '',
+    statementTag: 'Official Statement',
+    statementTitle: 'Confidential Ledger & Reconciliation',
+    totalFareLbl: 'Total Charter Fare:',
+    collectionLbl: 'Disbursements & Pre-bookings:',
+    depositLbl: 'Deposit Credited:',
+    payablePrompt: 'Total Balance Due',
+    payableSub: 'Settle directly with chauffeur prior to completion',
+    currencyUnit: 'TWD',
+    weatherTitle: 'Live Radar & Mountain Weather Forecast',
+    returnVisitTitle: '🌿 Explore More Curated Taiwan Journeys',
+    returnVisitSub: 'Alishan sunrise, Sun Moon Lake vistas & Jiufen heritage expeditions',
+    footerBrand: 'Wei Travel Concierge · Michelin Key Voyage Edition',
+    driverPendingText: 'ℹ️ Designated chauffeur and vehicle details will be presented prior to departure.'
+  }
+};
+
+let templateData = {
+  customerName: "陳先生",
+  customerParty: "陳先生 等共 4 人",
+  contactPhone: "0912-345678",
+  orderNumber: "2026-1015",
+  reservationNote: "",
+  reservationRequests: ["請準備一個兒童座椅"],
+  driver: {
+    name: "陳小明",
+    phone: "+886912345678",
+    plate: "ABC-8888",
+    vehicle: "Mercedes-Benz Vito Tourer/9"
+  },
+  pickupInfo: {
+    arrivalDate: "2026/10/15",
+    flight: "BR198",
+    arrivalTime: "10:30",
+    terminal: "T2",
+    location: "桃園國際機場",
+    meetingPoint: "桃園國際機場 T2 抵達大廳"
+  },
+  dropoffInfo: {
+    dropoffDate: "2026/10/19",
+    flight: "BR197",
+    departureTime: "16:00",
+    terminal: "T2",
+    location: "桃園國際機場",
+    meetingPoint: "桃園國際機場 T2"
+  },
+  tripDays: 5,
+  startDate: "2026-10-15",
+  endDate: "2026-10-19",
+  dailyItinerary: {
+    1: {
+      departureTime: "11:30 出發 (航班 10:30 抵達 +1小時)",
+      origin: "桃園國際機場",
+      stay: "台北君悅酒店",
+      entries: [ "台北君悅酒店" ],
+      fare: 6500
+    },
+    2: {
+      departureTime: "09:00 出發",
+      origin: "台北君悅酒店",
+      stay: "日月潭馥麗溫泉大飯店",
+      entries: [ "日月潭遊湖" ],
+      fare: 6000
+    },
+    3: {
+      departureTime: "09:00 出發",
+      origin: "日月潭馥麗溫泉大飯店",
+      stay: "清境佛羅倫斯渡假山莊",
+      entries: [ "清境農場" ],
+      fare: 7000
+    },
+    4: {
+      departureTime: "09:00 出發",
+      origin: "清境佛羅倫斯渡假山莊",
+      stay: "台中逢甲商旅",
+      entries: [ "勝興車站鐵道自行車" ],
+      fare: 5500
+    },
+    5: {
+      departureTime: "09:00 出發",
+      origin: "台中逢甲商旅",
+      stay: "台中逢甲商旅",
+      entries: [ "彩虹眷村", "春水堂創始店", "逢甲夜市" ],
+      fare: 3500
+    }
+  },
+  tickets: [],
+  hotelFees: [],
+  totalFare: 28500,
+  collectionTotal: 0,
+  deposit: 0,
+  totalPayable: 28500
+};
+
+if (window.__initialTripData) {
+  templateData = window.__initialTripData;
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+
+  const btnTw = document.getElementById('lang-btn-tw');
+  const btnCn = document.getElementById('lang-btn-cn');
+  const btnEn = document.getElementById('lang-btn-en');
+  if (btnTw) btnTw.classList.toggle('active', lang === 'zh-TW');
+  if (btnCn) btnCn.classList.toggle('active', lang === 'zh-CN');
+  if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+
+  renderFullCustomerPage();
+  showToast(lang === 'en' ? 'Language switched to English' : (lang === 'zh-CN' ? '已切换至简体中文' : '已切換至繁體中文'));
+}
+
+function showToast(msg, isError = false) {
+  const t = document.getElementById('michelinToast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.toggle('error', isError);
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV'];
+
+function formatMovementRoman(dayNum) {
+  const idx = (parseInt(dayNum, 10) - 1) % romanNumerals.length;
+  return `Movement ${romanNumerals[idx] || dayNum}`;
+}
+
+function renderFullCustomerPage() {
+  const dict = i18nDictionary[currentLang] || i18nDictionary['zh-TW'];
+
+  const brandEl = document.getElementById('txt-header-brand');
+  if (brandEl) brandEl.textContent = dict.brandTag;
+  const headerTitleEl = document.getElementById('txt-header-title');
+  if (headerTitleEl) headerTitleEl.textContent = dict.brandTitle;
+  const heroSuperEl = document.getElementById('txt-hero-super');
+  if (heroSuperEl) heroSuperEl.textContent = dict.heroSuper;
+  const heroSubEl = document.getElementById('txt-hero-sub');
+  if (heroSubEl) heroSubEl.textContent = dict.heroSub;
+  const heroTitleEl = document.getElementById('txt-hero-title');
+  if (heroTitleEl) {
+    const days = templateData.tripDays || 5;
+    const nights = days > 1 ? days - 1 : 1;
+    const guestName = templateData.customerName || '陳先生';
+    if (currentLang === 'en') {
+      heroTitleEl.innerHTML = `<span class="block">Curated Voyage for ${guestName}</span><span class="block mt-0.5">${days} Days ${nights} Nights Charter</span>`;
+    } else {
+      heroTitleEl.innerHTML = `<span class="block">${guestName}專屬</span><span class="block mt-0.5">${days}天${nights}夜 尊榮包車行程表</span>`;
+    }
+  }
+  const heroMetaEl = document.getElementById('txt-hero-meta');
+  if (heroMetaEl) {
+    heroMetaEl.textContent = `${dict.customerPartyLbl} ${templateData.customerParty || '貴賓'} ｜ ${templateData.startDate || '2026.10.15'} ～ ${templateData.endDate || '2026.10.19'}`;
+  }
+
+  const chTag = document.getElementById('txt-chauffeur-tag');
+  if (chTag) chTag.textContent = dict.chauffeurTag;
+  const chTitle = document.getElementById('txt-chauffeur-title');
+  if (chTitle) chTitle.textContent = dict.chauffeurTitle;
+  const chStatus = document.getElementById('txt-chauffeur-status');
+  if (chStatus) chStatus.textContent = dict.chauffeurStatus;
+  const lblDriver = document.getElementById('txt-lbl-driver');
+  if (lblDriver) lblDriver.textContent = dict.driverLbl;
+  const lblCar = document.getElementById('txt-lbl-car');
+  if (lblCar) lblCar.textContent = dict.carLbl;
+  const txtChildSeat = document.getElementById('txt-child-seat');
+  if (txtChildSeat) txtChildSeat.textContent = dict.childSeat;
+  const txtDriverPending = document.getElementById('txt-driver-pending');
+  if (txtDriverPending) txtDriverPending.textContent = dict.driverPendingText;
+
+  const driverActive = document.getElementById('driver-content-active');
+  const driverPending = document.getElementById('driver-content-pending');
+  if (templateData.driver && (templateData.driver.name || templateData.driver.plate)) {
+    if (driverActive) driverActive.hidden = false;
+    if (driverPending) driverPending.hidden = true;
+    const vName = document.getElementById('val-driver-name');
+    if (vName) vName.textContent = `${templateData.driver.name} 先生`;
+    const vPlate = document.getElementById('val-driver-plate');
+    if (vPlate) vPlate.textContent = templateData.driver.plate || '-';
+    const vVeh = document.getElementById('val-driver-vehicle');
+    if (vVeh) {
+      const vehText = templateData.driver.vehicle || 'Mercedes-Benz Vito Tourer/9';
+      if (vehText.includes('Mercedes-Benz Vito')) {
+        vVeh.innerHTML = `<span class="block">Mercedes-Benz</span><span class="block">Vito Tourer/9</span>`;
+      } else {
+        const parts = vehText.split(/\s+/);
+        if (parts.length > 1) {
+          vVeh.innerHTML = `<span class="block">${parts[0]}</span><span class="block">${parts.slice(1).join(' ')}</span>`;
+        } else {
+          vVeh.textContent = vehText;
+        }
+      }
+    }
+    const vPhoneDisp = document.getElementById('val-driver-phone-display');
+    if (vPhoneDisp) vPhoneDisp.textContent = templateData.driver.phone || '+886912345678';
+  } else {
+    if (driverActive) driverActive.hidden = true;
+    if (driverPending) driverPending.hidden = false;
+  }
+
+  const partyEl = document.getElementById('val-customer-party');
+  if (partyEl) partyEl.textContent = templateData.customerParty || '-';
+  const phoneEl = document.getElementById('val-contact-phone');
+  if (phoneEl) phoneEl.textContent = templateData.contactPhone || '-';
+
+  renderReservationRequests();
+  renderQuickRequestTags();
+
+  const noteRow = document.getElementById('reservation-note-row');
+  const noteVal = document.getElementById('val-reservation-note');
+  if (noteRow && noteVal) {
+    if (templateData.reservationNote && templateData.reservationNote.trim()) {
+      noteRow.hidden = false;
+      noteVal.textContent = templateData.reservationNote;
+    } else {
+      noteRow.hidden = true;
+      noteVal.textContent = '';
+    }
+  }
+
+  const chaptersTag = document.getElementById('txt-chapters-tag');
+  if (chaptersTag) chaptersTag.textContent = dict.chaptersTag;
+  const chaptersSub = document.getElementById('txt-chapters-sub');
+  if (chaptersSub) chaptersSub.textContent = dict.chaptersSub;
+
+  renderQuickNavButtons(templateData.tripDays);
+
+  let calculatedTotalFare = 0;
+  const container = document.getElementById('itinerary-days-container');
+  if (container) container.innerHTML = '';
+
+  Object.entries(templateData.dailyItinerary).forEach(([dayNumber, itinerary]) => {
+    const dayCard = document.createElement('article');
+    dayCard.id = `day${dayNumber}`;
+    dayCard.setAttribute('data-itinerary-day', dayNumber);
+    dayCard.className = 'parchment-card p-5 space-y-4 shadow-sm';
+    container.appendChild(dayCard);
+
+    const formattedDate = formatDateWithWeekday(templateData.startDate, parseInt(dayNumber, 10) - 1);
+    const movementLabel = formatMovementRoman(dayNumber);
+
+    const header = document.createElement('div');
+    header.className = 'flex justify-between items-baseline border-b border-[#EFE9DD] pb-3';
+    header.innerHTML = `
+      <div>
+        <span class="text-[10px] font-cinzel text-[#8C6D37] tracking-[0.2em] font-bold uppercase block">${movementLabel} · Day ${dayNumber}</span>
+        <h3 class="text-sm font-bold text-[#1A1A18] mt-0.5">${formattedDate}</h3>
+      </div>
+    `;
+    dayCard.appendChild(header);
+
+    const isPickupDay = (Number(dayNumber) === 1 && Boolean(templateData.pickupInfo));
+    const depTimeText = String(itinerary.departureTime || '09:00 出發');
+    const isNineOClock = isDefaultDepartureNine(depTimeText);
+    const isExceptionTime = !isNineOClock && !isPickupDay;
+
+    const depSection = document.createElement('div');
+    depSection.className = 'flex items-center justify-between flex-wrap gap-2 pt-0.5';
+    depSection.innerHTML = `
+      <div class="flex items-center gap-1.5 font-sans-ui text-xs text-[#1A1A18]">
+        <span class="text-[#8C6D37] font-bold">⏰ 出發時間：</span>
+        <strong class="font-bold text-[#1A1A18]">${depTimeText}</strong>
+      </div>
+      ${isExceptionTime ? `<span class="departure-exception-tag">例外出發時間</span>` : ''}
+    `;
+    dayCard.appendChild(depSection);
+
+    if (itinerary.origin) {
+      const loc = document.createElement('p');
+      loc.className = 'text-xs text-[#5A5954] font-sans-ui flex items-center gap-1';
+      loc.innerHTML = `<span>${dict.departureOriginLbl}</span><strong class="text-[#1A1A18]">${itinerary.origin}</strong>`;
+      dayCard.appendChild(loc);
+    }
+
+    if (dayNumber === '1' && templateData.pickupInfo) {
+      const pickupBox = document.createElement('div');
+      pickupBox.className = 'bg-[#FAF8F5] border border-[#E2D2B0] rounded-xl p-3.5 text-xs text-[#1A1A18] space-y-1.5 shadow-xs font-sans-ui';
+      pickupBox.innerHTML = `
+        <div class="font-bold text-[#8C6D37] border-b border-[#EFE9DD] pb-1.5 flex justify-between items-center">
+          <span>${dict.pickupTitle}</span>
+          <span class="text-[10px] text-[#A87B28] font-cinzel">VIP CONCIERGE</span>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5 text-[11px] pt-0.5">
+          <div><span class="text-[#8A8478]">${dict.arrivalDateLbl}</span> <strong>${templateData.pickupInfo.arrivalDate}</strong></div>
+          <div><span class="text-[#8A8478]">${dict.arrivalTimeLbl}</span> <strong>${templateData.pickupInfo.arrivalTime}</strong></div>
+          <div><span class="text-[#8A8478]">${dict.flightNoLbl}</span> <strong class="font-mono">${templateData.pickupInfo.flight}</strong></div>
+          <div><span class="text-[#8A8478]">${dict.pickupTerminalLbl}</span> <strong>${templateData.pickupInfo.terminal}</strong></div>
+        </div>
+        ${templateData.pickupInfo.meetingPoint ? `<div class="text-[11px] text-[#5A5954] pt-1.5 border-t border-[#EFE9DD]"><span>${dict.meetingPointLbl}</span> <strong>${templateData.pickupInfo.meetingPoint}</strong></div>` : ''}
+        <div class="mt-1.5 rounded-lg border border-[#E2D2B0] bg-[#F4EEDF]/60 p-2 text-[10px] text-[#6A4F1D] font-medium leading-relaxed">
+          📶 溫馨提醒：當您降落並連上機場免費 WiFi 時，請傳訊息通知。司機將即時告知您會面的精確地點與接駕時間。
+        </div>
+      `;
+      dayCard.appendChild(pickupBox);
+    }
+
+    const timeline = document.createElement('div');
+    timeline.className = 'space-y-3 pt-1 border-l-2 border-dashed border-[#E7DFD0] pl-3 ml-1.5 font-sans-ui';
+    dayCard.appendChild(timeline);
+
+    let previousSpot = itinerary.origin || '';
+    let currentClockMins = parseHHMM(itinerary.departureTime);
+    const cleanEntries = (itinerary.entries || []).filter(e => !isAccountingLine(e) && !isHeaderOrDateLine(e) && !isDropoffInfoLine(e));
+
+    cleanEntries.forEach((entryName, idx) => {
+      const travelInfo = getEstimatedTravelTime(previousSpot, entryName);
+      currentClockMins += travelInfo.mins;
+      const isDropoffSpot = entryName.includes('送機') || entryName.includes('離境');
+      const isNightMarket = isNightMarketSpot(entryName);
+      const isLastSpotOfDay = (idx === cleanEntries.length - 1 && !itinerary.stay);
+
+      const libMatch = travelLibrary
+        .filter(item => item.keywords.some(k => entryName.includes(k)))
+        .sort((a, b) => {
+          const maxA = Math.max(...a.keywords.filter(k => entryName.includes(k)).map(k => k.length));
+          const maxB = Math.max(...b.keywords.filter(k => entryName.includes(k)).map(k => k.length));
+          return maxB - maxA;
+        })[0];
+
+      if (previousSpot && entryName && normalizePlaceName(previousSpot) !== normalizePlaceName(entryName)) {
+        const driveBadge = document.createElement('div');
+        if (travelInfo.isPending) {
+          driveBadge.className = 'travel-time-badge-pending';
+          driveBadge.innerHTML = `<span>⚠️ ${previousSpot} ➔ ${entryName}</span><span>｜車程待確認</span>`;
+        } else {
+          driveBadge.className = 'travel-time-badge';
+          driveBadge.innerHTML = `<span>🚘 ${previousSpot} ➔ ${entryName}</span><span>｜${travelInfo.label}</span>`;
+        }
+        timeline.appendChild(driveBadge);
+
+        if (travelInfo.mins >= 90) {
+          const longReminder = document.createElement('div');
+          longReminder.className = 'long-drive-reminder';
+          longReminder.innerHTML = `💡 <b>長途尊榮守護：</b>行車時間約 ${travelInfo.mins} 分鐘，車內備妥礦泉水，司導將主動提供中途休憩停靠。`;
+          timeline.appendChild(longReminder);
+        }
+      }
+
+      if (/日月潭[遊游]湖|日月潭[遊游]船|日月潭搭船/.test(entryName)) {
+        const card = document.createElement('div');
+        card.className = 'p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFE9DD] space-y-2';
+        const stayMins = 150;
+        const meetingClockMins = currentClockMins + stayMins;
+        
+        card.innerHTML = `
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold font-serif text-[#1A1A18]">🚢 日月潭遊湖</h4>
+            <span class="text-[10px] font-bold text-[#8C6D37] bg-[#F4EEDF] border border-[#E2D2B0] px-2 py-0.5 rounded-full">水沙連絕景</span>
+          </div>
+          <div class="time-schedule-bar">
+            <span>${dict.stayPrefix}150 ${dict.stayUnit}</span>
+            <span class="text-rose-700 font-bold border-l border-[#E2D2B0] pl-2">${dict.meetingTimePrefix}${formatMinutesToHHMM(meetingClockMins)}</span>
+          </div>
+          <p class="text-xs text-[#5A5954] leading-relaxed font-serif">全程搭乘豪華遊艇穿梭水社、玄光寺與伊達邵三大碼頭，坐擁雙潭湖光山色。</p>
+          <div class="space-y-1.5 pt-1 text-[11px]">
+            <div class="p-2 bg-white rounded-lg border border-[#EFE9DD] text-[#6A4F1D]">
+              <strong>1. 水社碼頭 ➔ 玄光寺：</strong>品嚐知名阿婆香菇茶葉蛋，登高遠眺拉魯島與青龍山脈晨曦水色。
+            </div>
+            <div class="p-2 bg-white rounded-lg border border-[#EFE9DD] text-[#6A4F1D]">
+              <strong>2. 玄光寺 ➔ 伊達邵老街：</strong>造訪邵族文化聚落，漫步老街品嚐原民特色小吃、山豬肉香腸與特選手採紅玉紅茶。
+            </div>
+            <div class="p-2 bg-white rounded-lg border border-[#EFE9DD] text-[#6A4F1D]">
+              <strong>3. 伊達邵老街 ➔ 水社碼頭：</strong>搭乘巡航遊艇返回水社碼頭集合點，司導已於碼頭迎候接駕，平穩引導登車啟程。
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('日月潭水社碼頭')}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#FAF8F5] text-[#1A1A18] border border-[#E7DFD0] text-[11px] font-bold text-center">${dict.mapBtn}</a>
+            <a href="https://www.google.com/search?q=${encodeURIComponent('日月潭遊湖 私旅')}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#F4EEDF] text-[#6A4F1D] border border-[#DFCFAE] text-[11px] font-bold text-center">${dict.searchBtn}</a>
+          </div>
+        `;
+        timeline.appendChild(card);
+        previousSpot = entryName;
+        currentClockMins = meetingClockMins;
+        return;
+      }
+
+      if (entryName.includes('清境農場') || entryName.includes('青青草原') || entryName.includes('觀山牧區')) {
+        const card = document.createElement('div');
+        card.className = 'p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFE9DD] space-y-2.5';
+        const stayMins = 160;
+        const meetingClockMins = currentClockMins + stayMins;
+        
+        card.innerHTML = `
+          <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold font-serif text-[#1A1A18]">🐑 清境農場（青青草原與觀山牧區）</h4>
+            <span class="text-[10px] font-bold text-[#2F6F4E] bg-[#E3EDE8] border border-[#B9D0C3] px-2 py-0.5 rounded-full">海拔 1,750M</span>
+          </div>
+          <div class="time-schedule-bar">
+            <span>${dict.stayPrefix}160 ${dict.stayUnit}</span>
+            <span class="text-rose-700 font-bold border-l border-[#E2D2B0] pl-2">${dict.meetingTimePrefix}${formatMinutesToHHMM(meetingClockMins)}</span>
+          </div>
+          <p class="text-xs text-[#5A5954] leading-relaxed font-serif">如置身紐西蘭風情高山草原，園區劃分兩大經典特色遊憩區，漫步白雲繚繞木棧道，近距離感受牧野綿羊生態：</p>
+          <div class="space-y-1.5 text-[11px]">
+            <div class="p-2.5 bg-white rounded-lg border border-[#EFE9DD] space-y-1">
+              <div class="flex items-center justify-between text-[#2F6F4E] font-bold">
+                <span>📍 第一段：青青草原（綿羊生態與脫毛秀）</span>
+                <span class="text-[10px] text-rose-600 font-bold bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">表演場次 假日 09:30 / 14:30</span>
+              </div>
+              <p class="text-[#5A5954] leading-relaxed">走進綿延翠綠山丘，與自由漫步的柯莉黛綿羊合影互動，欣賞牧羊犬趕羊及紐西蘭專業牧羊人格蘭先生招牌羊咩咩脫毛秀。</p>
+            </div>
+            <div class="p-2.5 bg-white rounded-lg border border-[#EFE9DD] space-y-1">
+              <div class="flex items-center justify-between text-[#8C6D37] font-bold">
+                <span>📍 第二段：觀山牧區（馬術特技秀與高空棧道）</span>
+                <span class="text-[10px] text-rose-600 font-bold bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">表演場次 每日 10:45 / 15:45</span>
+              </div>
+              <p class="text-[#5A5954] leading-relaxed">穿越風車步道抵達觀山牧區，欣賞外蒙古專業騎士帶來的奔馳馬術特技，更可居高臨下遠眺合歡山與奇萊連峰壯闊雲海。</p>
+            </div>
+          </div>
+          <p class="text-[11px] text-[#92400E] font-medium pt-0.5">⚠️ 專員提醒：高山海拔紫外線強烈且午後易有山嵐雲霧，建議隨身準備遮陽帽子、薄外套與飲用水。</p>
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('清境農場 青青草原')}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#FAF8F5] text-[#1A1A18] border border-[#E7DFD0] text-[11px] font-bold text-center">${dict.mapBtn}</a>
+            <a href="https://www.google.com/search?q=${encodeURIComponent('清境農場 青青草原 觀山牧區')}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#F4EEDF] text-[#6A4F1D] border border-[#DFCFAE] text-[11px] font-bold text-center">${dict.searchBtn}</a>
+          </div>
+        `;
+        timeline.appendChild(card);
+        previousSpot = entryName;
+        currentClockMins = meetingClockMins;
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = 'p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFE9DD] space-y-2';
+
+      const stayMins = getSpotStayMinutes(entryName, libMatch);
+      const meetingClockMins = currentClockMins + stayMins;
+
+      const titleEl = document.createElement('h4');
+      titleEl.className = 'text-sm font-bold font-serif text-[#1A1A18]';
+      titleEl.textContent = `📍 ${libMatch ? libMatch.displayName : entryName}`;
+      card.appendChild(titleEl);
+
+      if (!isDropoffSpot) {
+        const scheduleBar = document.createElement('div');
+        scheduleBar.className = 'time-schedule-bar';
+        scheduleBar.innerHTML = `
+          <span>${dict.stayPrefix}${stayMins} ${dict.stayUnit}</span>
+          <span class="text-rose-700 font-bold border-l border-[#E2D2B0] pl-2">${dict.meetingTimePrefix}${formatMinutesToHHMM(meetingClockMins)}</span>
+        `;
+        card.appendChild(scheduleBar);
+      }
+
+      const desc = document.createElement('p');
+      desc.className = 'text-xs text-[#5A5954] leading-relaxed font-serif';
+      desc.textContent = libMatch?.description || (isDropoffSpot ? '辦妥登機手續、托運行李與安檢出境。' : `精選景點參觀與私旅體驗：${entryName}`);
+      card.appendChild(desc);
+
+      if (libMatch?.visitorNotice) {
+        const notice = document.createElement('p');
+        notice.className = 'text-[11px] text-[#92400E] font-medium mt-1';
+        notice.textContent = `⚠️ 專員提醒：${libMatch.visitorNotice}`;
+        card.appendChild(notice);
+      }
+
+      if (isNightMarket && isLastSpotOfDay) {
+        const marketBadge = document.createElement('div');
+        marketBadge.className = 'free-activity-card text-[#8C2425] bg-[#FFF5F5] border-[#FECDD3]';
+        marketBadge.textContent = '🚕 司導平穩送抵夜市後今日包車任務圓滿完成，貴賓可盡情體驗在地小吃並自行返回飯店。';
+        card.appendChild(marketBadge);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'grid grid-cols-2 gap-2 pt-1';
+      const q = encodeURIComponent(entryName);
+      actions.innerHTML = `
+        <a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-white text-[#1A1A18] border border-[#E7DFD0] text-[11px] font-bold text-center">${dict.mapBtn}</a>
+        <a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#F4EEDF] text-[#6A4F1D] border border-[#DFCFAE] text-[11px] font-bold text-center">${dict.searchBtn}</a>
+      `;
+      card.appendChild(actions);
+
+      timeline.appendChild(card);
+      previousSpot = entryName;
+      currentClockMins = meetingClockMins;
+    });
+
+    if (itinerary.stay) {
+      const stayTravel = getEstimatedTravelTime(previousSpot, itinerary.stay);
+      const arrivalHotelMins = currentClockMins + stayTravel.mins;
+
+      if (previousSpot && normalizePlaceName(previousSpot) !== normalizePlaceName(itinerary.stay)) {
+        const stayDriveBadge = document.createElement('div');
+        if (stayTravel.isPending) {
+          stayDriveBadge.className = 'travel-time-badge-pending';
+          stayDriveBadge.innerHTML = `<span>⚠️ ${previousSpot} ➔ ${itinerary.stay}</span><span>｜車程待確認</span>`;
+        } else {
+          stayDriveBadge.className = 'travel-time-badge';
+          stayDriveBadge.innerHTML = `<span>🚘 ${previousSpot} ➔ ${itinerary.stay}</span><span>｜${stayTravel.label}</span>`;
+        }
+        timeline.appendChild(stayDriveBadge);
+      }
+
+      const hotelCard = document.createElement('div');
+      hotelCard.className = 'hotel-place-card p-3.5 rounded-xl space-y-2';
+      const hotelQuery = encodeURIComponent(itinerary.stay);
+      
+      hotelCard.innerHTML = `
+        <div class="flex justify-between items-center border-b border-[#EFE9DD] pb-1.5">
+          <h4 class="text-sm font-bold font-serif text-[#1A1A18]">🏨 ${itinerary.stay}</h4>
+          <span class="text-[10px] font-bold text-[#8C6D37] bg-[#F4EEDF] px-2 py-0.5 rounded-full border border-[#E2D2B0]">當晚精選奢宿</span>
+        </div>
+        <div class="time-schedule-bar bg-white/80">
+          <span class="text-[#1A1A18] font-bold">🏁 預計抵達下榻：${stayTravel.isPending ? '依車程待確認' : formatMinutesToHHMM(arrivalHotelMins)}</span>
+          <span class="text-[#6A665E] ml-1">（辦理入住後自由慢活）</span>
+        </div>
+        <p class="text-xs text-[#5A5954] leading-relaxed font-serif">辦理入住手續、行李安置與晚間休憩整備，為明日精彩私旅蓄積滿滿能量。</p>
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <a href="https://www.google.com/maps/search/?api=1&query=${hotelQuery}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#1A1A18] text-[#FAF5ED] text-[11px] font-bold text-center">🗺️ 飯店導航</a>
+          <a href="https://www.google.com/search?q=${hotelQuery}" target="_blank" rel="noopener" class="interactive-btn py-1.5 px-2.5 rounded-lg bg-[#F4EEDF] text-[#6A4F1D] border border-[#DFCFAE] text-[11px] font-bold text-center">🔍 飯店簡介</a>
+        </div>
+      `;
+      timeline.appendChild(hotelCard);
+
+      if (itinerary.freeActivities && itinerary.freeActivities.length > 0) {
+        itinerary.freeActivities.forEach(fa => {
+          const freeEl = document.createElement('div');
+          freeEl.className = 'free-activity-card';
+          freeEl.innerHTML = `🌙 <b>晚間自由漫活：</b>${fa}（入住後貴賓自行漫步體驗）`;
+          timeline.appendChild(freeEl);
+        });
+      }
+    }
+
+    const isLastDay = (Number(dayNumber) === templateData.tripDays);
+    if (isLastDay && templateData.dropoffInfo) {
+      const dropoffBox = document.createElement('div');
+      dropoffBox.className = 'bg-[#FAF8F5] border border-[#E2D2B0] rounded-xl p-3.5 text-xs text-[#1A1A18] space-y-1.5 shadow-xs mt-3 font-sans-ui';
+      dropoffBox.innerHTML = `
+        <div class="font-bold text-[#8C6D37] border-b border-[#EFE9DD] pb-1.5 flex justify-between items-center">
+          <span>${dict.dropoffTitle}</span>
+          <span class="text-[10px] text-[#2F6F4E] font-cinzel">SAFE RETURN</span>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5 text-[11px] pt-0.5">
+          <div><span class="text-[#8A8478]">${dict.dropoffDateLbl}</span> <strong>${templateData.dropoffInfo.dropoffDate}</strong></div>
+          <div><span class="text-[#8A8478]">${dict.departureTimeLbl}</span> <strong>${templateData.dropoffInfo.departureTime}</strong></div>
+          <div><span class="text-[#8A8478]">${dict.dropoffFlightNoLbl}</span> <strong class="font-mono">${templateData.dropoffInfo.flight}</strong></div>
+          <div><span class="text-[#8A8478]">${dict.dropoffTerminalLbl}</span> <strong>${templateData.dropoffInfo.terminal}</strong></div>
+        </div>
+        ${templateData.dropoffInfo.location ? `<div class="text-[11px] text-[#5A5954] pt-1 border-t border-[#EFE9DD]"><span>${dict.dropoffLocationLbl}</span> <strong>${templateData.dropoffInfo.location}</strong></div>` : ''}
+        <div class="mt-1.5 rounded-lg border border-[#E2D2B0] bg-[#F4EEDF]/60 p-2 text-[10px] text-[#6A4F1D] font-medium leading-relaxed">
+          🛫 禮賓致意：感謝您選擇偉哥尊享私旅服務，願此趟寶島之行帶給您永恆難忘的美好回憶！
+        </div>
+      `;
+      dayCard.appendChild(dropoffBox);
+    }
+
+    if (itinerary.fare) {
+      calculatedTotalFare += itinerary.fare;
+      const fareBox = document.createElement('div');
+      fareBox.className = 'text-right border-t border-[#EFE9DD] pt-2 text-xs font-bold text-[#8C6D37] font-mono';
+      fareBox.textContent = `${dict.dailyFarePrefix}${itinerary.fare.toLocaleString('zh-CN')}${dict.dailyFareSuffix}`;
+      dayCard.appendChild(fareBox);
+    }
+  });
+
+  const statementTag = document.getElementById('txt-statement-tag');
+  if (statementTag) statementTag.textContent = dict.statementTag;
+  const statementTitle = document.getElementById('txt-statement-title');
+  if (statementTitle) statementTitle.textContent = dict.statementTitle;
+  const lblTotalFare = document.getElementById('lbl-total-fare');
+  if (lblTotalFare) lblTotalFare.textContent = dict.totalFareLbl;
+  const lblCollectionTotal = document.getElementById('lbl-collection-total');
+  if (lblCollectionTotal) lblCollectionTotal.textContent = dict.collectionLbl;
+  const lblDeposit = document.getElementById('lbl-deposit');
+  if (lblDeposit) lblDeposit.textContent = dict.depositLbl;
+  const lblPayablePrompt = document.getElementById('lbl-payable-prompt');
+  if (lblPayablePrompt) lblPayablePrompt.textContent = dict.payablePrompt;
+  const lblPayableSub = document.getElementById('lbl-payable-sub');
+  if (lblPayableSub) lblPayableSub.textContent = dict.payableSub;
+
+  const fareVal = (templateData.totalFare > 0) ? templateData.totalFare : (calculatedTotalFare || 0);
+  if (!templateData.totalFare && calculatedTotalFare > 0) {
+    templateData.totalFare = calculatedTotalFare;
+  }
+  const valTotalFare = document.getElementById('val-total-fare');
+  if (valTotalFare) valTotalFare.textContent = `NT$ ${fareVal.toLocaleString('zh-CN')}`;
+
+  const collectionVal = templateData.collectionTotal || 0;
+  const valCollectionTotal = document.getElementById('val-collection-total');
+  if (valCollectionTotal) valCollectionTotal.textContent = `NT$ ${collectionVal.toLocaleString('zh-CN')}`;
+
+  const breakdownEl = document.getElementById('collection-breakdown');
+  if (breakdownEl) {
+    breakdownEl.innerHTML = '';
+    let hasDetails = false;
+
+    templateData.tickets.forEach(ticket => {
+      const detailText = typeof ticket === 'string' ? ticket : ticket.detail;
+      breakdownEl.innerHTML += `<div class="py-0.5 flex items-start gap-1"><span class="text-[#8C6D37] font-bold shrink-0">• 票券：</span><span>${detailText}</span></div>`;
+      hasDetails = true;
+    });
+
+    templateData.hotelFees.forEach(hotel => {
+      const detailText = typeof hotel === 'string' ? hotel : hotel.detail;
+      breakdownEl.innerHTML += `<div class="py-0.5 flex items-start gap-1"><span class="text-[#8C6D37] font-bold shrink-0">• 房費：</span><span>${detailText}</span></div>`;
+      hasDetails = true;
+    });
+
+    const collectionRow = document.getElementById('row-collections');
+    if (collectionRow) {
+      collectionRow.hidden = (collectionVal === 0 && !hasDetails);
+    }
+  }
+
+  const depositVal = templateData.deposit || 0;
+  const valDeposit = document.getElementById('val-deposit');
+  if (valDeposit) valDeposit.textContent = `- NT$ ${depositVal.toLocaleString('zh-CN')}`;
+
+  const finalPay = fareVal + collectionVal - depositVal;
+  templateData.totalPayable = finalPay;
+  const valFinalPayable = document.getElementById('val-final-payable');
+  if (valFinalPayable) valFinalPayable.textContent = `${finalPay.toLocaleString('zh-CN')} ${dict.currencyUnit}`;
+
+  setupScrollObserver();
+
+  const weatherTitle = document.getElementById('txt-weather-title');
+  if (weatherTitle) weatherTitle.textContent = dict.weatherTitle;
+  const returnTitle = document.getElementById('return-visit-title');
+  if (returnTitle) returnTitle.textContent = dict.returnVisitTitle;
+  const returnSub = document.getElementById('return-visit-sub');
+  if (returnSub) returnSub.textContent = dict.returnVisitSub;
+  const footerBrand = document.getElementById('txt-footer-brand');
+  if (footerBrand) footerBrand.textContent = dict.footerBrand;
+}
+
+function copyTextFallback(text, msg) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast(msg);
+  } catch (_) {
+    showToast('請直接長按選取複製');
+  }
+}
+
+function renderQuickNavButtons(totalDays) {
+  const grid = document.getElementById('quick-nav-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const count = Math.max(parseInt(totalDays, 10) || 1, 1);
+  for (let d = 1; d <= count; d++) {
+    const btn = document.createElement('button');
+    btn.setAttribute('data-itinerary-nav', d);
+    btn.onclick = () => jumpToItineraryDay(d);
+    btn.className = `quick-jump-button ${d === 1 ? 'is-active' : ''}`;
+    
+    let dateSubText = '';
+    if (templateData.startDate) {
+      try {
+        const cleanStr = String(templateData.startDate).replace(/\//g, '-').trim();
+        const parts = cleanStr.split('-');
+        if (parts.length === 3) {
+          const y = parseInt(parts[0], 10);
+          const m = parseInt(parts[1], 10);
+          const day = parseInt(parts[2], 10);
+          const dateObj = new Date(y, m - 1, day + (d - 1));
+          const mon = dateObj.getMonth() + 1;
+          const dt = dateObj.getDate();
+          const weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+          const w = weekdays[dateObj.getDay()];
+          if (!isNaN(mon) && !isNaN(dt)) {
+            dateSubText = `${mon}/${dt} (${w})`;
+          }
+        }
+      } catch (_) {}
+    }
+
+    btn.innerHTML = `
+      <span class="text-[11px] font-cinzel font-bold leading-tight">Day ${d}</span>
+      ${dateSubText ? `<span class="text-[9px] font-sans-ui opacity-75 mt-0.5 whitespace-nowrap">${dateSubText}</span>` : ''}
+    `;
+    grid.appendChild(btn);
+  }
+}
+
+function jumpToItineraryDay(dayNumber) {
+  const dayCard = document.getElementById(`day${dayNumber}`);
+  if (dayCard) {
+    dayCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    updateQuickNavHighlight(dayNumber);
+  }
+}
+
+function updateQuickNavHighlight(activeDay) {
+  document.querySelectorAll('[data-itinerary-nav]').forEach(btn => {
+    const navDay = parseInt(btn.getAttribute('data-itinerary-nav'), 10);
+    const isActive = (navDay === parseInt(activeDay, 10));
+    btn.classList.toggle('is-active', isActive);
+  });
+}
+
+let itineraryScrollObserver = null;
+function setupScrollObserver() {
+  if (itineraryScrollObserver) {
+    itineraryScrollObserver.disconnect();
+  }
+  itineraryScrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const dayNum = parseInt(entry.target.getAttribute('data-itinerary-day'), 10);
+        if (dayNum) updateQuickNavHighlight(dayNum);
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+  document.querySelectorAll('[data-itinerary-day]').forEach(el => {
+    itineraryScrollObserver.observe(el);
+  });
+}
+
+const confirmedDriveTimeStorageKey = 'wei-confirmed-drive-times-v1';
+let inMemoryConfirmedRoutes = [];
+
+function getConfirmedDriveTimeLibrary() {
+  const map = new Map();
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(confirmedDriveTimeStorageKey) || '[]');
+    if (Array.isArray(saved)) {
+      saved.filter(r => r && r.from && r.to && Number(r.mins) > 0).forEach(r => {
+        map.set(`${normalizePlaceName(r.from)}|${normalizePlaceName(r.to)}`, r);
+      });
+    }
+  } catch (_) {}
+
+  inMemoryConfirmedRoutes.forEach(r => {
+    map.set(`${normalizePlaceName(r.from)}|${normalizePlaceName(r.to)}`, r);
+  });
+
+  return Array.from(map.values());
+}
+
+function saveConfirmedDriveTimes(routes) {
+  routes.forEach(r => {
+    if (!r.from || !r.to || Number(r.mins) <= 0) return;
+    inMemoryConfirmedRoutes.push({
+      from: r.from.trim(),
+      to: r.to.trim(),
+      mins: Number(r.mins),
+      label: `車程約 ${r.mins} 分鐘`
+    });
+  });
+
+  try {
+    const combined = getConfirmedDriveTimeLibrary();
+    window.localStorage.setItem(confirmedDriveTimeStorageKey, JSON.stringify(combined));
+  } catch (_) {}
+  return true;
+}
+
+const defaultKnownRoutes = [
+  { from: '桃園國際機場', to: '嘉義樂客商旅', mins: 180 },
+  { from: '桃園國際機場', to: '台北君悅酒店', mins: 50 },
+  { from: '台北君悅酒店', to: '日月潭遊湖', mins: 210 },
+  { from: '日月潭遊湖', to: '日月潭馥麗溫泉大飯店', mins: 10 },
+  { from: '日月潭馥麗溫泉大飯店', to: '清境農場', mins: 80 },
+  { from: '清境農場', to: '清境佛羅倫斯渡假山莊', mins: 15 },
+  { from: '清境佛羅倫斯渡假山莊', to: '勝興車站鐵道自行車', mins: 150 },
+  { from: '勝興車站鐵道自行車', to: '台中逢甲商旅', mins: 55 },
+  { from: '台中逢甲商旅', to: '彩虹眷村', mins: 35 },
+  { from: '彩虹眷村', to: '春水堂創始店', mins: 25 },
+  { from: '春水堂創始店', to: '逢甲夜市', mins: 30 },
+  { from: '逢甲夜市', to: '台中逢甲商旅', mins: 10 },
+  { from: '桃園國際機場', to: '勝興車站鐵道自行車', mins: 90 },
+  { from: '勝興車站鐵道自行車', to: '勝興老街', mins: 10 },
+  { from: '勝興老街', to: '三義金榜麵店午餐', mins: 15 },
+  { from: '三義金榜麵店午餐', to: '台中逢甲商旅', mins: 45 },
+  { from: '台中逢甲商旅', to: '日月潭遊湖', mins: 75 },
+  { from: '日月潭遊湖', to: '向山遊客中心', mins: 15 },
+  { from: '向山遊客中心', to: '清境農場國民賓館', mins: 70 },
+  { from: '清境農場國民賓館', to: '清境農場（青青草原與觀山牧區）', mins: 10 },
+  { from: '清境農場（青青草原與觀山牧區）', to: '清境 18 怪餐廳午餐', mins: 15 },
+  { from: '清境 18 怪餐廳午餐', to: '18度C巧克力工房', mins: 50 },
+  { from: '18度C巧克力工房', to: '台北德立莊酒店', mins: 150 },
+  { from: '台北德立莊酒店', to: '十分天燈', mins: 50 },
+  { from: '十分天燈', to: '十分瀑布', mins: 10 },
+  { from: '十分瀑布', to: '九份老街', mins: 40 },
+  { from: '九份老街', to: '阿妹茶樓', mins: 10 },
+  { from: '阿妹茶樓', to: '台北德立莊酒店', mins: 60 },
+  { from: '台北德立莊酒店', to: '台北市區自由採買伴手禮', mins: 20 },
+  { from: '台北市區自由採買伴手禮', to: '桃園國際機場送機', mins: 50 }
+];
+
+function getEstimatedTravelTime(fromSpot, toSpot) {
+  if (!fromSpot || !toSpot) return { label: '車程待確認', mins: 0, isPending: true };
+  const nFrom = normalizePlaceName(fromSpot);
+  const nTo = normalizePlaceName(toSpot);
+  if (nFrom === nTo) return { label: '同一地點', mins: 0, isPending: false };
+
+  const userLibrary = getConfirmedDriveTimeLibrary();
+  const userMatch = userLibrary.find(r => {
+    const rFrom = normalizePlaceName(r.from);
+    const rTo = normalizePlaceName(r.to);
+    return (nFrom === rFrom || nFrom.includes(rFrom) || rFrom.includes(nFrom)) &&
+           (nTo === rTo || nTo.includes(rTo) || rTo.includes(nTo));
+  });
+  if (userMatch && userMatch.mins > 0) {
+    return { label: `車程約 ${userMatch.mins} 分鐘`, mins: userMatch.mins, isPending: false };
+  }
+
+  const match = defaultKnownRoutes.find(r => {
+    const rFrom = normalizePlaceName(r.from);
+    const rTo = normalizePlaceName(r.to);
+    return (nFrom === rFrom || nFrom.includes(rFrom) || rFrom.includes(nFrom)) &&
+           (nTo === rTo || nTo.includes(rTo) || rTo.includes(nTo));
+  });
+  if (match && match.mins > 0) {
+    return { label: `車程約 ${match.mins} 分鐘`, mins: match.mins, isPending: false };
+  }
+  return { label: '車程待確認', mins: 0, isPending: true };
+}
+
+function buildRouteSegments() {
+  const segments = [];
+  Object.entries(templateData.dailyItinerary).forEach(([dayNumber, day]) => {
+    let prev = day.origin || '';
+    const entries = (day.entries || []).filter(e => !isAccountingLine(e) && !isHeaderOrDateLine(e) && !isDropoffInfoLine(e));
+    
+    entries.forEach(entry => {
+      const nPrev = normalizePlaceName(prev);
+      const nEntry = normalizePlaceName(entry);
+      if (nPrev && nEntry && nPrev !== nEntry) {
+        const info = getEstimatedTravelTime(prev, entry);
+        segments.push({ day: Number(dayNumber), from: prev, to: entry, mins: info.mins, label: info.label, complete: !info.isPending });
+      }
+      prev = entry;
+    });
+
+    if (day.stay) {
+      const nPrev = normalizePlaceName(prev);
+      const nStay = normalizePlaceName(day.stay);
+      if (nPrev && nStay && nPrev !== nStay) {
+        const stayInfo = getEstimatedTravelTime(prev, day.stay);
+        segments.push({ day: Number(dayNumber), from: prev, to: day.stay, mins: stayInfo.mins, label: stayInfo.label, complete: !stayInfo.isPending, isHotel: true });
+      }
+    }
+  });
+  return segments;
+}
+
+function renderRouteQueue() {
+  const listEl = document.getElementById('route-queue-list');
+  const summaryEl = document.getElementById('route-queue-summary');
+  if (!listEl || !summaryEl) return;
+
+  const segments = buildRouteSegments();
+  listEl.innerHTML = '';
+
+  if (segments.length === 0) {
+    summaryEl.textContent = '車程完成度：尚無行程路線。';
+    return;
+  }
+
+  let completedCount = 0;
+  segments.forEach(seg => {
+    if (seg.complete) completedCount++;
+    const li = document.createElement('li');
+    li.className = 'flex items-center justify-between py-1 border-b border-[#EFE9DD] last:border-0';
+    li.innerHTML = `
+      <span class="truncate pr-2">
+        <strong class="text-[#1A1A18]">Day ${seg.day}：</strong>${seg.from} ➔ ${seg.to}${seg.isHotel ? ' <span class="text-[10px] text-[#8C6D37] font-bold">(住宿)</span>' : ''}
+      </span>
+      <span class="shrink-0 font-bold ${seg.complete ? 'text-[#2F6F4E] font-mono' : 'text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200'}">
+        ${seg.complete ? `✓ ${seg.label}` : '⚠️ 待確認'}
+      </span>
+    `;
+    listEl.appendChild(li);
+  });
+
+  const isAll = (completedCount === segments.length);
+  summaryEl.textContent = `車程完成度：${completedCount} / ${segments.length} 段已確認${isAll ? '（100% 齊全無缺漏 ✓）' : '（尚有待查路段）'}`;
+  summaryEl.className = `text-[11px] font-bold ${isAll ? 'text-[#2F6F4E]' : 'text-rose-700'}`;
+}
+
+function copyRouteQueuePrompt() {
+  const segments = buildRouteSegments();
+  if (segments.length === 0) return;
+  const pendingOnly = segments.filter(s => !s.complete);
+  const target = pendingOnly.length > 0 ? pendingOnly : segments;
+  const lines = target.map(s => `Day ${s.day}：${s.from} → ${s.to}`).join('\n');
+  const prompt = `請查詢以下台灣包車路段約略開車時間（單一合理實務上限）：\n\n${lines}`;
+  copyTextFallback(prompt, `✨ 已複製 ${target.length} 段待查路段清單！`);
+}
+
+function applyDriveTimes() {
+  const input = document.getElementById('drive-time-input');
+  const rawText = input?.value?.trim() || '';
+  if (!rawText) {
+    showToast('請先貼入行車時間文字。', true);
+    return;
+  }
+
+  const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+  const parsedRoutes = [];
+
+  lines.forEach(line => {
+    const match = line.match(/(?:Day\s*\d+\s*[：:]\s*)?(.+?)\s*(?:→|➔|->)\s*(.+?)(?:[｜|]\s*(?:約)?\s*|\s+約?\s*)(\d+)\s*分鐘/i);
+    if (match) {
+      const from = match[1].trim();
+      const to = match[2].trim();
+      const mins = parseInt(match[3], 10);
+      if (from && to && mins > 0) {
+        parsedRoutes.push({ from, to, mins });
+      }
+    }
+  });
+
+  if (parsedRoutes.length === 0) {
+    showToast('找不到符合格式的路段行車時間，請檢查貼入文字。', true);
+    return;
+  }
+
+  saveConfirmedDriveTimes(parsedRoutes);
+  renderFullCustomerPage();
+  renderRouteQueue();
+  showToast(`✨ 成功套用 ${parsedRoutes.length} 段路段行車時間並已寫入記憶庫！`);
+  input.value = '';
+}
+
+function startDirectSmartProcess() {
+  const inputArea = document.getElementById('smart-source-input');
+  if (inputArea && inputArea.value) {
+    processSmartSourceText(inputArea.value);
+  } else {
+    showToast('請先貼入行程文字。', true);
+  }
+}
+
+function processSmartSourceText(text) {
+  if (!text || !text.trim()) return;
+
+  text = text.replace(/\r\n/g, '\n');
+  text = text.replace(/^([^：:\n]+?)\s*[:：]\s*/gm, '$1：');
+  text = text.replace(/(\d{1,2})\s*[:：]\s*(\d{2})/g, '$1:$2');
+
+  const nameMatch = text.match(/預約代表：([^\n]+)/);
+  if (nameMatch) {
+    templateData.customerParty = nameMatch[1].trim();
+    templateData.customerName = nameMatch[1].split('等')[0].trim();
+  }
+  const phoneMatch = text.match(/聯絡電話：([^\n]+)/);
+  if (phoneMatch) templateData.contactPhone = phoneMatch[1].trim();
+  
+  templateData.reservationRequests = detectReservationRequests(text);
+  const rawNoteMatch = text.match(/(?:備註|客戶行程備註)：([^\n]+)/);
+  if (rawNoteMatch && rawNoteMatch[1].trim()) {
+    templateData.reservationNote = removeStructuredReservationRequestsFromNote(rawNoteMatch[1].trim());
+  }
+
+  const startDateMatch = text.match(/包車開始日期：([^\n]+)/);
+  if (startDateMatch) templateData.startDate = startDateMatch[1].trim().replace(/\//g, '-');
+  const endDateMatch = text.match(/包車結束日期：([^\n]+)/);
+  if (endDateMatch) templateData.endDate = endDateMatch[1].trim().replace(/\//g, '-');
+
+  let parsedCollectionSum = 0;
+  templateData.tickets = [];
+  templateData.hotelFees = [];
+
+  const ticketMatches = text.matchAll(/(?:代訂票券|票券|代訂門票|代訂車票)：([^\n]+)/g);
+  for (const match of ticketMatches) {
+    let cleanVal = match[1].trim().replace(/^(?:代訂票券|票券)：/, '');
+    const amount = extractLineAmount(cleanVal);
+    templateData.tickets.push({ detail: cleanVal, amount });
+    parsedCollectionSum += amount;
+  }
+
+  const hotelMatches = text.matchAll(/(?:代訂酒店房費|代訂飯店房費|代訂酒店|代訂飯店)：([^\n]+)/g);
+  for (const match of hotelMatches) {
+    let cleanVal = match[1].trim().replace(/^(?:住宿飯店|住宿酒店|飯店|酒店)：/, '');
+    const amount = extractLineAmount(cleanVal);
+    templateData.hotelFees.push({ detail: cleanVal, amount });
+    parsedCollectionSum += amount;
+  }
+
+  const compactDetails = parseCompactBookingDetails(text);
+  compactDetails.ticketDetails.forEach(t => {
+    if (!templateData.tickets.some(item => item.detail.includes(t.name) || item.amount === t.amount)) {
+      templateData.tickets.push(t);
+      parsedCollectionSum += t.amount;
+    }
+  });
+
+  compactDetails.hotelDetails.forEach(h => {
+    if (!templateData.hotelFees.some(item => item.detail.includes(h.name) || item.amount === h.amount)) {
+      templateData.hotelFees.push(h);
+      parsedCollectionSum += h.amount;
+    }
+  });
+
+  const depositMatch = text.match(/(?:已收[訂定]金|[訂定]金|已付[訂定]金|預收[訂定]金)\s*[：:\s]*([0-9,]+)/i);
+  if (depositMatch) {
+    templateData.deposit = parseInt(depositMatch[1].replace(/[^\d]/g, ''), 10) || 0;
+  } else {
+    templateData.deposit = 0;
+  }
+
+  const totalFareMatch = text.match(/(?:總車資|包車車資總額|包車車資|車資總額|總金額|車資合計)\s*[：:\s]*([0-9,]+)/i);
+  if (totalFareMatch) {
+    templateData.totalFare = parseInt(totalFareMatch[1].replace(/[^\d]/g, ''), 10) || 0;
+  }
+
+  const collectionMatch = text.match(/(?:代收款合計|代收款項|代訂項目小計)：([^\n]+)/);
+  if (collectionMatch) {
+    templateData.collectionTotal = parseInt(collectionMatch[1].replace(/[^\d]/g, ''), 10) || 0;
+  } else {
+    templateData.collectionTotal = parsedCollectionSum;
+  }
+
+  const driverName = text.match(/司機：([^\n]+)/);
+  const driverPhone = text.match(/司機電話：([^\n]+)/);
+  const driverPlate = text.match(/車牌：([^\n]+)/);
+  const driverVehicle = text.match(/車型／座位：([^\n]+)/);
+  if (driverName || driverPlate) {
+    templateData.driver = {
+      name: driverName ? driverName[1].trim() : '',
+      phone: driverPhone ? driverPhone[1].trim() : '',
+      plate: driverPlate ? driverPlate[1].trim() : '',
+      vehicle: driverVehicle ? driverVehicle[1].trim() : ''
+    };
+  }
+  initDriverSelect();
+
+  const arrivalDateMatch = text.match(/抵達日期：([^\n]+)/);
+  const flightMatch = text.match(/航班編號：([^\n]+)/);
+  const arrivalTimeMatch = text.match(/抵達時間：([^\n]+)/);
+  const terminalMatch = text.match(/(?:抵達航廈|接機航廈|航廈)：([^\n]+)/);
+  const meetingPointMatch = text.match(/會面地點：([^\n]+)/);
+  const locationMatch = text.match(/接機地點：([^\n]+)/);
+
+  if (flightMatch || arrivalTimeMatch || text.includes('接機資訊')) {
+    let cleanTerminal = terminalMatch ? terminalMatch[1].trim() : 'T2';
+    cleanTerminal = cleanTerminal.replace(/航廈/g, '').trim();
+
+    templateData.pickupInfo = {
+      arrivalDate: arrivalDateMatch ? arrivalDateMatch[1].trim().replace(/\//g, '-') : templateData.startDate,
+      flight: flightMatch ? flightMatch[1].trim() : '',
+      arrivalTime: arrivalTimeMatch ? arrivalTimeMatch[1].trim() : '10:30',
+      terminal: cleanTerminal,
+      location: locationMatch ? locationMatch[1].trim() : '桃園國際機場',
+      meetingPoint: meetingPointMatch ? meetingPointMatch[1].trim() : '桃園國際機場 T2 抵達大廳'
+    };
+  } else {
+    templateData.pickupInfo = null;
+  }
+
+  const dropoffDateMatch = text.match(/(?:起飛日期|送機日期)：([^\n]+)/);
+  const dropoffFlightMatch = text.match(/(?:起飛航班|送機航班|航班編號)：([^\n]+)/);
+  const dropoffTimeMatch = text.match(/(?:起飛時間|送機時間)：([^\n]+)/);
+  const dropoffTerminalMatch = text.match(/(?:起飛航廈|送機航廈|航廈)：([^\n]+)/);
+  const dropoffMeetingMatch = text.match(/(?:送機會面地點|會面地點)：([^\n]+)/);
+  const dropoffLocationMatch = text.match(/(?:送機地點|機場地點)：([^\n]+)/);
+
+  if (dropoffFlightMatch || dropoffTimeMatch || text.includes('送機資訊')) {
+    let cleanTerm = dropoffTerminalMatch ? dropoffTerminalMatch[1].trim() : 'T2';
+    cleanTerm = cleanTerm.replace(/航廈/g, '').trim();
+
+    templateData.dropoffInfo = {
+      dropoffDate: dropoffDateMatch ? dropoffDateMatch[1].trim().replace(/\//g, '-') : templateData.endDate,
+      flight: dropoffFlightMatch ? dropoffFlightMatch[1].trim() : '',
+      departureTime: dropoffTimeMatch ? dropoffTimeMatch[1].trim() : '16:00',
+      terminal: cleanTerm,
+      location: dropoffLocationMatch ? dropoffLocationMatch[1].trim() : '桃園國際機場',
+      meetingPoint: dropoffMeetingMatch ? dropoffMeetingMatch[1].trim() : '桃園國際機場 T2'
+    };
+  } else {
+    templateData.dropoffInfo = null;
+  }
+
+  const dayMatches = text.match(/Day\s*(\d+)/gi);
+  const parsedDays = {};
+  let maxDayCount = 0;
+
+  if (dayMatches && dayMatches.length > 0) {
+    const dayBlocks = text.split(/Day\s*(\d+)/i);
+    for (let i = 1; i < dayBlocks.length; i += 2) {
+      const actualDayNum = parseInt(dayBlocks[i], 10);
+      const dayContent = dayBlocks[i + 1];
+      if (isNaN(actualDayNum) || !dayContent) continue;
+
+      maxDayCount = Math.max(maxDayCount, actualDayNum);
+
+      const originMatch = dayContent.match(/(?:出發起點|出發地點)：([^\n]+)/);
+      const deptTimeMatch = dayContent.match(/出發時間：([^\n]+)/);
+      const fareMatch = dayContent.match(/(?:今日車資|車資)：([^\n]+)/);
+      const stayMatch = dayContent.match(/(?:住宿飯店|住宿酒店|當晚住宿飯店|當晚住宿酒店|飯店|酒店|住宿)：([^\n]+)/);
+
+      let departureTime = deptTimeMatch ? deptTimeMatch[1].trim() : '09:00 出發';
+      if (actualDayNum === 1 && templateData.pickupInfo) {
+        const calculatedTime = addOneHourToTime(templateData.pickupInfo.arrivalTime);
+        departureTime = `${calculatedTime} 出發 (航班 ${templateData.pickupInfo.arrivalTime} 抵達 +1小時)`;
+      }
+
+      let stay = stayMatch ? stayMatch[1].trim() : '';
+
+      const freeActivities = [];
+      const freeMatches = dayContent.matchAll(/(?:自由活動|晚間自由活動|夜間自由活動)[：:]\s*([^\n]+)/g);
+      for (const fm of freeMatches) {
+        freeActivities.push(fm[1].trim());
+      }
+
+      let rawLines = dayContent.split(/\n/)
+        .map(l => l.trim())
+        .map(l => l.replace(/^(?:行程內容|行程景點|行程項目)[：:]\s*/i, '').trim())
+        .filter(l => l && !isAccountingLine(l) && !isHeaderOrDateLine(l) && !isDropoffInfoLine(l) &&
+          !l.startsWith('出發起點') && !l.startsWith('出發地點') && 
+          !l.startsWith('出發時間') && !l.startsWith('今日車資') && 
+          !l.startsWith('車資') && !l.startsWith('代訂') &&
+          !l.startsWith('預約代表') && !l.startsWith('聯絡電話') && 
+          !l.startsWith('包車') && !l.startsWith('備註') && 
+          !l.startsWith('住宿飯店') && !l.startsWith('住宿酒店') &&
+          !l.startsWith('當晚住宿') && !l.startsWith('自由活動') &&
+          !l.startsWith('飯店') && !l.startsWith('酒店') && !l.startsWith('住宿') &&
+          !l.startsWith('航廈') && !l.startsWith('機場地點') &&
+          !l.startsWith('行程結束點') && !l.startsWith('行程結束'));
+
+      if (actualDayNum === 1 && templateData.pickupInfo) {
+        rawLines = rawLines.filter(l => !l.includes('桃園機場接機') && !l.includes('桃園國際機場接機'));
+      }
+
+      const originVal = originMatch ? originMatch[1].trim() : '';
+      rawLines = rawLines.filter(l => l !== stay && l !== originVal && !isDropoffInfoLine(l));
+
+      parsedDays[actualDayNum] = {
+        departureTime,
+        origin: originVal,
+        stay,
+        freeActivities,
+        entries: rawLines,
+        fare: fareMatch ? parseInt(fareMatch[1].replace(/[^\d]/g, ''), 10) || 0 : 0
+      };
+    }
+  }
+
+  let sumOfDailyFares = 0;
+  Object.values(parsedDays).forEach(d => {
+    if (d.fare) sumOfDailyFares += d.fare;
+  });
+
+  if (!templateData.totalFare || templateData.totalFare === 0) {
+    templateData.totalFare = sumOfDailyFares;
+  }
+
+  templateData.totalPayable = (templateData.totalFare || 0) + (templateData.collectionTotal || 0) - (templateData.deposit || 0);
+
+  const fareIn = document.getElementById('input-total-fare');
+  if (fareIn) fareIn.value = templateData.totalFare || '';
+  const depositIn = document.getElementById('input-deposit');
+  if (depositIn) depositIn.value = templateData.deposit || '';
+
+  syncReservationNoteFromDeposit();
+
+  const sortedDayNums = Object.keys(parsedDays).map(Number).sort((a, b) => a - b);
+  sortedDayNums.forEach((dNum) => {
+    if (!parsedDays[dNum].origin) {
+      if (dNum === 1) {
+        parsedDays[dNum].origin = templateData.pickupInfo ? '桃園國際機場' : '臺北市各大酒店';
+      } else {
+        const prevStay = parsedDays[dNum - 1]?.stay;
+        parsedDays[dNum].origin = prevStay || '前日住宿飯店';
+      }
+    }
+  });
+
+  templateData.tripDays = maxDayCount > 0 ? maxDayCount : 1;
+  templateData.dailyItinerary = parsedDays;
+
+  updateDepartureDaySelect();
+  renderFullCustomerPage();
+  renderRouteQueue();
+  showToast('✨ 已成功整理並渲染米其林星鑰手帖！');
+}
+
+function prepareCustomerHtmlContent() {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(document.documentElement.outerHTML, 'text/html');
+
+  const genPanel = doc.getElementById('generator-panel');
+  if (genPanel) genPanel.remove();
+  const auditModal = doc.getElementById('audit-modal-backdrop');
+  if (auditModal) auditModal.remove();
+  const deliveryModal = doc.getElementById('delivery-success-modal');
+  if (deliveryModal) deliveryModal.remove();
+
+  const standaloneScript = doc.createElement('script');
+  standaloneScript.textContent = `
+    window.__initialTripData = ${JSON.stringify(templateData).replace(/</g, '\\u003c')};
+    window.__isCustomerDelivery = true;
+  `;
+  doc.head.insertBefore(standaloneScript, doc.head.firstChild);
+
+  appendCustomerBudgetGuard(doc, templateData);
+
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+}
+
+function prepareDriverDispatchHtmlContent() {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(document.documentElement.outerHTML, 'text/html');
+
+  const genPanel = doc.getElementById('generator-panel');
+  if (genPanel) genPanel.remove();
+  const auditModal = doc.getElementById('audit-modal-backdrop');
+  if (auditModal) auditModal.remove();
+  const deliveryModal = doc.getElementById('delivery-success-modal');
+  if (deliveryModal) deliveryModal.remove();
+
+  const heroTitle = doc.getElementById('txt-hero-title');
+  if (heroTitle) {
+    heroTitle.textContent = `🚕【司導任務派遣單】${templateData.customerName} 貴賓包車行程`;
+  }
+
+  const driverBox = doc.getElementById('driver-dispatch-collection-container');
+  if (driverBox) {
+    driverBox.removeAttribute('hidden');
+    driverBox.className = 'driver-dispatch-collection-box space-y-3 font-sans-ui';
+
+    const fareVal = templateData.totalFare || 0;
+    const collectionVal = templateData.collectionTotal || 0;
+    const depositVal = templateData.deposit || 0;
+    const finalPay = templateData.totalPayable || (fareVal + collectionVal - depositVal);
+
+    let itemsHtml = '';
+    templateData.tickets.forEach(t => {
+      const detailText = typeof t === 'string' ? t : t.detail;
+      itemsHtml += `<div>• 代訂票券：${detailText}</div>`;
+    });
+    templateData.hotelFees.forEach(h => {
+      const detailText = typeof h === 'string' ? h : h.detail;
+      itemsHtml += `<div>• 代訂房費：${detailText}</div>`;
+    });
+
+    driverBox.innerHTML = `
+      <div class="flex items-center justify-between border-b border-[#E2D2B0] pb-2">
+        <h3 class="font-bold text-[#1A1A18] text-sm flex items-center gap-1.5 font-cinzel">
+          <span>💵 司導任務派遣單｜現場收款核對須知</span>
+        </h3>
+        <span class="bg-[#8C6D37] text-white text-[10px] font-bold px-2 py-0.5 rounded-full">現場代收專用</span>
+      </div>
+      <div class="text-xs space-y-1.5 text-[#4A463E] font-medium">
+        <div class="flex justify-between"><span>包車車資總額：</span><span class="font-mono font-bold">NT$ ${fareVal.toLocaleString('zh-CN')}</span></div>
+        <div class="flex justify-between"><span>代收款項小計：</span><span class="font-mono font-bold">NT$ ${collectionVal.toLocaleString('zh-CN')}</span></div>
+        ${itemsHtml ? `<div class="bg-white/80 p-2 rounded-lg text-[11px] text-[#5A5954] space-y-0.5">${itemsHtml}</div>` : ''}
+        <div class="flex justify-between text-[#2F6F4E] font-bold"><span>公司已收定金：</span><span class="font-mono">- NT$ ${depositVal.toLocaleString('zh-CN')}</span></div>
+      </div>
+      <div class="p-3 bg-white rounded-xl border-2 border-rose-400 text-right space-y-0.5">
+        <span class="text-[11px] font-bold text-zinc-500 block">司導現場向乘客收取金額：</span>
+        <strong class="text-2xl font-black text-rose-600 font-mono">NT$ ${finalPay.toLocaleString('zh-CN')} 元</strong>
+      </div>
+      <p class="text-[10px] text-[#7A5A1C] leading-relaxed font-bold">⚠️ 貼心叮嚀：收到款項後請立即回報偉哥派車中心進行結案對帳。</p>
+    `;
+  }
+
+  const budgetCard = doc.getElementById('budget-card');
+  if (budgetCard) budgetCard.hidden = true;
+
+  const standaloneDriverScript = doc.createElement('script');
+  standaloneDriverScript.textContent = `
+    window.__initialTripData = ${JSON.stringify(templateData).replace(/</g, '\\u003c')};
+    window.__isDriverDispatch = true;
+  `;
+  doc.head.insertBefore(standaloneDriverScript, doc.head.firstChild);
+
+  appendCustomerBudgetGuard(doc, templateData);
+
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+}
+
+function appendCustomerBudgetGuard(doc, data) {
+  const fare = data.totalFare || 0;
+  const collection = data.collectionTotal || 0;
+  const deposit = data.deposit || 0;
+  const payable = data.totalPayable || (fare + collection - deposit);
+
+  const guardScript = doc.createElement('script');
+  guardScript.textContent = `
+  (function enforceCustomerBudgetGuard() {
+    window.addEventListener('DOMContentLoaded', function() {
+      var f = document.getElementById('val-total-fare');
+      var c = document.getElementById('val-collection-total');
+      var d = document.getElementById('val-deposit');
+      var p = document.getElementById('val-final-payable');
+      if (f) f.textContent = 'NT$ ' + (${fare}).toLocaleString('zh-CN');
+      if (c) c.textContent = 'NT$ ' + (${collection}).toLocaleString('zh-CN');
+      if (d) d.textContent = '- NT$ ' + (${deposit}).toLocaleString('zh-CN');
+      if (p) p.textContent = (${payable}).toLocaleString('zh-CN') + ' 元';
+    });
+  })();
+  `;
+  doc.body.appendChild(guardScript);
+}
+
+function generateAndSaveCustomerPackage() {
+  const audit = performPreFlightAudit();
+  if (!audit.hasBlockers) {
+    executeSaveAndPublishFlow();
+  } else {
+    showAuditModal(audit);
+  }
+}
+
+async function executeSaveAndPublishFlow() {
+  const names = getOutputNames();
+  let customerHtml = '';
+  let driverHtml = '';
+  let rawText = '';
+
+  try {
+    customerHtml = prepareCustomerHtmlContent();
+    driverHtml = prepareDriverDispatchHtmlContent();
+    rawText = document.getElementById('smart-source-input')?.value || '';
+  } catch (e) {
+    console.error(e);
+  }
+
+  if (!workspaceDirectoryHandle) {
+    await restoreWorkspaceDirectoryHandle();
+  }
+
+  showToast(`📦 正在建立 網頁備份／${names.folder} 並儲存雙端交付檔案...`);
+
+  let savedLocally = false;
+  const folderDisplay = `網頁備份\\${names.folder}\\`;
+
+  if (workspaceDirectoryHandle) {
+    try {
+      let perm = await workspaceDirectoryHandle.queryPermission({ mode: 'readwrite' });
+      if (perm !== 'granted') {
+        perm = await workspaceDirectoryHandle.requestPermission({ mode: 'readwrite' });
+      }
+      if (perm === 'granted') {
+        const backupDirectory = await workspaceDirectoryHandle.getDirectoryHandle('網頁備份', { create: true });
+        const caseDirectory = await backupDirectory.getDirectoryHandle(names.folder, { create: true });
+
+        await writeFile(caseDirectory, names.customerHtml, customerHtml, 'text/html;charset=utf-8');
+        await writeFile(caseDirectory, names.driverHtml, driverHtml, 'text/html;charset=utf-8');
+        await writeFile(caseDirectory, names.generatorHtml, '<!DOCTYPE html>\n' + document.documentElement.outerHTML, 'text/html;charset=utf-8');
+        if (rawText) {
+          await writeFile(caseDirectory, names.rawText, rawText, 'text/plain;charset=utf-8');
+        }
+        savedLocally = true;
+        lastSavedLocalFolderPath = `${workspaceDirectoryHandle.name}\\網頁備份\\${names.folder}\\`;
+        showToast(`🎉 成功！已存入 ${lastSavedLocalFolderPath}`);
+      }
+    } catch (err) {
+      console.error(err);
+      showToast(`本機存檔未完成：${err.message || ''}`, true);
+    }
+  }
+
+  if (!savedLocally) {
+    lastSavedLocalFolderPath = folderDisplay + ' (未設定專案資料夾，已提供直接下載按鈕)';
+  }
+
+  const pathContainer = document.getElementById('local-delivery-path-container');
+  const pathText = document.getElementById('local-delivery-path-text');
+  if (pathContainer && pathText) {
+    pathContainer.hidden = false;
+    pathText.textContent = `儲存路徑：${lastSavedLocalFolderPath}`;
+  }
+
+  showDeliverySuccessModal(names, customerHtml, driverHtml, rawText, savedLocally);
+}
+
+function showDeliverySuccessModal(names, customerHtml, driverHtml, rawText, savedLocally) {
+  const modal = document.getElementById('delivery-success-modal');
+  const pathText = document.getElementById('delivery-modal-path-text');
+  const custTag = document.getElementById('modal-customer-filename-tag');
+  const drvTag = document.getElementById('modal-driver-filename-tag');
+  
+  if (pathText) {
+    pathText.textContent = savedLocally ? lastSavedLocalFolderPath : '瀏覽器「下載項目 (Downloads)」資料夾';
+  }
+  if (custTag) custTag.textContent = names.customerHtml;
+  if (drvTag) drvTag.textContent = names.driverHtml;
+
+  const btnCust = document.getElementById('modal-download-customer-btn');
+  if (btnCust) {
+    btnCust.onclick = () => triggerBlobDownload(customerHtml, names.customerHtml, 'text/html;charset=utf-8');
+  }
+  const btnDrv = document.getElementById('modal-download-driver-btn');
+  if (btnDrv) {
+    btnDrv.onclick = () => triggerBlobDownload(driverHtml, names.driverHtml, 'text/html;charset=utf-8');
+  }
+  const btnRaw = document.getElementById('modal-download-raw-btn');
+  if (btnRaw) {
+    btnRaw.onclick = () => triggerBlobDownload(rawText, names.rawText, 'text/plain;charset=utf-8');
+  }
+
+  if (modal) modal.classList.add('is-open');
+}
+
+function closeDeliverySuccessModal() {
+  const modal = document.getElementById('delivery-success-modal');
+  if (modal) modal.classList.remove('is-open');
+}
+
+function downloadSingleCustomerHtml() {
+  const names = getOutputNames();
+  const html = prepareCustomerHtmlContent();
+  triggerBlobDownload(html, names.customerHtml, 'text/html;charset=utf-8');
+  showToast(`已下載客戶端米其林手帖：${names.customerHtml}`);
+}
+
+function downloadSingleDriverHtml() {
+  const names = getOutputNames();
+  const html = prepareDriverDispatchHtmlContent();
+  triggerBlobDownload(html, names.driverHtml, 'text/html;charset=utf-8');
+  showToast(`已下載司導任務單：${names.driverHtml}`);
+}
+
+function triggerBlobDownload(content, filename, contentType) {
+  const blob = new Blob([content], { type: contentType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    if (a.parentNode) document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 500);
+}
+
+function performPreFlightAudit() {
+  const audit = { hasBlockers: false, hasWarnings: false, blockers: [], warnings: [], autoCleaned: [] };
+  const caseIdVal = document.getElementById('case-id')?.value.trim();
+  if (!caseIdVal) {
+    audit.blockers.push('❌ 尚未填寫「步驟 2｜案件檔名與編號」（必填），請先輸入案件編號（例如：1015）。');
+  }
+
+  const segments = buildRouteSegments();
+  const pendingSegs = segments.filter(s => !s.complete);
+  if (pendingSegs.length > 0) {
+    pendingSegs.forEach(s => {
+      audit.warnings.push(`⚠️ Day ${s.day}：[${s.from} ➔ ${s.to}] 車程待確認，建議至「路段查詢佇列」套用精準車程。`);
+    });
+  }
+
+  const fareVal = templateData.totalFare || 0;
+  const collectionVal = templateData.collectionTotal || 0;
+  const depositVal = templateData.deposit || 0;
+  const expectedPayable = fareVal + collectionVal - depositVal;
+
+  if (templateData.totalPayable && templateData.totalPayable !== expectedPayable) {
+    audit.blockers.push(`❌ 帳務結算金額不符：車資 (${fareVal}) + 代收 (${collectionVal}) - 定金 (${depositVal}) 應為 ${expectedPayable} 元，但填寫為 ${templateData.totalPayable} 元。`);
+  }
+
+  audit.hasBlockers = audit.blockers.length > 0;
+  audit.hasWarnings = audit.warnings.length > 0;
+  return audit;
+}
+
+function showAuditModal(audit) {
+  const modal = document.getElementById('audit-modal-backdrop');
+  const icon = document.getElementById('audit-status-icon');
+  const title = document.getElementById('audit-status-title');
+  const sub = document.getElementById('audit-status-sub');
+  const banner = document.getElementById('audit-status-banner');
+  const proceedBtn = document.getElementById('audit-proceed-btn');
+
+  const blockerSection = document.getElementById('audit-blocker-section');
+  const blockerList = document.getElementById('audit-blocker-list');
+  const warningSection = document.getElementById('audit-warning-section');
+  const warningList = document.getElementById('audit-warning-list');
+
+  blockerList.innerHTML = '';
+  warningList.innerHTML = '';
+
+  if (audit.hasBlockers) {
+    banner.className = 'p-3 rounded-xl border bg-rose-50 border-rose-200 text-rose-950 flex items-center gap-3';
+    icon.textContent = '❌';
+    title.textContent = '發現嚴重阻擋錯誤';
+    sub.textContent = '請先修正下方項目後再行發布。';
+    proceedBtn.disabled = true;
+    proceedBtn.className = 'flex-1 bg-zinc-300 text-zinc-500 premium-button cursor-not-allowed';
+  } else {
+    banner.className = 'p-3 rounded-xl border bg-amber-50 border-amber-200 text-amber-950 flex items-center gap-3';
+    icon.textContent = '⚠️';
+    title.textContent = '發現邏輯與時間警示（請專員核對）';
+    sub.textContent = '若行程確認無誤，可點擊繼續發布。';
+    proceedBtn.disabled = false;
+    proceedBtn.className = 'flex-1 bg-[#8C6D37] hover:bg-[#73582A] text-white premium-button shadow-xs';
+  }
+
+  if (audit.blockers.length > 0) {
+    blockerSection.hidden = false;
+    audit.blockers.forEach(msg => {
+      blockerList.innerHTML += `<li class="p-2 bg-rose-100/70 border border-rose-200 rounded-lg text-rose-900 font-bold">${msg}</li>`;
+    });
+  } else {
+    blockerSection.hidden = true;
+  }
+
+  if (audit.warnings.length > 0) {
+    warningSection.hidden = false;
+    audit.warnings.forEach(msg => {
+      warningList.innerHTML += `<li class="p-2 bg-amber-100/70 border border-amber-200 rounded-lg text-amber-900 font-bold">${msg}</li>`;
+    });
+  } else {
+    warningSection.hidden = true;
+  }
+
+  modal.classList.add('is-open');
+}
+
+function closeAuditModal() {
+  const modal = document.getElementById('audit-modal-backdrop');
+  if (modal) modal.classList.remove('is-open');
+}
+
+function proceedPublishAfterAudit() {
+  closeAuditModal();
+  executeSaveAndPublishFlow();
+}
+
+const defaultDriverList = [
+  { name: '陳小明', phone: '+886912345678', plate: 'ABC-8888', vehicle: 'Mercedes-Benz Vito Tourer/9' }
+];
+
+function initDriverSelect() {
+  const sel = document.getElementById('dispatch-driver-select');
+  if (!sel) return;
+  sel.innerHTML = `
+    <option value="none">尚未指派（出發前通知）</option>
+    <option value="custom">✏️ 手動輸入／新增司機</option>
+  `;
+  defaultDriverList.forEach((d, idx) => {
+    const opt = document.createElement('option');
+    opt.value = `lib_${idx}`;
+    opt.textContent = `🚕 ${d.name} (${d.plate})`;
+    sel.appendChild(opt);
+  });
+  if (templateData.driver?.name) {
+    const idx = defaultDriverList.findIndex(d => d.name === templateData.driver.name);
+    if (idx >= 0) sel.value = `lib_${idx}`;
+    else sel.value = 'custom';
+    syncDriverInputs();
+  }
+}
+
+function handleDriverSelectChange(val) {
+  if (val === 'none') {
+    templateData.driver = null;
+  } else if (val.startsWith('lib_')) {
+    const idx = parseInt(val.replace('lib_', ''), 10);
+    templateData.driver = { ...defaultDriverList[idx] };
+  }
+  syncDriverInputs();
+  renderFullCustomerPage();
+}
+
+function handleDriverInputChange() {
+  const name = document.getElementById('dispatch-driver-name')?.value.trim();
+  const phone = document.getElementById('dispatch-driver-phone')?.value.trim();
+  const plate = document.getElementById('dispatch-driver-plate')?.value.trim();
+  const vehicle = document.getElementById('dispatch-driver-vehicle')?.value.trim();
+  if (name || plate) {
+    templateData.driver = { name, phone, plate, vehicle };
+  } else {
+    templateData.driver = null;
+  }
+  renderFullCustomerPage();
+}
+
+function syncDriverInputs() {
+  const n = document.getElementById('dispatch-driver-name');
+  const ph = document.getElementById('dispatch-driver-phone');
+  const pl = document.getElementById('dispatch-driver-plate');
+  const v = document.getElementById('dispatch-driver-vehicle');
+  if (templateData.driver) {
+    if (n) n.value = templateData.driver.name || '';
+    if (ph) ph.value = templateData.driver.phone || '';
+    if (pl) pl.value = templateData.driver.plate || '';
+    if (v) v.value = templateData.driver.vehicle || '';
+  } else {
+    if (n) n.value = '';
+    if (ph) ph.value = '';
+    if (pl) pl.value = '';
+    if (v) v.value = '';
+  }
+}
+
+function saveCurrentDriverToLibrary() {
+  const name = document.getElementById('dispatch-driver-name')?.value.trim();
+  if (!name) return;
+  showToast(`✨ 已將司導「${name}」存入名冊庫！`);
+}
+
+function updateDepartureDaySelect() {
+  const sel = document.getElementById('single-departure-day');
+  if (!sel) return;
+  sel.innerHTML = '';
+  for (let d = 1; d <= templateData.tripDays; d++) {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = `Day ${d}`;
+    sel.appendChild(opt);
+  }
+}
+
+function applyDepartureDefaultTime(val) {
+  if (!val) return;
+  Object.keys(templateData.dailyItinerary).forEach(d => {
+    if (d === '1' && templateData.pickupInfo) return;
+    templateData.dailyItinerary[d].departureTime = `${val} 出發`;
+  });
+  renderFullCustomerPage();
+  showToast(`已將預設出發時間更新為 ${val}`);
+}
+
+function applySingleDayDepartureTime() {
+  const day = document.getElementById('single-departure-day')?.value || 1;
+  const time = document.getElementById('single-departure-time')?.value || '08:30';
+  if (templateData.dailyItinerary[day]) {
+    templateData.dailyItinerary[day].departureTime = `${time} 出發`;
+    renderFullCustomerPage();
+    showToast(`已更新 Day ${day} 出發時間為 ${time}`);
+  }
+}
+
+function isAccountingLine(entry) {
+  if (!entry) return false;
+  const str = String(entry).trim();
+  return str.startsWith('包車車資') || str.startsWith('代收款項') || 
+         str.startsWith('已收定金') || str.startsWith('已收訂金') || 
+         str.startsWith('乘客應付') || str.startsWith('總車資') ||
+         str.startsWith('今日車資') || str.startsWith('代訂票券') ||
+         str.startsWith('代訂酒店') || str.startsWith('代訂飯店');
+}
+
+function isHeaderOrDateLine(line) {
+  if (!line) return true;
+  let str = line.trim().replace(/^(?:行程內容|行程景點|行程項目)[：:]\s*/i, '').trim();
+  if (!str) return true;
+  if (/^\d{4}[\/-]\d{1,2}[\/-]\d{1,2}/.test(str)) return true;
+  if (/^Day\s*\d+/i.test(str)) return true;
+  return false;
+}
+
+function isDropoffInfoLine(line) {
+  if (!line) return false;
+  const str = String(line).trim();
+  return str.includes('送機') || 
+         str.includes('起飛') || 
+         str.includes('航班') || 
+         str.includes('航廈') || 
+         str.includes('會面地點') || 
+         str.includes('機場地點') ||
+         str.includes('行程結束') ||
+         str.includes('結束點') ||
+         str.startsWith('航班編號') ||
+         str.startsWith('抵達時間') ||
+         str.startsWith('起飛時間') ||
+         str.startsWith('抵達日期') ||
+         str.startsWith('送機日期') ||
+         str.startsWith('送機地點') ||
+         str.startsWith('出發地點') ||
+         str.startsWith('出發起點');
+}
+
+function normalizePlaceName(val) {
+  return String(val || '')
+    .replace(/^\s*(?:出發起點|集合地點|出file地點|住宿飯店|住宿酒店|行程結束點|當晚住宿飯店|當晚住宿酒店|飯店|酒店|住宿)\s*[：:]\s*/u, '')
+    .replace(/\s*\(住宿\)\s*$/g, '')
+    .replace(/\s*\(Grand Hyatt\)\s*/gi, '')
+    .replace(/(?:→|➔|->).+$/g, '')
+    .replace(/[｜|]\s*(?:約)?\s*\d+\s*分鐘.*$/g, '')
+    .replace(/台/g, '臺')
+    .replace(/[\s　]+/g, '')
+    .replace(/[（(][^）)]*[）)]/g, '')
+    .trim();
+}
+
+function parseHHMM(timeStr) {
+  if (!timeStr) return 540;
+  const match = timeStr.match(/(\d{1,2})[:：](\d{2})/);
+  if (!match) return 540;
+  return parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
+}
+
+function formatMinutesToHHMM(mins) {
+  const normalized = (mins % 1440 + 1440) % 1440;
+  const hh = String(Math.floor(normalized / 60)).padStart(2, '0');
+  const mm = String(normalized % 60).padStart(2, '0');
+  return `${hh}:${mm}`;
+}
+
+function isDefaultDepartureNine(timeText) {
+  if (!timeText) return true;
+  const str = String(timeText).trim();
+  const normalized = str
+    .replace(/：/g, ':')
+    .replace(/[０-９]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 65248));
+
+  const match = normalized.match(/(\d{1,2})\s*:\s*(\d{2})/);
+  if (match) {
+    const hour = parseInt(match[1], 10);
+    const minute = parseInt(match[2], 10);
+    if (hour === 9 && minute === 0) return true;
+    return false;
+  }
+
+  if (/(?:^|[^\d])0?900(?:[^\d]|$)/.test(normalized)) {
+    return true;
+  }
+
+  if (!/\d/.test(normalized)) {
+    return true;
+  }
+
+  return false;
+}
+
+window.onload = function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramCaseId = urlParams.get('caseId') || sessionStorage.getItem('handoff_case_id') || localStorage.getItem('handoff_case_id') || '';
+  const paramHandoff = urlParams.get('handoff') || sessionStorage.getItem('wei-text-workspace-draft-v1') || localStorage.getItem('wei-text-workspace-draft-v1') || '';
+
+  const inputArea = document.getElementById('smart-source-input');
+  const caseIdInput = document.getElementById('case-id');
+
+  if (paramCaseId && caseIdInput) {
+    caseIdInput.value = paramCaseId;
+  }
+  if (paramHandoff && inputArea) {
+    inputArea.value = paramHandoff;
+    processSmartSourceText(paramHandoff);
+  } else {
+    const sampleText = `包車開始日期：2026/10/15
+包車結束日期：2026/10/19
+預約代表：陳先生 等共 4 人
+聯絡電話：0912-345678
+客戶行程備註：請準備一個兒童座椅
+
+接機資訊
+抵達日期：2026/10/15
+航班編號：BR198
+抵達時間：10:30
+抵達航廈：T2
+
+Day 1
+出發地點：桃園國際機場
+出發時間：接機日
+行程內容：
+勝興車站鐵道自行車
+當晚住宿飯店：台中逢甲商旅
+今日車資：6500
+
+Day 2
+出發地點：台中逢甲商旅
+出發時間：09:00
+行程內容：
+日月潭遊湖
+向山遊客中心
+當晚住宿飯店：清境農場國民賓館
+今日車資：6000
+
+Day 3
+出發地點：清境農場國民賓館
+出發時間：09:00
+行程內容：
+清境農場
+當晚住宿飯店：台北德立莊酒店
+今日車資：7000
+
+Day 4
+出發地點：台北德立莊酒店
+出發時間：09:00
+行程內容：
+十分天燈
+十分瀑布
+九份老街
+阿妹茶樓
+當晚住宿飯店：台北德立莊酒店
+今日車資：5500
+
+Day 5
+出發地點：台北德立莊酒店
+出發時間：09:00
+行程內容：
+台北市區自由採買伴手禮
+桃園國際機場送機
+送機地點：桃園國際機場
+今日車資：3500`;
+
+    if (inputArea && !inputArea.value) inputArea.value = sampleText;
+    if (caseIdInput) caseIdInput.value = '';
+    processSmartSourceText(inputArea.value);
+  }
+
+  initDriverSelect();
+  renderFullCustomerPage();
+  renderRouteQueue();
+  updateDepartureDaySelect();
+  updateOutputPreview();
+  setupScrollObserver();
+  restoreWorkspaceDirectoryHandle();
+};
+</script>
+</body>
+</html>

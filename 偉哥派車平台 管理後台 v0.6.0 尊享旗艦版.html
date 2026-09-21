@@ -1,0 +1,2142 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>偉哥 旅遊平台｜管理後台 (米其林星鑰尊榮旗艦版)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-alabaster: #F7F5F0;
+      --card-parchment: #FFFFFF;
+      --ink-black: #1A1A18;
+      --ink-sub: #5A5954;
+      --gold-michelin: #C5A059;
+      --gold-deep: #8C6D37;
+      --gold-light: #F4EEDF;
+      --border-gilded: #E7DFD0;
+      --burgundy-seal: #8C2425;
+      --sidebar-obsidian: #141412;
+      --sidebar-hover: #22221E;
+      --radius-card: 1.15rem;
+      --radius-control: 0.65rem;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg-alabaster);
+      color: var(--ink-black);
+      font-family: "Noto Serif TC", "Playfair Display", Georgia, serif;
+      line-height: 1.55;
+    }
+    button, input, select, textarea { font-family: inherit; }
+    button { cursor: pointer; }
+
+    .workspace-grid {
+      display: grid !important;
+      grid-template-columns: 16% 59% 25% !important;
+      min-height: 100vh;
+    }
+    .sidebar, .guide {
+      position: sticky !important;
+      top: 0 !important;
+      height: 100vh !important;
+      overflow-y: auto !important;
+    }
+
+    .sidebar {
+      padding: 24px 14px !important;
+      background: var(--sidebar-obsidian) !important;
+      color: #FAF5ED !important;
+      border-right: 1px solid rgba(197, 160, 89, 0.25);
+      box-shadow: 4px 0 25px rgba(0, 0, 0, 0.18);
+    }
+    .brand {
+      display: block !important;
+      padding: 4px 8px 24px !important;
+      border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+      margin-bottom: 18px;
+    }
+    .brand-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .wax-seal-backend {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: transparent !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: visible;
+    }
+    .brand-seal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(184, 29, 24, 0.35));
+    }
+
+    .brand h1 {
+      font-size: 0.92rem;
+      margin: 0;
+      font-weight: 900;
+      color: #FAF5ED;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .brand p {
+      margin: 4px 0 0;
+      color: var(--gold-michelin) !important;
+      font-size: 0.68rem;
+      font-family: "Cinzel", "Plus Jakarta Sans", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .menu { display: grid !important; gap: 8px !important; }
+    .menu button {
+      width: 100% !important;
+      border: 1px solid transparent;
+      border-radius: var(--radius-control);
+      padding: 10px 10px;
+      text-align: left;
+      background: transparent;
+      color: #C8BFB0 !important;
+      font-size: 0.84rem;
+      transition: all .18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .menu button:hover {
+      background: var(--sidebar-hover) !important;
+      color: #FAF5ED !important;
+      border-color: rgba(197, 160, 89, 0.3);
+      transform: translateX(2px);
+    }
+    .menu button.active {
+      background: linear-gradient(135deg, #26241F 0%, #1A1A18 100%) !important;
+      color: #F7EAD0 !important;
+      font-weight: 800;
+      border-color: var(--gold-michelin) !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(197, 160, 89, 0.4);
+    }
+    .menu-title { display: block; font-weight: 800; line-height: 1.25; }
+    .menu-note {
+      display: block;
+      margin-top: 3px;
+      color: #8C8476;
+      font-size: 0.68rem;
+      line-height: 1.35;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+    .menu button.active .menu-note { color: var(--gold-michelin); }
+
+    .center {
+      padding: 28px !important;
+      min-width: 0;
+      max-width: none !important;
+      margin: 0 !important;
+      overflow-y: auto;
+    }
+
+    .guide {
+      display: block !important;
+      padding: 24px 20px !important;
+      background: #FAF8F5 !important;
+      border-left: 1px solid var(--border-gilded) !important;
+      box-shadow: -4px 0 20px rgba(60, 52, 40, 0.03);
+    }
+    .guide-header {
+      border-bottom: 1.5px solid var(--border-gilded);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    .guide-header h2 {
+      font-size: 1rem;
+      margin: 0;
+      color: var(--gold-deep);
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .guide-header p {
+      margin: 5px 0 0;
+      font-size: 0.76rem;
+      color: var(--ink-sub);
+      font-family: "Plus Jakarta Sans", sans-serif;
+      line-height: 1.45;
+    }
+    .guide-step {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-gilded);
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+    .guide-step:last-child { border-bottom: none; }
+    .guide-step b {
+      display: grid;
+      flex: 0 0 24px;
+      height: 24px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--gold-light);
+      color: var(--gold-deep);
+      font-weight: 800;
+      font-size: 0.76rem;
+      font-family: "Cinzel", serif;
+      border: 1px solid #DFCFAE;
+      margin-top: 1px;
+    }
+    .guide-step-body strong {
+      color: var(--ink-black);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.84rem;
+    }
+    .guide-step-body span {
+      color: var(--ink-sub);
+      font-size: 0.78rem;
+    }
+
+    .template-box {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px dashed var(--border-gilded);
+    }
+    .template-box-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--gold-deep);
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .template-btn-grid { display: flex; flex-direction: column; gap: 7px; }
+    .template-btn {
+      border: 1px solid var(--border-gilded);
+      border-radius: 9px;
+      padding: 8px 12px;
+      background: #FFFFFF;
+      color: var(--ink-black);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: left;
+      transition: all .16s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .template-btn:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-michelin);
+      color: var(--gold-deep);
+      transform: translateX(3px);
+    }
+    .template-btn span.badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #EFE8DA;
+      color: var(--gold-deep);
+      border: 1px solid #DFCFAE;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .card {
+      background: var(--card-parchment);
+      border: 1px solid var(--border-gilded);
+      border-radius: var(--radius-card);
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(60, 52, 40, 0.04);
+      margin-bottom: 18px;
+    }
+    .hero {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin: 0 0 18px;
+      border-bottom: 1px solid var(--border-gilded);
+      padding-bottom: 14px;
+    }
+    .eyebrow {
+      color: var(--gold-deep);
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: "Cinzel", "Plus Jakarta Sans", sans-serif;
+    }
+    .hero h2 {
+      font-size: 1.45rem;
+      margin: 4px 0 0;
+      font-weight: 900;
+      color: var(--ink-black);
+      letter-spacing: -0.01em;
+    }
+    .hero p {
+      margin: 5px 0 0;
+      color: var(--ink-sub);
+      font-size: 0.84rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    .button {
+      border: 1px solid var(--border-gilded);
+      border-radius: var(--radius-control);
+      padding: 8px 14px;
+      background: #FFFFFF;
+      color: var(--ink-black);
+      font-weight: 800;
+      font-size: 0.8rem;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      transition: all .16s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .button:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-michelin);
+      color: var(--gold-deep);
+    }
+    .button.primary {
+      background: linear-gradient(135deg, #1A1A18 0%, #2A2823 100%);
+      border-color: var(--gold-michelin);
+      color: #FAF5ED;
+      box-shadow: 0 4px 12px rgba(26, 26, 24, 0.18);
+    }
+    .button.primary:hover {
+      background: linear-gradient(135deg, #8C6D37 0%, #73582A 100%);
+      border-color: #DFBE7A;
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+    .button.gold {
+      background: linear-gradient(135deg, #C5A059 0%, #8C6D37 100%);
+      border-color: #E6C887;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(197, 160, 89, 0.28);
+    }
+    .button.gold:hover {
+      background: linear-gradient(135deg, #DFBE7A 0%, #A88344 100%);
+      transform: translateY(-1px);
+    }
+    .button.danger {
+      background: #FFF5F5;
+      border-color: #FECDD3;
+      color: var(--burgundy-seal);
+    }
+    .button.danger:hover {
+      background: #FEE2E2;
+      border-color: #F87171;
+    }
+    .button.small {
+      padding: 5px 9px;
+      font-size: 0.74rem;
+      border-radius: 6px;
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .empty {
+      padding: 26px;
+      border: 1.5px dashed var(--border-gilded);
+      border-radius: 12px;
+      color: var(--ink-sub);
+      font-size: 0.84rem;
+      text-align: center;
+      background: #FAF8F5;
+    }
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      max-width: min(360px, calc(100vw - 40px));
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: var(--ink-black);
+      border: 1px solid var(--gold-michelin);
+      color: #FAF5ED;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+      transform: translateY(160%);
+      transition: all .24s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+    }
+    .toast.show { transform: translateY(0); }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+    .stat {
+      background: #FFFFFF;
+      border: 1px solid var(--border-gilded);
+      border-radius: var(--radius-card);
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(60, 52, 40, 0.03);
+    }
+    .stat span {
+      font-size: 0.76rem;
+      color: var(--ink-sub);
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-weight: 600;
+    }
+    .stat strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--gold-deep);
+      font-family: "Plus Jakarta Sans", monospace;
+    }
+
+    .text-workspace {
+      width: 100%;
+      height: 270px;
+      min-height: 220px;
+      resize: vertical;
+      box-sizing: border-box;
+      border: 1px solid var(--border-gilded);
+      border-radius: 12px;
+      background: #FAF8F5;
+      color: var(--ink-black);
+      padding: 14px;
+      font: 13px/1.65 "Plus Jakarta Sans", ui-monospace, SFMono-Regular, Consolas, monospace;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .text-workspace:focus {
+      outline: none;
+      border-color: var(--gold-michelin);
+      background: #FFFFFF;
+    }
+
+    .preorder-item-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-gilded);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+      transition: all .15s ease;
+    }
+    .preorder-item-card:hover { border-color: var(--gold-michelin); }
+    .preorder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .preorder-grid label {
+      font-size: 0.72rem;
+      color: var(--ink-sub);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 3px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+    .preorder-grid input, .preorder-grid select {
+      padding: 7px 9px;
+      border: 1px solid var(--border-gilded);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      width: 100%;
+      background: #FAF8F5;
+      color: var(--ink-black);
+    }
+    .preorder-grid input:focus { outline: none; border-color: var(--gold-michelin); background: #fff; }
+    .subtotal-tag {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--gold-deep);
+      text-align: right;
+      margin-top: 8px;
+      font-family: "Plus Jakarta Sans", monospace;
+    }
+
+    .place-accordion-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-gilded);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all .16s ease;
+    }
+    .place-accordion-card:hover {
+      border-color: var(--gold-michelin);
+      box-shadow: 0 6px 18px rgba(197, 160, 89, 0.08);
+    }
+    .place-accordion-header {
+      padding: 14px 18px;
+      background: #FAF8F5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .place-accordion-header h4 {
+      margin: 0;
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: var(--ink-black);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .place-accordion-meta {
+      font-size: 0.76rem;
+      color: var(--ink-sub);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+    .place-accordion-content {
+      padding: 18px;
+      border-top: 1px solid var(--border-gilded);
+      background: #FFFFFF;
+      font-size: 0.83rem;
+      display: none;
+    }
+    .place-accordion-card.open .place-accordion-content { display: block; }
+    .place-accordion-card.open .toggle-icon { transform: rotate(180deg); }
+    .toggle-icon { transition: transform .2s ease; font-size: 0.8rem; color: var(--gold-deep); }
+
+    .edit-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .edit-field { display: flex; flex-direction: column; gap: 4px; }
+    .edit-field label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--ink-black);
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+    .edit-field input, .edit-field textarea, .edit-field select {
+      padding: 8px 10px;
+      border: 1px solid var(--border-gilded);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      background: #FAF8F5;
+      color: var(--ink-black);
+    }
+    .edit-field input:focus, .edit-field textarea:focus {
+      outline: none;
+      border-color: var(--gold-michelin);
+      background: #FFFFFF;
+    }
+    .edit-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-gilded);
+    }
+
+    .statement-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 24, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      place-items: center;
+      z-index: 2000;
+      padding: 16px;
+    }
+    .statement-modal-backdrop.active { display: grid; }
+    .statement-modal-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+      border: 1.5px solid var(--gold-michelin);
+    }
+    .statement-modal-header {
+      padding: 16px 22px;
+      background: var(--sidebar-obsidian);
+      color: #FAF5ED;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--gold-michelin);
+    }
+    .statement-modal-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 800;
+      font-family: "Cinzel", "Noto Serif TC", serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold-michelin);
+    }
+    .statement-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+      background: #FAF8F5;
+      font-size: 0.83rem;
+    }
+    .statement-modal-footer {
+      padding: 14px 22px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-gilded);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media print {
+      @page { size: A4 portrait; margin: 10mm 12mm; }
+      body { background: #fff !important; color: #1A1A18 !important; }
+      .sidebar, .guide, .hero, .toast, .statement-modal-header, .statement-modal-footer, 
+      .edit-actions, nav, button, input, select { display: none !important; }
+      .workspace-grid { display: block !important; min-height: auto !important; }
+      .center { padding: 0 !important; margin: 0 !important; overflow: visible !important; }
+      .panel { display: none !important; }
+      .statement-modal-backdrop { position: static !important; display: block !important; background: transparent !important; padding: 0 !important; backdrop-filter: none !important; }
+      .statement-modal-card { max-width: 100% !important; max-height: none !important; border: none !important; box-shadow: none !important; overflow: visible !important; }
+      .statement-modal-body { padding: 0 !important; background: transparent !important; overflow: visible !important; }
+      #statement-printable-sheet { display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="workspace-grid">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-title-wrap">
+          <div class="wax-seal-backend">
+            <img src="https://raw.githubusercontent.com/tdb8053-bit/Trip2026/main/002.png" alt="偉哥 Logo" class="brand-seal-img" onerror="this.style.display='none'">
+          </div>
+          <div>
+            <h1>偉哥 旅遊平台</h1>
+            <p>Wei Travel Concierge</p>
+          </div>
+        </div>
+      </div>
+      <nav class="menu" aria-label="管理功能表">
+        <button class="active" data-panel="overview">
+          <span class="menu-title">❖ 營運總覽</span>
+          <span class="menu-note">今日調度、監控與出車動態</span>
+        </button>
+        <button id="create-confirmation" data-panel="confirmation">
+          <span class="menu-title">✦ 建立新行程</span>
+          <span class="menu-note">行程文字整理與獨立代訂</span>
+        </button>
+        <button data-panel="orders">
+          <span class="menu-title">◈ 訂單／派遣</span>
+          <span class="menu-note">訂單案件庫、司導指派調度</span>
+        </button>
+        <button data-panel="finance">
+          <span class="menu-title">⚖ 帳務核算</span>
+          <span class="menu-note">車資拆帳、派遣費與定金沖銷</span>
+        </button>
+        <button data-panel="places">
+          <span class="menu-title">📍 景點資料庫</span>
+          <span class="menu-note">停留時間、導航座標與叮嚀</span>
+        </button>
+        <button data-panel="settings">
+          <span class="menu-title">⚙ 系統設定</span>
+          <span class="menu-note">生成器連線與匯款帳號維護</span>
+        </button>
+        <button data-panel="other">
+          <span class="menu-title">🌿 官網發布</span>
+          <span class="menu-note">公開行程官網內容即時發布</span>
+        </button>
+      </nav>
+    </aside>
+
+    <section class="center">
+      <!-- 1. 總覽面板 -->
+      <section id="overview" class="panel active">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Operations & Dispatch Monitor</div>
+            <h2>今日營運與出車監控看板</h2>
+            <p>掌握即時派車動態、未收現場款項與偉哥星鑰行程生成器就緒狀態。</p>
+          </div>
+        </div>
+        <div class="grid">
+          <article class="stat"><span>待確認訂單</span><strong>3</strong></article>
+          <article class="stat"><span>今日出車</span><strong>2</strong></article>
+          <article class="stat"><span>現場待收款</span><strong>$18,800</strong></article>
+          <article class="stat"><span>生成器核心</span><strong style="font-size:1.05rem; color:var(--gold-deep);">v1.6.72 就緒 ✓</strong></article>
+        </div>
+
+        <article class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border-gilded); padding-bottom:10px;">
+            <h3 style="margin:0; font-size:1.05rem; color:var(--ink-black);">🚗 今日即時出車執勤動態</h3>
+            <span style="font-size:0.75rem; font-family:'Plus Jakarta Sans', sans-serif; color:var(--gold-deep); font-weight:700;">實時連線監控中</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:#FAF8F5; border:1px solid var(--border-gilded); border-radius:12px;">
+              <div>
+                <strong style="font-size:0.92rem; color:var(--ink-black);">Day 1 尊榮接機：BR198 班機抵達接駕</strong>
+                <p style="margin:4px 0 0; font-size:0.78rem; color:var(--ink-sub);">執勤司導：張其芳（TEB-6933）｜ 貴賓代表：陳先生 等共 4 人 ｜ 迎候時間：11:30</p>
+              </div>
+              <span style="font-size:0.76rem; font-weight:800; background:#FAF5ED; color:var(--gold-deep); padding:4px 12px; border-radius:99px; border:1px solid #DFBE7A;">巡航執勤中 ✓</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:#FAF8F5; border:1px solid var(--border-gilded); border-radius:12px;">
+              <div>
+                <strong style="font-size:0.92rem; color:var(--ink-black);">Day 2 湖景私旅：日月潭全景遊湖巡航</strong>
+                <p style="margin:4px 0 0; font-size:0.78rem; color:var(--ink-sub);">執勤司導：林志祥（RAB-6789）｜ 貴賓代表：張代表 等共 6 人 ｜ 啟程時間：09:00</p>
+              </div>
+              <span style="font-size:0.76rem; font-weight:800; background:#FFFBEB; color:#92400E; padding:4px 12px; border-radius:99px; border:1px solid #FDE68A;">待收現場尾款 ⏳</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 2. 建立新行程面板 -->
+      <section id="confirmation" class="panel">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Charter Dossier Creation</div>
+            <h2>標準行程文字工作區與獨立代訂管理</h2>
+            <p>貼入行程文字，系統將針對「勝興鐵道自行車」與「飯店房費」自動產生代訂配置；發布前必填案件編號。</p>
+          </div>
+        </div>
+
+        <article class="card" style="border: 1.5px solid var(--gold-michelin); background: #FAF8F5;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 style="margin:0; color:var(--ink-black); font-size:1.05rem;">📝 標準行程文字輸入區</h3>
+            <button class="button danger small" type="button" onclick="window.clearWorkspaceInput()">🧹 清空輸入區與案件編號</button>
+          </div>
+
+          <textarea id="standard-text-workspace" class="text-workspace" oninput="window.renderIndependentPreorderUI()">包車開始日期：2026/10/15
+包車結束日期：2026/10/19
+預約代表：陳先生 等共 4 人
+聯絡電話：0912-345678
+備註：請準備一個兒童座椅。
+
+接機資訊
+抵達日期：2026/10/15
+航班編號：BR198
+抵達時間：10:30
+抵達航廈：T2
+接機地點：桃園國際機場
+
+Day 1
+出發地點：桃園國際機場
+出發時間：接機日
+行程內容：
+勝興車站鐵道自行車
+住宿飯店：台中逢甲商旅
+今日車資：6500
+
+Day 2
+出發地點：台中逢甲商旅
+出發時間：09:00
+行程內容：
+日月潭遊湖
+向山遊客中心
+住宿飯店：清境農場國民賓館
+今日車資：6000
+
+Day 3
+出發地點：清境農場國民賓館
+出發時間：09:00
+行程內容：
+台北市區自由採買伴手禮
+桃園國際機場送機
+送機地點：桃園國際機場
+今日車資：5500
+
+送機資訊
+送機日期：2026/10/19
+起飛時間：18:30
+航班編號：BR197
+出發航廈：T2</textarea>
+
+          <div style="margin-top:16px;">
+            <h4 style="margin:0 0 10px; font-size:0.95rem; color:var(--gold-deep); font-weight:800;">
+              🎫 景點門票與 🏨 飯店房費獨立代訂管理（僅符合項目）：
+            </h4>
+            <div id="independent-preorder-container"></div>
+          </div>
+
+          <div style="margin-top:14px; padding:14px 16px; border:1px solid var(--border-gilded); border-radius:12px; background:#FFFFFF; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span style="font-size:0.84rem; font-weight:800; color:var(--ink-black);">💰 已收定金 (NT$)：</span>
+              <p style="margin:2px 0 0; font-size:0.72rem; color:var(--ink-sub);">輸入定金後將自動同步至行程文字備註與生成器帳務。</p>
+            </div>
+            <input id="booking-deposit" type="number" value="0" min="0" step="100" placeholder="0" style="width:170px; padding:8px 12px; border:1px solid var(--border-gilded); border-radius:8px; font-weight:800; text-align:right; font-size:0.95rem; background:#FAF8F5;" oninput="window.syncDepositToWorkspace(this.value)">
+          </div>
+
+          <div style="margin-top:14px; padding:16px; border:1.5px solid var(--gold-michelin); border-radius:12px; background:#FFFFFF;">
+            <label style="display:block; font-size:0.86rem; font-weight:900; color:var(--ink-black); margin-bottom:6px;">
+              步驟 2｜案件檔名與編號（<span style="color:var(--burgundy-seal)">必填</span>）
+            </label>
+            <input id="dispatch-finance-case-id" type="text" value="" placeholder="請輸入案件編號（例如：1015）" style="width:100%; padding:10px 12px; border:1px solid var(--border-gilded); border-radius:8px; font-weight:800; font-size:0.95rem; background:#FAF8F5;" oninput="window.updateOutputPreview(this.value)">
+            <p id="output-preview" style="margin:6px 0 0; font-size:0.78rem; font-weight:700; color:var(--burgundy-seal);">
+              ⚠️ 請填寫案件檔名與編號（必填，例如：1015）
+            </p>
+          </div>
+
+          <div style="display:flex; gap:12px; margin-top:16px;">
+            <button class="button gold" type="button" style="padding:14px; flex:1; font-size:0.95rem;" onclick="window.preflightAndOpenGenerator()">
+              🚀 預檢並開啟 偉哥行程生成器 v1.6.72 (尊享旗艦版)
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <!-- 3. 訂單／派遣面板 -->
+      <section id="orders" class="panel">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Guest Dossier Ledger</div>
+            <h2>已登記包車訂單與司導調度中心</h2>
+            <p>調閱現有包車行程、指派專屬隨行司導，或一鍵將案件重新載回工作區修訂。</p>
+          </div>
+        </div>
+
+        <article class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border-gilded); padding-bottom:10px;">
+            <h3 style="margin:0; font-size:1.05rem; color:var(--ink-black);">📋 本期行程案件清單</h3>
+            <span style="font-size:0.75rem; color:var(--ink-sub);">共 2 筆進行中案件</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="padding:16px; border:1px solid var(--border-gilded); border-radius:12px; background:#FFFFFF; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <span style="background:var(--ink-black); color:#FAF5ED; font-size:0.72rem; font-weight:900; padding:2px 8px; border-radius:4px; font-family:'Cinzel', serif;">#1015</span>
+                  <strong style="font-size:0.94rem; color:var(--ink-black);">陳先生 等共 4 人 ｜ 5天4夜 尊榮接送機包車行程</strong>
+                </div>
+                <p style="margin:4px 0 0; font-size:0.78rem; color:var(--ink-sub);">出發區間：2026/10/15 ～ 10/19 ｜ 車資總額：$28,500 ｜ 現場應收：$28,500</p>
+                <p style="margin:2px 0 0; font-size:0.78rem; color:var(--gold-deep); font-weight:800;">執勤司導：張其芳（TEB-6933 / Benz Vito 9人座）</p>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="button small primary" onclick="window.bringOrderToWorkspace('1015')">📤 帶入工作區</button>
+                <button class="button small" onclick="window.showToast('已確認指派張其芳司導執勤。')">🚕 指派資訊</button>
+              </div>
+            </div>
+
+            <div style="padding:16px; border:1px solid var(--border-gilded); border-radius:12px; background:#FFFFFF; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <span style="background:var(--ink-black); color:#FAF5ED; font-size:0.72rem; font-weight:900; padding:2px 8px; border-radius:4px; font-family:'Cinzel', serif;">#1022</span>
+                  <strong style="font-size:0.94rem; color:var(--ink-black);">林小姐 等共 2 人 ｜ 3天2夜 中台灣湖光經典巡航</strong>
+                </div>
+                <p style="margin:4px 0 0; font-size:0.78rem; color:var(--ink-sub);">出發區間：2026/10/22 ～ 10/24 ｜ 車資總額：$18,000 ｜ 已收定金：$3,000</p>
+                <p style="margin:2px 0 0; font-size:0.78rem; color:var(--gold-deep); font-weight:800;">執勤司導：陳建榮（TDC-8053 / 九人座商務車）</p>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="button small primary" onclick="window.bringOrderToWorkspace('1022')">📤 帶入工作區</button>
+                <button class="button small" onclick="window.showToast('已確認指派陳建榮司導執勤。')">🚕 指派資訊</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 4. 帳務面板 -->
+      <section id="finance" class="panel">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Financial Statement & Ledger</div>
+            <h2>車資、代收款、10% 派遣費與定金對帳中心</h2>
+            <p>支援個別司導自訂期間核算與全公司整月份帳務，自動換算司導 90% 實得與應繳回公司款項。</p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="button small gold" onclick="window.exportFinanceToExcelCSV()">📊 結算並匯出 Excel (CSV)</button>
+            <button class="button small primary" onclick="window.exportFinanceToJSON()">💾 匯出 帳務總表.json</button>
+            <button class="button small" onclick="window.openStatementModal()">🧾 預覽／列印對帳單</button>
+            <button class="button small" onclick="window.resetFinanceFilters()">↻ 重置篩選</button>
+          </div>
+        </div>
+
+        <article class="card" style="background:#FAF8F5; border:1px dashed var(--gold-michelin); padding:12px 18px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="font-size:0.76rem; color:var(--ink-sub);">
+              📁 <b>專案帳務自動存檔：</b><code id="finance-folder-status" style="background:#FFFFFF; padding:2px 8px; border-radius:6px; border:1px solid var(--border-gilded); font-family:'Plus Jakarta Sans', monospace; color:var(--gold-deep); font-weight:800;">偉哥派車系統\帳務結算\ ✓ 已就緒</code>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="button small primary" type="button" onclick="window.chooseWorkspaceFolder()">📁 選擇/綁定專案資料夾</button>
+              <button class="button small" type="button" onclick="window.copyAccountingFolderPath()">📋 複製帳務目錄路徑</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="background:#FAF8F5; border:1.5px solid var(--gold-michelin); padding:16px 20px;">
+          <h4 style="margin:0 0 8px; font-size:0.92rem; color:var(--gold-deep); font-weight:900;">
+            ✦ 偉哥 旅遊平台標準對帳拆帳規則說明（米其林星鑰標準）
+          </h4>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; font-size:0.78rem; color:var(--ink-sub); line-height:1.65;">
+            <div><b>1. 現場向乘客收款：</b><br>現場現金 ＝ 車資總額 ＋ 代訂全額（門票/房費） － 已付定金</div>
+            <div><b>2. 公司應收收入與代墊款：</b><br>公司應收 ＝ 代訂全額（公司已全額代墊） ＋ 車資總額 × 10% 派遣費</div>
+            <div><b>3. 司導完工應繳回公司：</b><br>司導繳回公司 ＝ 現場收款 － (車資總額 × 90% 司導實得)</div>
+          </div>
+        </article>
+
+        <article class="card" style="padding:18px; margin-bottom:18px;">
+          <div style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+            <div style="flex:1; min-width:180px;">
+              <label style="display:block; font-size:0.76rem; font-weight:800; color:var(--ink-black); margin-bottom:4px;">帳務統計維度：</label>
+              <select id="finance-filter-mode" onchange="window.onFinanceFilterChange()" style="width:100%; padding:8px 10px; border:1px solid var(--border-gilded); border-radius:8px; font-size:0.83rem; font-weight:700; background:#FAF8F5;">
+                <option value="driver">👤 個別司導－自訂期間對帳</option>
+                <option value="monthly">📅 全公司－整月份總帳務</option>
+                <option value="all">📋 全部案件－綜合總覽</option>
+              </select>
+            </div>
+
+            <div id="filter-driver-box" style="flex:1; min-width:160px;">
+              <label style="display:block; font-size:0.76rem; font-weight:800; color:var(--ink-black); margin-bottom:4px;">選擇司導：</label>
+              <select id="finance-filter-driver" onchange="window.onFinanceFilterChange()" style="width:100%; padding:8px 10px; border:1px solid var(--border-gilded); border-radius:8px; font-size:0.83rem; font-weight:700; background:#FAF8F5;">
+                <option value="all">全體司導名冊</option>
+                <option value="張其芳">張其芳（TEB-6933）</option>
+                <option value="陳建榮">陳建榮（TDC-8053）</option>
+              </select>
+            </div>
+
+            <div id="filter-month-box" style="flex:1; min-width:140px; display:none;">
+              <label style="display:block; font-size:0.76rem; font-weight:800; color:var(--ink-black); margin-bottom:4px;">統計月份：</label>
+              <input type="month" id="finance-filter-month" value="2026-10" onchange="window.onFinanceFilterChange()" style="width:100%; padding:7px 10px; border:1px solid var(--border-gilded); border-radius:8px; font-size:0.83rem; background:#FAF8F5;">
+            </div>
+
+            <div id="filter-daterange-box" style="display:flex; gap:8px; align-items:flex-end; flex:2; min-width:280px;">
+              <div style="flex:1;">
+                <label style="display:block; font-size:0.76rem; font-weight:800; color:var(--ink-black); margin-bottom:4px;">起始日期：</label>
+                <input type="date" id="finance-filter-start" value="2026-10-01" onchange="window.onFinanceFilterChange()" style="width:100%; padding:7px 10px; border:1px solid var(--border-gilded); border-radius:8px; font-size:0.83rem; background:#FAF8F5;">
+              </div>
+              <div style="flex:1;">
+                <label style="display:block; font-size:0.76rem; font-weight:800; color:var(--ink-black); margin-bottom:4px;">結束日期：</label>
+                <input type="date" id="finance-filter-end" value="2026-10-31" onchange="window.onFinanceFilterChange()" style="width:100%; padding:7px 10px; border:1px solid var(--border-gilded); border-radius:8px; font-size:0.83rem; background:#FAF8F5;">
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="grid" id="finance-kpi-grid">
+          <article class="stat"><span>篩選包車總車資</span><strong id="kpi-total-fare">$0</strong></article>
+          <article class="stat"><span>代訂項目(歸公司)</span><strong id="kpi-total-preorder">$0</strong></article>
+          <article class="stat"><span>公司 10% 派遣費</span><strong id="kpi-company-fee">$0</strong></article>
+          <article class="stat"><span>司導應繳回公司</span><strong id="kpi-driver-remit" style="color:var(--burgundy-seal);">$0</strong></article>
+        </div>
+
+        <article class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 style="margin:0; font-size:1.05rem; color:var(--ink-black);" id="finance-table-title">📋 結算行程明細表</h3>
+            <span style="font-size:0.75rem; color:var(--ink-sub);" id="finance-table-count">共 0 筆記錄</span>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.71rem; text-align:left; line-height:1.35;">
+              <thead>
+                <tr style="background:#FAF8F5; border-bottom:1.5px solid var(--border-gilded); color:var(--gold-deep); font-size:0.68rem; white-space:nowrap;">
+                  <th style="padding:6px 4px;">案件編號</th>
+                  <th style="padding:6px 4px;">執勤司導</th>
+                  <th style="padding:6px 4px;">行程日期</th>
+                  <th style="padding:6px 4px; text-align:right;">車資總額</th>
+                  <th style="padding:6px 4px; text-align:right;">代訂(歸公司)</th>
+                  <th style="padding:6px 4px; text-align:right;">已收定金</th>
+                  <th style="padding:6px 4px; text-align:right; color:var(--burgundy-seal); font-weight:800;">現場應收現金</th>
+                  <th style="padding:6px 4px; text-align:right; font-weight:900; color:var(--burgundy-seal);">應繳回公司</th>
+                  <th style="padding:6px 4px; text-align:center;">結算狀態</th>
+                </tr>
+              </thead>
+              <tbody id="finance-table-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- 5. 景點資料庫面板 -->
+      <section id="places" class="panel">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Scenic Database & Stops</div>
+            <h2>景點停留時間與導航資料庫</h2>
+            <p>點擊卡片可展開與收合；停留時間、景點特色簡介與司導提醒皆可自由編輯儲存。</p>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="button small primary" onclick="window.addNewPlacePrompt()">＋ 新增自訂景點</button>
+            <button class="button small" onclick="window.toggleAllPlaces(true)">⊞ 全部展開</button>
+            <button class="button small" onclick="window.toggleAllPlaces(false)">⊟ 全部收合</button>
+            <button class="button small danger" onclick="window.resetPlacesToDefault()">↻ 還原預設資料</button>
+          </div>
+        </div>
+
+        <article class="card">
+          <div id="places-accordion-list"></div>
+        </article>
+      </section>
+
+      <!-- 6. 系統設定面板 -->
+      <section id="settings" class="panel">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Environment & Settings</div>
+            <h2>行程生成器路徑與平台營運參數設定</h2>
+            <p>指定同目錄下的正式偉哥行程生成器檔案，系統已具備空白修剪與自動副檔名補齊防呆。</p>
+          </div>
+        </div>
+
+        <article class="card" style="border: 1.5px solid var(--gold-michelin); background: #FAF8F5;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <h3 style="margin:0; font-size:1.05rem; color:var(--ink-black);">🔗 偉哥行程生成器檔案路徑指定</h3>
+            <span style="font-size:0.75rem; background:var(--gold-light); color:var(--gold-deep); font-weight:800; padding:3px 10px; border-radius:99px; border:1px solid #DFCFAE;">相對路徑直連 ✓</span>
+          </div>
+          <p style="margin:0 0 12px; font-size:0.8rem; color:var(--ink-sub);">
+            指定與管理後台同目錄下的正式生成器檔名。若不確定檔名是否有多打副檔名，可點擊「📁 瀏覽選取檔案」自動抓取硬碟真實檔名。
+          </p>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <input id="generator-path" type="text" style="flex:1; min-width:280px; padding:10px 12px; border:1px solid var(--border-gilded); border-radius:8px; font-weight:800; font-size:0.88rem; background:#FFFFFF;" value="偉哥行程生成器_v1.6.72_尊享旗艦版.html">
+            <button type="button" class="button" onclick="document.getElementById('local-gen-file-picker').click()">📁 瀏覽選取檔案</button>
+            <input type="file" id="local-gen-file-picker" accept=".html,.htm" style="display:none;" onchange="window.handleSelectGeneratorFile(this.files)">
+            <button type="button" class="button primary" style="padding:10px 16px;" onclick="window.testOpenGenerator()">🧪 測試開啟生成器</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3 style="margin:0 0 14px; font-size:1.05rem; color:var(--ink-black);">⚙️ 營運參數與對帳匯款帳號維護</h3>
+          <div class="edit-form-grid">
+            <div class="edit-field">
+              <label>預設每日出發時間：</label>
+              <input id="setting-default-departure" type="time" value="09:00">
+            </div>
+            <div class="edit-field">
+              <label>公司派遣費比例 (%)：</label>
+              <input id="setting-dispatch-rate" type="number" min="1" max="100" value="10">
+            </div>
+            <div class="edit-field">
+              <label>司導實得車資比例 (%)：</label>
+              <input id="setting-driver-rate" type="number" min="1" max="100" value="90" readonly style="background:#FAF8F5; color:var(--ink-sub);">
+            </div>
+          </div>
+
+          <h4 style="margin:16px 0 10px; font-size:0.92rem; color:var(--gold-deep); border-top:1px dashed var(--border-gilded); padding-top:14px;">
+            🏦 偉哥公司代收繳回匯款帳號
+          </h4>
+          <div class="edit-form-grid">
+            <div class="edit-field">
+              <label>收款帳戶戶名：</label>
+              <input id="setting-bank-holder" type="text" value="" placeholder="請輸入收款戶名...">
+            </div>
+            <div class="edit-field">
+              <label>銀行名稱與代碼：</label>
+              <input id="setting-bank-name" type="text" value="" placeholder="例如：國泰世華銀行（013）">
+            </div>
+            <div class="edit-field">
+              <label>分行名稱：</label>
+              <input id="setting-bank-branch" type="text" value="" placeholder="例如：魚池分行">
+            </div>
+            <div class="edit-field">
+              <label>公司收款銀行帳號：</label>
+              <input id="setting-bank-account" type="text" value="" placeholder="請輸入匯款帳號...">
+            </div>
+          </div>
+
+          <div class="edit-actions">
+            <button type="button" class="button" onclick="window.resetSystemSettings()">↻ 清空重填</button>
+            <button type="button" class="button primary" style="padding:10px 22px;" onclick="window.saveSystemSettings()">💾 儲存系統設定</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- 7. 網站管理面板 -->
+      <section id="other" class="panel">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Public Showcase Management</div>
+            <h2>偉哥公開精選行程官方網站管理</h2>
+            <p>即時修改對外發布之形象官網網址、品牌標語與精選私旅推薦路線。</p>
+          </div>
+          <a id="site-visit-link" class="button gold" href="https://tdb8053-bit.github.io/Website/" target="_blank" rel="noopener">
+            🌐 前往公開官方網站 ➔
+          </a>
+        </div>
+
+        <article class="card">
+          <div class="edit-form-grid" style="grid-template-columns: 1fr;">
+            <div class="edit-field">
+              <label>官方網站正式發布網址 (URL)：</label>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <input id="site-setting-url" type="url" style="flex:1;" value="https://tdb8053-bit.github.io/Website/">
+                <button type="button" class="button" onclick="window.copySiteUrl()">📋 複製網址</button>
+                <a id="site-direct-jump-btn" href="https://tdb8053-bit.github.io/Website/" target="_blank" rel="noopener" class="button primary">🌐 開啟網站</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="edit-form-grid">
+            <div class="edit-field">
+              <label>主視覺品牌標語（中文）：</label>
+              <input id="site-setting-slogan-zh" type="text" value="探索寶島福爾摩沙之美，專屬奢華私旅。">
+            </div>
+            <div class="edit-field">
+              <label>主視覺副標語（英文）：</label>
+              <input id="site-setting-slogan-en" type="text" value="Curated Expedition in Formosa.">
+            </div>
+          </div>
+
+          <div class="edit-form-grid">
+            <div class="edit-field">
+              <label>客服專線電話：</label>
+              <input id="site-setting-phone" type="text" value="" placeholder="請輸入客服電話...">
+            </div>
+            <div class="edit-field">
+              <label>官方 LINE 諮詢 ID：</label>
+              <input id="site-setting-line" type="text" value="" placeholder="請輸入官方 LINE ID...">
+            </div>
+          </div>
+
+          <div class="edit-field" style="margin-bottom: 12px;">
+            <label>精選推薦包車路線：</label>
+            <textarea id="site-setting-routes" rows="3">1. 阿里山日出雲海二日遊（小火車、神木群、雲海觀日）
+2. 日月潭清境三日遊（遊湖遊船、青青草原綿羊秀、老街巡禮）
+3. 九份十分經典一日遊（十分放天燈、十分瀑布、山城茶樓夜景）</textarea>
+          </div>
+
+          <div class="edit-actions">
+            <button type="button" class="button" onclick="window.resetWebsiteSettings()">↻ 還原預設內容</button>
+            <button type="button" class="button primary" style="padding: 10px 22px;" onclick="window.saveWebsiteSettings()">💾 儲存網站設定</button>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <aside class="guide" id="dynamic-guide-container">
+      <div class="guide-header">
+        <h2 id="guide-title">📖 設定與使用手帖</h2>
+        <p id="guide-subtitle">掌握當前功能面板的操作流程與重點說明</p>
+      </div>
+      <div id="guide-steps-list"></div>
+    </aside>
+  </main>
+
+  <div id="statement-modal" class="statement-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="statement-modal-card">
+      <div class="statement-modal-header">
+        <h3 id="statement-modal-title">🧾 司導任務結算對帳單</h3>
+        <button type="button" class="button small" style="background:transparent; color:#FAF5ED; border:0; font-size:1.2rem; padding:2px 8px;" onclick="window.closeStatementModal()">✕</button>
+      </div>
+      
+      <div class="statement-modal-body" id="statement-printable-sheet"></div>
+
+      <div class="statement-modal-footer">
+        <div style="font-size:0.76rem; color:var(--ink-sub);">
+          💡 點擊「列印」可另存為 PDF，或點「複製 LINE 文字」直接發送司導。
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="button small" onclick="window.copyStatementLineText()">📲 複製 LINE 對帳文字</button>
+          <button type="button" class="button small gold" onclick="window.printStatementSheet()">🖨️ 列印對帳單 / 存為 PDF</button>
+          <button type="button" class="button small" onclick="window.closeStatementModal()">關閉</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const defaultGeneratorFileName = '偉哥行程生成器_v1.6.72_尊享旗艦版.html';
+    window.itemPricingState = window.itemPricingState || {};
+
+    const guideDictionary = {
+      overview: {
+        title: '📖 今日調度與行車監控',
+        subtitle: '掌握本日最新出車狀況、未收款項與連線狀態',
+        steps: [
+          { num: '1', strong: '今日出車狀態', desc: '確認今日出發司導是否已提前抵達迎候集合地點。' },
+          { num: '2', strong: '現場尾款追蹤', desc: '核對今日有收取現金尾款的行程案件，提醒司導收款。' },
+          { num: '3', strong: '未完工案件巡檢', desc: '巡檢進行中訂單，防止有無車輛狀況。' },
+          { num: '4', strong: '生成器核心就緒', desc: '確認右側生成器就緒狀態，隨時可進行新訂單交付。' }
+        ]
+      },
+      confirmation: {
+        title: '📖 行程建立與代訂指引',
+        subtitle: '標準行程文字輸入、獨立代訂與生成器連線流程',
+        hasTemplates: true,
+        steps: [
+          { num: '1', strong: '載入範本或貼入文字', desc: '可點擊上方 3 款標準範本快速帶入，或於工作區貼上文字。' },
+          { num: '2', strong: '獨立代訂項目確認', desc: '系統僅針對「勝興鐵道自行車」與「住宿飯店」產生代訂項目。' },
+          { num: '3', strong: '步驟 2 填寫案件編號', desc: '發布前必須填寫案件編號（必填防呆機制）。' },
+          { num: '4', strong: '預檢並開啟生成器', desc: '點擊按鈕直接無縫連線同目錄之「偉哥行程生成器_v1.6.72_尊享旗艦版.html」！' }
+        ]
+      },
+      orders: {
+        title: '📖 訂單管理與司導調度',
+        subtitle: '已登記訂單瀏覽、司導指派與行程重新載入',
+        steps: [
+          { num: '1', strong: '檢視案件清單', desc: '瀏覽所有已登記之多日或單日包車行程卡片。' },
+          { num: '2', strong: '指派/更換司導', desc: '確認行程由合適司導執勤並核實座駕車號規格。' },
+          { num: '3', strong: '帶入工作區重新修訂', desc: '點擊「📤 帶入工作區」可將既有行程文字重新載入並修改。' },
+          { num: '4', strong: '雙端交付確認', desc: '生成符合米其林星鑰標準的客戶端手帖與司導任務單。' }
+        ]
+      },
+      finance: {
+        title: '📖 帳務拆帳與結算指南',
+        subtitle: '現場收款、公司10%派遣費、代訂歸公司與結算沖銷',
+        steps: [
+          { num: '1', strong: '現場乘客收款公式', desc: '現場現金 ＝ 車資總額 ＋ 代訂費用（門票/房費） － 已付定金。' },
+          { num: '2', strong: '代訂費用歸屬公司', desc: '門票與飯店皆由公司全額墊款，司導現場代收後全額繳回公司。' },
+          { num: '3', strong: '10%派遣費與司導90%', desc: '公司收取車資總額之 10% 派遣費；司導實得車資的 90%。' },
+          { num: '4', strong: '司導完工繳回計算', desc: '司導應繳回 ＝ 現場收款 － (車資總額 × 90% 司導實得)。' }
+        ]
+      },
+      places: {
+        title: '📖 景點資料庫維護指南',
+        subtitle: '全台熱門包車景點停留時間與叮嚀文字庫',
+        steps: [
+          { num: '1', strong: '展開／收合卡片', desc: '點擊景點標題可展開或收合卡片，檢視目前設定的資訊。' },
+          { num: '2', strong: '編輯停留時間與介紹', desc: '展開卡片後直接在輸入框內修改建議停留時間、簡介與注意事項。' },
+          { num: '3', strong: '儲存或新增自訂景點', desc: '點擊卡片內的「💾 儲存修改」即完成修改，或點右上角新增景點。' },
+          { num: '4', strong: '生成器智慧連動', desc: '此處資料將即時作為行程生成器自動計算抵達與集合時間之基準。' }
+        ]
+      },
+      settings: {
+        title: '📖 系統環境與連線設定',
+        subtitle: '正式生成器檔案路徑指定與預設出發參數',
+        steps: [
+          { num: '1', strong: '確認生成器檔名', desc: '指定同目錄下之「偉哥行程生成器_v1.6.72_尊享旗艦版.html」。' },
+          { num: '2', strong: '點擊測試開啟', desc: '點擊「🧪 測試開啟生成器」驗證瀏覽器新分頁連線順暢。' },
+          { num: '3', strong: '固定出發時間', desc: '系統預設每日出發時間為 09:00（接機日依抵達時間 +1hr 順延）。' },
+          { num: '4', strong: '公司收款帳號', desc: '維護代收結算繳回之銀行帳號，即時連動對帳單。' }
+        ]
+      },
+      other: {
+        title: '📖 公開官網內容發布指引',
+        subtitle: '偉哥公開精選行程官方網站維護與管理',
+        steps: [
+          { num: '1', strong: '前往官方網站', desc: '點擊右上角按鈕在新分頁開啟公開精選行程網站。' },
+          { num: '2', strong: '編輯品牌宣傳標語', desc: '可自由修改中文標語、英文標語與客服諮詢聯絡電話。' },
+          { num: '3', strong: '維護精選包車推薦', desc: '直接修改首頁展示之推薦路線清單（如阿里山、日月潭等）。' },
+          { num: '4', strong: '一鍵儲存設定', desc: '點擊下方「💾 儲存網站設定」，即時保存發布內容！' }
+        ]
+      }
+    };
+
+    const itineraryTemplates = {
+      airport3d: `包車開始日期：2026/10/15
+包車結束日期：2026/10/19
+預約代表：陳先生 等共 4 人
+聯絡電話：0912-345678
+客戶行程備註：請準備一個兒童座椅
+
+接機資訊
+抵達日期：2026/10/15
+航班編號：BR198
+抵達時間：10:30
+抵達航廈：T2
+接機地點：桃園國際機場
+
+Day 1
+出發地點：桃園國際機場
+出發時間：接機日
+行程內容：
+勝興車站鐵道自行車
+住宿飯店：台中逢甲商旅
+今日車資：6500
+
+Day 2
+出發地點：台中逢甲商旅
+出發時間：09:00
+行程內容：
+日月潭遊湖
+向山遊客中心
+住宿飯店：清境農場國民賓館
+今日車資：6000
+
+Day 3
+出發地點：清境農場國民賓館
+出發時間：09:00
+行程內容：
+台北市區自由採買伴手禮
+桃園國際機場送機
+送機地點：桃園國際機場
+今日車資：5500
+
+送機資訊
+送機日期：2026/10/19
+起飛時間：18:30
+航班編號：BR197
+出發航廈：T2`,
+
+      normal3d: `包車開始日期：2026/10/20
+包車結束日期：2026/10/22
+預約代表：林先生 等共 6 人
+聯絡電話：0935-123456
+客戶行程備註：無特殊需求
+
+Day 1
+出發地點：台中高鐵站
+出發時間：09:00
+行程內容：
+勝興車站鐵道自行車
+勝興老街
+三義金榜麵店午餐
+住宿飯店：台中逢甲商旅
+今日車資：5500
+
+Day 2
+出發地點：台中逢甲商旅
+出發時間：09:00
+行程內容：
+日月潭遊湖
+向山遊客中心
+住宿飯店：日月潭馥麗溫泉大飯店
+今日車資：6000
+
+Day 3
+出發地點：日月潭馥麗溫泉大飯店
+出發時間：09:00
+行程內容：
+清境農場
+18度C巧克力工房
+彩虹眷村
+今日車資：6000`,
+
+      normal1d: `包車開始日期：2026/10/25
+包車結束日期：2026/10/25
+預約代表：張代表 等共 4 人
+聯絡電話：0928-888032
+客戶行程備註：請準備一個兒童座椅
+
+Day 1
+出發地點：台中逢甲商旅
+出發時間：09:00
+行程內容：
+勝興車站鐵道自行車
+勝興老街
+三義金榜麵店午餐
+高美濕地
+今日車資：5000`
+    };
+
+    window.applyItineraryTemplate = function(type) {
+      const templateText = itineraryTemplates[type];
+      if (!templateText) return;
+      const textarea = document.getElementById('standard-text-workspace');
+      if (textarea) {
+        textarea.value = templateText;
+        window.renderIndependentPreorderUI();
+        const caseInput = document.getElementById('dispatch-finance-case-id');
+        if (caseInput && !caseInput.value) {
+          caseInput.value = type === 'airport3d' ? '1015' : (type === 'normal3d' ? '1020' : '1025');
+          window.updateOutputPreview(caseInput.value);
+        }
+        window.showToast('✨ 已成功套用標準範本！');
+      }
+    };
+
+    window.renderGuideForPanel = function(panelId) {
+      const guideData = guideDictionary[panelId] || guideDictionary.confirmation;
+      const titleEl = document.getElementById('guide-title');
+      const subEl = document.getElementById('guide-subtitle');
+      const listEl = document.getElementById('guide-steps-list');
+
+      if (titleEl) titleEl.textContent = guideData.title;
+      if (subEl) subEl.textContent = guideData.subtitle;
+
+      if (listEl) {
+        let templateHtml = '';
+        if (guideData.hasTemplates) {
+          templateHtml = `
+            <div class="template-box">
+              <div class="template-box-title">📋 常用標準行程範本快速帶入：</div>
+              <div class="template-btn-grid">
+                <button type="button" class="template-btn" onclick="window.applyItineraryTemplate('airport3d')">
+                  <span>✈️ 接送機 5 日標準行程</span>
+                  <span class="badge">含接送機</span>
+                </button>
+                <button type="button" class="template-btn" onclick="window.applyItineraryTemplate('normal3d')">
+                  <span>🚗 一般 3 日標準行程</span>
+                  <span class="badge">經典三日</span>
+                </button>
+                <button type="button" class="template-btn" onclick="window.applyItineraryTemplate('normal1d')">
+                  <span>⏱️ 一般 1 日標準行程</span>
+                  <span class="badge">單日精選</span>
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        listEl.innerHTML = templateHtml + guideData.steps.map(s => `
+          <div class="guide-step">
+            <b>${s.num}</b>
+            <div class="guide-step-body">
+              <strong>${s.strong}</strong>
+              <span>${s.desc}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+    };
+
+    window.showToast = function(msg) {
+      const toast = document.getElementById('toast');
+      if (toast) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+    };
+
+    window.clearWorkspaceInput = function() {
+      const workspace = document.getElementById('standard-text-workspace');
+      if (workspace) workspace.value = '';
+      const caseInput = document.getElementById('dispatch-finance-case-id');
+      if (caseInput) caseInput.value = '';
+      const depositInput = document.getElementById('booking-deposit');
+      if (depositInput) depositInput.value = '0';
+      try {
+        sessionStorage.removeItem('wei_handoff_case_id');
+        sessionStorage.removeItem('wei-text-workspace-draft-v1');
+        localStorage.removeItem('wei_handoff_case_id');
+        localStorage.removeItem('wei-text-workspace-draft-v1');
+      } catch (_) {}
+      window.updateOutputPreview('');
+      window.renderIndependentPreorderUI();
+      window.showToast('🧹 已清空工作區文字與案件編號！');
+    };
+
+    window.syncDepositToWorkspace = function(value) {
+      const textarea = document.getElementById('standard-text-workspace');
+      if (!textarea) return;
+      const deposit = Math.max(0, Math.floor(Number(value) || 0));
+      const linePattern = /^\s*已收(?:訂金|定金)\s*[：:]\s*[^\n]*\n?/gmi;
+      let text = textarea.value.replace(linePattern, '').replace(/\n{3,}/g, '\n\n').trim();
+      text = `${text}${text ? '\n' : ''}已收定金：${deposit}`;
+      textarea.value = text;
+    };
+
+    window.updateOutputPreview = function(val) {
+      const caseId = (val || '').trim();
+      const preview = document.getElementById('output-preview');
+      if (!preview) return;
+      if (!caseId) {
+        preview.textContent = '⚠️ 請填寫案件檔名與編號（必填，例如：1015）';
+        preview.style.color = 'var(--burgundy-seal)';
+      } else {
+        preview.textContent = `將建立：網頁備份\\2026_${caseId}\\（陳先生專屬：5天4夜 偉哥尊享私旅手冊.html ＋ 司導任務單.html）`;
+        preview.style.color = 'var(--gold-deep)';
+      }
+    };
+
+    window.parseAllSpotsAndHotels = function(text) {
+      if (!text) return { spots: [], hotels: [] };
+      const spots = new Set();
+      const hotels = new Set();
+      const dayBlocks = text.split(/Day\s*\d+/i);
+      dayBlocks.forEach(block => {
+        const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+        let inContent = false;
+        lines.forEach(line => {
+          if (/^行程內容[：:]?/i.test(line)) { inContent = true; return; }
+          if (/^(?:住宿飯店|當晚住宿飯店|住宿酒店|飯店|酒店|住宿|今日車資|出發地點|出發時間)[：:]/i.test(line)) {
+            if (/^(?:住宿飯店|當晚住宿飯店|住宿酒店|飯店|酒店|住宿)[：:]/i.test(line)) {
+              const h = line.replace(/^(?:住宿飯店|當晚住宿飯店|住宿酒店|飯店|酒店|住宿)[：:]/i, '').trim();
+              if (h && h !== '自理') hotels.add(h);
+            }
+            inContent = false;
+            return;
+          }
+          if (inContent) {
+            if (line && line !== '行程內容' && !line.includes('→')) spots.add(line);
+          }
+        });
+      });
+      const hotelMatches = text.matchAll(/(?:住宿飯店|當晚住宿飯店|住宿酒店|飯店|酒店|住宿)[：:]\s*([^\n]+)/gi);
+      for (const m of hotelMatches) {
+        const h = m[1].trim();
+        if (h && h !== '自理') hotels.add(h);
+      }
+      return { spots: Array.from(spots), hotels: Array.from(hotels) };
+    };
+
+    window.renderIndependentPreorderUI = function() {
+      const container = document.getElementById('independent-preorder-container');
+      const textarea = document.getElementById('standard-text-workspace');
+      if (!container || !textarea) return;
+
+      const { spots, hotels } = window.parseAllSpotsAndHotels(textarea.value);
+      let html = '';
+      const qualifiedSpots = spots.filter(s => (/鐵[道路]自行車|自行車/.test(s)) && !s.includes('老街'));
+
+      Object.keys(window.itemPricingState).forEach(k => {
+        if (k.startsWith('spot_')) {
+          const isStillQualified = qualifiedSpots.some(spot => k.startsWith(`spot_${spot}_`));
+          if (!isStillQualified) delete window.itemPricingState[k];
+        }
+      });
+
+      if (qualifiedSpots.length === 0 && hotels.length === 0) {
+        container.innerHTML = '<div class="empty" style="padding:14px; font-size:0.8rem;">目前無符合之代訂項目（僅於行程出現「勝興鐵道自行車」或「住宿飯店」時啟動獨立代訂）。</div>';
+        return;
+      }
+
+      if (qualifiedSpots.length > 0) {
+        html += '<div style="font-size:0.82rem; font-weight:800; color:var(--gold-deep); margin-bottom:6px;">🎫 景點門票代訂（勝興鐵道自行車）：</div>';
+        qualifiedSpots.forEach(spot => {
+          ['adult', 'child'].forEach(type => {
+            const key = `spot_${spot}_${type}`;
+            const isAdult = type === 'adult';
+            if (!window.itemPricingState[key]) {
+              window.itemPricingState[key] = {
+                name: `${spot}${isAdult ? '全票' : '孩童票'}`,
+                price: isAdult ? 285 : 230,
+                qty: isAdult ? 2 : 0,
+                checked: isAdult
+              };
+            }
+            const state = window.itemPricingState[key];
+            const subtotal = (Number(state.price) || 0) * (Number(state.qty) || 1);
+            html += `
+              <div class="preorder-item-card" style="${state.checked ? '' : 'opacity:0.65; background:#FAF8F5;'}">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:0.86rem; font-weight:800; color:var(--ink-black);">
+                  <input type="checkbox" ${state.checked ? 'checked' : ''} onchange="window.toggleItemCheck('${key}', this.checked)" style="width:16px; height:16px;">
+                  <span>📍 景點：${spot} (${isAdult ? '全票 285元' : '孩童票 230元'})</span>
+                </label>
+                <div class="preorder-grid">
+                  <div><label>項目名稱</label><input type="text" value="${state.name}" oninput="window.updateItemField('${key}', 'name', this.value)"></div>
+                  <div><label>單價 ($)</label><input type="number" value="${state.price}" min="0" oninput="window.updateItemField('${key}', 'price', this.value)"></div>
+                  <div><label>數量</label><input type="number" value="${state.qty}" min="0" oninput="window.updateItemField('${key}', 'qty', this.value)"></div>
+                </div>
+                <div class="subtotal-tag">小計：$${subtotal.toLocaleString()}</div>
+              </div>
+            `;
+          });
+        });
+      }
+
+      if (hotels.length > 0) {
+        html += '<div style="font-size:0.82rem; font-weight:800; color:var(--gold-deep); margin:12px 0 6px;">🏨 各住宿飯店房費代訂（預設不勾選）：</div>';
+        hotels.forEach(hotel => {
+          const key = `hotel_${hotel}`;
+          if (!window.itemPricingState[key]) {
+            window.itemPricingState[key] = { name: `${hotel}房費`, price: 2800, qty: 1, checked: false };
+          }
+          const state = window.itemPricingState[key];
+          const subtotal = (Number(state.price) || 0) * (Number(state.qty) || 1);
+          html += `
+            <div class="preorder-item-card" style="${state.checked ? '' : 'opacity:0.65; background:#FAF8F5;'}">
+              <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:0.86rem; font-weight:800; color:var(--ink-black);">
+                <input type="checkbox" ${state.checked ? 'checked' : ''} onchange="window.toggleItemCheck('${key}', this.checked)" style="width:16px; height:16px;">
+                <span>🏨 飯店：${hotel} (預設不勾選)</span>
+              </label>
+              <div class="preorder-grid">
+                <div><label>項目名稱</label><input type="text" value="${state.name}" oninput="window.updateItemField('${key}', 'name', this.value)"></div>
+                <div><label>單價 ($)</label><input type="number" value="${state.price}" min="0" oninput="window.updateItemField('${key}', 'price', this.value)"></div>
+                <div><label>數量</label><input type="number" value="${state.qty}" min="1" oninput="window.updateItemField('${key}', 'qty', this.value)"></div>
+              </div>
+              <div class="subtotal-tag">小計：$${subtotal.toLocaleString()}</div>
+            </div>
+          `;
+        });
+      }
+      container.innerHTML = html;
+    };
+
+    window.toggleItemCheck = function(key, checked) {
+      if (window.itemPricingState[key]) {
+        window.itemPricingState[key].checked = checked;
+        window.renderIndependentPreorderUI();
+      }
+    };
+
+    window.updateItemField = function(key, field, val) {
+      if (window.itemPricingState[key]) {
+        window.itemPricingState[key][field] = val;
+        window.renderIndependentPreorderUI();
+      }
+    };
+
+    window.openSelectedGenerator = function() {
+      const textarea = document.getElementById('standard-text-workspace');
+      const caseInput = document.getElementById('dispatch-finance-case-id');
+      const caseId = (caseInput?.value || '').trim();
+
+      if (!caseId) {
+        window.showToast('⚠️ 【防呆提示】尚未輸入案件編號！請在步驟 2 填寫案件編號。');
+        caseInput?.focus();
+        return;
+      }
+
+      let text = textarea ? textarea.value.trim() : '';
+      let preorderLines = [];
+      Object.values(window.itemPricingState).forEach(state => {
+        if (state.checked && Number(state.price) > 0 && Number(state.qty) > 0) {
+          const sub = (Number(state.price) || 0) * (Number(state.qty) || 1);
+          if (state.name.includes('房費') || state.name.includes('飯店')) {
+            preorderLines.push(`代訂酒店房費：${state.name}｜房費 ${state.price} 元 × ${state.qty} 間＝${sub} 元`);
+          } else {
+            preorderLines.push(`代訂票券：${state.name}｜單價 ${state.price} 元 × ${state.qty}＝${sub} 元`);
+          }
+        }
+      });
+
+      if (preorderLines.length > 0) {
+        text = `${text}\n${preorderLines.join('\n')}`;
+      }
+
+      try {
+        sessionStorage.setItem('wei_handoff_case_id', caseId);
+        sessionStorage.setItem('wei-text-workspace-draft-v1', text);
+        localStorage.setItem('wei_handoff_case_id', caseId);
+        localStorage.setItem('wei-text-workspace-draft-v1', text);
+      } catch (_) {}
+
+      const sysSettings = window.loadSystemSettings ? window.loadSystemSettings() : {};
+      let targetUrl = document.getElementById('generator-path')?.value.trim() || sysSettings.generatorPath || defaultGeneratorFileName;
+      
+      targetUrl = targetUrl.trim();
+      if (targetUrl && !targetUrl.toLowerCase().endsWith('.html') && !targetUrl.toLowerCase().endsWith('.htm')) {
+        targetUrl += '.html';
+      }
+      
+      const fullLaunchUrl = `${targetUrl}?caseId=${encodeURIComponent(caseId)}&handoff=${encodeURIComponent(text)}&t=${Date.now()}`;
+      let win = null;
+      try {
+        win = window.open(fullLaunchUrl, '_blank');
+      } catch (err) {
+        console.warn('開啟新分頁受限：', err);
+      }
+
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        const toast = document.getElementById('toast');
+        if (toast) {
+          toast.innerHTML = `⚠️ 瀏覽器攔截自動開啟！請<a href="${fullLaunchUrl}" target="_blank" style="color:#DFBE7A; text-decoration:underline; font-weight:900; margin-left:6px;">【點擊這裡手動開啟偉哥生成器】</a>`;
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 8000);
+        }
+      } else {
+        window.showToast(`✨ 已成功連線並開啟 偉哥行程生成器（案件 #${caseId}）！`);
+      }
+    };
+
+    window.preflightAndOpenGenerator = function() {
+      window.openSelectedGenerator();
+    };
+
+    const PLACES_STORAGE_KEY = 'wei-places-database-v1';
+    const defaultPlacesDatabase = [
+      { id: 'place_railbike', name: '勝興車站舊山線鐵道自行車', region: '中部（苗栗三義）', stayMinutes: 90, description: '穿梭舊山線百年隧道群，凌空俯瞰龍騰斷橋歷史殘跡與山城絕景。', notice: '請提前 30 分鐘報到取票並參加行前安全講習。' },
+      { id: 'place_sunmoonlake', name: '日月潭遊湖', region: '中部（南投魚池）', stayMinutes: 150, description: '全程搭乘豪華遊艇穿梭水社、玄光寺與伊達邵三大碼頭，坐擁雙潭湖光山色。', notice: '搭船請隨身攜帶船票，各碼頭均可自由上岸遊覽後再搭乘下一班船。' },
+      { id: 'place_qingjing', name: '清境農場（青青草原與觀山牧區）', region: '高山（南投仁愛）', stayMinutes: 160, description: '海拔千餘米雲霧繚繞之高山草原，漫遊木棧道，享受清新純淨負離子。', notice: '海拔 1,750 公尺紫外線強烈，請隨身攜帶遮陽帽子、薄外套與飲用水。' },
+      { id: 'place_jiufen', name: '九份山城老街', region: '北部（新北瑞芳）', stayMinutes: 90, description: '漫步山城石階小徑，品嚐芋圓美味並遠眺山海一色夜景。', notice: '老街山路階梯多，車輛於九份停車場停靠後步行進入老街。' }
+    ];
+
+    window.loadPlacesData = function() {
+      try {
+        const saved = localStorage.getItem(PLACES_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch (_) {}
+      return [...defaultPlacesDatabase];
+    };
+
+    window.savePlacesData = function(list) {
+      try { localStorage.setItem(PLACES_STORAGE_KEY, JSON.stringify(list)); } catch (_) {}
+    };
+
+    window.renderPlacesListUI = function() {
+      const container = document.getElementById('places-accordion-list');
+      if (!container) return;
+      const list = window.loadPlacesData();
+      container.innerHTML = list.map((item, index) => {
+        const cardId = `place-card-${index}`;
+        return `
+          <div class="place-accordion-card" id="${cardId}">
+            <div class="place-accordion-header" onclick="window.togglePlaceCard('${cardId}')">
+              <h4>
+                <span>📍</span>
+                <span>${item.name}</span>
+                <span style="font-size:0.7rem; font-weight:800; background:var(--gold-light); color:var(--gold-deep); padding:2px 8px; border-radius:999px; border:1px solid #DFCFAE;">${item.region || '未分區'}</span>
+              </h4>
+              <div class="place-accordion-meta">
+                <span>⏱️ 停留：${item.stayMinutes} 分鐘</span>
+                <span class="toggle-icon">▼</span>
+              </div>
+            </div>
+            <div class="place-accordion-content">
+              <div class="edit-form-grid">
+                <div class="edit-field"><label>景點名稱：</label><input type="text" id="place-name-${index}" value="${item.name}"></div>
+                <div class="edit-field"><label>所屬分區：</label><input type="text" id="place-region-${index}" value="${item.region || ''}"></div>
+                <div class="edit-field"><label>建議停留時間（分鐘）：</label><input type="number" id="place-time-${index}" value="${item.stayMinutes}" min="10" step="5"></div>
+              </div>
+              <div class="edit-field" style="margin-bottom:10px;"><label>景點詳細特色與導覽簡介：</label><textarea id="place-desc-${index}" rows="2">${item.description || ''}</textarea></div>
+              <div class="edit-field"><label>司導叮嚀／參觀備註：</label><textarea id="place-notice-${index}" rows="2">${item.notice || ''}</textarea></div>
+              <div class="edit-actions">
+                <button type="button" class="button small danger" onclick="window.deletePlaceItem(${index})">🗑️ 刪除此景點</button>
+                <button type="button" class="button small primary" onclick="window.savePlaceItem(${index})">💾 儲存修改</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    window.togglePlaceCard = function(cardId) {
+      document.getElementById(cardId)?.classList.toggle('open');
+    };
+
+    window.toggleAllPlaces = function(expand) {
+      document.querySelectorAll('.place-accordion-card').forEach(c => {
+        if (expand) c.classList.add('open');
+        else c.classList.remove('open');
+      });
+      window.showToast(expand ? '⊞ 已展開所有景點介紹' : '⊟ 已收合所有景點介紹');
+    };
+
+    window.savePlaceItem = function(index) {
+      const list = window.loadPlacesData();
+      if (!list[index]) return;
+      list[index].name = document.getElementById(`place-name-${index}`)?.value.trim() || list[index].name;
+      list[index].region = document.getElementById(`place-region-${index}`)?.value.trim() || list[index].region;
+      list[index].stayMinutes = Number(document.getElementById(`place-time-${index}`)?.value) || list[index].stayMinutes;
+      list[index].description = document.getElementById(`place-desc-${index}`)?.value.trim() || '';
+      list[index].notice = document.getElementById(`place-notice-${index}`)?.value.trim() || '';
+      window.savePlacesData(list);
+      window.renderPlacesListUI();
+      window.showToast(`💾 已成功儲存「${list[index].name}」！`);
+    };
+
+    window.deletePlaceItem = function(index) {
+      const list = window.loadPlacesData();
+      if (!list[index]) return;
+      const removedName = list[index].name;
+      list.splice(index, 1);
+      window.savePlacesData(list);
+      window.renderPlacesListUI();
+      window.showToast(`🗑️ 已刪除景點「${removedName}」！`);
+    };
+
+    window.addNewPlacePrompt = function() {
+      const newName = prompt('請輸入欲新增的景點名稱：');
+      if (!newName || !newName.trim()) return;
+      const newTime = prompt('請輸入建議停留時間（分鐘）：', '60');
+      const list = window.loadPlacesData();
+      list.unshift({
+        id: `custom_${Date.now()}`,
+        name: newName.trim(),
+        region: '自訂精選',
+        stayMinutes: Number(newTime) || 60,
+        description: `自訂精選景點：${newName.trim()}。`,
+        notice: '請留意現場路況與停車規定。'
+      });
+      window.savePlacesData(list);
+      window.renderPlacesListUI();
+      window.showToast(`✨ 已新增「${newName.trim()}」！`);
+    };
+
+    window.resetPlacesToDefault = function() {
+      try { localStorage.removeItem(PLACES_STORAGE_KEY); } catch (_) {}
+      window.renderPlacesListUI();
+      window.showToast('↻ 已還原預設景點資料庫！');
+    };
+
+    const financeRecordsDatabase = [
+      { caseId: '1015', customer: '陳先生 等共 4 人', driver: '張其芳', plate: 'TEB-6933', date: '2026-10-15', endDate: '2026-10-19', carFare: 28500, preorderItems: 0, deposit: 0, status: 'pending' },
+      { caseId: '1022', customer: '林小姐 等共 2 人', driver: '陳建榮', plate: 'TDC-8053', date: '2026-10-22', endDate: '2026-10-24', carFare: 18000, preorderItems: 0, deposit: 3000, status: 'ready' }
+    ];
+
+    window.onFinanceFilterChange = function() {
+      const mode = document.getElementById('finance-filter-mode')?.value || 'driver';
+      const driverBox = document.getElementById('filter-driver-box');
+      const monthBox = document.getElementById('filter-month-box');
+      const daterangeBox = document.getElementById('filter-daterange-box');
+
+      if (mode === 'monthly') {
+        if (driverBox) driverBox.style.display = 'none';
+        if (monthBox) monthBox.style.display = 'block';
+        if (daterangeBox) daterangeBox.style.display = 'none';
+      } else if (mode === 'driver') {
+        if (driverBox) driverBox.style.display = 'block';
+        if (monthBox) monthBox.style.display = 'none';
+        if (daterangeBox) daterangeBox.style.display = 'flex';
+      } else {
+        if (driverBox) driverBox.style.display = 'none';
+        if (monthBox) monthBox.style.display = 'none';
+        if (daterangeBox) daterangeBox.style.display = 'flex';
+      }
+      window.renderFinanceTableUI();
+    };
+
+    window.renderFinanceTableUI = function() {
+      const mode = document.getElementById('finance-filter-mode')?.value || 'driver';
+      const selectedDriver = document.getElementById('finance-filter-driver')?.value || 'all';
+      const selectedMonth = document.getElementById('finance-filter-month')?.value || '2026-10';
+      const startDate = document.getElementById('finance-filter-start')?.value || '2026-10-01';
+      const endDate = document.getElementById('finance-filter-end')?.value || '2026-10-31';
+
+      let filtered = [...financeRecordsDatabase];
+      if (mode === 'monthly') filtered = filtered.filter(item => item.date.startsWith(selectedMonth));
+      else if (mode === 'driver') {
+        if (selectedDriver !== 'all') filtered = filtered.filter(item => item.driver === selectedDriver);
+        filtered = filtered.filter(item => item.date >= startDate && item.date <= endDate);
+      } else filtered = filtered.filter(item => item.date >= startDate && item.date <= endDate);
+
+      let sumCarFare = 0, sumPreorder = 0, sumCompanyFee = 0, sumDriverRemit = 0;
+      const tbody = document.getElementById('finance-table-body');
+      if (!tbody) return;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" class="empty" style="padding:24px; text-align:center; font-size:0.75rem;">此篩選條件下查無相關行程帳務記錄。</td></tr>`;
+      } else {
+        tbody.innerHTML = filtered.map(row => {
+          const fare = Number(row.carFare) || 0;
+          const preorder = Number(row.preorderItems) || 0;
+          const deposit = Number(row.deposit) || 0;
+          const onSiteCash = fare + preorder - deposit;
+          const driverNetIncome = Math.round(fare * 0.9);
+          const companyCut = Math.round(fare * 0.1);
+          const driverMustRemit = onSiteCash - driverNetIncome;
+
+          sumCarFare += fare;
+          sumPreorder += preorder;
+          sumCompanyFee += companyCut;
+          sumDriverRemit += (row.status === 'settled' ? 0 : driverMustRemit);
+
+          let statusTag = row.status === 'settled' 
+            ? '<span style="background:var(--gold-light); color:var(--gold-deep); padding:2px 6px; border-radius:99px; font-size:0.65rem; font-weight:800; border:1px solid #DFCFAE; white-space:nowrap;">已結清 ✓</span>'
+            : '<span style="background:#FFFBEB; color:#92400E; padding:2px 6px; border-radius:99px; font-size:0.65rem; font-weight:800; border:1px solid #FDE68A; white-space:nowrap;">待繳回 ⏳</span>';
+
+          return `
+            <tr style="border-bottom:1px solid var(--border-gilded); font-size:0.71rem;">
+              <td style="padding:6px 4px; font-weight:800; font-family:'Cinzel', serif; white-space:nowrap;">#${row.caseId}</td>
+              <td style="padding:6px 4px; white-space:nowrap;"><b>${row.driver}</b> <span style="font-size:0.66rem; color:var(--ink-sub);">(${row.plate})</span></td>
+              <td style="padding:6px 4px; font-size:0.68rem; color:var(--ink-sub); font-family:'Plus Jakarta Sans', sans-serif; white-space:nowrap;">${row.date}</td>
+              <td style="padding:6px 4px; text-align:right; font-weight:700; white-space:nowrap;">$${fare.toLocaleString()}</td>
+              <td style="padding:6px 4px; text-align:right; color:var(--gold-deep); font-weight:700; white-space:nowrap;">$${preorder.toLocaleString()}</td>
+              <td style="padding:6px 4px; text-align:right; color:var(--ink-black); white-space:nowrap;">-$${deposit.toLocaleString()}</td>
+              <td style="padding:6px 4px; text-align:right; font-weight:800; color:var(--burgundy-seal); white-space:nowrap;">$${onSiteCash.toLocaleString()}</td>
+              <td style="padding:6px 4px; text-align:right; font-weight:900; color:var(--burgundy-seal); white-space:nowrap;">$${driverMustRemit.toLocaleString()}</td>
+              <td style="padding:6px 4px; text-align:center;">${statusTag}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('kpi-total-fare').textContent = `$${sumCarFare.toLocaleString()}`;
+      document.getElementById('kpi-total-preorder').textContent = `$${sumPreorder.toLocaleString()}`;
+      document.getElementById('kpi-company-fee').textContent = `$${sumCompanyFee.toLocaleString()}`;
+      document.getElementById('kpi-driver-remit').textContent = `$${sumDriverRemit.toLocaleString()}`;
+      document.getElementById('finance-table-count').textContent = `共 ${filtered.length} 筆行程對帳記錄`;
+    };
+
+    window.resetFinanceFilters = function() {
+      document.getElementById('finance-filter-mode').value = 'driver';
+      document.getElementById('finance-filter-driver').value = 'all';
+      document.getElementById('finance-filter-start').value = '2026-10-01';
+      document.getElementById('finance-filter-end').value = '2026-10-31';
+      window.onFinanceFilterChange();
+      window.showToast('↻ 已重置帳務篩選條件！');
+    };
+
+    let workspaceDirectoryHandle = null;
+    const workspaceDbName = 'wei-backend-workspace-v1';
+    const workspaceStoreName = 'handles';
+    const workspaceKey = 'selected-workspace';
+
+    function openWorkspaceDb() {
+      return new Promise((resolve, reject) => {
+        if (!window.indexedDB) { reject(new Error('IndexedDB not supported')); return; }
+        const req = indexedDB.open(workspaceDbName, 1);
+        req.onupgradeneeded = () => req.result.createObjectStore(workspaceStoreName);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function persistWorkspaceHandle(handle) {
+      try {
+        const db = await openWorkspaceDb();
+        const tx = db.transaction(workspaceStoreName, 'readwrite');
+        tx.objectStore(workspaceStoreName).put(handle, workspaceKey);
+        tx.oncomplete = () => db.close();
+      } catch (_) {}
+      try { localStorage.setItem('wei_workspace_folder_name', handle.name || '偉哥派車系統'); } catch (_) {}
+    }
+
+    async function restoreWorkspaceDirectoryHandle() {
+      try {
+        const db = await openWorkspaceDb();
+        const handle = await new Promise((resolve, reject) => {
+          const tx = db.transaction(workspaceStoreName, 'readonly');
+          const req = tx.objectStore(workspaceStoreName).get(workspaceKey);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(req.error);
+        });
+        db.close();
+
+        if (handle) {
+          workspaceDirectoryHandle = handle;
+          window.updateFolderStatusUI(handle.name, true);
+          return true;
+        }
+      } catch (_) {}
+
+      try {
+        const savedName = localStorage.getItem('wei_workspace_folder_name') || '偉哥派車系統';
+        window.updateFolderStatusUI(savedName, false);
+      } catch (_) {
+        window.updateFolderStatusUI('偉哥派車系統', false);
+      }
+      return false;
+    }
+
+    window.chooseWorkspaceFolder = async function() {
+      if (!window.showDirectoryPicker) {
+        window.showToast('⚠️ 目前瀏覽器不支援資料夾選擇API');
+        return false;
+      }
+      try {
+        const handle = await window.showDirectoryPicker({ mode: 'readwrite' });
+        if (!handle) return false;
+        workspaceDirectoryHandle = handle;
+        await persistWorkspaceHandle(handle);
+        window.updateFolderStatusUI(handle.name, true);
+        window.showToast(`✨ 已成功綁定專案目錄：${handle.name}！`);
+        return true;
+      } catch (err) {
+        if (err.name !== 'AbortError') window.showToast('選擇資料夾失敗：' + (err.message || ''));
+        return false;
+      }
+    };
+
+    window.updateFolderStatusUI = function(folderName, isVerified) {
+      const statusEl = document.getElementById('finance-folder-status');
+      const displayName = folderName || '偉哥派車系統';
+      if (statusEl) {
+        statusEl.textContent = `${displayName}\\帳務結算\\ ${isVerified ? '✓ 已就緒' : '⚡ 點擊結算喚醒'}`;
+        statusEl.style.color = 'var(--gold-deep)';
+      }
+    };
+
+    async function writeAccountingFileDirectly(fileName, content, mimeType) {
+      if (!workspaceDirectoryHandle) await restoreWorkspaceDirectoryHandle();
+      if (!workspaceDirectoryHandle && window.showDirectoryPicker) {
+        const picked = await window.chooseWorkspaceFolder();
+        if (!picked) return false;
+      }
+      if (workspaceDirectoryHandle) {
+        try {
+          let perm = await workspaceDirectoryHandle.queryPermission({ mode: 'readwrite' });
+          if (perm !== 'granted') perm = await workspaceDirectoryHandle.requestPermission({ mode: 'readwrite' });
+          if (perm === 'granted') {
+            const accountingDir = await workspaceDirectoryHandle.getDirectoryHandle('帳務結算', { create: true });
+            const fileHandle = await accountingDir.getFileHandle(fileName, { create: true });
+            const writer = await fileHandle.createWritable();
+            await writer.write(new Blob([content], { type: mimeType }));
+            await writer.close();
+            return true;
+          }
+        } catch (err) {}
+      }
+      return false;
+    }
+
+    window.copyAccountingFolderPath = function() {
+      const base = workspaceDirectoryHandle ? workspaceDirectoryHandle.name : '偉哥派車系統';
+      const path = `${base}\\帳務結算\\`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(path);
+        window.showToast('📋 已複製帳務路徑：' + path);
+      }
+    };
+
+    window.exportFinanceToExcelCSV = async function() {
+      let csvContent = '\uFEFF案件編號,執勤司導,車資總額,現場應收現金,司導應繳回公司,結算狀態\n';
+      financeRecordsDatabase.forEach(r => {
+        const fare = Number(r.carFare) || 0;
+        const cash = fare + (Number(r.preorderItems) || 0) - (Number(r.deposit) || 0);
+        const remit = cash - Math.round(fare * 0.9);
+        csvContent += `"${r.caseId}","${r.driver}",${fare},${cash},${remit},"${r.status}"\n`;
+      });
+      const fileName = '偉哥_帳務結算總表.csv';
+      const isSaved = await writeAccountingFileDirectly(fileName, csvContent, 'text/csv;charset=utf-8;');
+      if (isSaved) window.showToast(`🎉 已存入專案目錄\\帳務結算\\${fileName}`);
+      else {
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      }
+    };
+
+    window.exportFinanceToJSON = async function() {
+      const sysSettings = window.loadSystemSettings();
+      const exportData = { platform: '偉哥 旅遊平台', records: financeRecordsDatabase, bankSettings: sysSettings };
+      const jsonStr = JSON.stringify(exportData, null, 2);
+      const fileName = '帳務總表.json';
+      const isSaved = await writeAccountingFileDirectly(fileName, jsonStr, 'application/json;charset=utf-8;');
+      if (isSaved) window.showToast(`🎉 已存入專案目錄\\帳務結算\\${fileName}`);
+      else {
+        const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      }
+    };
+
+    window.openStatementModal = function() {
+      const sysSettings = window.loadSystemSettings();
+      let sumCarFare = 0, sumCash = 0, sumRemit = 0;
+      financeRecordsDatabase.forEach(r => {
+        const fare = Number(r.carFare) || 0;
+        const cash = fare - (Number(r.deposit) || 0);
+        const remit = cash - Math.round(fare * 0.9);
+        sumCarFare += fare; sumCash += cash; sumRemit += remit;
+      });
+
+      document.getElementById('statement-printable-sheet').innerHTML = `
+        <div style="background:#FFFFFF; border:1px solid var(--border-gilded); border-radius:12px; padding:22px 24px;">
+          <h2 style="margin:0 0 4px; font-size:1.2rem;">偉哥 旅遊平台 · 營運核算書札</h2>
+          <p style="margin:0 0 16px; color:var(--ink-sub); font-size:0.78rem;">結算日期：${new Date().toLocaleDateString('zh-TW')}</p>
+          <div style="font-weight:900; color:var(--burgundy-seal); margin-bottom:12px;">司導應繳回總額：$${sumRemit.toLocaleString()} 元</div>
+          <div style="font-size:0.75rem; color:var(--ink-sub);">匯款銀行：${sysSettings.bankName || '（未設定）'} 帳號：${sysSettings.bankAccount || '（未設定）'}</div>
+        </div>
+      `;
+      document.getElementById('statement-modal')?.classList.add('active');
+    };
+
+    window.closeStatementModal = function() { document.getElementById('statement-modal')?.classList.remove('active'); };
+    window.printStatementSheet = function() { window.print(); };
+    window.copyStatementLineText = function() {
+      window.showToast('📲 已複製 LINE 對帳通知訊息！');
+    };
+
+    const SYSTEM_SETTINGS_STORAGE_KEY = 'wei-system-settings-v1';
+    const defaultSystemSettings = {
+      generatorPath: '偉哥行程生成器_v1.6.72_尊享旗艦版.html',
+      defaultDeparture: '09:00',
+      dispatchRate: 10,
+      bankName: '', bankBranch: '', bankAccount: '', bankHolder: ''
+    };
+
+    window.loadSystemSettings = function() {
+      try {
+        const saved = localStorage.getItem(SYSTEM_SETTINGS_STORAGE_KEY);
+        if (saved) return Object.assign({}, defaultSystemSettings, JSON.parse(saved));
+      } catch (_) {}
+      return defaultSystemSettings;
+    };
+
+    window.initSystemSettingsForm = function() {
+      const data = window.loadSystemSettings();
+      document.getElementById('generator-path').value = data.generatorPath || defaultGeneratorFileName;
+      document.getElementById('setting-default-departure').value = data.defaultDeparture;
+      document.getElementById('setting-dispatch-rate').value = data.dispatchRate;
+      document.getElementById('setting-bank-name').value = data.bankName || '';
+      document.getElementById('setting-bank-branch').value = data.bankBranch || '';
+      document.getElementById('setting-bank-account').value = data.bankAccount || '';
+      document.getElementById('setting-bank-holder').value = data.bankHolder || '';
+    };
+
+    window.saveSystemSettings = function() {
+      let generatorPath = document.getElementById('generator-path')?.value.trim() || defaultSystemSettings.generatorPath;
+      generatorPath = generatorPath.trim();
+      if (generatorPath && !generatorPath.toLowerCase().endsWith('.html') && !generatorPath.toLowerCase().endsWith('.htm')) generatorPath += '.html';
+      document.getElementById('generator-path').value = generatorPath;
+
+      const data = {
+        generatorPath,
+        defaultDeparture: document.getElementById('setting-default-departure')?.value || '09:00',
+        dispatchRate: Number(document.getElementById('setting-dispatch-rate')?.value) || 10,
+        bankName: document.getElementById('setting-bank-name')?.value.trim() || '',
+        bankBranch: document.getElementById('setting-bank-branch')?.value.trim() || '',
+        bankAccount: document.getElementById('setting-bank-account')?.value.trim() || '',
+        bankHolder: document.getElementById('setting-bank-holder')?.value.trim() || ''
+      };
+      try { localStorage.setItem(SYSTEM_SETTINGS_STORAGE_KEY, JSON.stringify(data)); } catch (_) {}
+      window.showToast('💾 偉哥系統設定已成功儲存！');
+    };
+
+    window.resetSystemSettings = function() {
+      try { localStorage.removeItem(SYSTEM_SETTINGS_STORAGE_KEY); } catch (_) {}
+      window.initSystemSettingsForm();
+      window.showToast('↻ 系統設定已重置！');
+    };
+
+    window.testOpenGenerator = function() {
+      const sysSettings = window.loadSystemSettings();
+      let targetUrl = document.getElementById('generator-path')?.value.trim() || sysSettings.generatorPath || defaultGeneratorFileName;
+      targetUrl = targetUrl.trim();
+      if (targetUrl && !targetUrl.toLowerCase().endsWith('.html') && !targetUrl.toLowerCase().endsWith('.htm')) targetUrl += '.html';
+      window.open(`${targetUrl}?test=1&t=${Date.now()}`, '_blank');
+      window.showToast(`🧪 正在連線：${targetUrl}`);
+    };
+
+    window.handleSelectGeneratorFile = function(files) {
+      if (!files || !files.length) return;
+      const realFilename = files[0].name;
+      const pathInput = document.getElementById('generator-path');
+      if (pathInput) {
+        pathInput.value = realFilename;
+        window.saveSystemSettings();
+        window.showToast(`🎉 已自動抓取實體檔名：${realFilename}`);
+      }
+    };
+
+    window.bringOrderToWorkspace = function(caseId) {
+      if (caseId === '1015') window.applyItineraryTemplate('airport3d');
+      else window.applyItineraryTemplate('normal3d');
+      const caseInput = document.getElementById('dispatch-finance-case-id');
+      if (caseInput) { caseInput.value = caseId; window.updateOutputPreview(caseId); }
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('[data-panel]').forEach(b => b.classList.remove('active'));
+      document.getElementById('confirmation')?.classList.add('active');
+      document.getElementById('create-confirmation')?.classList.add('active');
+      window.renderGuideForPanel('confirmation');
+      window.showToast(`✨ 已成功將案件 #${caseId} 帶入工作區！`);
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('[data-panel]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const panelId = btn.getAttribute('data-panel');
+          document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+          document.querySelectorAll('[data-panel]').forEach(b => b.classList.remove('active'));
+          document.getElementById(panelId)?.classList.add('active');
+          btn.classList.add('active');
+          window.renderGuideForPanel(panelId);
+        });
+      });
+      window.renderGuideForPanel('overview');
+      window.renderIndependentPreorderUI();
+      window.renderPlacesListUI();
+      window.initSystemSettingsForm();
+      window.onFinanceFilterChange();
+      restoreWorkspaceDirectoryHandle();
+    });
+  </script>
+</body>
+</html>
