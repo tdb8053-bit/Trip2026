@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="台灣包車精選行程與客製化旅遊參考，探索北海岸、宜蘭、中部與南部的一日及多日私人包車路線。">
   <meta name="keywords" content="台灣包車,私人包車,包車旅遊,台灣一日遊,客製化行程">
-  <meta name="theme-color" content="#263b34">
+  <meta name="theme-color" content="#fffdf7">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:title" content="精選包車行程｜台灣客製化旅遊">
   <meta property="og:description" content="從北海岸到南部，挑選適合自己的台灣私人包車路線。">
-  <meta property="og:image" content="web-assets/hero-mountain-coast-v1.webp">
+  <meta property="og:image" content="web-assets/hero-family-travel-v1.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="精選包車行程｜台灣客製化旅遊">
   <meta name="twitter:description" content="探索台灣私人包車精選路線，彈性安排您的旅行節奏。">
-  <meta name="twitter:image" content="web-assets/hero-mountain-coast-v1.webp">
-  <link rel="preload" as="image" href="web-assets/hero-mountain-coast-v1.webp" fetchpriority="high">
+  <meta name="twitter:image" content="web-assets/hero-family-travel-v1.jpg">
+  <link rel="preload" as="image" href="web-assets/hero-family-travel-v1.jpg" fetchpriority="high">
   <title>精選包車行程｜台灣客製化旅遊</title>
   <style>
     :root{--ink:#17383d;--brand:#0b766d;--brand-deep:#075950;--mint:#e8f7f3;--line:#c9e4dd;--paper:#fffdfa;--sand:#fff6e9;--muted:#60787d;--red:#b43e37}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:#f4f8f7;color:var(--ink);font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}
 .wrap{max-width:1160px;margin:auto;padding:18px 18px 58px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:6px 0 22px}
@@ -28,7 +28,7 @@ body{margin:0;background:#f4f8f7;color:var(--ink);font-family:"Noto Sans TC","Mi
 .brand small{display:block;color:var(--muted);font-weight:600;font-size:.75rem;letter-spacing:0}
 .nav{display:flex;flex-wrap:wrap;gap:13px}
 .nav a{color:var(--brand-deep);font-size:.88rem;font-weight:800;text-decoration:none}
-.hero{min-height:360px;border-radius:30px;padding:38px;display:flex;align-items:end;background:linear-gradient(0deg,rgba(2,42,45,.88),rgba(2,42,45,.08)),url("web-assets/hero-mountain-coast-v1.webp") center/cover;color:#fff;box-shadow:0 18px 40px rgba(15,87,80,.16)}
+.hero{min-height:360px;border-radius:30px;padding:38px;display:flex;align-items:end;background:none;color:#fff;box-shadow:0 18px 40px rgba(15,87,80,.16)}
 .hero-inner{max-width:690px}
 .eyebrow{font-size:.86rem;font-weight:900;letter-spacing:.1em}
 .hero h1{font-size:clamp(2.05rem,5vw,3.45rem);line-height:1.15;margin:9px 0;text-shadow:0 2px 13px rgba(0,0,0,.32)}
@@ -45,8 +45,8 @@ section{margin-top:52px}
 .trip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
 .trip{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 26px rgba(15,118,110,.075)}
 .trip-image{min-height:166px;background:linear-gradient(0deg,rgba(5,53,54,.48),rgba(5,53,54,0)),url("北海岸精選行程測試/images/漁人碼頭示意圖.webp") center/cover;filter:saturate(.88) hue-rotate(6deg) brightness(1.16) contrast(.94)}
-.trip-image.jiufen{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("精選行程網站圖片/九份十分主視覺.webp")}
-.trip-image.yangmingshan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("精選行程網站圖片/陽明山主視覺.webp")}
+.trip-image.jiufen{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/jiufen-shifen-hero.webp")}
+.trip-image.yangmingshan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/yangmingshan-hero.webp")}
 .trip-image.yilan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-02.webp")}
 .trip-image.tainan{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-03.webp")}
 .trip-image.kaohsiung{background-image:linear-gradient(0deg,rgba(5,53,54,.56),rgba(5,53,54,0)),url("web-assets/trip-image-04.webp")}
@@ -153,7 +153,7 @@ body{background:var(--paper);color:var(--ink);font-family:"Noto Sans TC","Micros
 .nav a+a:before{position:absolute;left:0;top:28%;width:1px;height:44%;background:#ddd5c7;content:""}
 .nav a:hover,.nav a:focus-visible{color:#9e7c3f}
 .hero{position:relative;min-height:0;padding:0;display:block;overflow:hidden;border-radius:14px;background:none;color:#fff;box-shadow:none}
-.hero-visual{height:430px;background:url("web-assets/hero-mountain-coast-v1.webp") center 62%/cover}
+.hero-visual{height:430px;background:url("web-assets/hero-family-travel-v1.jpg") left center/cover}
 .hero-inner{position:relative;display:flex;align-items:center;justify-content:center;gap:35px;width:100%;max-width:none;padding:19px 44px 20px;background:var(--ink)}
 .hero-copy{max-width:900px;margin:0 auto;text-align:center}
 .eyebrow{margin-bottom:7px;color:var(--gold);font-size:.76rem;letter-spacing:.16em}
@@ -251,116 +251,31 @@ section#trips{margin-top:68px;padding:0 30px}
 @media(max-width:820px){.wrap{padding:20px 22px 56px}.hero-visual{height:380px}.hero-inner{padding:26px 30px}.hero-action{right:30px}.trip-grid{gap:22px 18px}}
 @media(max-width:620px){.wrap{padding:14px 14px 46px}.top{padding-bottom:17px}.brand{font-size:1.25rem}.nav{margin-top:15px}.nav a{font-size:.82rem}.hero{margin-top:18px}.hero-visual{height:220px;background-position:center 58%}.hero-inner{padding:24px 22px 26px}.hero h1{font-size:1.98rem;letter-spacing:.04em}.hero p{font-size:.88rem}.hero-action{right:auto;min-width:0;letter-spacing:.06em}section#trips{margin-top:48px;padding:0 2px}#trips .section-head h2{font-size:1.78rem}.trip-image{min-height:200px}.custom{padding:20px}.custom h2{font-size:1.42rem}}
 
-    .style-picker{display:flex;align-items:center;gap:8px;margin-left:auto;padding:7px 10px;border:1px solid var(--line);border-radius:4px;background:color-mix(in srgb,var(--paper) 88%,transparent);font-size:.82rem;font-weight:800}
-    .style-picker label{white-space:nowrap}
-    .style-picker select{border:1px solid var(--line);border-radius:3px;padding:4px 7px;background:var(--paper);color:var(--ink);font:inherit;font-size:.82rem}
-    .style-picker button{border:1px solid var(--gold);border-radius:3px;padding:4px 9px;background:var(--ink);color:#fff;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}
-    .style-picker button:hover,.style-picker button:focus-visible{background:var(--gold);color:var(--ink)}
-    .language-picker{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:.8rem;font-weight:800}
-    .language-picker select{border:1px solid var(--line);border-radius:3px;padding:4px 6px;background:var(--paper);color:var(--ink);font:inherit}
-    body[data-theme="modern"]{--ink:#17383d;--brand:#0b766d;--brand-deep:#075950;--mint:#e8f7f3;--line:#c9e4dd;--paper:#fffdfa;--sand:#fff6e9;--muted:#60787d;--gold:#d29b53}
-    body[data-theme="modern"] .hero{border-radius:30px;background:linear-gradient(0deg,rgba(2,42,45,.88),rgba(2,42,45,.08)),url("web-assets/hero-mountain-coast-v1.webp") center/cover;box-shadow:0 18px 40px rgba(15,87,80,.16)}
-    body[data-theme="modern"] .hero-visual{display:none}
-    body[data-theme="modern"] .hero-inner{background:transparent;min-height:360px;padding:38px;align-items:end}
-    body[data-theme="business"]{--ink:#202b3c;--brand:#315d86;--brand-deep:#203f5c;--mint:#e8f0f7;--line:#cbd8e5;--paper:#f4f6f8;--sand:#edf1f5;--muted:#647181;--gold:#b88b42}
-    body[data-theme="business"] .hero-inner{background:#202b3c}
-    body[data-theme="business"] .hero-visual{filter:grayscale(.35) contrast(1.05)}
-    body[data-theme="nature"]{--ink:#304b3a;--brand:#5d8968;--brand-deep:#3e6549;--mint:#e7f1e3;--line:#cbdcc4;--paper:#f5f6ed;--sand:#f2ead7;--muted:#6d7c69;--gold:#b38b53}
-    body[data-theme="nature"] .hero-inner{background:#304b3a}
-    body[data-theme="nature"] .trip{border-radius:18px;box-shadow:0 10px 26px rgba(48,75,58,.1)}
-    body[data-theme="colorful"]{--ink:#3d234e;--brand:#d45b68;--brand-deep:#8e3154;--mint:#fff0e8;--line:#f0c9c3;--paper:#fff8f3;--sand:#fff0cf;--muted:#786a76;--gold:#e5a13d}
-    body[data-theme="colorful"] .hero-inner{background:linear-gradient(120deg,#3d234e,#8e3154)}
-    body[data-theme="colorful"] .filter-button[aria-pressed="true"],body[data-theme="colorful"] .button.primary{background:var(--brand);border-color:var(--brand)}
-    body[data-theme="japanese"]{--ink:#263b34;--brand:#557b78;--brand-deep:#355c59;--mint:#e9f0ed;--line:#d1dcd8;--paper:#f7f6f1;--sand:#f2eee4;--muted:#71807c;--gold:#b18b50}
-    body[data-theme="japanese"] .hero-inner{background:#557b78}
-    body[data-theme="japanese"] .hero-action{border-radius:999px}
-    body[data-theme="taiwan"]{--ink:#44352f;--brand:#a84f3b;--brand-deep:#71372d;--mint:#f5e7d8;--line:#dfc9b2;--paper:#f7f0e5;--sand:#eee0c8;--muted:#776b61;--gold:#c18b45}
-    body[data-theme="taiwan"] .hero-inner{background:#354d67}
+    .language-picker{position:relative;grid-column:2;grid-row:1;justify-self:end;align-self:start}
+    .language-picker label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .language-picker select{appearance:none;border:1px solid var(--line);border-radius:999px;padding:6px 22px 6px 10px;background:var(--paper);color:var(--ink);font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}
+    .language-picker:after{position:absolute;top:50%;right:8px;content:"⌄";font-size:.7rem;pointer-events:none;transform:translateY(-55%)}
+    body[data-theme="taiwan"]{--ink:#3e493d;--brand:#956a35;--brand-deep:#6c522e;--mint:#f4eddf;--line:#e5d8c1;--paper:#fffdf7;--sand:#faf2e2;--muted:#746d61;--gold:#c79e5a}
+    body[data-theme="taiwan"] .hero-inner{background:#5e7868}
     body[data-theme="taiwan"] .hero-visual{filter:saturate(.8) sepia(.12)}
     body[data-theme="taiwan"] .brand{border-left-color:var(--brand)}
     body[data-theme="taiwan"] .trip{border-radius:8px;box-shadow:0 8px 22px rgba(113,55,45,.1)}
     body[data-theme="taiwan"] .tag{color:var(--brand)}
     body[data-theme="taiwan"] .button.primary{background:var(--brand);border-color:var(--brand)}
-    body[data-theme="luxury"]{--ink:#282522;--brand:#a78345;--brand-deep:#70582e;--mint:#f1eadc;--line:#d9cbb2;--paper:#f8f5ee;--sand:#eee5d4;--muted:#756f66;--gold:#c9a866}
-    body[data-theme="luxury"] .hero-inner{background:#282522}
-    body[data-theme="luxury"] .hero-visual{filter:saturate(.65) contrast(1.08)}
-    body[data-theme="luxury"] .brand{border-left-color:var(--gold)}
-    body[data-theme="luxury"] .trip{border-color:#d6c5a7;border-radius:3px;box-shadow:0 14px 30px rgba(40,37,34,.12)}
-    body[data-theme="luxury"] .trip h3,body[data-theme="luxury"] .section-head h2{letter-spacing:.08em}
-    body[data-theme="luxury"] .button.primary{background:var(--ink);border-color:var(--gold)}
-    body[data-theme="luxury"] .button.secondary{border-color:var(--gold);color:var(--brand-deep)}
-    body[data-theme="island"]{--ink:#164b59;--brand:#169c9a;--brand-deep:#086b70;--mint:#def6f1;--line:#b9e1dc;--paper:#f1fbf8;--sand:#fff0d6;--muted:#668187;--gold:#e5a653}
-    body[data-theme="island"] .hero-inner{background:#164b59}
-    body[data-theme="island"] .hero-visual{filter:saturate(1.15) brightness(1.05)}
-    body[data-theme="island"] .trip{border-radius:20px;box-shadow:0 12px 28px rgba(22,75,89,.12)}
-    body[data-theme="island"] .button.primary{background:#169c9a;border-color:#169c9a}
-    body[data-theme="retro"]{--ink:#513d32;--brand:#b06445;--brand-deep:#804332;--mint:#f2dfca;--line:#d9baa0;--paper:#f5eadc;--sand:#ead4b5;--muted:#7c6b5d;--gold:#c38a45}
-    body[data-theme="retro"] .hero-inner{background:#513d32}
-    body[data-theme="retro"] .hero-visual{filter:sepia(.35) saturate(.78)}
-    body[data-theme="retro"] .trip{border:2px solid #d9baa0;border-radius:5px;box-shadow:4px 5px 0 rgba(128,67,50,.12)}
-    body[data-theme="retro"] .button{border-radius:5px}
-    body[data-theme="outdoor"]{--ink:#344331;--brand:#657d3d;--brand-deep:#405726;--mint:#e6edda;--line:#c5d1ae;--paper:#f0f1e8;--sand:#e9dfc7;--muted:#6d7865;--gold:#b78a45}
-    body[data-theme="outdoor"] .hero-inner{background:#344331}
-    body[data-theme="outdoor"] .hero-visual{filter:saturate(.78) contrast(1.1)}
-    body[data-theme="outdoor"] .trip{border-radius:12px;box-shadow:0 10px 22px rgba(52,67,49,.14)}
-    body[data-theme="outdoor"] .button.primary{background:#657d3d;border-color:#657d3d}
-    body[data-theme="tech"]{--ink:#17233d;--brand:#287bd4;--brand-deep:#174f92;--mint:#e2efff;--line:#b6d2f2;--paper:#f3f7fc;--sand:#e8eff8;--muted:#63738b;--gold:#49d5d0}
-    body[data-theme="tech"] .hero-inner{background:linear-gradient(120deg,#17233d,#174f92)}
-    body[data-theme="tech"] .hero-visual{filter:saturate(.8) hue-rotate(10deg)}
-    body[data-theme="tech"] .trip{border-radius:10px;box-shadow:0 8px 25px rgba(23,79,146,.15)}
-    body[data-theme="tech"] .button.primary{background:#287bd4;border-color:#287bd4}
-    body[data-theme="sunset"]{--ink:#55302b;--brand:#d76b45;--brand-deep:#994331;--mint:#fbe4d8;--line:#efc5ae;--paper:#fff5ed;--sand:#ffe5bd;--muted:#806b65;--gold:#e2a23f}
-    body[data-theme="sunset"] .hero-inner{background:linear-gradient(120deg,#55302b,#a94e3e)}
-    body[data-theme="sunset"] .hero-visual{filter:saturate(1.12) sepia(.12)}
-    body[data-theme="sunset"] .trip{border-radius:16px;box-shadow:0 12px 26px rgba(153,67,49,.12)}
-    body[data-theme="sunset"] .button.primary{background:#d76b45;border-color:#d76b45}
-    /* Each preset also changes the composition, not only the color palette. */
-    body[data-theme="modern"] .trip-grid,body[data-theme="japanese"] .trip-grid{gap:14px}
-    body[data-theme="modern"] .trip,body[data-theme="japanese"] .trip{border-radius:22px}
-    body[data-theme="modern"] .trip-image,body[data-theme="japanese"] .trip-image{min-height:166px}
-    body[data-theme="business"] .trip-grid{grid-template-columns:repeat(2,1fr);gap:24px}
-    body[data-theme="business"] .trip{display:grid;grid-template-columns:42% 1fr}
-    body[data-theme="business"] .trip-image{min-height:100%}
-    body[data-theme="nature"] .trip-grid{gap:18px}
-    body[data-theme="nature"] .trip-image{min-height:245px}
-    body[data-theme="colorful"] .trip-grid{grid-template-columns:repeat(4,1fr);gap:14px}
-    body[data-theme="colorful"] .trip-image{min-height:150px}
-    body[data-theme="colorful"] .trip-body{padding:15px}
     body[data-theme="taiwan"] .trip-grid{grid-template-columns:repeat(2,1fr);gap:28px 20px}
     body[data-theme="taiwan"] .trip-image{min-height:235px}
-    body[data-theme="luxury"] .trip-grid{gap:34px 28px}
-    body[data-theme="luxury"] .trip-image{min-height:250px}
-    body[data-theme="island"] .trip-grid{grid-template-columns:repeat(3,1fr);gap:20px}
-    body[data-theme="island"] .trip{border-radius:28px}
-    body[data-theme="island"] .trip-image{min-height:230px;border-radius:0 0 22px 22px}
-    body[data-theme="retro"] .trip-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-    body[data-theme="retro"] .trip:nth-of-type(odd){transform:rotate(-.6deg)}
-    body[data-theme="retro"] .trip:nth-of-type(even){transform:rotate(.6deg)}
-    body[data-theme="retro"] .trip-image{min-height:220px}
-    body[data-theme="outdoor"] .trip-grid{grid-template-columns:repeat(3,1fr);gap:12px}
-    body[data-theme="outdoor"] .trip-image{min-height:185px}
-    body[data-theme="tech"] .trip-grid{grid-template-columns:repeat(3,1fr);gap:18px}
-    body[data-theme="tech"] .trip{border-radius:2px}
-    body[data-theme="tech"] .trip-image{min-height:190px}
-    body[data-theme="sunset"] .trip-grid{grid-template-columns:repeat(2,1fr);gap:26px 18px}
-    body[data-theme="sunset"] .trip:nth-of-type(3n){grid-column:span 2}
-    body[data-theme="sunset"] .trip-image{min-height:245px}
     @media(min-width:621px){
-      body:not([data-theme="modern"]) .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
-      body:not([data-theme="modern"]) .hero-copy{padding-right:0}
-      body:not([data-theme="modern"]) .hero-copy p{max-width:640px}
-      body:not([data-theme="modern"]) .hero-action{position:static;min-width:190px;transform:none}
+      .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
+      .hero-copy{padding-right:0}
+      .hero-copy p{max-width:640px}
+      .hero-action{position:static;min-width:190px;transform:none}
     }
     @media(max-width:820px){
-      body[data-theme="colorful"] .trip-grid,body[data-theme="business"] .trip-grid,body[data-theme="taiwan"] .trip-grid,body[data-theme="retro"] .trip-grid,body[data-theme="sunset"] .trip-grid{grid-template-columns:repeat(2,1fr)}
-      body[data-theme="business"] .trip{display:block}
-      body[data-theme="business"] .trip-image{min-height:190px}
+      body[data-theme="taiwan"] .trip-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:620px){
-      body:not([data-theme="modern"]) .hero-copy{padding-right:0}
-      body[data-theme="colorful"] .trip-grid,body[data-theme="business"] .trip-grid,body[data-theme="taiwan"] .trip-grid,body[data-theme="retro"] .trip-grid,body[data-theme="sunset"] .trip-grid{grid-template-columns:1fr}
-      body[data-theme="sunset"] .trip:nth-of-type(3n){grid-column:auto}
-      body[data-theme="retro"] .trip:nth-of-type(odd),body[data-theme="retro"] .trip:nth-of-type(even){transform:none}
+      .hero-copy{padding-right:0}
+      body[data-theme="taiwan"] .trip-grid{grid-template-columns:1fr}
     }
     /* Shared homepage layout and typography refinements. */
     .top{position:sticky;top:0;z-index:10;margin:0 -32px;padding:12px 32px 16px;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(12px)}
@@ -387,13 +302,12 @@ section#trips{margin-top:68px;padding:0 30px}
     .service:hover,.vehicle:hover,.panel:hover,.step:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(38,59,52,.1)}
     .reveal{opacity:1;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
     .reveal.is-visible{opacity:1;transform:none}
-    .top{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;align-items:center;gap:24px;padding-top:14px;padding-bottom:14px}
-    .brand{display:flex;align-items:center;gap:13px;border-left:0;padding-left:0}
-    .brand:before{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);content:"旅";font-family:"Noto Serif TC","PMingLiU",serif;font-size:1.05rem}
-    .brand small{margin-top:3px}
-    .nav{justify-content:center}
-    .style-picker{margin-left:0}
-    @media(max-width:980px){.top{grid-template-columns:1fr auto auto;gap:13px}.nav{grid-column:1/-1;grid-row:2;justify-content:flex-start}}
+    .top{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;gap:8px 16px;padding-top:10px;padding-bottom:11px}
+    .brand{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto;align-items:center;border-left:0;padding-left:0}
+    .brand-title{grid-column:1;grid-row:1;white-space:nowrap}
+    .brand small{grid-column:1;grid-row:2;margin-top:3px}
+    .nav{grid-column:1/-1;grid-row:2;display:flex;flex-wrap:nowrap;justify-content:center;gap:clamp(12px,4vw,40px);margin:0;white-space:nowrap}
+    .nav a{padding:5px 0;font-size:.84rem}
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
@@ -404,19 +318,22 @@ section#trips{margin-top:68px;padding:0 30px}
       section{margin-top:54px}
     }
     @media(max-width:620px){
-      .top{grid-template-columns:1fr;gap:8px}
-      .language-picker,.style-picker{width:100%;margin-top:5px}
-      .language-picker select{flex:1}
+      .top{grid-template-columns:minmax(0,1fr) auto;gap:7px 10px}
+      .brand{font-size:clamp(21px,calc(4.8vw + 5px),25px);letter-spacing:.07em}
+      .brand small{font-size:12px;line-height:1.25}
+      .language-picker{grid-column:2;grid-row:1;width:auto;margin:0}
+      .nav{grid-column:1/-1;grid-row:2;justify-content:space-between;gap:8px}
+      .nav a{font-size:.78rem}
       .top{margin:0 -14px;padding-inline:14px}
       section{margin-top:44px}
       .custom{padding:22px}
       .footer{padding:28px 20px}
     }
-    @media(max-width:620px){.style-picker{margin:13px 0 0;justify-content:space-between}.style-picker select{flex:1}.hero h1{font-size:1.82rem;line-height:1.28}}
+    @media(max-width:620px){.hero h1{font-size:clamp(1.4rem,6vw,1.82rem);line-height:1.28}}
     @media(min-width:621px){
-      body:not([data-theme="modern"]) .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
-      body:not([data-theme="modern"]) .hero-copy{padding-right:0}
-      body:not([data-theme="modern"]) .hero-action{position:static;min-width:190px;transform:none}
+      .hero-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
+      .hero-copy{padding-right:0}
+      .hero-action{position:static;min-width:190px;transform:none}
     }
     @media(min-width:981px){
       .hero h1{white-space:nowrap}
@@ -440,8 +357,7 @@ section#trips{margin-top:68px;padding:0 30px}
     .trip-image img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     .hero-visual{filter:saturate(.92) hue-rotate(-8deg) brightness(1.02) contrast(1.02)}
     .trip-image img{filter:saturate(.9) hue-rotate(-6deg) brightness(1.02) contrast(1.02)}
-    body[data-theme="modern"] .hero{background:linear-gradient(0deg,rgba(2,42,55,.9),rgba(17,65,82,.18)),url("web-assets/hero-mountain-coast-v1.webp") center/cover}
-    body[data-theme="taiwan"] .hero-visual,body[data-theme="retro"] .hero-visual,body[data-theme="sunset"] .hero-visual{filter:saturate(.94) hue-rotate(-10deg) brightness(1.02) contrast(1.02)}
+    body[data-theme="taiwan"] .hero-visual{filter:saturate(1.02) hue-rotate(-7deg) brightness(1.08) contrast(1.01)}
     .trip-price{margin:8px 0 0;color:var(--brand-deep);font-size:.82rem;font-weight:400}
     .map-link{font-size:.8rem!important}
     .contact-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px auto 0;max-width:760px;text-align:left}
@@ -544,35 +460,59 @@ section#trips{margin-top:68px;padding:0 30px}
     .sort-select,
     .brand small,
     .region-title small{font-size:16px}
+
+    /* Family travel hero: responsive layout shared by mobile in-app browsers. */
+    .hero{position:relative;height:clamp(320px,34vw,430px);min-height:0;margin-top:20px;padding:0;overflow:hidden;border:1px solid rgba(201,158,90,.24);border-radius:12px;background:transparent;color:var(--ink);box-shadow:0 12px 30px rgba(62,73,61,.08)}
+    .hero-visual{position:absolute;inset:0;height:auto;background-image:url("web-assets/hero-family-travel-v1.jpg");background-position:left center;background-size:cover;background-repeat:no-repeat}
+    .hero:after{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(255,253,247,0) 38%,rgba(255,253,247,.28) 53%,rgba(255,253,247,.35) 100%);content:"";pointer-events:none}
+    .hero-inner,body[data-theme="taiwan"] .hero-inner{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:flex-end;gap:0;width:100%;padding:clamp(22px,4vw,52px);background:transparent}
+    .hero-copy{width:min(49%,570px);max-width:570px;margin:0 0 0 auto;padding:12px clamp(8px,1.4vw,18px);text-align:left}
+    .eyebrow{margin-bottom:9px;color:var(--brand);font-size:.76rem;font-weight:900;letter-spacing:.16em}
+    .hero h1{margin:0 0 9px;color:var(--ink);font-family:"Noto Serif TC","PMingLiU",serif;font-size:clamp(1.7rem,3vw,2.65rem);font-weight:700;letter-spacing:.025em;line-height:1.25;text-shadow:0 1px 8px rgba(255,253,247,.72);white-space:normal}
+    .hero p{max-width:none;margin:0;color:var(--brand-deep);font-size:clamp(.94rem,1.2vw,1.06rem);font-weight:700;line-height:1.65;text-shadow:0 1px 7px rgba(255,253,247,.82)}
+    .hero-action{position:static;display:inline-flex;align-items:center;justify-content:center;min-width:0;margin-top:17px;padding:10px 16px;border:1px solid var(--gold);border-radius:4px;background:var(--gold);color:var(--ink);font-size:.88rem;font-weight:900;letter-spacing:.05em;text-decoration:none;transform:none}
+    .hero-action:hover,.hero-action:focus-visible{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+    .hero-action:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+    .language-picker select:focus{border-color:var(--gold);outline:2px solid color-mix(in srgb,var(--gold) 40%,transparent);outline-offset:2px}
+    @media(max-width:820px){.hero{height:360px}.hero-copy{width:min(51%,430px);padding-inline:9px}.hero h1{font-size:clamp(1.65rem,3.7vw,2.2rem)}}
+    @media(max-width:700px){
+      .hero{display:flex;height:auto;flex-direction:column;border-radius:10px}
+      .hero-visual{position:relative;inset:auto;width:100%;height:clamp(190px,57vw,250px);background-position:left center}
+      .hero:after{display:none}
+      .hero-inner,body[data-theme="taiwan"] .hero-inner{position:relative;inset:auto;display:block;padding:20px 20px 22px;background:var(--paper)}
+      .hero-copy{width:100%;max-width:none;margin:0;padding:0;text-align:center}
+      .hero h1{font-size:clamp(16px,5.6vw,22px);line-height:1.28;letter-spacing:0;white-space:nowrap}
+      .hero p{font-size:.94rem}
+      .hero-action{margin-top:15px}
+    }
+    @media(max-width:700px){
+      html.line-inapp .brand small{font-size:10px!important}
+      html.line-inapp .hero h1{font-size:clamp(15px,4.3vw,18px)!important;white-space:nowrap}
+    }
   </style>
+  <script>
+    if (/(?:Line\/|LIFF)/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add('line-inapp');
+    }
+  </script>
 </head>
-<body>
+<body data-theme="taiwan">
   <main class="wrap">
     <header class="top" aria-label="網站頁首">
-      <div class="brand">精選包車行程<small>台灣私人包車・客製化旅遊參考</small>
+      <div class="brand"><span class="brand-title">精選包車行程</span><small>行程您來決定，細節我們安排</small>
 </div>
       <nav class="nav">
 <a href="#trips">精選行程</a>
-<a href="#custom">台中客製</a>
 <a href="#service">車輛與服務</a>
 <a href="#booking">預約方式</a>
 </nav>
 <div class="language-picker">
   <label for="language-select">語言</label>
   <select id="language-select" aria-label="選擇語言">
-    <option value="zh-Hant">繁中</option>
+    <option value="zh-Hant" selected>繁中</option>
     <option value="zh-Hans">简中</option>
     <option value="en">English</option>
   </select>
-</div>
-<div class="style-picker" aria-label="首頁風格設定">
-  <label for="style-select">首頁風格</label>
-  <select id="style-select">
-    <option value="colorful">活潑鮮豔</option>
-    <option value="taiwan">台灣人文風</option>
-    <option value="retro">復古懷舊風</option>
-  </select>
-  <button id="save-style" type="button">儲存</button>
 </div>
     </header>
 
@@ -581,10 +521,10 @@ section#trips{margin-top:68px;padding:0 30px}
       <div class="hero-inner">
 <div class="hero-copy">
 <div class="eyebrow">TAIWAN PRIVATE TOUR</div>
-<h1>挑選喜歡的路線，<br>安排一趟台灣旅行</h1>
-<p>挑選喜歡的路線，從一日慢遊到多日包車。<br><span class="keep-line">再一起安排最適合您的旅行節奏。</span></p>
+<h1>帶著喜歡的人，一起去旅行</h1>
+<p>台灣包車，自在出發。</p>
+<a class="hero-action" href="#trips"><span class="hero-action-label">探索精選行程</span><span aria-hidden="true">→</span></a>
 </div>
-<a class="hero-action" href="#trips">探索精選行程 <span aria-hidden="true">→</span></a>
 </div>
     </section>
 
@@ -623,7 +563,7 @@ section#trips{margin-top:68px;padding:0 30px}
         <div class="region-title south">南部精選<small>府城文化、港灣與客庄風景</small>
 </div>
         <article class="trip north">
-<div class="trip-image jiufen"><img src="精選行程網站圖片/九份十分主視覺.webp" loading="lazy" decoding="async" alt="九份山城與十分風景">
+<div class="trip-image jiufen"><img src="web-assets/jiufen-shifen-hero.webp" loading="lazy" decoding="async" alt="九份山城與十分風景">
 </div>
 <div class="trip-body">
 <span class="tag">北部・一日遊</span>
@@ -636,7 +576,7 @@ section#trips{margin-top:68px;padding:0 30px}
 </div>
 </article>
         <article class="trip north">
-<div class="trip-image yangmingshan"><img src="精選行程網站圖片/陽明山主視覺.webp" loading="lazy" decoding="async" alt="陽明山自然景色">
+<div class="trip-image yangmingshan"><img src="web-assets/yangmingshan-hero.webp" loading="lazy" decoding="async" alt="陽明山自然景色">
 </div>
 <div class="trip-body">
 <span class="tag">北部・一日遊</span>
@@ -753,50 +693,6 @@ section#trips{margin-top:68px;padding:0 30px}
 </div>
 </article>
         <p class="empty-state" id="empty-state" hidden>找不到符合條件的行程，請試試其他關鍵字或篩選方式。</p>
-      </div>
-    </section>
-
-    <section id="custom">
-      <div class="custom">
-        <div class="custom-top">
-<div>
-<h2>台中客製化一日遊</h2>
-<p class="lead">請選擇您喜歡的行程。系統會協助整理您的想法；實際順序與停留時間，仍由我們依車程、季節與當日狀況確認後安排。</p>
-</div>
-<span class="count" id="count">已選擇 0／5 項</span>
-</div>
-        <div class="choice-grid" id="choices">
-          <label class="choice">
-<input type="checkbox" value="彩虹眷村">彩虹眷村</label>
-          <label class="choice">
-<input type="checkbox" value="紙箱王">紙箱王</label>
-          <label class="choice">
-<input type="checkbox" value="薰衣草森林">薰衣草森林</label>
-          <label class="choice">
-<input type="checkbox" value="中社花市">中社花市</label>
-          <label class="choice">
-<input type="checkbox" value="仙塘跡農園餐廳">仙塘跡農園餐廳</label>
-          <label class="choice">
-<input type="checkbox" value="高美濕地" data-group="coast">高美濕地</label>
-          <label class="choice">
-<input type="checkbox" value="審計新村" data-group="city">審計新村</label>
-          <label class="choice">
-<input type="checkbox" value="春水堂創始店" data-group="city">春水堂創始店</label>
-          <label class="choice">
-<input type="checkbox" value="逢甲夜市">逢甲夜市</label>
-        </div>
-        <p class="hint">高美濕地與「審計新村・春水堂創始店」不安排於同一天；最多可選 5 個主要停留點。</p>
-        <label class="request-label" for="request">其他想去的景點／用餐／需求</label>
-        <textarea class="request" id="request" placeholder="例如：想安排親子農場、指定餐廳、希望 18:00 前返回飯店……">
-</textarea>
-        <div class="summary" id="summary">
-<b>您已選擇：</b>尚未選擇景點。</div>
-        <div class="custom-actions">
-<button class="button secondary" id="reset-custom" type="button">重新選擇</button>
-<button class="button primary" id="copy-custom" type="button">複製詢問內容</button>
-<button class="button secondary" id="share-custom" type="button">分享此選擇</button>
-</div>
-        <p class="notice">此頁目前不直接送出個資；按下按鈕只會產生或分享您的詢問內容，方便再透過您慣用的通訊軟體聯絡。</p>
       </div>
     </section>
 
@@ -959,14 +855,6 @@ section#trips{margin-top:68px;padding:0 30px}
       const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{threshold:.12});
       revealItems.forEach(item=>revealObserver.observe(item));
     }else{revealItems.forEach(item=>item.classList.add('is-visible'))}
-    const styleSelect=document.getElementById('style-select');
-    const availableStyles=[...styleSelect.options].map(option=>option.value);
-    const storedStyle=localStorage.getItem('homepage-style');
-    const savedStyle=availableStyles.includes(storedStyle)?storedStyle:'taiwan';
-    function applyStyle(style){document.body.dataset.theme=style;styleSelect.value=style}
-    applyStyle(savedStyle);
-    styleSelect.addEventListener('change',()=>applyStyle(styleSelect.value));
-    document.getElementById('save-style').addEventListener('click',()=>{localStorage.setItem('homepage-style',styleSelect.value);status.textContent=`已儲存「${styleSelect.options[styleSelect.selectedIndex].text}」首頁風格。`});
     const languageSelect=document.getElementById('language-select');
     const languageText={
       'zh-Hant':{title:'精選包車行程｜台灣客製化旅遊',search:'搜尋景點、地區或行程名稱',all:'全部',north:'北部',yilan:'宜蘭',central:'中部',south:'南部',price:'價格依日期、車型與人數報價',map:'查看地圖',favorite:'♡ 只看收藏',allFavorites:'♥ 顯示全部'},
@@ -980,30 +868,27 @@ section#trips{margin-top:68px;padding:0 30px}
     };
     const pageTranslations={
       'zh-Hant':{
-        nav:['精選行程','台中客製','車輛與服務','預約方式'],styleLabel:'首頁風格',save:'儲存',
-        hero:['挑選喜歡的路線，從一日慢遊到多日包車。','再一起安排最適合您的旅行節奏。'],
+        nav:['精選行程','車輛與服務','預約方式'],
+        hero:['帶著喜歡的人，出發去旅行','台灣包車，自在出發。','探索精選行程'],
         trips:['精選行程','以下是適合包車旅遊的路線靈感。實際停留時間、順序與用餐安排，將依天候、交通、季節與旅客步調彈性調整。','手機可直接分享給親友'],
-        custom:['台中客製化一日遊','請選擇您喜歡的行程。系統會協助整理您的想法；實際順序與停留時間，仍由我們依車程、季節與當日狀況確認後安排。','其他想去的景點／用餐／需求','例如：想安排親子農場、指定餐廳、希望 18:00 前返回飯店……','重新選擇','複製詢問內容','分享此選擇','此頁目前不直接送出個資；按下按鈕只會產生或分享您的詢問內容，方便再透過您慣用的通訊軟體聯絡。'],
         service:['車輛與服務說明','依人數、行李、兒童座椅與路線需求，協助確認適合的車型與服務方式。'],
         booking:['預約方式','先說明您的日期與需求，再一起把路線安排得剛剛好。'],
         faq:'常見問題',footer:['想把下一趟台灣旅行排得更剛好？','先選擇您喜歡的行程方向，再把詢問內容傳給我們。這份網站目前為行程展示與需求整理用途，正式安排仍以確認回覆為準。'],
         form:['稱呼','例如：王小姐','旅行日期','同行人數','例如：4 位','出發地','例如：台中市區飯店','想去的行程／其他需求','想詢問的路線、行李、兒童座椅或其他需求','產生 LINE 詢問','產生 WhatsApp 詢問','複製詢問內容']
       },
       'zh-Hans':{
-        nav:['精选行程','台中定制','车辆与服务','预约方式'],styleLabel:'首页风格',save:'保存',
-        hero:['挑选喜欢的路线，从一日慢游到多日包车。','再一起安排最适合您的旅行节奏。'],
+        nav:['精选行程','车辆与服务','预约方式'],
+        hero:['带着喜欢的人，出发去旅行','台湾包车，自在出发。','探索精选行程'],
         trips:['精选行程','以下是适合包车旅游的路线灵感。实际停留时间、顺序与用餐安排，将依天气、交通、季节与旅客步调弹性调整。','手机可直接分享给亲友'],
-        custom:['台中定制一日游','请选择您喜欢的行程。系统会协助整理您的想法；实际顺序与停留时间，仍由我们依车程、季节与当日状况确认后安排。','其他想去的景点／用餐／需求','例如：想安排亲子农场、指定餐厅、希望 18:00 前返回饭店……','重新选择','复制询问内容','分享此选择','此页目前不直接送出个人资料；按下按钮只会产生或分享您的询问内容，方便再透过您惯用的通讯软件联系。'],
         service:['车辆与服务说明','依人数、行李、儿童座椅与路线需求，协助确认适合的车型与服务方式。'],
         booking:['预约方式','先说明您的日期与需求，再一起把路线安排得刚刚好。'],
         faq:'常见问题',footer:['想把下一趟台湾旅行安排得更刚好？','先选择您喜欢的行程方向，再把询问内容传给我们。这份网站目前为行程展示与需求整理用途，正式安排仍以确认回复为准。'],
         form:['称呼','例如：王小姐','旅行日期','同行人数','例如：4 位','出发地','例如：台中市区饭店','想去的行程／其他需求','想询问的路线、行李、儿童座椅或其他需求','产生 LINE 询问','产生 WhatsApp 询问','复制询问内容']
       },
       en:{
-        nav:['Featured Tours','Taichung Custom','Vehicles & Services','Booking'],styleLabel:'Homepage style',save:'Save',
-        hero:['Choose a route you love, from a relaxed day tour to a multi-day private trip.','Let us arrange a travel pace that suits you.'],
+        nav:['Featured Tours','Vehicles & Services','Booking'],
+        hero:['Travel with the people you love','Private tours, at your pace.','Explore featured tours'],
         trips:['Featured Tours','Explore private-tour ideas across Taiwan. Stops, meals and timing remain flexible according to weather, traffic, season and your pace.','Easy to share on mobile'],
-        custom:['Taichung Custom Day Tour','Choose the places you like. We will help organize your ideas, then confirm the route and timing according to driving distance, season and conditions.','Other places, meals or requests','For example: a family farm, a specific restaurant, or return to the hotel by 18:00…','Reset choices','Copy inquiry','Share selection','This page does not submit personal data directly; the buttons create or share an inquiry for your preferred messaging app.'],
         service:['Vehicles & Services','We help confirm a suitable vehicle and service plan according to your group size, luggage, child seats and route.'],
         booking:['Booking','Tell us your dates and needs first, then we will shape the route together.'],
         faq:'Frequently Asked Questions',footer:['Ready to plan your next Taiwan trip?','Choose a travel direction, then send us your inquiry. This website is for route previews and request planning; final arrangements require confirmation.'],
@@ -1014,10 +899,9 @@ section#trips{margin-top:68px;padding:0 30px}
     function translatePage(language){
       const t=pageTranslations[language]||pageTranslations['zh-Hant'];
       document.querySelectorAll('.nav a').forEach((item,index)=>item.textContent=t.nav[index]);
-      setText('.style-picker label',t.styleLabel);setText('#save-style',t.save);
-      const heroParagraph=document.querySelector('.hero p');heroParagraph.innerHTML=`${t.hero[0]}<br><span class="keep-line">${t.hero[1]}</span>`;
+      setText('.hero h1',t.hero[0]);setText('.hero p',t.hero[1]);
+      setText('.hero-action-label',t.hero[2]);
       setText('#trips .section-head h2',t.trips[0]);setText('#trips .section-head p',t.trips[1]);setText('#trips .section-head>p',t.trips[2]);
-      const custom=document.querySelector('#custom');setText('#custom h2',t.custom[0]);setText('#custom .lead',t.custom[1]);setText('.request-label',t.custom[2]);document.querySelector('#request').placeholder=t.custom[3];setText('#reset-custom',t.custom[4]);setText('#copy-custom',t.custom[5]);setText('#share-custom',t.custom[6]);setText('#custom .notice',t.custom[7]);
       setText('#service h2',t.service[0]);setText('#service .section-head p',t.service[1]);setText('#booking h2',t.booking[0]);setText('#booking .section-head p',t.booking[1]);setText('.faq h2',t.faq);setText('.footer h2',t.footer[0]);setText('.footer>p',t.footer[1]);
       const labels=document.querySelectorAll('#contact-form label');[0,2,3].forEach((index,i)=>{if(labels[index])labels[index].firstChild.nodeValue=t.form[i*2]});if(labels[1])labels[1].firstChild.nodeValue=t.form[2];if(labels[4])labels[4].firstChild.nodeValue=t.form[6];
       document.querySelector('#contact-name').placeholder=t.form[1];document.querySelector('#contact-people').placeholder=t.form[4];document.querySelector('#contact-origin').placeholder=t.form[6];document.querySelector('#contact-message').placeholder=t.form[8];setText('#contact-line',t.form[9]);setText('#contact-whatsapp',t.form[10]);setText('#general-inquiry',t.form[11]);
@@ -1025,7 +909,6 @@ section#trips{margin-top:68px;padding:0 30px}
       const serviceData=language==='en'?[['One-day & multi-day private tours','From relaxed city day trips to multi-city journeys, planned around your pace.'],['Airport & point-to-point transfers','We can arrange airport pickups, drop-offs, hotel transfers and multiple stops.'],['Families & special needs','Please tell us about child seats, wheelchairs, pets or oversized luggage.'],['Local route advice','We adjust stops and pace according to season, weather, traffic and attractions.'],['Comfortable rides','Confirm pickup details, luggage and special needs before departure.'],['Pre-trip confirmation','The confirmed itinerary, vehicle, price range and services prevail.']]:language==='zh-Hans'?[['一日・多日包车','从城市一日慢游到跨县市多日旅行，保留弹性，依旅客步调安排。'],['机场与定点接送','可协助规划接机、送机、饭店往返与多点接送等交通需求。'],['亲子与特殊需求','儿童座椅、轮椅、宠物或大型行李等需求，请于预约时主动告知。'],['在地行程建议','依季节、天气、交通与景点特性，协助调整停留顺序与旅游节奏。'],['安心乘车','出发前确认集合、行李与特殊需求；乘车期间也请共同维护车内整洁。'],['出发前确认','行程、车型、费用范围与服务内容，均以正式确认内容为准。']]:[['一日・多日包車','從城市一日慢遊到跨縣市多日旅行，保留彈性，依旅客步調安排。'],['機場與定點接送','可協助規劃接機、送機、飯店往返與多點接送等交通需求。'],['親子與特殊需求','兒童座椅、輪椅、寵物或大型行李等需求，請於預約時主動告知。'],['在地行程建議','依季節、天候、交通與景點特性，協助調整停留順序與旅遊節奏。'],['安心乘車','出發前確認集合、行李與特殊需求；乘車期間也請共同維護車內整潔。'],['出發前確認','行程、車型、費用範圍與服務內容，均以正式確認內容為準。']];document.querySelectorAll('.service').forEach((item,index)=>{item.querySelector('h3').textContent=serviceData[index][0];item.querySelector('p').textContent=serviceData[index][1]});
       const processData=language==='en'?[['Tell us your travel needs','Share dates, group size, starting point, destinations and any luggage or child-seat needs.'],['Confirm a suitable plan','We confirm the vehicle, route direction and pricing details for your group.'],['Complete pre-trip confirmation','Review the meeting details and itinerary highlights before departure.']]:language==='zh-Hans'?[['告诉我们旅行需求','提供日期、人数、出发地、想去的景点，以及是否有行李、儿童座椅或接送需求。'],['确认适合方案','依路线与人数确认可安排的车型、行程方向与费用内容。'],['完成出发前确认','出发前再次确认集合资讯与行程重点，当日可依现场状况保有合理弹性。']]:[['告訴我們旅行需求','提供日期、人數、出發地、想去的景點，以及是否有行李、兒童座椅或接送需求。'],['確認適合方案','依路線與人數確認可安排的車型、行程方向與費用內容。'],['完成出發前確認','出發前再次確認集合資訊與行程重點，當日可依現場狀況保有合理彈性。']];document.querySelectorAll('.step').forEach((item,index)=>{item.querySelector('h3').textContent=processData[index][0];item.querySelector('p').textContent=processData[index][1]});
       const cardDescriptions=language==='en'?['Old streets, mountain views, sky-lantern experiences and waterfalls along Taiwan’s northeast coast.','From Taipei hotels, visit Qingtiangang, Xiaoyoukeng, Zhuzihu, Beitou and Tamsui Old Street before returning to the Fisherman’s Wharf area.','Pet farms, Sanxing scallion experiences, Qingshui geothermal springs, the Traditional Arts Center and Luodong Night Market, ideal for families.','Jingzaijiao Salt Fields, Sicao Green Tunnel, Anping Fort, Anping Old Street and Garden Night Market.','Lotus Pond, Pier-2 Art Center, Cijin Old Street and Rainbow Church, combining harbor and island scenery.','Taipingshan Forest Recreation Area, the mountain railway, Jiingluo Historic Trail and Jiuzhize Hot Spring.','From Taichung hotels to Sun Moon Lake and Cingjing’s alpine grasslands, then back to Taichung.','Shengxing Railway Bike, local lunch, Zhongshe Flower Market, Gaomei Wetlands and Fengjia Night Market; railway tickets require advance booking.','Xingyue Sky, Lukang Old Street, the Glass Museum and Gaomei Wetlands, connecting central Taiwan’s culture and coast.','Tiandizhiqiao, Fenqihu and Alishan; choose a day trip or stay overnight for sunrise and forest trails.']:language==='zh-Hans'?['老街巷弄、山城景色、天灯体验与瀑布自然风景，适合感受东北角人文氛围。','从台北各大酒店出发，走访擎天岗、小油坑、竹子湖、北投地热谷，再到淡水老街与渔人码头。','萌宠农场、三星葱体验、清水地热、传艺中心与罗东夜市，适合亲子慢旅行。','井仔脚盐田、四草绿色隧道、安平古堡、安平老街与花园夜市，细细感受府城风景与美食。','莲池潭、驳二特区、旗津老街与彩虹教堂，走访高雄港湾与海岛风景。','太平山森林游乐区、蹦蹦车、见晴怀古步道与鸠之泽温泉，最后返回宜兰各大酒店。','从台中各大酒店出发，安排日月潭湖光山色与清境高山草原，最后返回台中各大酒店。','胜兴铁路自行车、在地午餐、中社花市、高美湿地与逢甲夜市，铁路班次需提前预约确认。','星月天空、鹿港老街、玻璃博物馆与高美湿地，串起中部人文、艺术与海线风景。','天长地久桥、奋起湖与阿里山园区；可选一日早出发，或两日留宿山区安排日出与步道。']:null;if(cardDescriptions)document.querySelectorAll('.trip-body > p:not(.trip-price)').forEach((item,index)=>item.textContent=cardDescriptions[index]);
-      const choiceText=language==='en'?['Rainbow Village','Carton King','Lavender Cottage','Zhongshe Flower Market','Xiantangji Farm Restaurant','Gaomei Wetlands','Shenji New Village','Chun Shui Tang Original Store','Fengjia Night Market']:language==='zh-Hans'?['彩虹眷村','纸箱王','薰衣草森林','中社花市','仙塘迹农园餐厅','高美湿地','审计新村','春水堂创始店','逢甲夜市']:null;if(choiceText)document.querySelectorAll('#choices label').forEach((item,index)=>{item.lastChild.nodeValue=choiceText[index]});
       const faqData=language==='en'?[['Can you arrange exactly the attractions I specify?','You can share your preferred attractions. We will suggest a practical order based on geography, traffic and visit time.'],['Why can’t Gaomei Wetlands and city attractions be on the same day?','Gaomei is best around sunset on the coast, while Shenji New Village and Chun Shui Tang are in the city; combining them makes the drive long and the stops rushed.'],['Can you arrange airport pickup or drop-off?','Yes. Please provide the flight date, time, terminal, hotel or destination, luggage details and group size.'],['Can the itinerary change because of weather?','Yes. Safety and trip quality come first. We can adjust the order or suggest alternatives for rain, road conditions or traffic controls.']]:language==='zh-Hans'?[['可以完全按照客人指定的景点安排吗？','可以提出想去的景点；我们会依地理位置、交通与停留时间提出可行顺序，避免整天都在车上。'],['为什么高美湿地与市区景点不能同一天？','高美湿地适合安排傍晚海线时段；审计新村与春水堂位于市区，两组同日会拉长车程并压缩停留时间。'],['可以安排接机或送机吗？','可以。请先提供航班日期、时间、航站、酒店或目的地，以及行李与人数资讯。'],['行程会因天气改变吗？','会以旅客安全与行程品质优先。遇雨势、道路状况或交通管制时，将协助调整顺序或替代景点。']]:null;if(faqData)document.querySelectorAll('.faq details').forEach((item,index)=>{item.querySelector('summary').textContent=faqData[index][0];item.querySelector('p').textContent=faqData[index][1]});
       const ruleData=language==='en'?[['Pricing & itinerary notes',['Final quotes depend on date, vehicle, service hours, route and special needs.','Meals, tickets, activities, accommodation and booking services are normally charged separately unless included in the quote.','For multi-day trips, driver accommodation, meals and cross-area arrangements will be explained in advance.','For weather, traffic controls or unexpected conditions, safety and a smooth itinerary come first.']],['Luggage & ride conditions',['Please tell us the group size, number of bags and largest dimensions so we can arrange the right vehicle.','Child seats, wheelchairs, pets and special equipment must be noted and confirmed in advance.','Drivers focus on driving and basic onboard introduction; request a full-time guide when booking if needed.','Cleaning fees may apply for interior stains or special cleaning needs.']]]:language==='zh-Hans'?[['费用与行程提醒',['正式报价会依日期、车型、用车时数、路线与特殊需求确认。','餐食、景点门票、体验活动、住宿或代订项目，除非报价明确列入，通常另行计算。','多日行程如涉及司机住宿、餐费或跨区安排，会于确认前一并说明。','若遇天气、交通管制或不可预期状况，将以安全与行程顺畅为优先调整。']],['行李与乘车条件',['请于询价时告知人数、行李件数与最大尺寸，才能正确安排车型。','婴幼儿安全座椅、轮椅、宠物或特殊设备，请提前备注确认。','小型车的司机以驾驶与车上简介为主；若需全程随行导览，可于预订时提出需求。','为兼顾下一组旅客权益，若有车内污损或特殊清洁需求，可能酌收必要费用。']]]:null;if(ruleData)document.querySelectorAll('.rules .panel').forEach((item,index)=>{item.querySelector('h3').textContent=ruleData[index][0];item.querySelectorAll('li').forEach((li,i)=>li.textContent=ruleData[index][1][i])});
       const tagText=language==='en'?['North · 1 day','North · 1 day','Yilan · 1 day','Tainan · 1 day','Kaohsiung · 1 day','Yilan · 2 days','Central · 1 day','Central · 1 day','Central · 1 day','Alishan · 2 days']:language==='zh-Hans'?['北部・一日游','北部・一日游','宜兰・一日游','台南・一日游','高雄・一日游','宜兰・二日游','中部・一日游','中部・一日游','中部・一日游','阿里山・二日游']:null;if(tagText)document.querySelectorAll('.trip .tag').forEach((item,index)=>item.textContent=tagText[index]);
@@ -1047,50 +930,13 @@ section#trips{margin-top:68px;padding:0 30px}
       renderTrips();
       translatePage(language);
     }
-    const savedLanguage=localStorage.getItem('homepage-language')||'zh-Hant';
+    const storedLanguage=localStorage.getItem('homepage-language');
+    const savedLanguage=languageText[storedLanguage]?storedLanguage:'zh-Hant';
     languageSelect.value=savedLanguage;
     languageSelect.addEventListener('change',()=>applyLanguage(languageSelect.value));
 
-    const checks=[...document.querySelectorAll('#choices input')];
-
-    const request=document.getElementById('request');
-
-    const summary=document.getElementById('summary');
-
-    const count=document.getElementById('count');
-
-    const coast=checks.find(c=>c.dataset.group==='coast');
-
-    const city=checks.filter(c=>c.dataset.group==='city');
-
-    function selected(){return checks.filter(c=>c.checked).map(c=>c.value)}
-    function updateChoices(){const picked=selected();
-const coastOn=coast.checked;
-const cityOn=city.some(c=>c.checked);
-checks.forEach(c=>{let disabled=false;
-if(!c.checked){
-  if(c.dataset.group==='city'&&coastOn)disabled=true;
-  else if(c===coast&&cityOn)disabled=true;
-  else if(picked.length>=5)disabled=true;
-}
-c.disabled=disabled;
-c.closest('.choice').classList.toggle('disabled',disabled)});
-const latest=selected();
-count.textContent=`已選擇 ${latest.length}／5 項`;
-summary.innerHTML=`<b>您已選擇：</b>${latest.length?latest.join('、'):'尚未選擇景點。'}`}
-    checks.forEach(c=>c.addEventListener('change',updateChoices));
-
-    function customText(){const places=selected();
-const note=request.value.trim();
-return `想詢問：台中客製化一日遊\n已選擇景點：${places.length?places.join('、'):'尚未選擇'}\n補充需求：${note||'無'}`}
     async function copyText(text,done){try{await navigator.clipboard.writeText(text);
 status.textContent=done}catch{status.textContent='無法自動複製，請手動選取內容後複製。'}}
-    document.getElementById('reset-custom').addEventListener('click',()=>{checks.forEach(c=>c.checked=false);request.value='';updateChoices();status.textContent='已清空選擇，您可以重新挑選景點。';});
-    document.getElementById('copy-custom').addEventListener('click',()=>copyText(customText(),'已複製詢問內容，可貼到 LINE、WhatsApp 或其他通訊軟體。'));
-
-    document.getElementById('share-custom').addEventListener('click',async()=>{const text=customText();
-try{if(navigator.share){await navigator.share({title:'台中客製化一日遊',text,url:location.href});
-status.textContent='已開啟分享。'}else{await copyText(text+'\n'+location.href,'已複製行程選擇與網址。')}}catch(e){if(e.name!=='AbortError')status.textContent='分享未完成，請再試一次。'}});
 
     document.querySelectorAll('[data-share]').forEach(btn=>btn.addEventListener('click',async()=>{const title=btn.dataset.share;
 const description=btn.closest('.trip').querySelector('p').textContent.trim();
